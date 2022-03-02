@@ -1,0 +1,51 @@
+@charset 'utf-8';
+
+#body {padding: 0;}
+footer {margin-top: 0;}
+.wrapper {background: var(--color-bak); max-width: unset; width: 100%;}
+.wrapper:nth-of-type(2) {background: orange;}
+.wrapper:nth-of-type(3) {background: skyblue;}
+
+.wrapper:nth-of-type(1) .main-txt {
+	position: absolute;
+	display: flex;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	margin-left: 23vw;
+	flex-wrap: wrap;
+	gap: 2em;
+	white-space: nowrap;
+}
+.wrapper:nth-of-type(1) .main-txt * {width: 100%; line-height: 1.2em;}
+.wrapper:nth-of-type(1) .main-txt h1 {font-size: var(--page-title-font-size);font-weight: 100;}
+.wrapper:nth-of-type(1) .main-txt h2 {font-size: var(--big-font-size); font-weight: 300;}
+
+#ingre-wrapper {
+    position: absolute;
+    display: flex;
+    top: 50%;
+    left: -17vw;
+    transform: translateY(-50%);
+    flex-direction: column;
+    justify-content: center;
+    gap: 1.5em;
+    width: 100%;
+    flex-wrap: wrap;
+    height: 100%;
+}
+#ingre-wrapper .row {display: flex;justify-content: center;gap: 1.5em;}
+
+#ingre-wrapper .item {position: relative; width: 7vw; height: 7vw;}
+#ingre-wrapper .item svg path,
+#ingre-wrapper .item svg polygon,
+#ingre-wrapper .item svg circle {stroke-width: .5;}
+#ingre-wrapper .item svg image {width: 100%; visibility: hidden; opacity: 0; transition: .4s ease; transform-origin: center center; filter: blur(2px);}
+#ingre-wrapper .item svg .stroke {animation: draw 1.5s ease forwards; stroke-dasharray: 200; stroke-dashoffset: 200;}
+#ingre-wrapper .item svg .fill {animation: fade 1s 1.3s ease forwards; opacity: 0;}
+#ingre-wrapper .item:hover svg image {visibility: visible; opacity: 1; filter: none;}
+
+@keyframes draw {
+    0% {stroke-dasharray: 200; stroke-dashoffset: 200;}
+    100% {stroke-dashoffset: 0;}
+}

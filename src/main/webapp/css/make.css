@@ -1,0 +1,174 @@
+@charset 'utf-8';
+#body {padding: 0;}
+
+.wrapper h1 {position: absolute; left: -10vw; bottom: 7vh; font-size: var(--page-title-font-size); line-height: 1em; font-weight: 100;}
+@media all and (max-width: 1280px) {
+	.wrapper h1 {display: none;}
+}
+
+.making {
+    position: relative;
+    height: 100%;
+    bottom: 7vh;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.making .slider {position: relative; top: 24vh;}
+.making .slider .btn.prev {position: absolute; left: 0; cursor: pointer;}
+.making .slider .btn.next {position: absolute; right: 0; cursor: pointer;}
+.making .slider .btn svg {width: 40px; margin-top: 10px; stroke-width: .7;}
+
+.making .slider-container {position: relative; margin: 0 auto; overflow-x: clip;}
+.making .slider ul {position: absolute; display: flex; gap: 15px; flex-wrap: wrap; transition: .6s ease; left: 0;}
+.making .slider ul li {position: relative;}
+.making .slider ul li .img {
+	position: relative;
+	display: flex;
+	width: 100px;
+	height: 100px;
+	border: 1px solid;
+	border-radius: 50%;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+	cursor: pointer;
+}
+.making .slider ul li img {
+	position: relative;
+	width: 70%;
+	height: auto;
+}
+.making .slider ul li .name {
+	position: absolute;
+	top: 100%;
+	left: 0;
+	display: block;
+	width: 100%;
+	padding-top: 5px;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.making .slider ul li .info-box {
+	position: absolute;
+	top: 100%;
+	margin-top: 40px;
+	width: 100%;
+	font-size: var(--small-font-size);
+	line-height: 1.2em;
+	padding: 10px;
+	border-radius: 1.2rem;
+	color: var(--color-bak);
+	background: var(--color-default);
+	opacity: 0;
+	animation: fade .3s ease forwards;
+	z-index: 1;
+}
+.making .slider ul li .info-box .line {
+	margin: 5px 0 7px;
+	position: relative;
+	width: 100%;
+	border-color: inherit;
+	border-left: 0;
+	border-top-width: 1px;
+}
+.making .slider ul li .info-box::before {
+	content: '';
+	position: absolute;
+	top: -10px;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 0;
+	height: 0;
+	border: 5px solid var(--color-default);
+	border-top-color: transparent;
+	border-left-color: transparent;
+	border-right-color: transparent;	
+}
+
+.making #bowl {position: absolute;width: 80%;height: 50vh;max-width: 600px;left: 50%;bottom: 0;transform: translateX(-50%);}
+.making #bowl svg {position: absolute; bottom: 0;}
+.making #bowl svg .stroke {stroke-width: .15;}
+.making #bowl .item {
+	position: absolute;
+	display: flex;
+	width: 70px;
+	height: 70px;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+	border: 1px solid;
+	border-radius: 50%;
+	transform: scale(0);
+	animation: pop .3s ease forwards;
+}
+.making #bowl .item img {
+	position: relative;
+	width: 70%;
+	height: auto;
+}
+@keyframes pop {
+	0% {transform: scale(0);}
+	80% {transform: scale(1);}
+	90% {transform: scale(.9);}
+	100% {transform: scale(1);}
+}
+
+.making #bowl .item:nth-of-type(1) {left: 48%; bottom: 2rem;}
+.making #bowl .item:nth-of-type(2) {left: 30%; bottom: 3.5rem;}
+.making #bowl .item:nth-of-type(3) {right: 25%; bottom: 4.5rem;}
+.making #bowl .item:nth-of-type(4) {left: 40%; bottom: 7.5rem;}
+.making #bowl .item:nth-of-type(5) {left: 15%; bottom: 7rem;}
+.making #bowl .item:nth-of-type(6) {left: 56%; bottom: 10rem;}
+.making #bowl .item:nth-of-type(7) {left: 27%; bottom: 10.5rem;}
+.making #bowl .item:nth-of-type(8) {right: 13%; bottom: 8.4rem;}
+.making #bowl .item:nth-of-type(9) {left: 9%; bottom: 12.5rem;}
+.making #bowl .item:nth-of-type(10) {left: 40%;bottom: 14rem;}
+.making #bowl .item:nth-of-type(11) {left: 22%; bottom: 16rem;}
+.making #bowl .item:nth-of-type(12) {left: 60%; bottom: 16.5rem;}
+.making #bowl .item:nth-of-type(13) {right: 12%; bottom: 14.5rem;}
+
+.making .write-name {width: 300px; position: relative; top: 50%; margin: 0 auto; z-index: 10;}
+.making .write-name input {
+	width: 100%;
+	font-size: var(--accent-font-size);
+	font-weight: 200;
+	text-align: center;
+	transition: .3s ease;
+	transform: scaleX(0);
+}
+.making .write-name.toggle input {transform: scaleX(1);}
+.making .write-name button {position: absolute; bottom: .8rem; left: 50%; transform: translateX(-50%); transition: .3s .15s ease; cursor: pointer;}
+.making .write-name.toggle button {left: 100%; transform: translateX(-100%);}
+
+.making .indicator {
+    left: 50%;
+    transform: translate(-50%);
+    text-align: center;
+    bottom: unset;
+    top: 6em;
+}
+
+.making .receipt {
+    position: absolute;
+	width: 300px;
+	height: 400px;
+    left: 100%;
+    bottom: 2em;
+    padding: 20px;
+	border: 1px solid;
+}
+.making .receipt legend {position: absolute; top: calc(-1em - 15px); left: 0;}
+.making .receipt ul {
+	
+}
+.making .receipt button {position: absolute; top: 100%; left: 0; margin-top: 15px;}
+
+@media all and (max-width: 1200px) {
+	.making #bowl {transform: none;left: -80px;width: 50%;}
+}
+
+@media all and (max-width: 1000px) {
+	.making #bowl {transform: translateX(-50%); left: 50%;}	
+}

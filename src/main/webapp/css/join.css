@@ -1,0 +1,106 @@
+@charset 'utf-8';
+
+#body {display: flex;justify-content: center;flex-wrap: wrap;align-content: center;}
+
+.join-box {
+    position: relative;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+.join-box .pn {width: 100%; margin-top: 50px; display: flex; gap: 20px;justify-content: center; gap: 20px;}
+
+/* joinAgree */
+.join-box .procedure {display: flex;width: 100%;justify-content: center;margin-bottom: 80px;gap: inherit;align-items: center;}
+.join-box .procedure .item {opacity: .4;}
+.join-box .procedure .item.cur {opacity: 1;}
+.join-box .procedure .item span {position: relative; display: block; text-align: center;}
+.join-box .procedure .item .num {
+    width: 1.2em;
+    height: 1.2em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: var(--big-font-size);
+    font-weight: 200;
+    background: var(--color-bak);
+    border-radius: 50%;
+    margin: 0 auto;
+}
+.join-box .procedure .item .num::before {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2em;
+    top: 0;
+    left: 50%;
+    border-left: 1px solid var(--color-salary);
+    transform: translate(-50%, -20%) rotate(45deg);
+    z-index: -1;
+}
+.join-box .procedure .item .name {font-size: var(--small-font-size);padding-top: 20px;position: absolute;}
+.join-box .procedure .arrow {
+    position: relative;
+    width: 1.2em;
+    height: 1.2em;
+    opacity: .4;
+}
+.join-box .procedure .arrow::before {
+    content: '';
+    position: absolute;
+    top: -34%;
+    left: 34%;
+    width: 0;
+    height: 100%;
+    transform: rotate(-45deg);
+    border-left: 1px solid;
+}
+.join-box .procedure .arrow::after {
+    content: '';
+    position: absolute;
+    top: 34%;
+    left: 34%;
+    width: 0;
+    height: 100%;
+    transform: rotate(45deg);
+    border-left: 1px solid;
+}
+.join-box .procedure .item.cur + .arrow {opacity: 1;}
+
+.join-box form {width: 100%;}
+.join-box .input-item {position: relative;width: 100%; padding: 8px 0;}
+.join-box .input-item.check {margin: 0;}
+.join-box .input-item.point.check {text-align: left; padding: 12px 25px; border-radius: 2em; margin-bottom: 40px; cursor: default;}
+.join-box .input-item.check a {position: absolute; right: 0; font-size: var(--small-font-size); border-bottom: 1px solid;}
+
+/* joinForm */
+.join-box .input-item .ui-btn {position: absolute; top: 12px; right: 0;}
+#open-zip {
+    visibility: hidden;
+    border:1px solid;
+    width:500px;
+    height:300px;
+    position:fixed;
+    z-index: 99;
+    top:50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: .4s ease;
+}
+#open-zip.show {visibility: visible;opacity: 1;}
+#open-zip::before {
+    content: '';
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    display: block;
+    background: rgba(0,0,0,.4);
+    transform: translate(-50%,-50%);
+    top:50%;
+    left: 50%;
+    backdrop-filter: blur(3px);
+}
