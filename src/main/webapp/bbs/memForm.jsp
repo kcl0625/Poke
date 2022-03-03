@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/memForm.css">
 <form name="memForm" action="memFormRes.jsp">
 	<fieldset class="form-item">
 		<legend>회원 정보</legend>
