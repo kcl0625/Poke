@@ -75,32 +75,3 @@
 .join-box .input-item.check {margin: 0;}
 .join-box .input-item.point.check {text-align: left; padding: 12px 25px; border-radius: 2em; margin-bottom: 40px; cursor: default;}
 .join-box .input-item.check a {position: absolute; right: 0; font-size: var(--small-font-size); border-bottom: 1px solid;}
-
-/* joinForm */
-.join-box .input-item .ui-btn {position: absolute; top: 12px; right: 0;}
-#open-zip {
-    visibility: hidden;
-    border:1px solid;
-    width:500px;
-    height:300px;
-    position:fixed;
-    z-index: 99;
-    top:50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    opacity: 0;
-    transition: .4s ease;
-}
-#open-zip.show {visibility: visible;opacity: 1;}
-#open-zip::before {
-    content: '';
-    position: fixed;
-    width: 100vw;
-    height: 100vh;
-    display: block;
-    background: rgba(0,0,0,.4);
-    transform: translate(-50%,-50%);
-    top:50%;
-    left: 50%;
-    backdrop-filter: blur(3px);
-}
