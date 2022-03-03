@@ -220,9 +220,8 @@ header .side::before {
 
 /*헤더 끝*/
 
-#body {min-height: 100vh; padding-top: 200px;}
-.wrapper {position: relative; width: 60vw; max-width: 920px; height: 100vh; margin: 0 auto;}
- 
+#body {max-width: 920px; min-height: 100vh; padding-top: 200px; margin: 0 auto;}
+
 /* 푸터 */
 footer {
     position: relative;
