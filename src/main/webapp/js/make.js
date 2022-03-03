@@ -11,7 +11,6 @@ let cur = 0;
 let slide = () => {
 	slider.style.width = `${itemW * wrapperL + gap * 3}px`;
 	ul.style.width = `${itemW * item.length + gap * (item.length - 1)}px`;
-	
 }
 slide();
 
@@ -40,7 +39,7 @@ let showInfo = (item) => {
 	infoBox.innerHTML = `￦${price}<br>${cal}kacl<hr class="line">`;
 	
 	for(let i=0;i<origin.length;i++)
-		infoBox.innerHTML += origin[i];
+		infoBox.innerHTML += `${origin[i]}<br>`;
 }
 
 let hideInfo = (item) => {
