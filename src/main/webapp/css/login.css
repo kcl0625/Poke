@@ -1,16 +1,56 @@
 @charset 'utf-8';
 
-#body {padding: 0;display: flex;justify-content: center;align-content: center;flex-wrap: wrap;}
-footer {margin-top: 0;}
+#body {
+	display: flex;
+	justify-content: center;
+	align-content: center;
+	flex-wrap: wrap;
+}
 
-.input-item {position: relative; width: 100%; margin-bottom: 40px;}
-.input-item input {font-size: 2rem; font-weight: 100; padding-left: 0 !important;}
-.input-item input + label {top: 1rem; transition: .4s ease; font-weight: 100;}
-.input-item.empty input + label {font-size: 2rem;}
- 
-.input-item input:focus + label,
-.input-item:not(.empty) input + label {top: .6rem;font-size: 1rem;font-weight: 400;}
-.input-item .indicator {bottom: -25px;left: 0;}
- 
-.login-box .ui-btn {margin-bottom: 10px;}
-.login-box a:not(.ui-btn) {font-size: var(--small-font-size);display: block;width: 100%;}
+.input-item {
+	position: relative;
+	width: 100%;
+	margin-bottom: 40px;
+}
+
+.input-item input {
+	font-size: 2rem;
+	font-weight: 100;
+	padding-left: 0 !important;
+}
+
+.input-item input+label {
+	top: 1rem;
+	transition: .4s ease;
+	font-weight: 100;
+}
+
+.input-item.empty input+label {
+	font-size: 2rem;
+}
+
+.input-item input:focus+label, .input-item:not(.empty) input+label {
+	top: .6rem;
+	font-size: 1rem;
+	font-weight: 400;
+}
+
+.input-item .indicator {
+	bottom: -25px;
+	left: 0;
+}
+
+.login-box .ui-btn {
+	margin-bottom: 10px;
+}
+
+.login-box a:not(.ui-btn) {
+	font-size: var(- -small-font-size);
+	display: block;
+	width: 100%;
+}
+
+@media all and (min-width: 1281px) {
+	#body {padding: 0;}
+	footer {margin-top: 0;}
+}
