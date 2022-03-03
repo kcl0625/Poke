@@ -1,7 +1,7 @@
 @charset 'utf-8';
 #body {padding: 0;}
 
-.wrapper h1 {position: absolute; left: -10vw; bottom: 7vh; font-size: var(--page-title-font-size); line-height: 1em; font-weight: 100;}
+#body > h1 {position: absolute; left: -10vw; bottom: 7vh; font-size: var(--page-title-font-size); line-height: 1em; font-weight: 100;}
 @media all and (max-width: 1280px) {
 	.wrapper h1 {display: none;}
 }
@@ -13,10 +13,10 @@
     left: 50%;
     transform: translateX(-50%);
 }
-.making .slider {position: relative; top: 24vh;}
+.making .slider {position: relative;width: 66%;/* max-width: 550px; */top: 24vh;margin: 0 auto;}
 .making .slider .btn.prev {position: absolute; left: 0; cursor: pointer;}
 .making .slider .btn.next {position: absolute; right: 0; cursor: pointer;}
-.making .slider .btn svg {width: 40px; margin-top: 10px; stroke-width: .7;}
+.making .slider .btn svg {width: 2em; max-width: 40px; margin-top: 10px; stroke-width: .7;}
 
 .making .slider-container {position: relative; margin: 0 auto; overflow-x: clip;}
 .making .slider ul {position: absolute; display: flex; gap: 15px; flex-wrap: wrap; transition: .6s ease; left: 0;}
@@ -24,8 +24,10 @@
 .making .slider ul li .img {
 	position: relative;
 	display: flex;
-	width: 100px;
-	height: 100px;
+	width: 5em;
+	height: 5em;
+	max-width: 100px;
+	max-height: 100px;
 	border: 1px solid;
 	border-radius: 50%;
 	justify-content: center;
@@ -93,8 +95,10 @@
 .making #bowl .item {
 	position: absolute;
 	display: flex;
-	width: 70px;
-	height: 70px;
+	width: 4em;
+	height: 4em;
+	max-width: 70px;
+	max-height: 70px;
 	justify-content: center;
 	align-items: center;
 	flex-wrap: wrap;
@@ -145,19 +149,21 @@
 .making .indicator {
     left: 50%;
     transform: translate(-50%);
-    text-align: center;
+    text-align: xcenter;
     bottom: unset;
     top: 6em;
 }
 
 .making .receipt {
     position: absolute;
-	width: 300px;
-	height: 400px;
-    left: 100%;
+    width: 18vw;
+	height: 24vw;
+    max-width: 300px;
+    max-height: 400px;
+    right: -2em;
     bottom: 2em;
     padding: 20px;
-	border: 1px solid;
+    border: 1px solid;
 }
 .making .receipt legend {position: absolute; top: calc(-1em - 15px); left: 0;}
 .making .receipt ul {
@@ -165,8 +171,8 @@
 }
 .making .receipt button {position: absolute; top: 100%; left: 0; margin-top: 15px;}
 
-@media all and (max-width: 1200px) {
-	.making #bowl {transform: none;left: -80px;width: 50%;}
+@media all and (max-width: 1280px) {
+	.making #bowl {transform: none; left: -2em; width: 60%;}
 }
 
 @media all and (max-width: 1000px) {
