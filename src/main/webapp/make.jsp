@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <jsp:include page="header.jsp" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/make.css">
-<div class="wrapper">
 	<h1><span class="point salmon">M</span>ake<br>M<span class="point salary">y</span><br><span class="point cheese">O</span>wn<br>B<span class="point salmon">o</span>wl</h1>
 	
 	<div class="making">
@@ -71,7 +70,6 @@
 			</div>
 		</form>
 	</div>
-</div>
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/fullpage.css">
 <script src="${pageContext.request.contextPath}/js/make.js"></script>
