@@ -1,7 +1,11 @@
 @charset 'utf-8';
 
-#body {padding: 0;display: flex;justify-content: center;align-content: center;flex-wrap: wrap;}
-footer {margin-top: 0;}
+@media all and (min-width: 1281px){
+	#body {padding: 0;}
+	footer {margin-top: 0;}
+}
+
+#body {display: flex;justify-content: center;align-content: center;flex-wrap: wrap;}
 
 .input-item {position: relative; width: 100%; margin-bottom: 40px;}
 .input-item input {font-size: 2rem; font-weight: 100; padding-left: 0 !important;}

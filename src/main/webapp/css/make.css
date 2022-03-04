@@ -1,31 +1,43 @@
 @charset 'utf-8';
 #body {padding: 0;}
 
-.wrapper h1 {position: absolute; left: -10vw; bottom: 7vh; font-size: var(--page-title-font-size); line-height: 1em; font-weight: 100;}
-@media all and (max-width: 1280px) {
-	.wrapper h1 {display: none;}
+.wrapper h1 {
+	position: absolute;
+	left: -10vw;
+	bottom: 7vh;
+	font-size: 4em;
+	line-height: 1em;
+	font-weight: 100;
+	display: none;
+}
+@media all and (min-width: 1281px) {
+	.wrapper h1 {display: block;}
+	footer {margin-top: 0;}
 }
 
 .making {
     position: relative;
+    display: flex;
+    width: 100%;
     height: 100%;
-    bottom: 7vh;
-    left: 50%;
-    transform: translateX(-50%);
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
 }
-.making .slider {position: relative; top: 24vh;}
-.making .slider .btn.prev {position: absolute; left: 0; cursor: pointer;}
-.making .slider .btn.next {position: absolute; right: 0; cursor: pointer;}
-.making .slider .btn svg {width: 40px; margin-top: 10px; stroke-width: .7;}
 
-.making .slider-container {position: relative; margin: 0 auto; overflow-x: clip;}
-.making .slider ul {position: absolute; display: flex; gap: 15px; flex-wrap: wrap; transition: .6s ease; left: 0;}
-.making .slider ul li {position: relative;}
-.making .slider ul li .img {
+.slider {position: relative;width: 70%;height: 80px;}
+.slider .category {position: absolute;width: 100%;top: -3.5em;}
+.slider .category ul {display: flex; justify-content: center; gap: 20px; font-size: var(--small-font-size);}
+.slider .btn.prev {position: absolute;width: 30px; top: 10px; left: 0;cursor: pointer; z-index: 10;}
+.slider .btn.next {position: absolute; width: 30px; top: 10px; right: 0; cursor: pointer; z-index: 10;}
+.slider .btn svg {stroke-width: .8;}
+
+.making .item {
 	position: relative;
 	display: flex;
-	width: 100px;
-	height: 100px;
+	width: 80px;
+	height: 80px;
+	background: var(--color-bak);
 	border: 1px solid;
 	border-radius: 50%;
 	justify-content: center;
@@ -33,12 +45,12 @@
 	flex-wrap: wrap;
 	cursor: pointer;
 }
-.making .slider ul li img {
-	position: relative;
-	width: 70%;
-	height: auto;
-}
-.making .slider ul li .name {
+.making .item img {position: relative;width: 70%;height: auto;}
+
+.slider-container {position: relative; margin: 0 auto; overflow-x: clip;}
+.slider-container ul {position: absolute;display: flex;gap: 30px;flex-wrap: wrap;transition: .6s ease;left: 0;}
+.slider-container li {position: relative;}
+.slider-container li .name {
 	position: absolute;
 	top: 100%;
 	left: 0;
@@ -50,12 +62,12 @@
     text-overflow: ellipsis;
     white-space: nowrap;
 }
-.making .slider ul li .info-box {
+.slider-container li .info-box {
 	position: absolute;
 	top: 100%;
 	margin-top: 40px;
 	width: 100%;
-	font-size: var(--small-font-size);
+	font-size: .6rem;
 	line-height: 1.2em;
 	padding: 10px;
 	border-radius: 1.2rem;
@@ -63,9 +75,9 @@
 	background: var(--color-default);
 	opacity: 0;
 	animation: fade .3s ease forwards;
-	z-index: 1;
+	z-index: 11;
 }
-.making .slider ul li .info-box .line {
+.slider-container li .info-box .line {
 	margin: 5px 0 7px;
 	position: relative;
 	width: 100%;
@@ -73,7 +85,7 @@
 	border-left: 0;
 	border-top-width: 1px;
 }
-.making .slider ul li .info-box::before {
+.slider-container li .info-box::before {
 	content: '';
 	position: absolute;
 	top: -10px;
@@ -87,27 +99,10 @@
 	border-right-color: transparent;	
 }
 
-.making #bowl {position: absolute;width: 80%;height: 50vh;max-width: 600px;left: 50%;bottom: 0;transform: translateX(-50%);}
-.making #bowl svg {position: absolute; bottom: 0;}
-.making #bowl svg .stroke {stroke-width: .15;}
-.making #bowl .item {
-	position: absolute;
-	display: flex;
-	width: 70px;
-	height: 70px;
-	justify-content: center;
-	align-items: center;
-	flex-wrap: wrap;
-	border: 1px solid;
-	border-radius: 50%;
-	transform: scale(0);
-	animation: pop .3s ease forwards;
-}
-.making #bowl .item img {
-	position: relative;
-	width: 70%;
-	height: auto;
-}
+#bowl {position: relative;width: 70vw;max-width: 600px;z-index: 11;top: 8em;padding-top: 28em;}
+#bowl svg {position: absolute; bottom: 0;}
+#bowl svg .stroke {stroke-width: .15;}
+#bowl .item {width: 70px; height: 70px; position: absolute; transform: scale(0); animation: pop .3s ease forwards;}
 @keyframes pop {
 	0% {transform: scale(0);}
 	80% {transform: scale(1);}
@@ -115,60 +110,69 @@
 	100% {transform: scale(1);}
 }
 
-.making #bowl .item:nth-of-type(1) {left: 48%; bottom: 2rem;}
-.making #bowl .item:nth-of-type(2) {left: 30%; bottom: 3.5rem;}
-.making #bowl .item:nth-of-type(3) {right: 25%; bottom: 4.5rem;}
-.making #bowl .item:nth-of-type(4) {left: 40%; bottom: 7.5rem;}
-.making #bowl .item:nth-of-type(5) {left: 15%; bottom: 7rem;}
-.making #bowl .item:nth-of-type(6) {left: 56%; bottom: 10rem;}
-.making #bowl .item:nth-of-type(7) {left: 27%; bottom: 10.5rem;}
-.making #bowl .item:nth-of-type(8) {right: 13%; bottom: 8.4rem;}
-.making #bowl .item:nth-of-type(9) {left: 9%; bottom: 12.5rem;}
-.making #bowl .item:nth-of-type(10) {left: 40%;bottom: 14rem;}
-.making #bowl .item:nth-of-type(11) {left: 22%; bottom: 16rem;}
-.making #bowl .item:nth-of-type(12) {left: 60%; bottom: 16.5rem;}
-.making #bowl .item:nth-of-type(13) {right: 12%; bottom: 14.5rem;}
+#bowl .item:nth-of-type(2) {left: 48%; bottom: 2rem;}
+#bowl .item:nth-of-type(3) {left: 30%; bottom: 3.5rem;}
+#bowl .item:nth-of-type(4) {right: 25%; bottom: 4.5rem;}
+#bowl .item:nth-of-type(5) {left: 40%; bottom: 7.5rem;}
+#bowl .item:nth-of-type(6) {left: 15%; bottom: 7rem;}
+#bowl .item:nth-of-type(7) {left: 56%; bottom: 10rem;}
+#bowl .item:nth-of-type(8) {left: 27%; bottom: 10.5rem;}
+#bowl .item:nth-of-type(9) {right: 13%; bottom: 8.4rem;}
+#bowl .item:nth-of-type(10) {left: 9%; bottom: 12.5rem;}
+#bowl .item:nth-of-type(11) {left: 40%;bottom: 14rem;}
+#bowl .item:nth-of-type(12) {left: 22%; bottom: 16rem;}
+#bowl .item:nth-of-type(13) {left: 60%; bottom: 16.5rem;}
+#bowl .item:nth-of-type(14) {right: 12%; bottom: 14.5rem;}
 
-.making .write-name {width: 300px; position: relative; top: 50%; margin: 0 auto; z-index: 10;}
+.making .write-name {position: absolute;width: 300px;left: 50%;z-index: 30;transform: translateX(-50%);top: 0;}
 .making .write-name input {
 	width: 100%;
 	font-size: var(--accent-font-size);
-	font-weight: 200;
+	font-weight: 300;
 	text-align: center;
-	transition: .3s ease;
+	border: 0;
+}
+.making .write-name input + .line{
+	width: 100%;
+	height: 0;
+	border: 0;
+	border-bottom: 1px solid;
 	transform: scaleX(0);
+	transition: .3s ease;
 }
-.making .write-name.toggle input {transform: scaleX(1);}
-.making .write-name button {position: absolute; bottom: .8rem; left: 50%; transform: translateX(-50%); transition: .3s .15s ease; cursor: pointer;}
-.making .write-name.toggle button {left: 100%; transform: translateX(-100%);}
+.making .write-name input:focus + .line {transform: scaleX(1);}
 
-.making .indicator {
-    left: 50%;
-    transform: translate(-50%);
-    text-align: center;
-    bottom: unset;
-    top: 6em;
-}
+.making .indicator {display: block;width: 100%;top: 4em;text-align: center;line-height: 1.2em;}
 
 .making .receipt {
     position: absolute;
-	width: 300px;
-	height: 400px;
-    left: 100%;
-    bottom: 2em;
+    width: 15em;
+    height: 20em;
+    max-width: 300px;
+    max-height: 400px;
+    right: -23em;
+    bottom: -5em;
     padding: 20px;
-	border: 1px solid;
+    border: 1px solid;
 }
 .making .receipt legend {position: absolute; top: calc(-1em - 15px); left: 0;}
 .making .receipt ul {
 	
 }
-.making .receipt button {position: absolute; top: 100%; left: 0; margin-top: 15px;}
+.making .receipt button {position: absolute;top: 100%;left: 0;margin-top: 15px;}
 
-@media all and (max-width: 1200px) {
-	.making #bowl {transform: none;left: -80px;width: 50%;}
+@media all and (max-width: 1280px){
+	.form-wrapper {width: 100%;justify-content: space-between;}
+	.making {margin-top: 4em;}
+	.making #bowl {top: 5em;}
+	.making .receipt {right: 0;bottom: 0;margin-top: 8em;}
 }
 
-@media all and (max-width: 1000px) {
-	.making #bowl {transform: translateX(-50%); left: 50%;}	
+@media all and (max-width: 750px) {
+	.slider {width: 75%;}
+	.form-wrapper {justify-content: center;}
+	.making {margin-top: 21em;}
+	.making #bowl {width: 65vw;}
+	.making #bowl .item {width: 4em; height: 4em;}
+	.making .receipt {position: relative;margin-bottom: 11em;}
 }

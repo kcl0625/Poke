@@ -35,9 +35,9 @@
     /* font size */
     --font-size: 1em;
     --small-font-size: .8rem;
-    --accent-font-size: 1.5rem;
-    --big-font-size: 2rem;
-   	--page-title-font-size: 4rem;
+    --accent-font-size: 1.2rem;
+    --big-font-size: 1.8rem;
+    --page-title-font-size: 3rem;
 }
 
 #cur {
@@ -69,7 +69,7 @@ body {color: var(--color-default);font: var(--font-size)/1.7em 'SUIT', 'Dotum', 
 ::selection {background: var(--color-salmon); color: var(--color-bak);}
 
 /* 헤더 */
-header {position: fixed; top: 0; left: 0;z-index: 99;}
+header {position: fixed; width: 100%; top: 0; left: 0;z-index: 99;}
 header::before {
   content: '';
   position: absolute;
@@ -83,7 +83,7 @@ header::before {
 }
 header .center {
     display: flex;
-    width: 100vw;
+    width: 100%;
     height: 8vh;
     min-height: 55px;
     border-bottom: 1px solid;
@@ -115,7 +115,7 @@ header .side::before {
 
 #gnb {position: relative; width: calc(100% - 20vh); height: 100%; margin: 0 auto; padding: 0 70px; z-index: 98; visibility: visible;}
 #gnb div {position: relative;height: 100%;}
-#gnb ul {position: relative; display: flex; height: 100%; align-items: center; gap: 40px; flex-wrap: wrap;}
+#gnb ul {position: relative;display: flex;height: 100%;align-items: center;gap: 40px;flex-wrap: wrap;}
 #gnb ul li {position: relative;}
 #gnb ul li::before {
   content: '';
@@ -159,21 +159,21 @@ header .side::before {
 
 #cart {right: 0;}
 
-@media all and (max-width: 1000px){
+@media (max-width: 1280px){
   #logo {left: 50%; transform: translateX(-50%);}
   #gnb {
   	position: fixed;
-    width: 100%;
-    left: 0;
-    visibility: hidden;
-    display: flex;
-    justify-content: center;
-    align-content: center;
-    flex-wrap: wrap;
-    z-index: 100;
+  	width: 100%;
+  	left: 0;
+  	visibility: hidden;
+  	display: flex;
+  	justify-content: center;
+  	align-content: center;
+  	flex-wrap: wrap;
+  	z-index: 100;
   }
-  #gnb > div {width: 70%; padding: 30px 0;}
-  #gnb ul {display: flex;justify-content: center;flex-wrap: wrap; gap: 20px; flex-direction: column;}
+  #gnb > div {width: 51%;padding: 30px 0;}
+  #gnb ul {display: flex;justify-content: center;flex-wrap: wrap;gap: 20px;flex-direction: column;}
   #gnb ul li {margin-left: -50px; transition: .4s ease; transition-delay: calc(.07s * var(--i)); opacity: 0;}
   #gnb .menu {height: 40%;}
   #gnb .login {height: 17%;}
@@ -237,10 +237,10 @@ footer {
     background: var(--color-bak);
 }
 footer div {width: 100%;}
-footer div.left p {font-size: var(--small-font-size);line-height: 1.5em;padding-top: 1em;}
+footer div.left p {font-size: var(--small-font-size);line-height: 1.5em;padding-top: 1em;white-space: nowrap;}
 footer div ul {display: flex; gap: 40px;}
 footer div:last-of-type ul {float: right;}
-@media all and (max-width: 1000px) {
+@media all and (max-width: 750px) {
   footer {padding: 0 30px; flex-wrap: wrap;}
   footer > div {padding: 30px 0;}
   

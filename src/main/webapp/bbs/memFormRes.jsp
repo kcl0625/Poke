@@ -3,8 +3,10 @@
 <jsp:include page="/header.jsp" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/join.css">
 <style>
-#body {padding: 0;}
-footer {margin-top: 0;}
+@media all and (min-width: 1281px){
+	#body {padding: 0;}
+	footer {margin-top: 0;}
+}
 </style>
 <h2 class="page-title"><span class="point cheese">J</span>oin Us</h2>
 <div class="join-box form-wrapper form-item">
