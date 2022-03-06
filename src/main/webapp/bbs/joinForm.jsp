@@ -15,7 +15,7 @@
 			<div class="item"><span class="num">3</span><span class="name">가입완료</span></div>
 		</div>
 		<jsp:include page="memForm.jsp" />
-		
+			
 		<div class="pn" style="flex-direction: column;align-items: center;">
 			<a class="ui-btn point big" onclick="formSubmit(memForm);">회원가입</a>
 			<a class="ui-btn big" href="${pageContext.request.contextPath}/index.jsp">취소</a>

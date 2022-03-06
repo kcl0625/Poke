@@ -3,41 +3,43 @@
 <jsp:include page="/header.jsp" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/join.css">
 <style>
-@media all and (min-width: 1281px){
-	#body {padding: 0;}
+@media all and (min-width: 1281px) {
+	.wrapper {padding-top: 0;}
 	footer {margin-top: 0;}
 }
 </style>
-<h2 class="page-title"><span class="point cheese">J</span>oin Us</h2>
-<div class="join-box form-wrapper form-item">
-	<div class="procedure">
-		<div class="item cur"><span class="num">1</span><span class="name">약관동의</span></div>
-		<div class="arrow"></div>
-		<div class="item"><span class="num">2</span><span class="name">정보입력</span></div>
-		<div class="arrow"></div>
-		<div class="item"><span class="num">3</span><span class="name">가입완료</span></div>
-	</div>
-	<form name="joinAgree">
-		<div class="input-item ui-btn point check">
-			<input type="checkbox" name="all" id="all" onclick="allChk(this);">
-			<label for="all"><span></span>전체 이용약관 동의</label>
+<div class="wrapper">
+	<h2 class="page-title"><span class="point cheese">J</span>oin Us</h2>
+	<div class="join-box form-wrapper form-item">
+		<div class="procedure">
+			<div class="item cur"><span class="num">1</span><span class="name">약관동의</span></div>
+			<div class="arrow"></div>
+			<div class="item"><span class="num">2</span><span class="name">정보입력</span></div>
+			<div class="arrow"></div>
+			<div class="item"><span class="num">3</span><span class="name">가입완료</span></div>
 		</div>
-		
-		<div class="input-item check">
-			<input type="checkbox" name="term" id="term">
-			<label for="term"><span></span>(필수) 이용약관</label>
-			<a href="">전체보기</a>
+		<form name="joinAgree">
+			<div class="input-item ui-btn point check">
+				<input type="checkbox" name="all" id="all" onclick="allChk(this);">
+				<label for="all"><span></span>전체 이용약관 동의</label>
+			</div>
+			
+			<div class="input-item check">
+				<input type="checkbox" name="term" id="term">
+				<label for="term"><span></span>(필수) 이용약관</label>
+				<a href="">전체보기</a>
+			</div>
+			<div class="input-item check">
+				<input type="checkbox" name="privacy" id="privacy">
+				<label for="privacy"><span></span>(필수) 개인정보 수집 및 이용</label>
+				<a href="">전체보기</a>
+			</div>
+			<span class="indicator txt-center" style="bottom:unset;margin-top:10px;width:100%;"></span>
+	    </form>
+		<div class="pn">
+			<a class="ui-btn" onclick="history.back();">취소</a>
+		    <a class="ui-btn point" onclick="goNext();">다음</a>
 		</div>
-		<div class="input-item check">
-			<input type="checkbox" name="privacy" id="privacy">
-			<label for="privacy"><span></span>(필수) 개인정보 수집 및 이용</label>
-			<a href="">전체보기</a>
-		</div>
-		<span class="indicator txt-center" style="bottom:unset;margin-top:10px;width:100%;"></span>
-    </form>
-	<div class="pn">
-		<a class="ui-btn" onclick="history.back();">취소</a>
-	    <a class="ui-btn point" onclick="goNext();">다음</a>
 	</div>
 </div>
 <script>

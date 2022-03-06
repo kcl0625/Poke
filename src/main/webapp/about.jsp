@@ -3,7 +3,7 @@
 <jsp:include page="header.jsp" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/about.css">
 <div id="fullpage">
-<div class="wrapper section">
+<div class="section">
 	<div id="ingre-wrapper">
 		<div class="row">
 			<div class="item"></div>

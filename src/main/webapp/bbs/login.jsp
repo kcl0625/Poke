@@ -3,23 +3,25 @@
 <jsp:include page="/header.jsp" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/login.css">
 
-<h2 class="page-title"><span class="point cheese">W</span>elcome!</h2>
-<div class="login-box form-wrapper form-item">
-	<form name="login">
-		<div class="input-item empty">
-			<input class="full" type="text" id="id" name="id">
-			<label for="id">id</label>
-			<span class="indicator"></span>
-		</div>
-		<div class="input-item empty">
-			<input class="full" type="password" id="pw" name="pw">
-			<label for="pw">pw</label>
-	        <span class="indicator"></span>
-	    </div>
-	    <a class="ui-btn point full">Log in</a>
-	    <a href="joinAgree.jsp" class="ui-btn full">Join</a>
-	    <a href="" class="txt-center">아이디/비밀번호 찾기</a>
-	</form>
+<div class="wrapper">
+	<h2 class="page-title"><span class="point cheese">W</span>elcome!</h2>
+	<div class="login-box form-wrapper form-item">
+		<form name="login">
+			<div class="input-item empty">
+				<input class="full" type="text" id="id" name="id">
+				<label for="id">id</label>
+				<span class="indicator"></span>
+			</div>
+			<div class="input-item empty">
+				<input class="full" type="password" id="pw" name="pw">
+				<label for="pw">pw</label>
+		        <span class="indicator"></span>
+		    </div>
+		    <a class="ui-btn point full">Log in</a>
+		    <a href="joinAgree.jsp" class="ui-btn full">Join</a>
+		    <a href="" class="txt-center">아이디/비밀번호 찾기</a>
+		</form>
+	</div>
 </div>
 <script>
 let form = document.querySelector('form');

@@ -1,22 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<jsp:include page="header.jsp" />
+<jsp:include page="/header.jsp" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/make.css">
 <div class="wrapper">
-	<h1><span class="point salmon">M</span>ake<br>M<span class="point salary">y</span><br><span class="point cheese">O</span>wn<br>B<span class="point salmon">o</span>wl</h1>
-	
 	<div class="making">
+		<h1><span class="point salmon">M</span>ake<br>M<span class="point salary">y</span><br><span class="point cheese">O</span>wn<br>B<span class="point salmon">o</span>wl</h1>
 		<div class="slider">
 			<div class="category">
 				<ul>
-					<li>abc</li>
-					<li>def</li>
-					<li>abc</li>
-					<li>def</li>
-					<li>abc</li>
-					<li>def</li>
-					<li>abc</li>
-					<li>def</li>
+					<li data-cate="육류">육류</li>
+					<li data-cate="해산물">해산물</li>
+					<li data-cate="야채 & 과일">야채 & 과일</li>
+					<li data-cate="곡물">곡물</li>
+					<li data-cate="견과류">견과류</li>
+					<li data-cate="치즈">치즈</li>
+					<li data-cate="소스">소스</li>
 				</ul>
 			</div>
 			<div class="btn prev" onclick="prev();"><svg viewBox="0 0 25 50"><polyline class="stroke only" stroke-miterlimit="10" points="25,0 0,25 25,50"/></svg></div>
@@ -72,13 +70,21 @@
 				</div>
 				
 				<div class="receipt">
-					<legend>receipt</legend>
-					<ul></ul>
-					<div class="total">
-						<span class="price"></span>
-						<span class="cal"></span>
+					<input type="hidden" name="ingre">
+					<div class="paper">
+						<div class="head">
+							<legend>receipt</legend>
+							<a class="clear" href="javascript:clear();"><i class="fas fa-trash"></i></a>
+						</div>
+						<div class="list">
+							<ul></ul>
+						</div>
+						<div class="total">
+							<p class="price"><input type="text" name="price" value="￦0" readonly></p>
+							<p class="cal"><input type="text" name="cal" value="0kcal" readonly></p>
+						</div>
 					</div>
-					<button class="ui-btn point full" onclick="addCart(event);">담기</button>
+					<button class="ui-btn point big full" onclick="addCart(event);">담기</button>
 				</div>
 			</form>
 		</div>
@@ -87,4 +93,4 @@
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/fullpage.css">
 <script src="${pageContext.request.contextPath}/js/make.js"></script>
-<jsp:include page="footer.jsp" />
+<jsp:include page="/footer.jsp" />

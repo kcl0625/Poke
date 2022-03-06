@@ -1,12 +1,13 @@
 @charset 'utf-8';
-#body {padding: 0;}
+
+.wrapper {padding-top: 0; max-width: unset;}
 footer {margin-top: 0;}
 
-.wrapper {background: var(--color-bak); max-width: unset; width: 100%;}
-.wrapper:nth-of-type(2) {background: orange;}
-.wrapper:nth-of-type(3) {background: skyblue;}
+.section {background: var(--color-bak); max-width: unset;}
+.section:nth-of-type(2) {background: orange;}
+.section:nth-of-type(3) {background: skyblue;}
 
-.wrapper:nth-of-type(1) .main-txt {
+.section:nth-of-type(1) .main-txt {
 	position: absolute;
 	display: flex;
 	top: 50%;
@@ -17,9 +18,9 @@ footer {margin-top: 0;}
 	gap: 2em;
 	white-space: nowrap;
 }
-.wrapper:nth-of-type(1) .main-txt * {width: 100%; line-height: 1.2em;}
-.wrapper:nth-of-type(1) .main-txt h1 {font-size: var(--page-title-font-size);font-weight: 100;}
-.wrapper:nth-of-type(1) .main-txt h2 {font-size: var(--big-font-size); font-weight: 300;}
+.section:nth-of-type(1) .main-txt * {width: 100%; line-height: 1.2em;}
+.section:nth-of-type(1) .main-txt h1 {font-size: var(--page-title-font-size);font-weight: 100;}
+.section:nth-of-type(1) .main-txt h2 {font-size: var(--big-font-size); font-weight: 300;}
 
 #ingre-wrapper {
     position: absolute;
@@ -51,5 +52,6 @@ footer {margin-top: 0;}
 }
 
 @media (max-width: 750px) {
-	#ingre-wrapper {top: 0; left: 0; transform: none; background: red;}
+	.section:nth-of-type(1) .main-txt {transform: translateY(-50%); left: 0;}
+	#ingre-wrapper {display: none;}
 }

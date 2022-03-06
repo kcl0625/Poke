@@ -1,18 +1,9 @@
 @charset 'utf-8';
-#body {padding: 0;}
 
-.wrapper h1 {
-	position: absolute;
-	left: -10vw;
-	bottom: 7vh;
-	font-size: 4em;
-	line-height: 1em;
-	font-weight: 100;
-	display: none;
-}
-@media all and (min-width: 1281px) {
-	.wrapper h1 {display: block;}
-	footer {margin-top: 0;}
+.wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    min-height: 100vh;
 }
 
 .making {
@@ -23,49 +14,30 @@
     flex-wrap: wrap;
     justify-content: center;
     align-content: center;
+    gap: 6em;
+	margin: auto;
 }
 
-.slider {position: relative;width: 70%;height: 80px;}
-.slider .category {position: absolute;width: 100%;top: -3.5em;}
-.slider .category ul {display: flex; justify-content: center; gap: 20px; font-size: var(--small-font-size);}
-.slider .btn.prev {position: absolute;width: 30px; top: 10px; left: 0;cursor: pointer; z-index: 10;}
-.slider .btn.next {position: absolute; width: 30px; top: 10px; right: 0; cursor: pointer; z-index: 10;}
+.making h1 {
+	position: absolute;
+	left: -11vw;
+	bottom: 0;
+	font-size: 4em;
+	line-height: 1em;
+	font-weight: 100;
+	display: none;
+}
+
+.slider {position: relative;width: 70%;height: 5em;}
+.slider .category {position: absolute;width: 110%;top: -3.5em; z-index: 1; left: -5%;}
+.slider .category ul {display: flex; justify-content: center; gap: 20px; font-size: var(--small-font-size); flex-wrap: wrap;}
+.slider .btn.prev {position: absolute;width: 2em;top: .5em;left: 0;cursor: pointer;z-index: 10;}
+.slider .btn.next {position: absolute;width: 2em; top: .5em;right: 0;cursor: pointer;z-index: 10;}
 .slider .btn svg {stroke-width: .8;}
 
-.making .item {
-	position: relative;
-	display: flex;
-	width: 80px;
-	height: 80px;
-	background: var(--color-bak);
-	border: 1px solid;
-	border-radius: 50%;
-	justify-content: center;
-	align-items: center;
-	flex-wrap: wrap;
-	cursor: pointer;
-}
-.making .item img {position: relative;width: 70%;height: auto;}
-
-.slider-container {position: relative; margin: 0 auto; overflow-x: clip;}
-.slider-container ul {position: absolute;display: flex;gap: 30px;flex-wrap: wrap;transition: .6s ease;left: 0;}
-.slider-container li {position: relative;}
-.slider-container li .name {
+.info-box {
 	position: absolute;
 	top: 100%;
-	left: 0;
-	display: block;
-	width: 100%;
-	padding-top: 5px;
-    text-align: center;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-.slider-container li .info-box {
-	position: absolute;
-	top: 100%;
-	margin-top: 40px;
 	width: 100%;
 	font-size: .6rem;
 	line-height: 1.2em;
@@ -75,9 +47,9 @@
 	background: var(--color-default);
 	opacity: 0;
 	animation: fade .3s ease forwards;
-	z-index: 11;
+	z-index: 12;
 }
-.slider-container li .info-box .line {
+.info-box .line {
 	margin: 5px 0 7px;
 	position: relative;
 	width: 100%;
@@ -85,7 +57,7 @@
 	border-left: 0;
 	border-top-width: 1px;
 }
-.slider-container li .info-box::before {
+.info-box::before {
 	content: '';
 	position: absolute;
 	top: -10px;
@@ -99,10 +71,45 @@
 	border-right-color: transparent;	
 }
 
-#bowl {position: relative;width: 70vw;max-width: 600px;z-index: 11;top: 8em;padding-top: 28em;}
+.making .item {
+	position: relative;
+	display: flex;
+	width: 5em;
+    height: 5em;
+    max-width: 80px;
+    max-height: 80px;
+	background: var(--color-bak);
+	border: 1px solid;
+	border-radius: 50%;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+	cursor: pointer;
+}
+.making .item img {position: relative;width: 70%;height: auto;}
+
+.slider-container {position: relative; margin: 0 auto; overflow-x: clip;}
+.slider-container ul {position: absolute;display: flex; flex-wrap: wrap;transition: .6s ease;left: 0;}
+.slider-container li {position: relative;}
+.slider-container li .name {
+	position: absolute;
+	top: 100%;
+	left: 0;
+	display: block;
+	width: 100%;
+	padding-top: 5px;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.slider-container .info-box {margin-top: 40px;}
+
+#bowl {position: relative;width: 70vw;max-width: 600px;z-index: 11;bottom: 0;padding-top: 28em;}
 #bowl svg {position: absolute; bottom: 0;}
 #bowl svg .stroke {stroke-width: .15;}
-#bowl .item {width: 70px; height: 70px; position: absolute; transform: scale(0); animation: pop .3s ease forwards;}
+#bowl .item {position: absolute; transform: scale(0); animation: pop .3s ease forwards;}
+
 @keyframes pop {
 	0% {transform: scale(0);}
 	80% {transform: scale(1);}
@@ -124,6 +131,8 @@
 #bowl .item:nth-of-type(13) {left: 60%; bottom: 16.5rem;}
 #bowl .item:nth-of-type(14) {right: 12%; bottom: 14.5rem;}
 
+#bowl .info-box {margin-top: 15px;}
+
 .making .write-name {position: absolute;width: 300px;left: 50%;z-index: 30;transform: translateX(-50%);top: 0;}
 .making .write-name input {
 	width: 100%;
@@ -132,7 +141,7 @@
 	text-align: center;
 	border: 0;
 }
-.making .write-name input + .line{
+.making .write-name input ~ .line{
 	width: 100%;
 	height: 0;
 	border: 0;
@@ -142,37 +151,71 @@
 }
 .making .write-name input:focus + .line {transform: scaleX(1);}
 
-.making .indicator {display: block;width: 100%;top: 4em;text-align: center;line-height: 1.2em;}
+.making .indicator {display: block;width: 100%;top: 4.5em;text-align: center;line-height: 1.2em;}
 
-.making .receipt {
-    position: absolute;
-    width: 15em;
+.making .receipt {position: absolute; right: -23em; bottom: 0;}
+.making .receipt .head {position: absolute;top: calc(-1em - 15px);left: 0;width: 100%;display: flex;gap: 8px;justify-content: end;}
+.making .receipt .head legend {position: absolute; left: 0;}
+
+.making .receipt .paper {
+	width: 15em;
     height: 20em;
-    max-width: 300px;
+	max-width: 300px;
     max-height: 400px;
-    right: -23em;
-    bottom: -5em;
-    padding: 20px;
+	padding: 20px;
     border: 1px solid;
 }
-.making .receipt legend {position: absolute; top: calc(-1em - 15px); left: 0;}
-.making .receipt ul {
-	
+
+.making .receipt .list {
+	position: relative;
+	height: 210px;
+	max-height: 14rem;
+	overflow-y: scroll;
 }
-.making .receipt button {position: absolute;top: 100%;left: 0;margin-top: 15px;}
+.making .receipt .list::-webkit-scrollbar {width: 3px; display: block;}
+.making .receipt .list::-webkit-scrollbar-thumb {border-radius: 1em;background: var(--color-default);}
+
+.making .receipt li {
+	display: flex;
+	padding: 10px 0;
+	justify-content: space-between;
+	border-bottom: 1px solid;
+}
+.making .receipt li .cal {font-size: var(--small-font-size);}
+.making .receipt li:last-child {border: 0;}
+
+.making .receipt .total {position: absolute;padding: 19px 20px 0 0;margin-top: -10px;}
+.making .receipt .total p input {border: 0; width: 100%; text-align: right; padding: 0;}
+.making .receipt .total .price input {font-size: var(--big-font-size);font-weight: 100;}
+
+.making .receipt button {margin-top: 15px;}
+
+@media all and (min-width: 1281px) {
+	.wrapper {padding-top: 0;}
+	.making .receipt {bottom: -60px;}
+	.making h1 {display: block;}
+	footer {margin-top: 0;}
+}
 
 @media all and (max-width: 1280px){
 	.form-wrapper {width: 100%;justify-content: space-between;}
-	.making {margin-top: 4em;}
-	.making #bowl {top: 5em;}
-	.making .receipt {right: 0;bottom: 0;margin-top: 8em;}
+	.making .receipt {right: 0;}
 }
 
 @media all and (max-width: 750px) {
-	.slider {width: 75%;}
+	.making {padding-top: 3em; gap: 3em;}
+	
+	.slider {width: 100%;}
+	.slider .btn.prev,
+	.slider .btn.next {width: 1.5em;}
+	.slider .btn svg {stroke-width: 1.1;}
+	
+	.making .item {width: 4em; height: 4em;}
 	.form-wrapper {justify-content: center;}
-	.making {margin-top: 21em;}
-	.making #bowl {width: 65vw;}
-	.making #bowl .item {width: 4em; height: 4em;}
-	.making .receipt {position: relative;margin-bottom: 11em;}
+	
+	.making #bowl {width: 65vw; padding-top: 26em;}
+	.making #bowl svg path {stroke-width: .2;}
+	.making #bowl .item {width: 8vw; height: 8vw;}
+	
+	.making .receipt {position: relative;}
 }

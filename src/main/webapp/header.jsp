@@ -26,7 +26,7 @@
 	    	<div class="menu">
 	            <ul>
 	                <li style="--i: 1;"><a href="${pageContext.request.contextPath}/about.jsp">About</a></li>
-	                <li style="--i: 2;"><a href="${pageContext.request.contextPath}/make.jsp">Make</a></li>
+	                <li style="--i: 2;"><a href="${pageContext.request.contextPath}/make/make.jsp">Make</a></li>
 	                <li style="--i: 3;"><a href="">Bowls</a></li>
 	                <li style="--i: 4;"><a href="">Shop</a></li>
 	                <li style="--i: 5;"><a href="">Notice</a></li>
