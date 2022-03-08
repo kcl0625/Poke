@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/login.css">
 
 <div class="wrapper">
-	<h2 class="page-title"><span class="point cheese">W</span>elcome!</h2>
+	<div class="page-title"><h2><span class="point cheese">W</span>elcome!</h2></div>
 	<div class="login-box form-wrapper form-item">
 		<form name="login">
 			<div class="input-item empty">

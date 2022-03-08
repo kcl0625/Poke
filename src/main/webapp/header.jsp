@@ -27,15 +27,15 @@
 	            <ul>
 	                <li style="--i: 1;"><a href="${pageContext.request.contextPath}/about.jsp">About</a></li>
 	                <li style="--i: 2;"><a href="${pageContext.request.contextPath}/make/make.jsp">Make</a></li>
-	                <li style="--i: 3;"><a href="">Bowls</a></li>
-	                <li style="--i: 4;"><a href="">Shop</a></li>
+	                <li style="--i: 3;"><a href="${pageContext.request.contextPath}/bowls/bowls.jsp">Bowls</a></li>
+	                <li style="--i: 4;"><a href="${pageContext.request.contextPath}/shop/shop.jsp">Shop</a></li>
 	                <li style="--i: 5;"><a href="">Notice</a></li>
-	                <li style="--i: 6;"><a href="">Review</a></li>
+	                <li style="--i: 6;"><a href="${pageContext.request.contextPath}/review/review.jsp">Review</a></li>
 	            </ul>
 	        </div>
 	        <div class="login">
 	            <ul>
-	                <li style="--i: 7;"><a href="">My POKE</a></li>
+	                <li style="--i: 7;"><a href="${pageContext.request.contextPath}/mypage/index.jsp">My POKE</a></li>
 	                <li style="--i: 8;"><a href="${pageContext.request.contextPath}/bbs/login.jsp">Log in</a></li>
 	            </ul>
 	        </div>

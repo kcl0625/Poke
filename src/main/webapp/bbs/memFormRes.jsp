@@ -10,7 +10,7 @@
 </style>
 
 <div class="wrapper">
-	<h2 class="page-title"><span class="point cheese">J</span>oin Us</h2>
+	<div class="page-title"><h2><span class="point cheese">J</span>oin Us</h2></div>
 	<div class="join-box form-wrapper form-item">
 		<div class="procedure">
 			<div class="item"><span class="num">1</span><span class="name">약관동의</span></div>

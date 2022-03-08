@@ -1,0 +1,35 @@
+@charset 'utf-8';
+
+.result {font-size: var(--big-font-size); font-weight: 200; padding-bottom: 30px;}
+
+.list li {
+    position: relative;
+    padding: 40px 0 40px 11em;
+    border-top: 1px solid;
+}
+.list li:last-of-type {border-bottom: 1px solid;}
+.list li .img {position: absolute; top: 50%; left: 2em; transform: translateY(-50%); width: 6em; height: 6em;}
+.list li h2 {font-size: var(--big-font-size); font-weight: 200;}
+.list li .sub {padding: 20px 0;}
+.list li .price {font-size: var(--accent-font-size); font-weight: 200;}
+.list li .add {
+    position: absolute;
+    display: flex;
+    top: 50%;
+    right: 0;
+    gap: 1em;
+    flex-wrap: wrap;
+    justify-content: end;
+    align-items: center;
+    transform: translateY(-50%);
+    font-size: var(--small-font-size);
+}
+.list li .add svg {width: 2.5em; stroke-width: .8; margin-left: 20px;}
+
+.search {float: right; margin-top: 50px;}
+
+@media all and (max-width: 750px){
+    .list li {padding-left: 9em;}
+    .list li .img {left: 1em;}
+    .list li .add svg {width: 2em; stroke-width: .97; margin-left: 0;}
+}

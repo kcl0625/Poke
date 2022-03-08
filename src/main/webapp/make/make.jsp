@@ -18,7 +18,7 @@
 				</ul>
 			</div>
 			<div class="btn prev" onclick="prev();"><svg viewBox="0 0 25 50"><polyline class="stroke only" stroke-miterlimit="10" points="25,0 0,25 25,50"/></svg></div>
-			<div class="btn next" onclick="next();"><svg viewBox="0 0 25 50"><polyline class="stroke only" stroke-miterlimit="10" points="0,0 25,25 0,50"/></div>
+			<div class="btn next" onclick="next();"><svg viewBox="0 0 25 50"><polyline class="stroke only" stroke-miterlimit="10" points="0,0 25,25 0,50"/></svg></div>
 			
 			<div class="slider-container">
 				<ul>
@@ -59,7 +59,7 @@
 		</div>
 		
 		<div class="form-wrapper">
-			<form name="menu" action="${pageContext.request.contextPath}/bbs/menuRes.jsp">
+			<form name="menu" method="post" action="${pageContext.request.contextPath}/bbs/menuRes.jsp">
 				<div id="bowl" ondragover="drop();" ondrop="addItem(event);">
 					<div class="write-name">
 						<input type="text" name="poke_name" id="poke_name" onsubmit="return false;" value="POKE">
@@ -84,13 +84,11 @@
 							<p class="cal"><input type="text" name="cal" value="0kcal" readonly></p>
 						</div>
 					</div>
-					<button class="ui-btn point big full" onclick="addCart(event);">담기</button>
+					<button type="button" class="ui-btn point big full" onclick="addCart(event);">담기</button>
 				</div>
 			</form>
 		</div>
 	</div>
 </div>
-
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/fullpage.css">
 <script src="${pageContext.request.contextPath}/js/make.js"></script>
 <jsp:include page="/footer.jsp" />

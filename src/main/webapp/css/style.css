@@ -19,6 +19,12 @@
     src: url('font/SUIT-Regular.woff2') format('woff2');
     font-weight: 400;
 }
+@font-face {
+    font-family: 'SUIT';
+    src: url('font/SUIT-SemiBold.woff2') format('woff2');
+    font-weight: 600;
+}
+
 
 @keyframes fade {
   0% {opacity: 0;}
@@ -218,8 +224,8 @@ header .side::before {
 #body {min-height: 100vh; margin: 0 auto;}
 .wrapper {width: 80vw; max-width: 920px; position: relative; margin: 0 auto; padding-top: 200px;}
 
-@media all and (max-width: 750px) {
-  .wrapper {width: 70vw; padding-top: 100px;}
+@media all and (max-width: 1280px) {
+  .wrapper {width: 70vw; padding-top: 150px;}
 }
 
 /* 푸터 */
@@ -228,7 +234,7 @@ footer {
     display: flex;
     width: calc(100% - 120px);
     height: 240px;
-    margin: 100px auto 0;
+    margin: 140px auto 0;
     padding: 0 70px;
     border-top: 1px solid;
     justify-content: space-between;
@@ -284,7 +290,22 @@ svg .fill.salary {fill: var(--color-salary);}
 .ui-btn.full {display: block; width: 100%; text-align: center;}
 .ui-btn.point {background: var(--color-default); color: var(--color-bak); border: 0;}
  
-.page-title {width: 100%; font-size: var(--page-title-font-size); font-weight: 100; text-align: center; padding-bottom: 60px;}
+.page-title {width: 100%;}
+.page-title h2 {font-size: var(--page-title-font-size); font-weight: 100; text-align: center; padding-bottom: 60px;}
+.page-title .sub {position: relative;text-align: center;font-size: var(--small-font-size); padding: 30px 0 60px;}
+.page-title .sub::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 40px;
+    border-top: 1px solid;
+    margin: 0 auto;
+    transform: translateX(-50%);
+}
+
+.page.category {margin-bottom: 100px;}
+.category ul {display: flex; justify-content: center; gap: 20px; font-size: var(--small-font-size); flex-wrap: wrap;}
  
 /* 폼 요소 */
 input[type="text"],
@@ -352,6 +373,31 @@ input[type="checkbox"]:checked + label span::after {transform: rotate(45deg) sca
 }
 .form-wrapper:not(.form-item) form {display: flex;justify-content: space-between; gap: 40px; transition: .4s ease;}
 .form-item {width: 60vw; max-width: 380px;}
+
+/* 검색 */
+.search {position: relative; max-width: 200px;}
+.search .input-item {position: relative;margin: 0;padding: 0;}
+.search .input-item::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  transform: scaleX(0);
+  transform-origin: top right;
+  transition: .3s ease;
+  border-bottom: 1px solid;
+}
+.search .input-item input {padding-left: 0;padding-right: 26px;width: 100%;border: 0;}
+.search button {width: 1em;position: absolute;right: 0;top: 8px;}
+
+.search .input-item.on::before {transform: scaleX(1);}
+
+/* 페이징 */
+.paging {display: flex; justify-content: center; align-items: center; gap: 30px; clear: both; padding: 100px 0 30px;}
+.paging .btn {width: 1em;height: 2em;}
+.paging .btn svg {stroke-width: 1.6;}
+.paging nav a {padding: 0 10px;}
+.paging nav a.cur {font-weight: 600;}
 
 @media all and (max-width: 1000px) {
   .form-wrapper:not(.form-item) form {justify-content: center; flex-wrap: wrap; gap: 80px;}

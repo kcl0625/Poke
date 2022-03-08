@@ -1,9 +1,7 @@
 @charset 'utf-8';
 
-@media all and (min-width: 1281px){
-	.wrapper {padding-top: 0;}
-	footer {margin-top: 0;}
-}
+.wrapper {padding-top: 0;}
+footer {margin-top: 0;}
 
 #body {display: flex;justify-content: center;align-content: center;flex-wrap: wrap;}
 
@@ -39,7 +37,7 @@
 	bottom: -25px;
 	left: 0;
 }
-
+.login-box {margin: 0 auto;}
 .login-box .ui-btn {
 	margin-bottom: 10px;
 }

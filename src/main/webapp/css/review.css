@@ -1,0 +1,10 @@
+@charset 'utf-8';
+
+.list a {float: right; padding-bottom: 1em;}
+.list ul {display: grid;justify-content: center;grid-template-columns: 1fr 1fr 1fr;gap: 1em; clear: both;}
+.list li {position: relative; border: 1px solid;}
+.list li::before {
+	content: '';
+	display: block;
+	padding-bottom: 100%;
+}
