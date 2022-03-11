@@ -200,3 +200,9 @@ let clear = () => {
 	menu.price.value = `￦${totPrice}`;
 	menu.cal.value = `${totCal}kcal`;
 }
+
+// 카테고리 선택
+let selectCategory = (item) => {
+	let cate = item.dataset.cate;
+	console.log(cate);
+}

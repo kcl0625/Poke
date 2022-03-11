@@ -30,7 +30,7 @@
 	                <li style="--i: 3;"><a href="${pageContext.request.contextPath}/bowls/bowls.jsp">Bowls</a></li>
 	                <li style="--i: 4;"><a href="${pageContext.request.contextPath}/shop/shop.jsp">Shop</a></li>
 	                <li style="--i: 5;"><a href="">Notice</a></li>
-	                <li style="--i: 6;"><a href="${pageContext.request.contextPath}/review/review.jsp">Review</a></li>
+	                <li style="--i: 6;"><a href="${pageContext.request.contextPath}/review/list.jsp">Review</a></li>
 	            </ul>
 	        </div>
 	        <div class="login">

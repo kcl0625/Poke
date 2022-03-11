@@ -269,8 +269,9 @@ hr.line {
   border-left-width: 1px;
 }
 
-.theme-box {border: 1px solid;padding: 30px;}
-.theme-box.leaf {border-top-left-radius:  1.2rem;border-bottom-right-radius: 1.2rem;width: 60vw;max-width: 380px;}
+.theme-box {border: 1px solid;padding: 30px; width: 100%;}
+.theme-box.round {border-radius: 1.2rem;}
+.theme-box.leaf {border-top-left-radius:  1.2rem;border-bottom-right-radius: 1.2rem;}
 
 svg .stroke {stroke: var(--color-default);}
 svg .stroke.only {fill: none;}
@@ -283,7 +284,6 @@ svg .fill.cheese {fill: var(--color-cheese);}
 svg .fill.salary {fill: var(--color-salary);}
  
 /* 버튼 */
-
 .ui-btn {display: block; padding: 7px 12px; border: 1px solid; border-radius: 1.5rem; width: 150px; text-align: center; cursor: pointer;}
 .ui-btn.big {padding: 12px 18px; border-radius: 2em; width: 380px;}
 .ui-btn.small {width: unset; padding: 3px 15px; font-size: var(--small-font-size);}
@@ -362,6 +362,20 @@ input[type="checkbox"]:checked + label span::after {transform: rotate(45deg) sca
 .input-item input:not([type="checkbox"]) {padding-left: 110px;}
 .input-item input:not([type="checkbox"]) + label {top: 50%; transform: translateY(-50%); position: absolute; left: 0;}
 .input-item.false {color: var(--color-salmon);}
+
+.select {position: relative; width: 250px;}
+.select .view-more {position: absolute; top: 50%; right: 20px; transform: translateY(-50%);}
+.select .select-item {
+	position: relative;
+	width: 100%;
+	padding: 10px 20px;
+	border-radius: 1.5rem;
+	border: 1px solid;
+}
+.select .select-wrapper {margin-top: 10px;}
+.select .select-wrapper .select-item {visibility: hidden; opacity: 0; transition: .3s calc(.1s * var(--i)) ease;}
+.select .select-wrapper ul {display: flex; gap: 5px; flex-wrap: wrap;}
+.select.open .select-wrapper .select-item {visibility: visible; opacity: 1;}
 
 .form-wrapper {
 	position: relative;

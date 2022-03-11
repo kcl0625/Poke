@@ -10,7 +10,29 @@ let search = (e) => {
         else searchInput.classList.remove('on');
     } else searchInput.classList.add('on');
 }
-
+let openSelect = (select) => {
+	if(!select.classList.contains('open')){
+		select.classList.add('open');
+		let selectItem = select.querySelectorAll('.select-wrapper .select-item');
+		let selected = select.querySelector('.selected span');
+		
+		selectItem.forEach((item, i) => {
+			selectItem[i].addEventListener('click', () => {
+				let val = selectItem[i].dataset.data;
+				selected.innerText = val;
+				select.classList.remove('open');
+			})
+		})
+		
+		
+	} else {
+		document.addEventListener('click', (e) => {
+			if (e.target != select) {
+				console.log('바깥');
+			}
+		})
+	}
+}
 /*const mysql = require('mysql');
 const conn = mysql.createConnection({
 	host: 'localhost',

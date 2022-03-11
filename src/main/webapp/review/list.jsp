@@ -9,7 +9,7 @@
 	</div>
 	
 	<div class="list">
-		<a href=""><i class="fas fa-pen"></i></a>
+		<a href="writeReview.jsp"><i class="fas fa-pen"></i></a>
 		<ul>
 			<li style="background: url('');"></li>
 			<li style="background: url('');"></li>
