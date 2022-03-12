@@ -15,7 +15,6 @@
 }
 
 .list li .content-bottom {text-align: center;padding: 1.5em 0 .5em;}
-
 .list li .content-bottom form {display: flex; flex-wrap: wrap; justify-content: center; gap: 1em;}
 .list li .content-bottom form input {width: 2em; text-align: center;}
 

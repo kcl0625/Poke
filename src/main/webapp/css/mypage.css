@@ -1,1 +1,65 @@
 @charset 'utf-8';
+
+.show-submenu {display: none;}
+.show-submenu  + .submenu {position: fixed;margin-left: -12em;text-align: right;}
+.show-submenu  + .submenu li {padding-bottom: .8em;}
+
+@media all and (max-width: 1280px) {
+	.show-submenu{
+		position: fixed;
+		display: block;
+		width: 1em;
+		top: 6em;
+		right: 15vw;
+		transition: .3s ease;
+		z-index: 10;
+		cursor: pointer;
+	}
+	.show-submenu svg {stroke-width: 3.2;}
+	.show-submenu.show {transform: rotate(-180deg);}
+	
+	.show-submenu + .submenu {
+		display: none;
+		margin-left: 0;
+		right: 15vw;
+		z-index: 10;
+	}
+	.show-submenu.show + .submenu {display: block;}
+}
+
+.profile {display: flex; align-items: center; gap: 3em; flex-wrap: wrap;}
+.profile .pic {width: 10em; height: 10em; border-radius: 50%; border: 1px solid;}
+.profile .name h2 {font-size: var(--big-font-size); font-weight: 200; float: left;}
+.profile .name a {margin-left: 10px; vertical-align: middle;}
+
+.profile .sub-info {padding-top: 10px;}
+.profile .sub-info p {float: left; margin-right: 3em;}
+.profile .sub-info p span {padding-left: 10px; font-weight: 600;}
+
+.procedure {display: flex; margin: 7em 0; justify-content: space-between; align-items: center;}
+.procedure > a {position: absolute; right: 0; margin-top: -17em; font-size: var(--small-font-size);}
+.procedure div {position: relative; text-align: center;}
+.procedure div::before {
+    content: '';
+    position: absolute;
+    width: 2em;
+    border-top: 1px solid;
+    bottom: 2.5em;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.procedure div .num {font-size: 3.5em; font-weight: 100; padding-bottom: .7em;}
+.procedure svg {width: 1.6em;}
+
+.plan .top h2 {font-size: var(--big-font-size); float: left; font-weight: 200;}
+.plan .top span {padding-left: 1em; vertical-align: sub;}
+
+.plan .list {margin-top: 2em;}
+.plan .list li {position: relative; margin-bottom: 20px; display: flex; justify-content: space-between;}
+.plan .list li .img {width: 7vw; height: 7vw;}
+.plan .list li .content-right {position: relative; display: flex; width: calc(100% - 11vw); align-content: center; justify-content: space-between; flex-wrap: wrap;}
+.plan .list li .content-right > * {display: flex;height: 100%;flex-wrap: wrap;align-content: center;}
+.plan .list li .content-right .info p {width: 100%;}
+.plan .list li .content-right form {text-align: center; gap: 1em;}
+.plan .list li .content-right form input {width: 2em; text-align: center;}
+.plan .list li .content-right .btns a {padding-left: 1em;}

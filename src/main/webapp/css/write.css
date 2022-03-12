@@ -1,5 +1,60 @@
-@charset 'utf-8';
+@charset "UTF-8";
 
-a.go-back {position: fixed;top: 20px;left: 20px;display: flex;align-items: center;gap: .8em;font-size: var(--accent-font-size);font-weight: 200;}
-a.go-back svg {width: .8em;}
+a.go-back {position: fixed;top: 20px;left: 20px;display: flex;align-items: center;gap: .8em;font-size: var(--accent-font-size);font-weight: 300;}
+a.go-back svg {width: .8em; stroke-width: 1.6;}
 
+.photo {
+	position: fixed;
+	width: 20vw;
+	height: 30vw;
+	border: 1px solid;
+	max-width: 380px;
+	max-height: 570px;
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+.form-right {
+	position: absolute;
+	right: 0;
+	width: 48%;
+	max-width: 28em;
+}
+.form-right .write-top {display: flex; justify-content: space-between; align-items: center; padding-bottom: 1em;}
+
+.form-right hr.line {border-top: 1px solid; width: 100%;}
+.form-right .star-ratings {direction: rtl;}
+.form-right .star-ratings input + label {color: transparent;-webkit-text-stroke: 1px var(--color-default);font-size: var(--accent-font-size);}
+.form-right .star-ratings :checked ~ label {color: var(--color-default);}
+
+.form-right .textarea {padding-top: 1em;}
+
+@media all and (max-width: 1280px) {
+	.photo {width: 25vw; height: 37.5vw;}
+}
+@media all and (max-width: 750px) {
+	.photo {position: relative; width: 100%; height: unset;}
+	.photo::before {content:''; display: block; padding-bottom: 150%;}
+	.form-right {position: relative; width: 100%;margin-top: 2em;}
+}
+
+.write-bottom {
+	position: fixed;
+	display: flex;
+	width: 100%;
+	left: 0;
+	bottom: 0;
+	padding: 1em 60px;
+	justify-content: space-between;
+	align-items: center;
+	border-top: 1px solid;
+	background: var(--color-bak);
+}
+.write-bottom .edit .txt-option {float: right; margin-left: 1.5em;}
+.write-bottom .edit .txt-option button {margin-right: .3em;}
+.write-bottom .edit #b {font-weight: 600;}
+.write-bottom .edit #i {font-style: italic;}
+.write-bottom .edit #u {text-decoration: underline;}
+.write-bottom .edit #t {text-decoration: line-through;}
+
+.write-bottom .pn button {float: left; margin-left: 1em; padding: 12px 30px; width: unset;}

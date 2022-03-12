@@ -10,27 +10,60 @@ let search = (e) => {
         else searchInput.classList.remove('on');
     } else searchInput.classList.add('on');
 }
+document.addEventListener('DOMContentLoaded', () => {
+	let select = document.querySelectorAll('.select');
+	
+	select.forEach((selectWrapper, i) => {
+		let selectItem = select[i].querySelectorAll('.select-wrapper .select-item');
+		let selected = select[i].querySelector('.selected');
+		let hidden = select[i].querySelector('input[type="hidden"]');
+		
+		select[i].addEventListener('click', (e) => {
+			e.stopImmediatePropagation();
+			if(!select[i].classList.contains('open')){
+				select[i].classList.add('open');
+				selectItem.forEach((item, j) => {
+					selectItem[j].addEventListener('click', () => {
+						let val = selectItem[j].dataset.data;
+						selected.innerText = val;
+						hidden.value = val;
+					})
+				})
+			} else {
+				select[i].classList.remove('open');
+			}
+		})
+		
+		document.addEventListener('click', (e) => {
+			e.stopImmediatePropagation();
+			select[i].classList.remove('open');
+			return false;
+		})
+	})
+})
+
 let openSelect = (select) => {
-	if(!select.classList.contains('open')){
-		select.classList.add('open');
-		let selectItem = select.querySelectorAll('.select-wrapper .select-item');
-		let selected = select.querySelector('.selected span');
+	let selectItem = select.querySelectorAll('.select-wrapper .select-item');
+	let selected = select.querySelector('.selected');
+	let hidden = select.querySelector('input[type="hidden"]');
+	
+	if(!select.classList.contains('open')){ //select가 open 상태가 아닐 때
 		
 		selectItem.forEach((item, i) => {
 			selectItem[i].addEventListener('click', () => {
 				let val = selectItem[i].dataset.data;
 				selected.innerText = val;
+				hidden.value = val;
 				select.classList.remove('open');
 			})
 		})
-		
-		
-	} else {
+		return false;
+	} else { //open 상태일 때
 		document.addEventListener('click', (e) => {
-			if (e.target != select) {
-				console.log('바깥');
-			}
+			select.classList.remove('open');
+			return false;
 		})
+		
 	}
 }
 /*const mysql = require('mysql');

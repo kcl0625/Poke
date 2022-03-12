@@ -1,6 +1,11 @@
 @charset 'utf-8';
 
-.join-box .input-item .ui-btn {position: absolute; top: 12px; right: 0;}
+form {width: 100%;}
+form .input-item {position: relative;width: 100%; padding: 8px 0;}
+form .input-item.check {margin: 0;}
+form .input-item.point.check {text-align: left; padding: 12px 25px; border-radius: 2em; margin-bottom: 40px; cursor: default;}
+form .input-item.check a {position: absolute; right: 0; font-size: var(--small-font-size); border-bottom: 1px solid;}
+form .input-item .ui-btn {position: absolute; top: 12px; right: 0;}
 #open-zip {
     visibility: hidden;
     border:1px solid;

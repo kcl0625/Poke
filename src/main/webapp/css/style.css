@@ -24,7 +24,12 @@
     src: url('font/SUIT-SemiBold.woff2') format('woff2');
     font-weight: 600;
 }
-
+@font-face {
+    font-family: 'Font Awesome Free';
+        src: url('font/fa-solid-900.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
 
 @keyframes fade {
   0% {opacity: 0;}
@@ -39,7 +44,7 @@
     --color-cheese: #EEBC69;
     --color-salary: #32AAAA;
     /* font size */
-    --font-size: 1em;
+    --font-size: 16px;
     --small-font-size: .8rem;
     --accent-font-size: 1.2rem;
     --big-font-size: 1.8rem;
@@ -262,10 +267,9 @@ footer div:last-of-type ul {float: right;}
 
 hr.line {
   width: 0;
-  border-width: 1px;
+  border-width: 0;
   border-style: dashed;
   border-color: var(--color-cheese);
-  border-width: 0;
   border-left-width: 1px;
 }
 
@@ -305,7 +309,7 @@ svg .fill.salary {fill: var(--color-salary);}
 }
 
 .page.category {margin-bottom: 100px;}
-.category ul {display: flex; justify-content: center; gap: 20px; font-size: var(--small-font-size); flex-wrap: wrap;}
+.category ul {display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;}
  
 /* 폼 요소 */
 input[type="text"],
@@ -363,19 +367,23 @@ input[type="checkbox"]:checked + label span::after {transform: rotate(45deg) sca
 .input-item input:not([type="checkbox"]) + label {top: 50%; transform: translateY(-50%); position: absolute; left: 0;}
 .input-item.false {color: var(--color-salmon);}
 
-.select {position: relative; width: 250px;}
-.select .view-more {position: absolute; top: 50%; right: 20px; transform: translateY(-50%);}
+.select {position: relative; width: 150px;}
 .select .select-item {
 	position: relative;
 	width: 100%;
 	padding: 10px 20px;
 	border-radius: 1.5rem;
 	border: 1px solid;
+	user-select: none;
+	background: var(--color-bak);
 }
-.select .select-wrapper {margin-top: 10px;}
-.select .select-wrapper .select-item {visibility: hidden; opacity: 0; transition: .3s calc(.1s * var(--i)) ease;}
+.select .select-item.selected::before {content: '\f107'; font-family: 'Font Awesome Free'; position: absolute;right: 20px;transition: .3s ease;}
+.select .select-wrapper {margin-top: 10px; position: absolute; visibility: hidden; z-index: 10;}
+.select .select-wrapper .select-item {top: -10px; opacity: 0; transition: .3s calc(.05s * var(--i)) ease;}
 .select .select-wrapper ul {display: flex; gap: 5px; flex-wrap: wrap;}
-.select.open .select-wrapper .select-item {visibility: visible; opacity: 1;}
+.select.open .select-wrapper {visibility: visible;}
+.select.open .select-item.selected::before {transform: rotate(-180deg);}
+.select.open .select-wrapper .select-item {opacity: 1; top: 0;}
 
 .form-wrapper {
 	position: relative;

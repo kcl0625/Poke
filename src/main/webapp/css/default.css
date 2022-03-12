@@ -28,7 +28,12 @@ input:-webkit-autofill:active  {
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; -moz-appearance: none; appearance: none; }
 
+input[type="radio"],
 input[type="checkbox"] {display: none;}
+
+[placeholder]:focus {outline: 0;}
+[placeholder]:empty::before {content: attr(placeholder); opacity: .4;}
+[placeholder]:empty:focus::before {content: '';}
 
 svg {overflow: visible; stroke-linejoin: round; stroke-linecap: round;}
 ::-webkit-scrollbar {display: none;}

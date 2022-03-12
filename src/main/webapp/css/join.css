@@ -70,9 +70,3 @@
     border-left: 1px solid;
 }
 .join-box .procedure .item.cur + .arrow {opacity: 1;}
-
-.join-box form {width: 100%;}
-.join-box .input-item {position: relative;width: 100%; padding: 8px 0;}
-.join-box .input-item.check {margin: 0;}
-.join-box .input-item.point.check {text-align: left; padding: 12px 25px; border-radius: 2em; margin-bottom: 40px; cursor: default;}
-.join-box .input-item.check a {position: absolute; right: 0; font-size: var(--small-font-size); border-bottom: 1px solid;}
