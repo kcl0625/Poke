@@ -40,16 +40,19 @@ String[] dayEng = {"mon", "tue", "wed", "thu", "fri", "sat", "sun"};
 									<label for="<%=dayEng[i]%>"><%=day[i]%></label>
 								<%} %>
 								</fieldset>
-								<h2 class="name">이름1</h2>
-								<p class="sub">소개소개소개소개<br>재료1/재료2/재료3/재료4</p>
+								<h3 class="name">이름1</h3>
+								<p class="ingre">재료1/재료2/재료3/재료4</p>
 							</div>
 							
 							<p class="price">￦00,000</p>
 							
 							<fieldset class="quantity">
 								<a>+</a><input type="number" name="qua"><a>-</a>
-								<button class="cart"><i class="fas fa-shopping-cart"></i></button>
 							</fieldset>
+							<div class="btns">
+								<button class="cart"><i class="fas fa-pen"></i></button>
+								<button class="cart"><i class="fas fa-trash"></i></button>
+							</div>
 						</li>
 					</ul>
 				</div>

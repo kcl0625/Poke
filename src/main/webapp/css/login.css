@@ -1,39 +1,35 @@
 @charset 'utf-8';
 
-.wrapper {padding-top: 0;}
-footer {margin-top: 0;}
-
 #body {display: flex;justify-content: center;align-content: center;flex-wrap: wrap;}
 
-.input-item {
-	position: relative;
+.login-box .input-item {
 	width: 100%;
 	margin-bottom: 40px;
 }
 
-.input-item input {
+.login-box .input-item input {
 	font-size: 2rem;
 	font-weight: 100;
 	padding-left: 0 !important;
 }
 
-.input-item input+label {
+.login-box .input-item input+label {
 	top: 1rem;
 	transition: .4s ease;
 	font-weight: 100;
 }
 
-.input-item.empty input+label {
+.login-box .input-item.empty input+label {
 	font-size: 2rem;
 }
 
-.input-item input:focus+label, .input-item:not(.empty) input+label {
+.login-box .input-item input:focus+label, .login-box .input-item:not(.empty) input+label {
 	top: .6rem;
 	font-size: 1rem;
 	font-weight: 400;
 }
 
-.input-item .indicator {
+.login-box .input-item .indicator {
 	bottom: -25px;
 	left: 0;
 }
@@ -42,13 +38,23 @@ footer {margin-top: 0;}
 	margin-bottom: 10px;
 }
 
-.login-box a:not(.ui-btn) {
+.login-box .login-box a:not(.ui-btn) {
 	font-size: var(- -small-font-size);
 	display: block;
 	width: 100%;
 }
 
+:not(.login-box) form {gap: 0 !important; align-content: space-between; height: 27em;}
+:not(.login-box) form > * {width: 100%;}
+:not(.login-box) form legend {padding: 0;}
+
 @media all and (min-width: 1281px) {
 	#body {padding: 0;}
 	footer {margin-top: 0;}
+}
+
+@media all and (max-width: 750px) {
+	:not(.login-box) .form-wrapper {flex-wrap: wrap;}
+	:not(.login-box) form {height: unset;}
+	:not(.login-box) form fieldset {margin: 2em 0;}
 }

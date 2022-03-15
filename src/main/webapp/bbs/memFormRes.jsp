@@ -4,10 +4,8 @@
 <jsp:include page="/header.jsp" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/join.css">
 <style>
-@media all and (min-width: 1281px) {
-	.wrapper {padding-top: 0;}
-	footer {margin-top: 0;}
-}
+.wrapper {padding-top: 0;}
+footer {margin-top: 0;}
 </style>
 <jsp:useBean id="memberBean" class="member.MemberDTO" />
 <jsp:setProperty property="*" name="memberBean" />

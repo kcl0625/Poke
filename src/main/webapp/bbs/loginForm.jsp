@@ -2,7 +2,10 @@
     pageEncoding="UTF-8"%>
 <jsp:include page="/header.jsp" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/login.css">
-
+<style>
+.wrapper {padding-top: 0;}
+footer {margin-top: 0;}
+</style>
 <div class="wrapper">
 	<div class="page-title"><h2><span class="point cheese">W</span>elcome!</h2></div>
 	<div class="login-box form-wrapper form-item">
@@ -19,7 +22,7 @@
 		    </div>
 		    <a class="ui-btn point full">Log in</a>
 		    <a href="joinAgree.jsp" class="ui-btn full">Join</a>
-		    <a href="" class="txt-center">아이디/비밀번호 찾기</a>
+		    <a href="findForm.jsp" class="txt-center" style="display: block;">아이디/비밀번호 찾기</a>
 		</form>
 	</div>
 </div>

@@ -322,7 +322,7 @@ input[type="password"] {letter-spacing: .5em;}
 input[type="password"]::placeholder {letter-spacing: normal;}
 input.full {width: 100%;}
 
-.input-item {padding: 10px 0; margin-bottom: 15px;}
+.input-item {position: relative; padding: 10px 0; margin-bottom: 15px; width: 100%;}
 .input-item input:not([type="checkbox"]) {padding-left: 110px;}
 .input-item input:not([type="checkbox"]) + label {top: 50%; transform: translateY(-50%); position: absolute; left: 0;}
 .input-item.false {color: var(--color-salmon);}
@@ -350,10 +350,9 @@ input.full {width: 100%;}
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	flex-wrap: wrap;
 	gap: 30px;
 }
-.form-wrapper:not(.form-item) form {display: flex;justify-content: space-between; gap: 40px; transition: .4s ease;}
+.form-wrapper:not(.form-item) form {display: flex;justify-content: space-between; gap: 40px; transition: .4s ease; flex-wrap: wrap;}
 .form-item {width: 60vw; max-width: 380px;}
 
 /* 검색 */
@@ -386,7 +385,7 @@ input.full {width: 100%;}
 .paging nav a {padding: 0 10px;}
 .paging nav a.cur {font-weight: 600;}
 
-@media all and (max-width: 1000px) {
+@media all and (max-width: 750px) {
   .form-wrapper:not(.form-item) form {justify-content: center; flex-wrap: wrap; gap: 80px;}
   .form-wrapper:not(.form-item) form .input-item:last-of-type {margin: 0;}
   .form-wrapper .form-item {max-width: unset;}

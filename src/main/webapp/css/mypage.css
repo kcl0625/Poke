@@ -100,24 +100,3 @@
 .qna .list {border-top: 1px solid; margin-top: 1em;}
 .qna .list li {position: relative; padding: 1em 0; border-bottom: 1px solid;}
 .qna .list li .date {float: right; font-size: var(--small-font-size);}
-
-.view-area .article-info {display: flex; justify-content: space-between; align-items: end;}
-.view-area .article-info a.back {display: flex;align-items: center;gap: 1.5em;font-size: var(--small-font-size); float: left;}
-.view-area .article-info a.back svg {width: .5em; stroke-width: 3.3;}
-.view-area .article-info .date {font-size: var(--small-font-size); float: right; order: 2;}
-.view-area .article-info .article-header {order: 1;}
-.view-area .article-info .article-header .category {position: relative; font-size: var(--small-font-size); text-align: center; top: -1.5em; padding-bottom: .5em;}
-.view-area .article-info .article-header .category::before {
-	content: '';
-	position: absolute;
-	bottom: 0;
-	left: 50%;
-	transform: translateX(-50%);
-	width: 2em;
-	height: 0;
-	border-bottom: 1px solid;
-}
-.view-area .article-info .article-header .article-title {font-weight: 300; font-size: var(--accent-font-size);}
-
-.view-area .article {clear: both; margin-top: 1.5em;}
-.view-area .article img {border: 1px solid; margin: 0 auto 2em; display: block;}

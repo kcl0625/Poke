@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <jsp:include page="/header.jsp" />
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/bowls.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/notice.css">
 <div class="wrapper">
 	<div class="page-title">
 		<h2><span class="point salmon">N</span>otice</h2>
@@ -22,7 +22,42 @@
 	
 	<div class="list">
 		<ul>
+			<li>
+				<span class="cate">Notice</span>
+				<a class="title" href="view.skin.jsp">공지사항 제목</a>
+				<span class="date">00.00.00</span>
+			</li>
 			
+			<li>
+				<span class="cate">Event</span>
+				<a class="title" href="view.skin.jsp">이벤트 제목</a>
+				<span class="date">00.00.00</span>
+			</li>
+			<li>
+				<span class="cate">Notice</span>
+				<a class="title" href="view.skin.jsp">공지사항 제목</a>
+				<span class="date">00.00.00</span>
+			</li>
+			<li>
+				<span class="cate">Notice</span>
+				<a class="title" href="view.skin.jsp">공지사항 제목</a>
+				<span class="date">00.00.00</span>
+			</li>
+			<li>
+				<span class="cate">Event</span>
+				<a class="title" href="view.skin.jsp">이벤트 제목</a>
+				<span class="date">00.00.00</span>
+			</li>
+			<li>
+				<span class="cate">Event</span>
+				<a class="title" href="view.skin.jsp">이벤트 제목</a>
+				<span class="date">00.00.00</span>
+			</li>
+			<li>
+				<span class="cate">Event</span>
+				<a class="title" href="view.skin.jsp">이벤트 제목</a>
+				<span class="date">00.00.00</span>
+			</li>
 		</ul>
 	</div>
 	
