@@ -89,7 +89,7 @@
 .making .item img {position: relative;width: 70%;height: auto;}
 
 .slider-container {position: relative; margin: 0 auto; overflow-x: clip;}
-.slider-container ul {position: absolute;display: flex; flex-wrap: wrap;transition: .6s ease;left: 0;}
+.slider-container ul {position: absolute;display: flex; flex-wrap: wrap;transition: left .6s ease;left: 0;}
 .slider-container li {position: relative;}
 .slider-container li .name {
 	position: absolute;

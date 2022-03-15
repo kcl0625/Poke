@@ -3,10 +3,6 @@
 <%@ page import="member.MemberDTO" %>
 <jsp:include page="/header.jsp" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/join.css">
-<style>
-.wrapper {padding-top: 0;}
-footer {margin-top: 0;}
-</style>
 <jsp:useBean id="memberBean" class="member.MemberDTO" />
 <jsp:setProperty property="*" name="memberBean" />
 <div class="wrapper">

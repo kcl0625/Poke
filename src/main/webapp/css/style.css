@@ -131,8 +131,8 @@ header .side::before {
   top: 100%;
   left: 0;
   width: 0;
-  height: 1px;
-  background: var(--color-default);
+  height: 0;
+  border-top: 1px solid;
   transition: .2s ease;
 }
 #gnb ul li:hover::before,
@@ -228,6 +228,7 @@ header .side::before {
 
 #body {min-height: 100vh; margin: 0 auto;}
 .wrapper {width: 80vw; max-width: 920px; position: relative; margin: 0 auto; padding-top: 200px;}
+.wrapper::after {content: ''; clear: both; display: block;}
 
 @media all and (max-width: 1280px) {
   .wrapper {width: 70vw; padding-top: 150px;}

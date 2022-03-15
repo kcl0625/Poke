@@ -112,3 +112,8 @@ input[type="checkbox"]:checked + label span::after {transform: rotate(45deg) sca
     border-left: 1px solid;
 }
 .join-box .procedure .item.cur + .arrow {opacity: 1;}
+
+@media all and (min-width: 1281px) {
+	.wrapper {padding-top: 0;}
+	footer {margin-top: 0;}
+}

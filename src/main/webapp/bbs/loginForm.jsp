@@ -3,8 +3,10 @@
 <jsp:include page="/header.jsp" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/login.css">
 <style>
-.wrapper {padding-top: 0;}
-footer {margin-top: 0;}
+@media all and (min-width: 1281px) {
+	.wrapper {padding-top: 0;}
+	footer {margin-top: 0;}
+}
 </style>
 <div class="wrapper">
 	<div class="page-title"><h2><span class="point cheese">W</span>elcome!</h2></div>
