@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>  
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,6 +12,7 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/default.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
 	<link rel="icon" href="${pageContext.request.contextPath}/favicon.svg">
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<script src="${pageContext.request.contextPath}/js/common.js"></script>
 	<title>POKE</title>
 </head>

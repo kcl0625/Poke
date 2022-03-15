@@ -138,7 +138,7 @@ header .side::before {
 #gnb ul li:hover::before,
 #gnb ul li.cur::before {width: 100%;}
 
-#logo, #cart {
+#logo, #header-right-btn {
     position: absolute;
     top: 0;
     display: flex;
@@ -163,7 +163,7 @@ header .side::before {
   100% {stroke-dashoffset: 0;}
 }
 
-#cart {right: 0;}
+#header-right-btn {right: 0;}
 
 @media (max-width: 1280px){
   #logo {left: 50%; transform: translateX(-50%);}
@@ -308,6 +308,8 @@ svg .fill.salary {fill: var(--color-salary);}
     transform: translateX(-50%);
 }
 
+.page-sub-title h2 {font-weight: 200; font-size: var(--big-font-size);}
+
 .page.category {margin-bottom: 100px;}
 .category ul {display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;}
  
@@ -320,48 +322,6 @@ input[type="password"] {letter-spacing: .5em;}
 input[type="password"]::placeholder {letter-spacing: normal;}
 input.full {width: 100%;}
 
-input[type="checkbox"] + label {padding-left: 40px; position: relative;}
-input[type="checkbox"] + label span {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 20px;
-    height: 20px;
-    display: block;
-    border: 1px solid;
-    border-radius: 50%;
-    z-index: 10;
-}
-input[type="checkbox"] + label span::before {
-    content: '';
-    position: absolute;
-    display: block;
-    top: -4px;
-    left: -6px;
-    width: 0;
-    height: 20px;
-    border-left: 1px solid;
-    transform: rotate(-45deg) scaleY(0);
-    transform-origin: top center;
-    transition: .1s ease;
-}
-input[type="checkbox"] + label span::after {
-    content: '';
-    position: absolute;
-    display: block;
-    top: -25px;
-    left: 8px;
-    width: 0;
-    height: 35px;
-    border-left: 1px solid;
-    transform: rotate(45deg) scaleY(0);
-    transform-origin: bottom center;
-    transition: .1s .1s ease;
-}
-
-input[type="checkbox"]:checked + label span::before {transform: rotate(-45deg) scaleY(1);}
-input[type="checkbox"]:checked + label span::after {transform: rotate(45deg) scaleY(1);}
-
 .input-item {padding: 10px 0; margin-bottom: 15px;}
 .input-item input:not([type="checkbox"]) {padding-left: 110px;}
 .input-item input:not([type="checkbox"]) + label {top: 50%; transform: translateY(-50%); position: absolute; left: 0;}
@@ -371,7 +331,7 @@ input[type="checkbox"]:checked + label span::after {transform: rotate(45deg) sca
 .select .select-item {
 	position: relative;
 	width: 100%;
-	padding: 10px 20px;
+	padding: .5em 1em;
 	border-radius: 1.5rem;
 	border: 1px solid;
 	user-select: none;
@@ -398,21 +358,26 @@ input[type="checkbox"]:checked + label span::after {transform: rotate(45deg) sca
 
 /* 검색 */
 .search {position: relative; max-width: 200px;}
-.search .input-item {position: relative;margin: 0;padding: 0;}
+.search .input-item {
+	position: relative;
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	transform: scaleX(0);
+	transform-origin: top right;
+	transition: .3s ease;
+}
 .search .input-item::before {
   content: '';
   position: absolute;
   bottom: 0;
   width: 100%;
-  transform: scaleX(0);
-  transform-origin: top right;
-  transition: .3s ease;
   border-bottom: 1px solid;
 }
 .search .input-item input {padding-left: 0;padding-right: 26px;width: 100%;border: 0;}
 .search button {width: 1em;position: absolute;right: 0;top: 8px;}
 
-.search .input-item.on::before {transform: scaleX(1);}
+.search.open .input-item {transform: scaleX(1);}
 
 /* 페이징 */
 .paging {display: flex; justify-content: center; align-items: center; gap: 30px; clear: both; padding: 100px 0 30px;}

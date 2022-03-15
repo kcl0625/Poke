@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="member.MemberDTO" %>
 <jsp:include page="/header.jsp" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/join.css">
 <style>
@@ -8,7 +9,8 @@
 	footer {margin-top: 0;}
 }
 </style>
-
+<jsp:useBean id="memberBean" class="member.MemberDTO" />
+<jsp:setProperty property="*" name="memberBean" />
 <div class="wrapper">
 	<div class="page-title"><h2><span class="point cheese">J</span>oin Us</h2></div>
 	<div class="join-box form-wrapper form-item">
@@ -25,7 +27,7 @@
 		</div>
 			
 		<div class="pn" style="flex-wrap: wrap;">
-	    	<a class="ui-btn full" onclick="${pageContext.request.contextPath}/bbs/login.jsp">Log in</a>
+	    	<a class="ui-btn full" onclick="${pageContext.request.contextPath}/bbs/loginForm.jsp">Log in</a>
 		    <a class="ui-btn point full" href="${pageContext.request.contextPath}/index.jsp">Main</a>
 		</div>
 	</div>

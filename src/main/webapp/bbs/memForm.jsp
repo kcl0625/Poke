@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/memForm.css">
-<form name="memForm" action="memFormRes.jsp">
+<form name="memForm" action="memFormRes.jsp" method="post">
 	<fieldset class="form-item">
 		<legend>회원 정보</legend>
 	
@@ -90,6 +90,12 @@
                 memForm.add1.value = addr;
                 memForm.add2.focus();
 
+				//false 상태 없애기
+    			memForm.zip.parentNode.classList.remove('false');
+    			memForm.add1.parentNode.classList.remove('false');
+    			printMsg('', memForm.zip.parentNode.querySelector('.indicator'));
+    			printMsg('', memForm.add1.parentNode.querySelector('.indicator'));
+				
                 // iframe을 넣은 element를 안보이게 한다.
                 openZipWrap.classList.remove('show');
 
@@ -173,10 +179,20 @@
     	
     	//id 중복검사
     	if(id == 'id') {
-    		var xhr = new XMLHttpRequest();
-    		xhr.onreadysatechange = () => {
-    			
-    		}
+    		memForm.id.addEventListener('keydown', () => {
+    			$.ajax({
+        			url: '${pageContext.request.contextPath}/member/idChk?id=' + memForm.id.value,
+        			type: 'get',
+        			success: () => {
+        				if (true)
+        					msg = '사용할 수 없는 아이디예요';
+        				else
+        					msg = '';
+        				memForm.id.parentNode.classList.remove('false');
+    	    			printMsg(msg, memForm.id.parentNode.querySelector('.indicator'));
+        			}
+    			})
+    		})
     	}
     	
     	// pw 확인
@@ -189,12 +205,7 @@
     			msg = '';
     			memForm.pwChk.parentNode.classList.remove('false');
     			printMsg(msg, memForm.pwChk.parentNode.querySelector('.indicator'));
-    		}	
-    	}
-    	
-    	//readonly 일 때 change 감지되게 함
-    	if(id == zip || id == add1){
-    		
+    		}
     	}
     }
     

@@ -47,8 +47,7 @@ let openSelect = (select) => {
 	let selected = select.querySelector('.selected');
 	let hidden = select.querySelector('input[type="hidden"]');
 	
-	if(!select.classList.contains('open')){ //select가 open 상태가 아닐 때
-		
+	if(!select.classList.contains('open')){ //select가 open 상태가 아닐 때	
 		selectItem.forEach((item, i) => {
 			selectItem[i].addEventListener('click', () => {
 				let val = selectItem[i].dataset.data;
@@ -66,6 +65,23 @@ let openSelect = (select) => {
 		
 	}
 }
+
+let openSearch = (e) => {
+	e.preventDefault();
+	let searchBox = document.querySelector('.search');
+	let input = searchBox.querySelector('input[name="keyword"]');
+	
+	if(!searchBox.classList.contains('open')){
+		searchBox.classList.add('open');
+	} else {
+		if(input.value){
+			console.log('제출!!');
+			//search.submit();
+		} else {
+			searchBox.classList.remove('open');
+		}
+	}
+} 
 /*const mysql = require('mysql');
 const conn = mysql.createConnection({
 	host: 'localhost',

@@ -1,0 +1,5 @@
+@charset "UTF-8";
+
+@media all and (min-width: 1281px) {
+	#logo {border-right: 1px solid;}
+}

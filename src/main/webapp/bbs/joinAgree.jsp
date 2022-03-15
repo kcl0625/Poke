@@ -17,7 +17,7 @@ footer {margin-top: 0;}
 			<div class="item"><span class="num">3</span><span class="name">가입완료</span></div>
 		</div>
 		<form name="joinAgree" style="width:100%;">
-			<div class="input-item ui-btn point check" style="width:100%;text-align:left;padding:10px;">
+			<div class="input-item ui-btn point check" style="width:100%;text-align:left;padding:10px 15px;">
 				<input type="checkbox" name="all" id="all" onclick="allChk(this);">
 				<label for="all"><span></span>전체 이용약관 동의</label>
 			</div>

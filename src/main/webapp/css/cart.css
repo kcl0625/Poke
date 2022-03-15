@@ -1,0 +1,14 @@
+@charset "UTF-8";
+
+.cart-left {position: relative; width: 60%;}
+.cart-left .list-container-top {display: flex; justify-content: space-between; align-items: center;}
+.cart-left .list-container-top h3 {font-size: var(--big-font-size); font-weight: 200;}
+
+.cart-left .item-list {clear: both; margin-top: 1em;}
+
+.cart-left .item-list li {position: relative; padding-left: 10em;}
+.cart-left .item-list li .img {position: absolute; top: 50%; left: 2em; transform: translateY(-50%); width: 6em; height: 6em; background: #eee;}
+.cart-left .item-list li fieldset.day label {font-size: var(--small-font-size);}
+.cart-left .item-list li fieldset.day :checked + label {font-weight: 600;}
+
+.cart-left .etc {magrin-top: 3em;}

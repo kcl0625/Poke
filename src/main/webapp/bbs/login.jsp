@@ -1,55 +1,35 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<jsp:include page="/header.jsp" />
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/login.css">
+<%@ page import="config.Config" %>
+<%@ page import="java.sql.Connection" %>
+<%@ page import="java.sql.PreparedStatement" %>
+<%@ page import="java.sql.ResultSet" %>
 
-<div class="wrapper">
-	<div class="page-title"><h2><span class="point cheese">W</span>elcome!</h2></div>
-	<div class="login-box form-wrapper form-item">
-		<form name="login">
-			<div class="input-item empty">
-				<input class="full" type="text" id="id" name="id">
-				<label for="id">id</label>
-				<span class="indicator"></span>
-			</div>
-			<div class="input-item empty">
-				<input class="full" type="password" id="pw" name="pw">
-				<label for="pw">pw</label>
-		        <span class="indicator"></span>
-		    </div>
-		    <a class="ui-btn point full">Log in</a>
-		    <a href="joinAgree.jsp" class="ui-btn full">Join</a>
-		    <a href="" class="txt-center">아이디/비밀번호 찾기</a>
-		</form>
-	</div>
-</div>
-<script>
-let form = document.querySelector('form');
-let inputItem = form.querySelectorAll('.input-item');
-let loginBtn = form.querySelector('.ui-btn.point');
-inputItem.forEach((item, i) => {
-	let input = inputItem[i].querySelector('input');
-    let indicator = inputItem[i].querySelector('.indicator');
- 
-    input.addEventListener('change', () => {
-    	if (input.value) {
-    		inputItem[i].classList.remove('empty');
-    		indicator.innerHTML = '';
-    	} else {
-			inputItem[i].classList.add('empty');
-            indicator.innerHTML = '값을 입력해주세요';
-        }
-    })
-    
-    loginBtn.addEventListener('click', () => {
-    	if (input.value) {
-    		inputItem[i].classList.remove('empty');
-    		indicator.innerHTML = '';
-    	} else {
-    		inputItem[i].classList.add('empty');
-    		indicator.innerHTML = '값을 입력해주세요';
-		}
-    })
-})
-</script>
-<jsp:include page="/footer.jsp" />
+<%
+	String id = request.getParameter("id");
+	String pw = request.getParameter("pw");
+	
+	String sql = null;
+	Connection con = null;
+	PreparedStatement pstmt = null;
+	ResultSet rs = null;
+	
+	con = Config.getConnection();
+	sql = "select id, pw, admin from member where id = ? and pw = ?";
+	pstmt = con.prepareStatement(sql);
+	
+	pstmt.setString(1, id);
+	pstmt.setString(2, pw);
+	
+	rs = pstmt.executeQuery();	
+
+	if(rs.next()){
+		session.setAttribute("id", id);
+		session.setAttribute("pw", pw);
+		session.setAttribute("isAdm", rs.getString("admin"));
+		
+		response.sendRedirect("../index.jsp");	
+	} else {
+		response.sendRedirect("loginForm.jsp");
+	}
+%>
