@@ -18,6 +18,7 @@
 .cart-left .item-list li .btns button {padding-left: .5em;}
 
 .cart-left .etc {margin-top: 3em;}
+.cart-left .etc .item-list li .item-info .name {padding: 2.4rem 0;}
 
 .cart-right {position: relative; float: right; width: 23%;}
 .cart-right .receipt .price {position: relative; border-bottom: 1px solid;}
@@ -28,3 +29,8 @@
 .cart-right .receipt .total {padding: 1.2em 0;}
 .cart-right .receipt .total span {vertical-align: sub;}
 .cart-right .receipt .total .total-price {float: right; font-size: var(--big-font-size); font-weight: 100;}
+
+@media all and (max-width: 750px){
+    .cart-left {width: 100%;}
+    .cart-right {width: 100%; margin-top: 5em;}
+}

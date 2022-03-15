@@ -14,7 +14,6 @@
 }
 
 .login-box .input-item input+label {
-	top: 1rem;
 	transition: .4s ease;
 	font-weight: 100;
 }
