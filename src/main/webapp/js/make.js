@@ -196,7 +196,10 @@ let clear = () => {
 		
 	totPrice = 0;
 	totCal = 0;
-	
+	msg = '';
+	itemL = 0;
+
+	printMsg(msg, indicator);
 	menu.price.value = `￦${totPrice}`;
 	menu.cal.value = `${totCal}kcal`;
 }
@@ -204,5 +207,15 @@ let clear = () => {
 // 카테고리 선택
 let selectCategory = (item) => {
 	let cate = item.dataset.cate;
-	console.log(cate);
+	let cateLi = document.querySelectorAll('.category li');
+	
+	$.ajax({
+        url: '${pageContext.request.contextPath}/poke/cate?cate=' + cate,
+        type: 'get',
+        success: () => {
+			for(let i=0;i<cateLi.length;i++)
+				cateLi[i].classList.remove('cur');
+			item.classList.add('cur');
+        }
+    })
 }

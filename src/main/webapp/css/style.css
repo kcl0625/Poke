@@ -75,7 +75,7 @@
     100% {transform: rotate(360deg);}
 }
 
-body {color: var(--color-default);font: var(--font-size)/1.7em 'SUIT', 'Dotum', sans-serif;background: var(--color-bak);}
+body {color: var(--color-default);font: var(--font-size)/1.5em 'SUIT', 'Dotum', sans-serif;background: var(--color-bak);}
 
 ::selection {background: var(--color-salmon); color: var(--color-bak);}
 
@@ -181,8 +181,8 @@ header .side::before {
   #gnb > div {width: 51%;padding: 30px 0;}
   #gnb ul {display: flex;justify-content: center;flex-wrap: wrap;gap: 20px;flex-direction: column;}
   #gnb ul li {margin-left: -50px; transition: .4s ease; transition-delay: calc(.07s * var(--i)); opacity: 0;}
-  #gnb .menu {height: 40%;}
-  #gnb .login {height: 17%;}
+  #gnb .menu {height: 48%;}
+  #gnb .login {height: 23%;}
 
 #gnb::before {
     content: '';
@@ -338,7 +338,7 @@ input.full {width: 100%;}
 	user-select: none;
 	background: var(--color-bak);
 }
-.select .select-item.selected::before {content: '\f107'; font-family: 'Font Awesome Free'; position: absolute;right: 20px;transition: .3s ease;}
+.select .select-item.selected::before {content: '\f107'; font-family: 'Font Awesome Free'; position: absolute;right: 1em;transition: .3s ease;}
 .select .select-wrapper {margin-top: 10px; position: absolute; visibility: hidden; z-index: 10;}
 .select .select-wrapper .select-item {top: -10px; opacity: 0; transition: .3s calc(.05s * var(--i)) ease;}
 .select .select-wrapper ul {display: flex; gap: 5px; flex-wrap: wrap;}

@@ -32,28 +32,34 @@
 let form = document.querySelector('form');
 let inputItem = form.querySelectorAll('.input-item');
 let loginBtn = form.querySelector('.ui-btn.point');
+
+let isEmpty = (input, indicator) => {
+	if (input.value) {
+		input.parentNode.classList.remove('empty');
+		indicator.innerHTML = '';
+	} else {
+		input.parentNode.classList.add('empty');
+        indicator.innerHTML = '값을 입력해주세요';
+    }
+}
+
 inputItem.forEach((item, i) => {
 	let input = inputItem[i].querySelector('input');
     let indicator = inputItem[i].querySelector('.indicator');
  
     input.addEventListener('change', () => {
-    	if (input.value) {
-    		inputItem[i].classList.remove('empty');
-    		indicator.innerHTML = '';
-    	} else {
-			inputItem[i].classList.add('empty');
-            indicator.innerHTML = '값을 입력해주세요';
-        }
+    	isEmpty(input, indicator);
     })
     
     loginBtn.addEventListener('click', () => {
-    	if(!input.value) {
-    		inputItem[i].classList.add('empty');
-    		indicator.innerHTML = '값을 입력해주세요';
-		}
-    	
-    	if(login.id.value && login.pw.value){
-    		login.submit();
+    	isEmpty(input, indicator);
+    	if(login.id && login.pw) login.submit();
+    })
+    
+  	login.addEventListener('keypress', (e) => {
+    	if(e.keyCode == 13) {
+    		isEmpty(input, indicator);
+    		if(login.id && login.pw) login.submit();
     	}
     })
 })

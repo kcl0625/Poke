@@ -40,12 +40,11 @@
 	    <div id="gnb">
 	    	<div class="menu">
 	            <ul>
-	                <li style="--i: 1;"><a href="${pageContext.request.contextPath}/about.jsp">About</a></li>
-	                <li style="--i: 2;"><a href="${pageContext.request.contextPath}/make/make.jsp">Make</a></li>
-	                <li style="--i: 3;"><a href="${pageContext.request.contextPath}/bowls/bowls.jsp">Bowls</a></li>
-	                <li style="--i: 4;"><a href="${pageContext.request.contextPath}/shop/list.jsp">Shop</a></li>
-	                <li style="--i: 5;"><a href="${pageContext.request.contextPath}/notice/list.jsp">Notice</a></li>
-	                <li style="--i: 6;"><a href="${pageContext.request.contextPath}/review/list.jsp">Review</a></li>
+	                <li style="--i: 1;"><a href="${pageContext.request.contextPath}/make/make.jsp">Make</a></li>
+	                <li style="--i: 2;"><a href="${pageContext.request.contextPath}/bowls/bowls.jsp">Bowls</a></li>
+	                <li style="--i: 3;"><a href="${pageContext.request.contextPath}/shop/list.jsp">Shop</a></li>
+	                <li style="--i: 4;"><a href="${pageContext.request.contextPath}/notice/list.jsp">Notice</a></li>
+	                <li style="--i: 5;"><a href="${pageContext.request.contextPath}/review/list.jsp">Review</a></li>
 	            </ul>
 	        </div>
 	        <div class="login">

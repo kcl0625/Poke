@@ -1,26 +1,37 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<jsp:include page="/header.jsp" />
+<%@page import="java.util.ArrayList" %>
+<%@page import="poke.IngreDTO" %>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/make.css">
+<jsp:include page="/header.jsp" />
+
+<jsp:useBean id="ingreBean" class="poke.IngreDAO" />
+
 <div class="wrapper">
 	<div class="making">
 		<h1><span class="point salmon">M</span>ake<br>M<span class="point salary">y</span><br><span class="point cheese">O</span>wn<br>B<span class="point salmon">o</span>wl</h1>
-		
 		<div class="category">
 			<ul>
-				<li data-cate="육류" onclick="selectCategory(this);">육류</li>
+				<%
+				ArrayList<IngreDTO> cateList = ingreBean.getIngreCate();
+				int total = ingreBean.getIngreCate().size();
+				for(int i=0;i<total;i++){%>
+					<li data-cate="<%=cateList.get(i).getName() %>" onclick="selectCategory(this);"><%=cateList.get(i).getName()%></li>
+				<%} %>
+				
+				<!--<li data-cate="육류" onclick="selectCategory(this);">육류</li>
 				<li data-cate="해산물" onclick="selectCategory(this);">해산물</li>
 				<li data-cate="야채 & 과일" onclick="selectCategory(this);">야채 & 과일</li>
 				<li data-cate="곡물" onclick="selectCategory(this);">곡물</li>
 				<li data-cate="견과류" onclick="selectCategory(this);">견과류</li>
 				<li data-cate="치즈" onclick="selectCategory(this);">치즈</li>
-				<li data-cate="소스" onclick="selectCategory(this);">소스</li>
+				<li data-cate="소스" onclick="selectCategory(this);">소스</li>-->
 			</ul>
 		</div>
 		
-		<div class="slider">	
-			<div class="btn prev" onclick="prev();"><svg viewBox="0 0 25 50"><polyline class="stroke only" stroke-miterlimit="10" points="25,0 0,25 25,50"/></svg></div>
-			<div class="btn next" onclick="next();"><svg viewBox="0 0 25 50"><polyline class="stroke only" stroke-miterlimit="10" points="0,0 25,25 0,50"/></svg></div>
+		<div class="slider">
+			<div class="btn prev" onclick="prev();"><svg viewBox="0 0 25 50"><polyline class="stroke only" points="25,0 0,25 25,50"/></svg></div>
+			<div class="btn next" onclick="next();"><svg viewBox="0 0 25 50"><polyline class="stroke only" points="0,0 25,25 0,50"/></svg></div>
 			
 			<div class="slider-container">
 				<ul>

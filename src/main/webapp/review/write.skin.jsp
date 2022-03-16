@@ -12,8 +12,8 @@
 <a class="go-back" href="${pageContext.request.contextPath}/review/list.jsp"><svg viewBox="0 0 25 50"><polyline class="stroke only" stroke-miterlimit="10" points="25,0 0,25 25,50"/></svg>back</a>
 <div class="wrapper" onload="run();">
 	<form name="write" action="${pageContext.request.contextPath}/bbs/write.jsp" method="post" enctype="multipart/form-data">
-		<input type="file" name="photo" style="display:block;" accept="image/jpeg, image/png">
-		<div class="photo"></div>
+		<input type="file" name="photo" style="display:none;" accept="image/jpeg, image/png">
+		<div class="photo"><img src=""></div>
 		<div class="form-right">
 			<div class="write-top">
 				<div class="select">
@@ -65,9 +65,11 @@
 	
 	<script>
 		write.photo.addEventListener('change', (e) => {
-			console.log('upload');
-			console.log(${e.target.value});
-			photo.style.backgroundImage = `url('${write.photo.value}')`;
+			let fReader = new FileReader();
+			fReader.readAsDataURL(write.photo.files[0]);
+			fReader.onloaded = (e) => {
+				document.querySelector('.photo img').src = e.target.result;
+			}
 		})
 	</script>
 </div>

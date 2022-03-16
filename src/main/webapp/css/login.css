@@ -43,7 +43,7 @@
 	width: 100%;
 }
 
-:not(.login-box) form {gap: 0 !important; align-content: space-between; height: 27em;}
+:not(.login-box) form {gap: 0 !important; align-content: space-between;}
 :not(.login-box) form > * {width: 100%;}
 :not(.login-box) form legend {padding: 0;}
 

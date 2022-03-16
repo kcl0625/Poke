@@ -30,6 +30,7 @@
 }
 .making .category {z-index: 1;position: absolute; top: -1em;}
 .making .category li {cursor: pointer; font-size: var(--small-font-size);}
+.making .category li.cur {font-weight: 600;}
 
 .slider {position: relative;width: 70%;height: 5em;}
 .slider .btn.prev {position: absolute;width: 2em;top: .5em;left: 0;cursor: pointer;z-index: 10;}
