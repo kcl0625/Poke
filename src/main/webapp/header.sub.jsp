@@ -12,7 +12,7 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/default.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
 	<link rel="icon" href="${pageContext.request.contextPath}/favicon.svg">
-	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/prototype/1.7.2.0/prototype.js"></script>
 	<script src="${pageContext.request.contextPath}/js/common.js"></script>
 	<title>POKE</title>
 </head>

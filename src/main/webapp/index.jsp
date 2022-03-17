@@ -4,6 +4,38 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/main.css">
 <div id="fullpage">
 <div class="wrapper section">
+	
+	
+	<div class="main-txt">
+		<h1><span class="point salmon">D</span>esign <span class="point salary">Y</span>our<br>
+		<span class="point cheese">O</span>wn <span class="point salmon">B</span>owl
+		</h1>
+		
+		<p class="sub-txt">; one of the Hawaiian dishes,<br>in which diced fish served</p>
+		<h2 class="sub-title">내가 좋아하는 것들만 담아서</h2>
+	</div>
+</div>
+<div class="wrapper section">
+	<div class="img"><img src="${pageContext.request.contextPath}/img/main-img.png" alt="main-img"></div>
+	<div class="txt-area">
+		<h2 class="section-title"><span class="point salmon">P</span>O<span class="point cheese">K</span><span class="point salary">E</span>(포케)가 뭔가요?</h2>
+		<p class="section-txt">
+			포케는 하와이 사람들이 생선을 소금, 해초, 으깬 이아모나, 쿠쿠이 너트 등에 버무려 즐긴 것에서 시작되었어요. 과거 하와이에는 세계 각국에서 이민자들이 몰려왔는데요, 이 이주민들의 모국의 식재료를 더하면서 포케가 다양해졌어요.
+			오늘날에는 후리카케 연어, 문어, 육포, 포르투갈식 염장 대구 등 다양한 재료들이 들어가지요.<br><br>
+			이제 포케는 하와이뿐만 아니라 LA, 캔자스 시티, 뉴욕 등 미국 곳곳에서 굉장히 대중적인 음식이 되었어요. 또한 미국을 넘어서 일본, 우리나라에 이르기까지 정말 많은 사람들이 포케를 맛보고 즐길 수 있습니다.
+		</p>
+	</div>
+</div>
+<div class="wrapper section">
+	<div class="txt-area txt-right">
+		<h2 class="section-title">Wh<span class="point salmon">a</span>t's<br>
+		y<span class="point salary">o</span>ur<br>
+		f<span class="point salary">a</span>v<span class="point salmon">o</span>rit<span class="point cheese">e</span>s?
+		</h1>
+		<p class="section-sub-title">내가 <span class="point cheese">좋아하는</span> 재료들로<br>나만의 <span class="point salmon">POKE</span>를!</p>
+		<p class="section-txt">어떤 것들이 준비되어있을까요?<br>당신을 위해 다양하게 준비했어요</p>
+	</div>
+	
 	<div id="ingre-wrapper">
 		<div class="row">
 			<div class="item"></div>
@@ -86,38 +118,6 @@
 			</div>
 		</div>
 	</div>
-	
-	<div class="main-txt">
-		<h1><span class="point salmon">D</span>esign <span class="point salary">Y</span>our<br>
-		<span class="point cheese">O</span>wn <span class="point salmon">B</span>owl
-		</h1>
-		
-		<p class="sub-txt">; one of the Hawaiian dishes,<br>in which diced fish served</p>
-		<h2 class="sub-title">내가 좋아하는 것들만 담아서</h2>
-	</div>
-</div>
-<div class="wrapper section">
-	<div class="img"><img src="${pageContext.request.contextPath}/img/main-img.png" alt="main-img"></div>
-	<div class="txt-area">
-		<h2 class="section-title"><span class="point salmon">P</span>O<span class="point cheese">K</span><span class="point salary">E</span>(포케)가 뭔가요?</h2>
-		<p class="section-txt">
-			포케는 하와이 사람들이 생선을 소금, 해초, 으깬 이아모나, 쿠쿠이 너트 등에 버무려 즐긴 것에서 시작되었어요. 과거 하와이에는 세계 각국에서 이민자들이 몰려왔는데요, 이 이주민들의 모국의 식재료를 더하면서 포케가 다양해졌어요.
-			오늘날에는 후리카케 연어, 문어, 육포, 포르투갈식 염장 대구 등 다양한 재료들이 들어가지요.<br><br>
-			이제 포케는 하와이뿐만 아니라 LA, 캔자스 시티, 뉴욕 등 미국 곳곳에서 굉장히 대중적인 음식이 되었어요. 또한 미국을 넘어서 일본, 우리나라에 이르기까지 정말 많은 사람들이 포케를 맛보고 즐길 수 있습니다.
-		</p>
-	</div>
-</div>
-<div class="wrapper section">
-	<div class="txt-area txt-right">
-		<h2 class="section-title">Wh<span class="point salmon">a</span>t's<br>
-		y<span class="point salary">o</span>ur<br>
-		f<span class="point salary">a</span>v<span class="point salmon">o</span>rit<span class="point cheese">e</span>s?
-		</h1>
-		<p class="section-sub-title">내가 <span class="point cheese">좋아하는</span> 재료들로<br>나만의 <span class="point salmon">POKE</span>를!</p>
-		<p class="section-txt">어떤 것들이 준비되어있을까요?<br>당신을 위해 다양하게 준비했어요</p>
-	</div>
-	
-	<div class="section-content"></div>
 	
 	<div class="txt-area">
 		<p class="section-txt">Make에서 내가 좋아하는 것들만 골라서 주문할 수 있어요.</p>

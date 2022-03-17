@@ -66,11 +66,10 @@
 <img src="https://t1.daumcdn.net/postcode/resource/images/close.png" id="btnFoldWrap" style="cursor:pointer;position:absolute;right:0px;top:-1px;z-index:1" onclick="foldDaumPostcode()" alt="접기 버튼">
 </div>
 
-<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script>
+<script type="text/javascript" src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script type="text/javascript">
     // 우편번호 찾기 찾기 화면을 넣을 element
     let openZipWrap = document.querySelector('#open-zip');
-
     let foldDaumPostcode = () => {openZipWrap.classList.remove('show');}
 
     let openZip = () => {
@@ -107,12 +106,32 @@
                 openZipWrap.style.height = size.height+'px';
             },
             width : '100%',
-            height : '100%'
+            height : '100%',
+            theme : {
+            	searchBgColor: 'pink',
+            	queryTextColor: 'blue'
+            }
         }).embed(openZipWrap);
 
         // iframe을 넣은 element를 보이게 한다.
         openZipWrap.classList.add('show');
     }
+    
+    let callback = (originalRequest) => {
+		let res = originalRequest.responseText;
+		console.log('originalRequest', originalRequest);
+		console.log('originalRequest.responseText', res);
+		if (res == 0){
+			msg = '사용할 수 없는 아이디예요';
+			//memForm.id.parentNode.classList.add('false');
+			console.log(msg);
+		} else {
+			msg = '';
+			//memForm.id.parentNode.classList.remove('false');
+			console.log(msg);
+		}
+		//printMsg(msg, memForm.id.parentNode.querySelector('.indicator'));
+	}
     
     // 유효성 검사
     let chk = (input) => {
@@ -179,18 +198,12 @@
     	
     	//id 중복검사
     	if(id == 'id') {
-    		memForm.id.addEventListener('keydown', () => {
-    			$.ajax({
-        			url: '${pageContext.request.contextPath}/member/idChk?id=' + memForm.id.value,
-        			type: 'get',
-        			success: () => {
-        				if (true)
-        					msg = '사용할 수 없는 아이디예요';
-        				else
-        					msg = '';
-        				memForm.id.parentNode.classList.remove('false');
-    	    			printMsg(msg, memForm.id.parentNode.querySelector('.indicator'));
-        			}
+    		memForm.id.addEventListener('change', (e) => {
+    			e.stopImmediatePropagation();
+    			new Ajax.Request('${pageContext.request.contextPath}/bbs/idChk.jsp?id=' + memForm.id.value, {
+    				method: 'get',
+    				parameter: memForm.id,
+    				onComplete: callback
     			})
     		})
     	}

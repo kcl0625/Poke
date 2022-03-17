@@ -15,8 +15,8 @@
     justify-content: center;
     align-content: center;
     gap: 6em;
-	margin: auto;
-	padding-top: 2em;
+    margin: auto;
+    padding-top: 1.5em;
 }
 
 .making h1 {
@@ -32,9 +32,9 @@
 .making .category li {cursor: pointer; font-size: var(--small-font-size);}
 .making .category li.cur {font-weight: 600;}
 
-.slider {position: relative;width: 70%;height: 5em;}
-.slider .btn.prev {position: absolute;width: 2em;top: .5em;left: 0;cursor: pointer;z-index: 10;}
-.slider .btn.next {position: absolute;width: 2em; top: .5em;right: 0;cursor: pointer;z-index: 10;}
+.slider {height: 5vw;position: relative;width: 50%;max-height: 80px;}
+.slider .btn.prev {position: absolute;width: 2.5vw; max-width: 40px; top: 0;left: -3em;cursor: pointer;z-index: 10;}
+.slider .btn.next {position: absolute;width: 2.5vw; max-width: 40px; top: 0;right: -3em;cursor: pointer;z-index: 10;}
 .slider .btn svg {stroke-width: .8;}
 
 .info-box {
@@ -76,10 +76,10 @@
 .making .item {
 	position: relative;
 	display: flex;
-	width: 5em;
-    height: 5em;
-    max-width: 80px;
-    max-height: 80px;
+	width: 5vw;
+	height: 5vw;
+	max-width: 80px;
+	max-height: 80px;
 	background: var(--color-bak);
 	border: 1px solid;
 	border-radius: 50%;
@@ -107,7 +107,7 @@
 }
 .slider-container .info-box {margin-top: 40px;}
 
-#bowl {position: relative;width: 70vw;max-width: 600px;z-index: 11;bottom: 0;padding-top: 28em;}
+#bowl {position: relative;width: 70vw;max-width: 600px;z-index: 11;bottom: 0;padding-top: 29em;}
 #bowl svg {position: absolute; bottom: 0;}
 #bowl svg .stroke {stroke-width: .15;}
 #bowl .item {position: absolute; transform: scale(0); animation: pop .3s ease forwards;}
@@ -153,7 +153,7 @@
 }
 .making .write-name input:focus + .line {transform: scaleX(1);}
 
-.making .indicator {display: block;width: 100%;top: 4.5em;text-align: center;line-height: 1.2em;}
+.making .indicator {display: block;width: 100%;top: 4.5em;height: 0;text-align: center;line-height: 1.2rem;z-index: 10;background: gray;}
 
 .making .receipt {position: absolute; right: -23em; bottom: 0;}
 .making .receipt .head {position: absolute;top: calc(-1em - 15px);left: 0;width: 100%;display: flex;gap: 8px;justify-content: end;}
@@ -200,6 +200,8 @@
 }
 
 @media all and (max-width: 1280px){
+	.making {top: -3em; gap: 4em;}
+	.making #bowl {padding-top: 25em;}
 	.form-wrapper {width: 100%;justify-content: space-between;}
 	.making .receipt {right: 0;}
 }
@@ -212,7 +214,7 @@
 	.slider .btn.next {width: 1.5em;}
 	.slider .btn svg {stroke-width: 1.1;}
 	
-	.making .item {width: 4em; height: 4em;}
+	.making .item {width: 10vw;height: 10vw;}
 	.form-wrapper {justify-content: center;}
 	
 	.making #bowl {width: 65vw; padding-top: 26em;}

@@ -56,6 +56,7 @@ public class MemberDAO {
 			
 			res = pstmt.executeUpdate();
 			pstmt.close();
+			con.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -73,6 +74,7 @@ public class MemberDAO {
 			
 			res = pstmt.executeUpdate();
 			pstmt.close();
+			con.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -107,9 +109,33 @@ public class MemberDAO {
 			}
 			rs.close();
 			pstmt.close();
+			con.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return member;
+	}
+	
+	public int idChk(String id) {
+		int res = 0;
+		try {
+			con = Config.getConnection();
+			sql = "select id from member where id = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			
+			ResultSet rs = null;
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) res = 0; //존재할 때
+			else res = 1;
+			
+			rs.close();
+			pstmt.close();
+			con.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return res;
 	}
 }

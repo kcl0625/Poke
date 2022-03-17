@@ -24,12 +24,12 @@ let slide = () => {
 	ul.style.width = `${itemW * item.length + gap * (item.length - 1)}px`;
 	ul.style.gap = `${gap}px`;
 }
+
 let prev = () => {
 	getItemW();
 	if(cur != 0) cur--;
 	ul.style.left = `-${cur * wrapperL * (itemW + gap)}px`;
 }
-
 let next = () => {
 	getItemW();
 	if(cur < (item.length / wrapperL - 1)) cur++;
@@ -38,6 +38,7 @@ let next = () => {
 
 slide();
 window.addEventListener('resize', () => {
+	console.log('resize');
 	slide();
 })
 
@@ -209,13 +210,5 @@ let selectCategory = (item) => {
 	let cate = item.dataset.cate;
 	let cateLi = document.querySelectorAll('.category li');
 	
-	$.ajax({
-        url: '${pageContext.request.contextPath}/poke/cate?cate=' + cate,
-        type: 'get',
-        success: () => {
-			for(let i=0;i<cateLi.length;i++)
-				cateLi[i].classList.remove('cur');
-			item.classList.add('cur');
-        }
-    })
+	
 }
