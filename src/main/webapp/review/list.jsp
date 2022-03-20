@@ -1,6 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page import="java.util.ArrayList" %>
+<%@page import="review.ReviewDTO" %>
+
 <jsp:include page="/header.jsp" />
+
+<jsp:useBean id="reviewBean" class="review.ReviewDAO" />
+
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/review.css">
 <div class="wrapper">
 	<div class="page-title">
@@ -11,16 +17,26 @@
 	<div class="list">
 		<a href="write.skin.jsp"><i class="fas fa-pen"></i></a>
 		<ul>
-			<li style="background: url('');"></li>
-			<li style="background: url('');"></li>
-			<li style="background: url('');"></li>
-			<li style="background: url('');"></li>
-			<li style="background: url('');"></li>
-			<li style="background: url('');"></li>
-			<li style="background: url('');"></li>
-			<li style="background: url('');"></li>
-			<li style="background: url('');"></li>
+			<%
+				ArrayList<ReviewDTO> reviewList = reviewBean.getReviewList();
+				int total = reviewBean.getReviewList().size();
+				for(int i=0;i<total;i++){%>
+					<li id="review_<%=reviewList.get(i).getNo() %>" onclick="showReview(<%=reviewList.get(i).getNo() %>);"></li>
+			<%} %>
 		</ul>
+		<script>
+		let showReview = (no) => {
+			let viewer = document.querySelector('.review-viewer');
+			new Ajax.Request('view.jsp?no=' + no, {
+				method: 'get',
+				parameter: no,
+				onComplete: () => {
+					viewer.classList.add('remove');
+					
+				}
+			})
+		}
+		</script>
 	</div>
 	
 	<div class="paging">
