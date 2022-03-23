@@ -4,8 +4,9 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/main.css">
 <div id="fullpage">
 <div class="wrapper section">
-	
-	
+	<div id="bowl">
+		<svg viewBox="0 0 100 50"><path class="stroke only" d="M99.5,0c0,27.339-22.162,49.5-49.5,49.5C22.662,49.5,0.5,27.339,0.5,0"></path></svg>
+	</div>
 	<div class="main-txt">
 		<h1><span class="point salmon">D</span>esign <span class="point salary">Y</span>our<br>
 		<span class="point cheese">O</span>wn <span class="point salmon">B</span>owl
@@ -13,6 +14,12 @@
 		
 		<p class="sub-txt">; one of the Hawaiian dishes,<br>in which diced fish served</p>
 		<h2 class="sub-title">내가 좋아하는 것들만 담아서</h2>
+	</div>
+	<div class="bg-slide">
+		<div class="bg-item" style="background-image: url('${pageContext.request.contextPath}/img/bg1.jpg');"></div>
+		<div class="bg-item"></div>
+		<div class="bg-item"></div>
+		<div class="bg-item"></div>
 	</div>
 </div>
 <div class="wrapper section">
@@ -47,7 +54,7 @@
 				<svg viewBox="0 0 50 50">
 					<clipPath id="path1"><path class="fill salmon" d="M9.998,50h40V0h-50v40C-0.002,45.5,4.498,50,9.998,50z"/></clipPath>
 					<path class="fill salmon" d="M9.998,50h40V0h-50v40C-0.002,45.5,4.498,50,9.998,50z"/>
-					<image x="-6" y="4" href="${pageContext.request.contextPath}/data/ingre/vegeNfru/coriander.png" clip-path="url(#path1)"></image>
+					<image x="-6" y="4" href="${pageContext.request.contextPath}/data/ingre/coriander.png" clip-path="url(#path1)"></image>
 				</svg>
 			</div>
 			<div class="item"></div>
@@ -58,14 +65,14 @@
 				<svg viewBox="0 0 50 50">
 					<clipPath id="path2"><path d="M49.998,40V0h-50v49.999h40C45.498,50,49.998,45.5,49.998,40z"/></clipPath>
 					<path class="fill cheese" d="M49.998,40V0h-50v49.999h40C45.498,50,49.998,45.5,49.998,40z"/>
-					<image x="-10" y="3" href="${pageContext.request.contextPath}/data/ingre/etc/whiteMushroom.png" clip-path="url(#path2)"></image>
+					<image x="-10" y="3" href="${pageContext.request.contextPath}/data/ingre/whiteMushroom.png" clip-path="url(#path2)"></image>
 				</svg>
 			</div>
 			<div class="item">
 				<svg viewBox="0 0 50 50">
 					<clipPath id="path3"><circle cx="25" cy="25" r="25"/></clipPath>
 					<circle class="fill salary" cx="25" cy="25" r="25"/>
-					<image x="15" y="13" href="${pageContext.request.contextPath}/data/ingre/seafood/salmon.png" clip-path="url(#path3)"></image>
+					<image x="15" y="13" href="${pageContext.request.contextPath}/data/ingre/salmon.png" clip-path="url(#path3)"></image>
 				</svg>
 				
 			</div>
@@ -84,7 +91,7 @@
 				<svg viewBox="0 0 50 50">
 					<clipPath id="path4"><path d="M50,10c0-5.5-4.5-10-10-10H10C4.5,0,0,4.5,0,10v30c0,5.5,4.5,10,10,10h40V10z"/></clipPath>
 					<path class="fill salmon" d="M50,10c0-5.5-4.5-10-10-10H10C4.5,0,0,4.5,0,10v30c0,5.5,4.5,10,10,10h40V10z"/>
-					<image x="-8" y="13" href="${pageContext.request.contextPath}/data/ingre/etc/oats.png" clip-path="url(#path4)"></image>
+					<image x="-8" y="13" href="${pageContext.request.contextPath}/data/ingre/oats.png" clip-path="url(#path4)"></image>
 				</svg>
 			</div>
 			<div class="item"></div>
@@ -92,7 +99,7 @@
 				<svg viewBox="0 0 50 50">
 					<clipPath id="path5"><polygon points="50,0 50,50 0,50 "/></clipPath>
 					<polygon class="fill cheese" points="50,0 50,50 0,50 "/>
-					<image x="-8" y="16" href="${pageContext.request.contextPath}/data/ingre/vegeNfru/avocado.png" clip-path="url(#path5)"></image>
+					<image x="-8" y="16" href="${pageContext.request.contextPath}/data/ingre/avocado.png" clip-path="url(#path5)"></image>
 				</svg>
 			</div>
 			<div class="item"></div>
@@ -113,7 +120,7 @@
 				<svg viewBox="0 0 50 50">
 					<clipPath id="path6"><path d="M10,0C4.5,0,0,4.5,0,10v30c0,5.5,4.5,10,10,10h30c5.5,0,10-4.5,10-10V0H10z"/></clipPath>
 					<path class="fill salary" d="M10,0C4.5,0,0,4.5,0,10v30c0,5.5,4.5,10,10,10h30c5.5,0,10-4.5,10-10V0H10z"/>
-					<image x="15" y="-3" href="${pageContext.request.contextPath}/data/ingre/vegeNfru/cherryTomato.png" clip-path="url(#path6)"></image>
+					<image x="15" y="-3" href="${pageContext.request.contextPath}/data/ingre/cherryTomato.png" clip-path="url(#path6)"></image>
 				</svg>
 			</div>
 		</div>

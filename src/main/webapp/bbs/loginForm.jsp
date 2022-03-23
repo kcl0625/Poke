@@ -29,41 +29,41 @@
 	</div>
 </div>
 <script>
-let form = document.querySelector('form');
-let inputItem = form.querySelectorAll('.input-item');
-let loginBtn = form.querySelector('.ui-btn.point');
+let inputItem = login.querySelectorAll('.input-item');
+let loginBtn = login.querySelector('.ui-btn.point');
 
-let isEmpty = (input, indicator) => {
+let isEmpty = (input) => {
+	let inputItem = input.parentNode;
+	let indicator = inputItem.querySelector('.indicator');
 	if (input.value) {
-		input.parentNode.classList.remove('empty');
+		inputItem.classList.remove('empty');
 		indicator.innerHTML = '';
 	} else {
-		input.parentNode.classList.add('empty');
+		inputItem.classList.add('empty');
         indicator.innerHTML = '값을 입력해주세요';
     }
 }
+login.id.addEventListener('change', () => {
+	isEmpty(login.id);
+})
+login.pw.addEventListener('change', () => {
+	isEmpty(login.pw);
+})
 
-inputItem.forEach((item, i) => {
-	let input = inputItem[i].querySelector('input');
-    let indicator = inputItem[i].querySelector('.indicator');
- 
-    input.addEventListener('change', () => {
-    	isEmpty(input, indicator);
-    })
+loginBtn.addEventListener('click', (e) => {
+    e.stopImmediatePropagation();
+    isEmpty(login.id);
+    isEmpty(login.pw);
+    if(login.id.value && login.pw.value) login.submit();
+})
     
-    loginBtn.addEventListener('click', (e) => {
-    	e.stopImmediatePropagation();
-    	isEmpty(input, indicator);
+login.addEventListener('keypress', (e) => {
+  	e.stopImmediatePropagation();
+    if(e.keyCode == 13) {
+    	isEmpty(login.id);
+    	isEmpty(login.pw);
     	if(login.id.value && login.pw.value) login.submit();
-    })
-    
-  	login.addEventListener('keypress', (e) => {
-  		e.stopImmediatePropagation();
-    	if(e.keyCode == 13) {
-    		isEmpty(input, indicator);
-    		if(login.id.value && login.pw.value) login.submit();
-    	}
-    })
+    }
 })
 </script>
 <jsp:include page="/footer.jsp" />
