@@ -22,21 +22,30 @@
 		</div>
 		
 		<div class="slider">
-			<div class="btn prev" onclick="prev();"><svg viewBox="0 0 25 50"><polyline class="stroke only" points="25,0 0,25 25,50"/></svg></div>
-			<div class="btn next"><svg onclick="next();" viewBox="0 0 25 50"><polyline class="stroke only" points="0,0 25,25 0,50"/></svg></div>
+			<div class="btn prev"><svg viewBox="0 0 25 50" onclick="prev();"><polyline class="stroke only" points="25,0 0,25 25,50"/></svg></div>
+			<div class="btn next"><svg viewBox="0 0 25 50" onclick="next();"><polyline class="stroke only" points="0,0 25,25 0,50"/></svg></div>
 			
 			<div class="slider-container"><ul></ul></div>
 			<script>
 			let selectCategory = (cate) => {
-				let sliderUl = document.querySelector('.slider-container ul');
+				let categoryLi = document.querySelectorAll('.category li');
+				for(let i=0;i<categoryLi.length;i++){
+					categoryLi[i].classList.remove('cur');
+					if(categoryLi[i].dataset.cate == cate)
+						categoryLi[i].classList.add('cur');
+				}
+				
 				new Ajax.Request('select.jsp?cate=' + cate, {
 					method: 'get',
 					parameter: cate,
 					onComplete: (response) => {
-						sliderUl.innerHTML = response.responseText;
+						document.querySelector('.slider-container ul').innerHTML = response.responseText;
+						slide();
 					}
 				})
 			}
+			
+			selectCategory('<%=cateList.get(0).getName()%>');
 			</script>
 		</div>
 		

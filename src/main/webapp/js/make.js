@@ -1,64 +1,64 @@
-//슬라이더
-let slider = document.querySelector('.slider-container');
-let ul = slider.querySelector('ul');
-let item = slider.querySelectorAll('li');
-let itemW;
 let wrapperL = 4; //한 번에 보여줄 개수
-let gap; //간격
-
+let gap = 30; //간격
+			
 let cur = 0;
-
-let getItemW = () => {
-	itemW = item[0].offsetWidth;
-	return itemW;
-}
-
+			
+//슬라이더
 let slide = () => {
-	getItemW();
-	if (matchMedia('all and (max-width: 750px)').matches) {
-		gap  = 15;
-	} else {
-		gap = 30;
-	}
-	slider.style.width = `${itemW * wrapperL + gap * (wrapperL - 1)}px`;
-	ul.style.width = `${itemW * item.length + gap * (item.length - 1)}px`;
-	ul.style.gap = `${gap}px`;
+	let slider = document.querySelector('.slider-container');
+	let ul = slider.querySelector('ul');
+	let item = ul.querySelectorAll('li');
+	let itemW = item[0].offsetWidth;
+	
+	if (matchMedia('all and (max-width: 750px)').matches) gap  = 15;
+	else gap = 30;
+	
+	slider.style.width = itemW * wrapperL + gap * (wrapperL - 1) + 'px';
+	ul.style.left = 0;
+	ul.style.width = itemW * item.length + gap * (item.length - 1) + 'px';
+	ul.style.gap = gap + 'px';
 }
-
+//prev
 let prev = () => {
-	getItemW();
+	let ul = document.querySelector('.slider-container ul');
+	let item = ul.querySelectorAll('li');
+	let itemW = item[0].offsetWidth;
 	if(cur != 0) cur--;
 	ul.style.left = `-${cur * wrapperL * (itemW + gap)}px`;
-}
-let next = () => {
-	getItemW();
-	if(cur < (item.length / wrapperL - 1)) cur++;
-	ul.style.left = `-${cur * wrapperL * (itemW + gap)}px`;
+	console.log(cur);
 }
 
-slide();
+//next
+let next = () => {
+	let ul = document.querySelector('.slider-container ul');
+	let item = ul.querySelectorAll('li');
+	let itemW = item[0].offsetWidth;
+	if(cur < (item.length / wrapperL - 1)) cur++;
+	ul.style.left = `-${cur * wrapperL * (itemW + gap)}px`;
+	console.log(cur);
+}
+
 window.addEventListener('resize', () => {
-	console.log('resize');
 	slide();
 })
 
 //재료 툴팁
 let toolTip1 = (price, cal, origin, infoBox) => {
 	infoBox.innerHTML = `￦${price}<br>${cal}kacl<hr class="line">`;
-	
-	for(let i=0;i<origin.length;i++)
-		infoBox.innerHTML += `${origin[i]}<br>`;
+	infoBox.innerHTML += origin;
+	//for(let i=0;i<origin.length;i++)
+		//infoBox.innerHTML += `${origin[i]}<br>`;
 }
 let toolTip2 = (name, price, cal, infoBox) => {
 	infoBox.innerHTML = `${name}<hr class="line">￦${price}<br>${cal}kcal`;
 }
 
-let showInfo = (item) => {
+let showInfo = (item, e) => {
+	e.stopImmediatePropagation();
 	let name = item.dataset.name;
 	let price = item.dataset.price;
 	let cal = item.dataset.cal;
-	let origin;
-	if (item.dataset.origin) {origin = item.dataset.origin.split('/');}
+	let origin = item.dataset.origin;
 	
 	let div = document.createElement('div');
 	item.appendChild(div);
@@ -70,7 +70,8 @@ let showInfo = (item) => {
 	else if (item.closest('#bowl')) toolTip2(name, price, cal, infoBox);
 }
 
-let hideInfo = (item) => {
+let hideInfo = (item, e) => {
+	e.stopImmediatePropagation();
 	item.querySelector('.info-box').remove();
 }
 
@@ -110,8 +111,8 @@ let addItem = (e) => {
 		div.classList.add(`ingre_${itemL}`);
 		div.innerHTML = `<img src="${imgSrc}">`;
 		div.setAttribute('onclick', 'dropItem(this)');
-		div.setAttribute('onmouseover', 'showInfo(this)');
-		div.setAttribute('onmouseout', 'hideInfo(this)');
+		div.setAttribute('onmouseenter', 'showInfo(this, event)');
+		div.setAttribute('onmouseleave', 'hideInfo(this, event)');
 		div.setAttribute('data-name', name);
 		div.setAttribute('data-price', price);
 		div.setAttribute('data-cal', cal);
