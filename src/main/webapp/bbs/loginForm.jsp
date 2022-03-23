@@ -51,15 +51,17 @@ inputItem.forEach((item, i) => {
     	isEmpty(input, indicator);
     })
     
-    loginBtn.addEventListener('click', () => {
+    loginBtn.addEventListener('click', (e) => {
+    	e.stopImmediatePropagation();
     	isEmpty(input, indicator);
-    	if(login.id && login.pw) login.submit();
+    	if(login.id.value && login.pw.value) login.submit();
     })
     
   	login.addEventListener('keypress', (e) => {
+  		e.stopImmediatePropagation();
     	if(e.keyCode == 13) {
     		isEmpty(input, indicator);
-    		if(login.id && login.pw) login.submit();
+    		if(login.id.value && login.pw.value) login.submit();
     	}
     })
 })

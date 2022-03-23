@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%request.setCharacterEncoding("utf-8"); %>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/memForm.css">
 <form name="memForm" action="memFormRes.jsp" method="post">
 	<fieldset class="form-item">
@@ -117,22 +118,6 @@
         openZipWrap.classList.add('show');
     }
     
-    let callback = (originalRequest) => {
-		let res = originalRequest.responseText;
-		console.log('originalRequest', originalRequest);
-		console.log('originalRequest.responseText', res);
-		if (res == 0){
-			msg = '사용할 수 없는 아이디예요';
-			//memForm.id.parentNode.classList.add('false');
-			console.log(msg);
-		} else {
-			msg = '';
-			//memForm.id.parentNode.classList.remove('false');
-			console.log(msg);
-		}
-		//printMsg(msg, memForm.id.parentNode.querySelector('.indicator'));
-	}
-    
     // 유효성 검사
     let chk = (input) => {
     	let value = input.value;
@@ -203,7 +188,21 @@
     			new Ajax.Request('${pageContext.request.contextPath}/bbs/idChk.jsp?id=' + memForm.id.value, {
     				method: 'get',
     				parameter: memForm.id,
-    				onComplete: callback
+    				onComplete: (response) => {
+    			    	let res = response.responseText;
+    					console.log('res', response);
+    					
+    					if (res == 'no'){
+    						msg = '사용할 수 없는 아이디예요';
+    						//memForm.id.parentNode.classList.add('false');
+    						console.log(msg);
+    					} else {
+    						msg = '';
+    						//memForm.id.parentNode.classList.remove('false');
+    						console.log(msg);
+    					}
+    					//printMsg(msg, memForm.id.parentNode.querySelector('.indicator'));
+    				}
     			})
     		})
     	}

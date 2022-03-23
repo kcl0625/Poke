@@ -16,13 +16,28 @@ ArrayList<ReviewDTO> review = reviewBean.showReview(no);
 int star = review.get(0).getStar();
 String content = review.get(0).getContent();
 %>
-<div id="mask"></div>
-<div class="review-viewer theme-box round">
+
+<a class="close" href="javascript:closeReview();">
+	<span></span>
+	<span></span>
+</a>
+<div class="theme-box round">
 	<div class="photo"></div>
 	
 	<div class="review-area">
 		<div class="review-header">
-			<p>별점: <%=star %></p>
+			<div class="user-info">
+				<div class="pic"></div>
+				<p class="name">이름이름</p>
+			</div>
+			<div class="poke-info">
+				<div class="star-ratings">
+					<%for(int i=5;i>=1;i--){%>
+						<input type="radio" id="<%=i %>-star" name="rating" value="<%=i %>" v-model="ratings" onclick="return false;" <%if (i == star) { %> checked="true" <%} %> />
+						<label for="<%=i %>-star" class="star pr-<%=i %>"><i class="fas fa-star"></i></label>
+					<%}%>
+				</div>
+			</div>
 		</div>
 		<div class="review-content">
 			<p><%=content %></p>

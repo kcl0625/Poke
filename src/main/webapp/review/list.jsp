@@ -24,19 +24,6 @@
 					<li id="review_<%=reviewList.get(i).getNo() %>" onclick="showReview(<%=reviewList.get(i).getNo() %>);"></li>
 			<%} %>
 		</ul>
-		<script>
-		let showReview = (no) => {
-			let viewer = document.querySelector('.review-viewer');
-			new Ajax.Request('view.jsp?no=' + no, {
-				method: 'get',
-				parameter: no,
-				onComplete: () => {
-					viewer.classList.add('remove');
-					
-				}
-			})
-		}
-		</script>
 	</div>
 	
 	<div class="paging">
@@ -50,5 +37,32 @@
 		</nav>
 		<div class="btn next"><svg viewBox="0 0 25 50"><polyline class="stroke only" stroke-miterlimit="10" points="0,0 25,25 0,50"/></svg></div>
 	</div>
+	
+	<div id="review-viewer"></div>
+	<div id="mask"></div>
+	
+	<script>
+		let showReview = (no) => {
+			new Ajax.Request('view.jsp?no=' + no, {
+				method: 'get',
+				parameter: no,
+				onComplete: (response) => {
+					let viewer = document.querySelector('#review-viewer');
+					let mask = document.querySelector('#mask');
+					viewer.innerHTML = response.responseText;
+					viewer.classList.add('show');
+					mask.classList.add('show');
+				}
+			})
+		}
+		
+		let closeReview = () => {
+			let viewer = document.querySelector('#review-viewer');
+			let mask = document.querySelector('#mask');
+			viewer.innerHTML = '';
+			viewer.classList.remove('show');
+			mask.classList.remove('show');
+		}
+	</script>
 </div>
 <jsp:include page="/footer.jsp" />

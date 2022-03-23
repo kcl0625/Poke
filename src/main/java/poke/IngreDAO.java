@@ -17,7 +17,7 @@ public class IngreDAO {
 		ArrayList<IngreDTO> cate = new ArrayList<IngreDTO>();
 		try{
 			con = Config.getConnection();
-			sql = "select name from ingre_cate_tbl i order by i.order";
+			sql = "select name from ingre_category i order by i.order";
 			pstmt = con.prepareStatement(sql);
 			ResultSet rs = null;
 			
@@ -35,5 +35,34 @@ public class IngreDAO {
 			e.printStackTrace();
 		}
 		return cate;
+	}
+	
+	public ArrayList<IngreDTO> selectCate(String cate) {
+		ArrayList<IngreDTO> ingreList = new ArrayList<IngreDTO>();
+		try {
+			con = Config.getConnection();
+			sql = "select name, cal, price, origin, fileName from ingre where cate = ?";
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, cate);
+			ResultSet rs = null;
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				IngreDTO dto = new IngreDTO();
+				dto.setName(rs.getString("name"));
+				dto.setPrice(rs.getInt("price"));
+				dto.setCal(rs.getFloat("cal"));
+				dto.setOrigin(rs.getString("origin"));
+				dto.setFileName(rs.getString("fileName"));
+				ingreList.add(dto);
+			}
+			rs.close();
+			pstmt.close();
+			con.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return ingreList;
 	}
 }

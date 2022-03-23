@@ -116,8 +116,8 @@ public class MemberDAO {
 		return member;
 	}
 	
-	public int idChk(String id) {
-		int res = 0;
+	public String idChk(String id) {
+		String res = "";
 		try {
 			con = Config.getConnection();
 			sql = "select id from member where id = ?";
@@ -127,8 +127,8 @@ public class MemberDAO {
 			ResultSet rs = null;
 			rs = pstmt.executeQuery();
 			
-			if(rs.next()) res = 0; //존재할 때
-			else res = 1;
+			if(rs.next()) res = "no"; //존재할 때
+			else res = "yes";
 			
 			rs.close();
 			pstmt.close();
