@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page import="java.util.ArrayList" %>
+<%@page import="bbs.CategoryDTO" %>
+
+<jsp:useBean id="categoryBean" class="bbs.CategoryDAO" />
+
 <jsp:include page="/header.jsp" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/notice.css">
 <div class="wrapper">
@@ -14,8 +19,12 @@
 		<div class="select-wrapper">
 			<ul>
 				<li class="select-item" data-data="전체" style="--i: 1;">전체</li>
-				<li class="select-item" data-data="Notice" style="--i: 2;">Notice</li>
-				<li class="select-item" data-data="Event" style="--i: 3;">Event</li>
+				<%
+				ArrayList<CategoryDTO> cateList = categoryBean.getCategory("shop");
+				int total = cateList.size();
+				for(int i=0;i<total;i++){%>
+					<li class="select-item" data-data="<%=cateList.get(i).getName() %>" onclick="selectCategory(this.dataset.data);" style="--i: <%=i + 2%>"><%=cateList.get(i).getName()%></li>
+				<%} %>
 			</ul>
 		</div>
 	</div>

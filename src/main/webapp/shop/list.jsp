@@ -1,20 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page import="java.util.ArrayList" %>
+<%@page import="bbs.CategoryDTO" %>
+
+<jsp:useBean id="categoryBean" class="bbs.CategoryDAO" />
+
 <jsp:include page="/header.jsp" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/shop.css">
 <div class="wrapper">
 	<div class="page-title">
 		<h2><span class="point salmon">S</span>hop</h2>
-		<p class="sub">추가구매도 가능해요<br>무엇이 있을까요?</p>	
+		<p class="sub">포케 말고도 다른 하와이안 음식을 즐겨보세요<br>무엇이 있을까요?</p>	
 	</div>
 	
 	<div class="page category">
 		<ul>
 			<li data-cate="전체">전체</li>
-			<li data-cate="음료수">음료수</li>
-			<li data-cate="에너지바">에너지바</li>
-			<li data-cate="기타 간식">기타 간식</li>
-			<li data-cate="굿즈">굿즈</li>
+			<%
+			ArrayList<CategoryDTO> cateList = categoryBean.getCategory("shop");
+			int total = cateList.size();
+			for(int i=0;i<total;i++){%>
+					<li data-cate="<%=cateList.get(i).getName() %>" onclick="selectCategory(this.dataset.cate)"><%=cateList.get(i).getName()%></li>
+			<%} %>
 		</ul>
 	</div>
 	

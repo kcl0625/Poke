@@ -44,10 +44,9 @@ window.addEventListener('resize', () => {
 
 //재료 툴팁
 let toolTip1 = (price, cal, origin, infoBox) => {
-	infoBox.innerHTML = `￦${price}<br>${cal}kacl<hr class="line">`;
-	infoBox.innerHTML += origin;
-	//for(let i=0;i<origin.length;i++)
-		//infoBox.innerHTML += `${origin[i]}<br>`;
+	infoBox.innerHTML = `￦${price}<br>${cal}kcal<hr class="line">`;
+	for(let i=0;i<origin.length;i++)
+		infoBox.innerHTML += `${origin[i]}<br>`;
 }
 let toolTip2 = (name, price, cal, infoBox) => {
 	infoBox.innerHTML = `${name}<hr class="line">￦${price}<br>${cal}kcal`;
@@ -58,7 +57,7 @@ let showInfo = (item, e) => {
 	let name = item.dataset.name;
 	let price = item.dataset.price;
 	let cal = item.dataset.cal;
-	let origin = item.dataset.origin;
+	let origin = item.dataset.origin.split('/');
 	
 	let div = document.createElement('div');
 	item.appendChild(div);

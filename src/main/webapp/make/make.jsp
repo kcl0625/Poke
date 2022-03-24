@@ -1,11 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@page import="java.util.ArrayList" %>
+<%@page import="bbs.CategoryDTO" %>
 <%@page import="poke.IngreDTO" %>
+
+<jsp:useBean id="categoryBean" class="bbs.CategoryDAO" />
+<jsp:useBean id="ingreBean" class="poke.IngreDAO" />
+
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/make.css">
 <jsp:include page="/header.jsp" />
-
-<jsp:useBean id="ingreBean" class="poke.IngreDAO" />
 
 <div class="wrapper">
 	<div class="making">
@@ -13,8 +16,8 @@
 		<div class="category">
 			<ul>
 				<%
-				ArrayList<IngreDTO> cateList = ingreBean.getIngreCate();
-				int total = ingreBean.getIngreCate().size();
+				ArrayList<CategoryDTO> cateList = categoryBean.getCategory("make");
+				int total = cateList.size();
 				for(int i=0;i<total;i++){%>
 					<li data-cate="<%=cateList.get(i).getName() %>" onclick="selectCategory(this.dataset.cate);"><%=cateList.get(i).getName()%></li>
 				<%} %>

@@ -1,5 +1,6 @@
 @charset 'utf-8';
 
+.list {width: 45vw; margin: 0 auto;}
 .list ul {display: grid;justify-content: center;grid-template-columns: 1fr 1fr 1fr;gap: 5vw;}
 .list li {position: relative;}
 
@@ -19,3 +20,7 @@
 .list li .content-bottom form input {width: 2em; text-align: center;}
 
 .search {float: right; margin-top: 50px;}
+
+@media all and (max-width: 750px) {
+	.list {width: 100%;}
+}

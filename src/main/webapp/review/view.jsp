@@ -31,11 +31,17 @@ String content = review.get(0).getContent();
 				<p class="name">이름이름</p>
 			</div>
 			<div class="poke-info">
+				<p class="poke-name">POKE - 1</p>
+				<p class="poke-ingre">재료1/재료2/재료3/재료4</p>
 				<div class="star-ratings">
 					<%for(int i=5;i>=1;i--){%>
 						<input type="radio" id="<%=i %>-star" name="rating" value="<%=i %>" v-model="ratings" onclick="return false;" <%if (i == star) { %> checked="true" <%} %> />
 						<label for="<%=i %>-star" class="star pr-<%=i %>"><i class="fas fa-star"></i></label>
 					<%}%>
+				</div>
+				<div class="add-btns">
+					<a href="">이 구성으로 담기</a>/
+					<a href="">수정하기</a>
 				</div>
 			</div>
 		</div>

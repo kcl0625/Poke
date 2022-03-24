@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page import="java.util.ArrayList" %>
+<%@page import="bbs.CategoryDTO" %>
+
+<jsp:useBean id="categoryBean" class="bbs.CategoryDAO" />
+
 <jsp:include page="/header.jsp" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bowls.css">
 <div class="wrapper">
@@ -10,13 +15,12 @@
 	
 	<div class="page category">
 		<ul>
-			<li data-cate="육류">육류</li>
-			<li data-cate="해산물">해산물</li>
-			<li data-cate="야채 & 과일">야채 & 과일</li>
-			<li data-cate="곡물">곡물</li>
-			<li data-cate="견과류">견과류</li>
-			<li data-cate="치즈">치즈</li>
-			<li data-cate="소스">소스</li>
+			<%
+			ArrayList<CategoryDTO> cateList = categoryBean.getCategory("make");
+			int total = cateList.size();
+			for(int i=0;i<total;i++){%>
+					<li data-cate="<%=cateList.get(i).getName() %>" onclick="selectCategory(this.dataset.cate)"><%=cateList.get(i).getName()%></li>
+			<%} %>
 		</ul>
 	</div>
 	

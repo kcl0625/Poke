@@ -33,8 +33,8 @@
 .making .category li.cur {font-weight: 600;}
 
 .slider {height: 4em;position: relative;width: 50%;max-height: 80px;}
-.slider .btn.prev {position: absolute;width: 2em;max-width: 40px;top: 0;left: -3em;cursor: pointer;z-index: 10;}
-.slider .btn.next {position: absolute;width: 2em;max-width: 40px;top: 0;right: -3em;cursor: pointer;z-index: 10;}
+.slider .btn.prev {position: absolute;width: 1.5em;max-width: 40px;top: .5em;left: -3em;cursor: pointer;z-index: 10;}
+.slider .btn.next {position: absolute;width: 1.5em;max-width: 40px;top: .5em;right: -3em;cursor: pointer;z-index: 10;}
 .slider .btn svg {stroke-width: .8;}
 
 .info-box {
