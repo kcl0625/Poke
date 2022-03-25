@@ -11,9 +11,8 @@ public class MemberDAO {
 	Connection con = null;
 	String sql = null;
 	PreparedStatement pstmt = null;
-	int res = 0;
 	
-	public int join(MemberDTO dto) {
+	public void join(MemberDTO dto) {
 		try {
 			con = Config.getConnection();
 			sql = "insert into member(id, pw, name, nick, zip, add1, add2, tel, email, admin) values(?,?,?,?,?,?,?,?,?, 0)";
@@ -29,20 +28,20 @@ public class MemberDAO {
 			pstmt.setString(8, dto.getTel());
 			pstmt.setString(9, dto.getEmail());
 			
-			res = pstmt.executeUpdate();
+			pstmt.executeUpdate();
 			pstmt.close();
 			System.out.println("회원가입 성공!!");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return res;
 	}
 	
-	public int updateMember(MemberDTO dto) {
+	public void updateMember(MemberDTO dto) {
 		try {
 			con = Config.getConnection();
 			sql = "update member(pw, name, nick, zip, add1, add2, tel, email) values(?,?,?,?,?,?,?,?) where id = ?";
 			pstmt = con.prepareStatement(sql);
+			ResultSet rs = null;
 			
 			pstmt.setString(1, dto.getPw());
 			pstmt.setString(2, dto.getName());
@@ -54,31 +53,30 @@ public class MemberDAO {
 			pstmt.setString(8, dto.getEmail());
 			pstmt.setString(9, dto.getId());
 			
-			res = pstmt.executeUpdate();
+			pstmt.executeUpdate();
 			pstmt.close();
 			con.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return res;
 	}
 	
-	public int deleteMember(MemberDTO dto) {
+	public void deleteMember(MemberDTO dto) {
 		try {
 			con = Config.getConnection();
 			sql = "delete member where id = ?";
 			pstmt = con.prepareStatement(sql);
+			ResultSet rs = null;
 			
 			pstmt.setString(1, dto.getId());
 			pstmt.setString(2, dto.getPw());
 			
-			res = pstmt.executeUpdate();
+			pstmt.executeUpdate();
 			pstmt.close();
 			con.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return res;
 	}
 	
 	public ArrayList<MemberDTO> getList(String id) {

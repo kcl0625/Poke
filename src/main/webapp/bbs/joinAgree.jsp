@@ -2,6 +2,11 @@
     pageEncoding="UTF-8"%>
 <jsp:include page="/header.jsp" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/join.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/memForm.css">
+<style>
+.wrapper {padding-top: 0;}
+footer {margin-top: 0;}
+</style>
 <div class="wrapper">
 	<div class="page-title"><h2><span class="point cheese">J</span>oin Us</h2></div>
 	<div class="join-box form-wrapper form-item">

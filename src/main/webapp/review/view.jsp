@@ -10,7 +10,6 @@ response.setCharacterEncoding("utf-8");
 
 int no = Integer.parseInt(request.getParameter("no"));
 
-ReviewDAO dao = new ReviewDAO();
 ArrayList<ReviewDTO> review = reviewBean.showReview(no);
 
 int star = review.get(0).getStar();
