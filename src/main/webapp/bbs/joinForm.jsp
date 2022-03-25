@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@include file="/config.jsp" %>
 <jsp:include page="/header.jsp" />
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/join.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/memForm.css">
+<link rel="stylesheet" href="<%=root %>/css/join.css">
+<link rel="stylesheet" href="<%=root %>/css/memForm.css">
 
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
@@ -16,7 +17,7 @@
 			<div class="arrow"></div>
 			<div class="item"><span class="num">3</span><span class="name">가입완료</span></div>
 		</div>
-		<form name="memForm" action="${pageContext.request.contextPath}/bbs/joinRes.jsp" method="post">
+		<form name="memForm" action="<%=root %>/bbs/joinRes.jsp" method="post">
 			<fieldset class="form-item">
 				<legend>회원 정보</legend>
 			
@@ -150,8 +151,28 @@
 		        			msg = '길이가 너무 짧거나 길어요';
 		        			inputItem.classList.add('false');
 		        		} else {
-		        			msg = '';
-		        			inputItem.classList.remove('false');
+		        			//id 중복검사
+		    		    	if(id == 'id') {
+		    		    		memForm.id.addEventListener('change', (e) => {
+		    		    			e.stopImmediatePropagation();
+		    		    			new Ajax.Request('idChk.jsp?id=' + memForm.id.value, {
+		    		    				method: 'get',
+		    		    				parameter: memForm.id,
+		    		    				onComplete: (response) => {
+		    		    			    	let res = response.responseText.trim();
+		    		    					
+		    		    					if (res == 'no'){
+		    		    						msg = '사용할 수 없는 아이디예요';
+		    		    						inputItem.classList.add('false');
+		    		    						printMsg(msg, indicator);
+		    		    					}
+		    		    				}
+		    		    			})
+		    		    		})
+		    		    	} else {
+		    		    		msg = '';
+			        			inputItem.classList.remove('false');
+		    		    	}
 		        		}
 		        	}
 		    		//패턴 검사
@@ -195,29 +216,6 @@
 		    	}
 		    	if(indicator) printMsg(msg, indicator);
 		    	
-		    	//id 중복검사
-		    	if(id == 'id') {
-		    		memForm.id.addEventListener('change', (e) => {
-		    			e.stopImmediatePropagation();
-		    			new Ajax.Request('${pageContext.request.contextPath}/bbs/idChk.jsp?id=' + memForm.id.value, {
-		    				method: 'get',
-		    				parameter: memForm.id,
-		    				onComplete: (response) => {
-		    			    	let res = response.responseText.trim();
-		    					
-		    					if (res == 'no'){
-		    						msg = '사용할 수 없는 아이디예요';
-		    						memForm.id.parentNode.classList.add('false');
-		    					} else {
-		    						msg = '';
-		    						memForm.id.parentNode.classList.remove('false');
-		    					}
-		    					printMsg(msg, memForm.id.parentNode.querySelector('.indicator'));
-		    				}
-		    			})
-		    		})
-		    	}
-		    	
 		    	// pw 확인
 		    	if(id == 'pw' || id == 'pwChk'){
 		    		if(memForm.pw.value != memForm.pwChk.value){
@@ -253,7 +251,7 @@
 			
 		<div class="pn" style="flex-direction: column;align-items: center;">
 			<a class="ui-btn point big" onclick="formSubmit(memForm);">회원가입</a>
-			<a class="ui-btn big" href="${pageContext.request.contextPath}/index.jsp">취소</a>
+			<a class="ui-btn big" href="<%=root %>/index.jsp">취소</a>
 		</div>
 	</div>
 </div>

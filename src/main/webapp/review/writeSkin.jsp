@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@include file="/config.jsp" %>
 <jsp:include page="/header.sub.jsp" />
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/write.css">
+<link rel="stylesheet" href="<%=root%>/css/write.css">
 
 
 <script>
@@ -9,9 +10,9 @@
 		document.querySelector('.textarea').contentWindow.document.designMode = 'on';
 	}
 </script>
-<a class="go-back" href="${pageContext.request.contextPath}/review/list.jsp"><svg viewBox="0 0 25 50"><polyline class="stroke only" stroke-miterlimit="10" points="25,0 0,25 25,50"/></svg>back</a>
+<a class="go-back" href="<%=root%>/review/list.jsp"><svg viewBox="0 0 25 50"><polyline class="stroke only" stroke-miterlimit="10" points="25,0 0,25 25,50"/></svg>back</a>
 <div class="wrapper" onload="run();">
-	<form name="write" action="${pageContext.request.contextPath}/bbs/write.jsp" method="post" enctype="multipart/form-data">
+	<form name="write" action="<%=root%>/bbs/write.jsp" method="post" enctype="multipart/form-data">
 		<input type="file" name="photo" style="display:none;" accept="image/jpeg, image/png">
 		<div class="photo"><img src=""></div>
 		<div class="form-right">
@@ -57,7 +58,7 @@
 			</div>
 			
 			<div class="pn">
-				<button type="button" class="ui-btn" onclick="location.href='${pageContext.request.contextPath}/review/list.jsp'">취소</button>
+				<button type="button" class="ui-btn" onclick="location.href='<%=root%>/review/list.jsp'">취소</button>
 				<button type="button" class="ui-btn point" onclick="formWrite(menu);">완료</button>
 			</div>
 		</div>

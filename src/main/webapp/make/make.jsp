@@ -3,11 +3,12 @@
 <%@page import="java.util.ArrayList" %>
 <%@page import="bbs.CategoryDTO" %>
 <%@page import="poke.IngreDTO" %>
+<%@include file="/config.jsp" %>
 
 <jsp:useBean id="categoryBean" class="bbs.CategoryDAO" />
 <jsp:useBean id="ingreBean" class="poke.IngreDAO" />
 
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/make.css">
+<link rel="stylesheet" href="<%=root %>/css/make.css">
 <jsp:include page="/header.jsp" />
 
 <div class="wrapper">
@@ -53,7 +54,7 @@
 		</div>
 		
 		<div class="form-wrapper">
-			<form name="menu" method="post" action="${pageContext.request.contextPath}/bbs/menuRes.jsp" style="width: 100%;">
+			<form name="menu" method="post" action="<%=root %>/bbs/menuRes.jsp" style="width: 100%;">
 				<div id="bowl" ondragover="drop();" ondrop="addItem(event);">
 					<div class="write-name">
 						<input type="text" name="poke_name" id="poke_name" onsubmit="return false;" value="POKE">
@@ -84,5 +85,5 @@
 		</div>
 	</div>
 </div>
-<script src="${pageContext.request.contextPath}/js/make.js"></script>
+<script src="<%=root %>/js/make.js"></script>
 <jsp:include page="/footer.jsp" />

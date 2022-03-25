@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@include file="/config.jsp" %>
 <jsp:include page="/header.jsp" />
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/view.skin.bbs.css">
+<link rel="stylesheet" href="<%=root%>/css/view.skin.bbs.css">
 <div class="wrapper qna">
 	<jsp:include page="submenu.jsp" />
 	<div class="view-area">

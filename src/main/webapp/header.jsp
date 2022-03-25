@@ -4,19 +4,7 @@
 <%@ page import="javax.servlet.http.HttpServlet" %>
 <%@ page import="javax.servlet.http.HttpServletRequest" %>
 <%@ page import="javax.servlet.http.HttpServletResponse" %>
-<% request.setCharacterEncoding("utf-8");
-	String id = null;
-	int isAdm = 0;
-	int isMem = 0;
-	
-	id = (String)session.getAttribute("id");
-	if(id != null){ //로그인 상태일 때
-		isMem = 1;
-		if(Integer.parseInt((String)session.getAttribute("isAdm")) == 1){
-			isAdm = Integer.parseInt((String)session.getAttribute("isAdm"));
-		}
-	}
-%>
+<%@include file="/config.jsp" %>
 <jsp:include page="/header.sub.jsp" />
 <header>
 	<div class="center">
@@ -28,7 +16,7 @@
 	    	let openGnb = () => {document.querySelector('body').classList.toggle('open');}
 	    </script>
 	    <div id="logo">
-	    	<a href="${pageContext.request.contextPath}/index.jsp">
+	    	<a href="<%=root %>/index.jsp">
 	    		<svg viewBox="0 0 188 188">
 	    			<path class="fill salary" d="M120 0c-7 0-12 5-12 12v68h68c7 0 12-5 12-12V0h-68z"/>
 	    			<path class="fill salmon" d="m80 183-61-35 61-35z"/>
@@ -40,31 +28,31 @@
 	    <div id="gnb">
 	    	<div class="menu">
 	            <ul>
-	                <li style="--i: 1;"><a href="${pageContext.request.contextPath}/make/make.jsp">Make</a></li>
-	                <li style="--i: 2;"><a href="${pageContext.request.contextPath}/bowls/bowls.jsp">Bowls</a></li>
-	                <li style="--i: 3;"><a href="${pageContext.request.contextPath}/shop/list.jsp">Shop</a></li>
-	                <li style="--i: 4;"><a href="${pageContext.request.contextPath}/notice/list.jsp">Notice</a></li>
-	                <li style="--i: 5;"><a href="${pageContext.request.contextPath}/review/list.jsp">Review</a></li>
+	                <li style="--i: 1;"><a href="<%=root %>/make/make.jsp">Make</a></li>
+	                <li style="--i: 2;"><a href="<%=root %>/bowls/bowls.jsp">Bowls</a></li>
+	                <li style="--i: 3;"><a href="<%=root %>/shop/list.jsp">Shop</a></li>
+	                <li style="--i: 4;"><a href="<%=root %>/notice/list.jsp">Notice</a></li>
+	                <li style="--i: 5;"><a href="<%=root %>/review/list.jsp">Review</a></li>
 	            </ul>
 	        </div>
 	        <div class="login">
 	            <ul>
 	            	<%if(isMem == 0) { //세션 없을 때%>
-	                	<li style="--i:x 8;"><a href="${pageContext.request.contextPath}/bbs/loginForm.jsp">Log in</a></li>
+	                	<li style="--i:x 8;"><a href="<%=root %>/bbs/loginForm.jsp">Log in</a></li>
 	                <%} else {
 	                	if(isAdm == 0) {%>
-	                		<li style="--i: 7;"><a href="${pageContext.request.contextPath}/mypage/index.jsp">My POKE</a></li>
+	                		<li style="--i: 7;"><a href="<%=root %>/mypage/index.jsp">My POKE</a></li>
 	                	<%} %>
-	                	<li style="--i: 8;"><a href="${pageContext.request.contextPath}/bbs/logout.jsp">Log out</a></li>
+	                	<li style="--i: 8;"><a href="<%=root %>/bbs/logout.jsp">Log out</a></li>
 	                <%}%>
 	            </ul>
 	        </div>
 	    </div>
 	    <div id="header-right-btn">
 	    	<% if(isAdm == 1) {%>
-	    		<a href="${pageContext.request.contextPath}/admin/index.jsp"><i class="fas fa-cog"></i></a>
+	    		<a href="<%=root %>/admin/index.jsp"><i class="fas fa-cog"></i></a>
 	    	<%} else { %>
-	    		<a href="${pageContext.request.contextPath}/bbs/cartList.jsp"><i class="fas fa-shopping-cart"></i></a>
+	    		<a href="<%=root %>/bbs/cartList.jsp"><i class="fas fa-shopping-cart"></i></a>
 	    	<%} %>
 	    </div>
 	</div>

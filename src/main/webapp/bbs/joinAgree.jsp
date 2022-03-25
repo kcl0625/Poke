@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@include file="/config.jsp" %>
 <jsp:include page="/header.jsp" />
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/join.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/memForm.css">
+<link rel="stylesheet" href="<%=root %>/css/join.css">
+<link rel="stylesheet" href="<%=root %>/css/memForm.css">
 <style>
 .wrapper {padding-top: 0;}
 footer {margin-top: 0;}

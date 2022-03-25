@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/mypage.css">
+<%@include file="/config.jsp" %>
+<link rel="stylesheet" href="<%=root %>/css/mypage.css">
 <a class="show-submenu" onclick="openSubmenu(this);"><svg viewBox="0 0 50 25"><polyline class="stroke only" stroke-miterlimit="10" points="0,0 25,25 50,0"></polyline></svg></a>
 <div class="submenu">
 	<ul>

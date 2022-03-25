@@ -2,11 +2,12 @@
     pageEncoding="UTF-8"%>
 <%@page import="java.util.ArrayList" %>
 <%@page import="bbs.CategoryDTO" %>
+<%@include file="/config.jsp" %>
 
 <jsp:useBean id="categoryBean" class="bbs.CategoryDAO" />
 
 <jsp:include page="/header.jsp" />
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/shop.css">
+<link rel="stylesheet" href="<%=root %>/css/shop.css">
 <div class="wrapper">
 	<div class="page-title">
 		<h2><span class="point salmon">S</span>hop</h2>

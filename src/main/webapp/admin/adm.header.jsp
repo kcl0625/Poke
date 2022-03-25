@@ -4,6 +4,7 @@
 <%@ page import="javax.servlet.http.HttpServlet" %>
 <%@ page import="javax.servlet.http.HttpServletRequest" %>
 <%@ page import="javax.servlet.http.HttpServletResponse" %>
+<%@include file="/config.jsp" %>
 <jsp:include page="/header.sub.jsp" />
 <link rel="stylesheet" href="css/admin.css">
 <header>
@@ -16,7 +17,7 @@
 	    	let openGnb = () => {document.querySelector('body').classList.toggle('open');}
 	    </script>
 	    <div id="logo">
-	    	<a href="${pageContext.request.contextPath}/index.jsp">
+	    	<a href="<%=root%>/index.jsp">
 	    		<svg viewBox="0 0 188 188">
 	    			<path class="fill salary" d="M120 0c-7 0-12 5-12 12v68h68c7 0 12-5 12-12V0h-68z"/>
 	    			<path class="fill salmon" d="m80 183-61-35 61-35z"/>

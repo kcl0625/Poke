@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@include file="/config.jsp" %>
 <jsp:include page="header.jsp" />
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/main.css">
+<link rel="stylesheet" href="<%=root %>/css/fullpage.css">
+<link rel="stylesheet" href="<%=root %>/css/main.css">
 <div id="fullpage">
 <div class="wrapper section">
 	<div id="bowl">
@@ -16,14 +18,14 @@
 		<h2 class="sub-title">내가 좋아하는 것들만 담아서</h2>
 	</div>
 	<div class="bg-slide">
-		<div class="bg-item" style="background-image: url('${pageContext.request.contextPath}/img/bg1.jpg');"></div>
+		<div class="bg-item" style="background-image: url('<%=root%>/img/bg1.jpg');"></div>
 		<div class="bg-item"></div>
 		<div class="bg-item"></div>
 		<div class="bg-item"></div>
 	</div>
 </div>
 <div class="wrapper section">
-	<div class="img"><img src="${pageContext.request.contextPath}/img/main-img.png" alt="main-img"></div>
+	<div class="img"><img src="<%=root %>/img/main-img.png" alt="main-img"></div>
 	<div class="txt-area">
 		<h2 class="section-title"><span class="point salmon">P</span>O<span class="point cheese">K</span><span class="point salary">E</span>(포케)가 뭔가요?</h2>
 		<p class="section-txt">
@@ -54,7 +56,7 @@
 				<svg viewBox="0 0 50 50">
 					<clipPath id="path1"><path class="fill salmon" d="M9.998,50h40V0h-50v40C-0.002,45.5,4.498,50,9.998,50z"/></clipPath>
 					<path class="fill salmon" d="M9.998,50h40V0h-50v40C-0.002,45.5,4.498,50,9.998,50z"/>
-					<image x="-6" y="4" href="${pageContext.request.contextPath}/data/ingre/coriander.png" clip-path="url(#path1)"></image>
+					<image x="-6" y="4" href="<%=root %>/data/ingre/coriander.png" clip-path="url(#path1)"></image>
 				</svg>
 			</div>
 			<div class="item"></div>
@@ -65,14 +67,14 @@
 				<svg viewBox="0 0 50 50">
 					<clipPath id="path2"><path d="M49.998,40V0h-50v49.999h40C45.498,50,49.998,45.5,49.998,40z"/></clipPath>
 					<path class="fill cheese" d="M49.998,40V0h-50v49.999h40C45.498,50,49.998,45.5,49.998,40z"/>
-					<image x="-10" y="3" href="${pageContext.request.contextPath}/data/ingre/whiteMushroom.png" clip-path="url(#path2)"></image>
+					<image x="-10" y="3" href="<%=root %>/data/ingre/whiteMushroom.png" clip-path="url(#path2)"></image>
 				</svg>
 			</div>
 			<div class="item">
 				<svg viewBox="0 0 50 50">
 					<clipPath id="path3"><circle cx="25" cy="25" r="25"/></clipPath>
 					<circle class="fill salary" cx="25" cy="25" r="25"/>
-					<image x="15" y="13" href="${pageContext.request.contextPath}/data/ingre/salmon.png" clip-path="url(#path3)"></image>
+					<image x="15" y="13" href="<%=root %>/data/ingre/salmon.png" clip-path="url(#path3)"></image>
 				</svg>
 				
 			</div>
@@ -91,7 +93,7 @@
 				<svg viewBox="0 0 50 50">
 					<clipPath id="path4"><path d="M50,10c0-5.5-4.5-10-10-10H10C4.5,0,0,4.5,0,10v30c0,5.5,4.5,10,10,10h40V10z"/></clipPath>
 					<path class="fill salmon" d="M50,10c0-5.5-4.5-10-10-10H10C4.5,0,0,4.5,0,10v30c0,5.5,4.5,10,10,10h40V10z"/>
-					<image x="-8" y="13" href="${pageContext.request.contextPath}/data/ingre/oats.png" clip-path="url(#path4)"></image>
+					<image x="-8" y="13" href="<%=root %>/data/ingre/oats.png" clip-path="url(#path4)"></image>
 				</svg>
 			</div>
 			<div class="item"></div>
@@ -99,7 +101,7 @@
 				<svg viewBox="0 0 50 50">
 					<clipPath id="path5"><polygon points="50,0 50,50 0,50 "/></clipPath>
 					<polygon class="fill cheese" points="50,0 50,50 0,50 "/>
-					<image x="-8" y="16" href="${pageContext.request.contextPath}/data/ingre/avocado.png" clip-path="url(#path5)"></image>
+					<image x="-8" y="16" href="<%=root %>/data/ingre/avocado.png" clip-path="url(#path5)"></image>
 				</svg>
 			</div>
 			<div class="item"></div>
@@ -120,7 +122,7 @@
 				<svg viewBox="0 0 50 50">
 					<clipPath id="path6"><path d="M10,0C4.5,0,0,4.5,0,10v30c0,5.5,4.5,10,10,10h30c5.5,0,10-4.5,10-10V0H10z"/></clipPath>
 					<path class="fill salary" d="M10,0C4.5,0,0,4.5,0,10v30c0,5.5,4.5,10,10,10h30c5.5,0,10-4.5,10-10V0H10z"/>
-					<image x="15" y="-3" href="${pageContext.request.contextPath}/data/ingre/cherryTomato.png" clip-path="url(#path6)"></image>
+					<image x="15" y="-3" href="<%=root %>/data/ingre/cherryTomato.png" clip-path="url(#path6)"></image>
 				</svg>
 			</div>
 		</div>
@@ -129,7 +131,7 @@
 	<div class="txt-area">
 		<p class="section-txt">Make에서 내가 좋아하는 것들만 골라서 주문할 수 있어요.</p>
 		
-		<a href="${pageContext.request.contextPath}/make/make.jsp"><span class="point cheese">E</span>xpl<span class="point salmon">o</span>re <span class="point salary">N</span>ow
+		<a href="<%=root %>/make/make.jsp"><span class="point cheese">E</span>xpl<span class="point salmon">o</span>re <span class="point salary">N</span>ow
 		<svg viewBox="0 0 25 50"><polyline class="stroke only" points="0,0 25,25 0,50"/></svg>
 		</a>
 	</div>
@@ -166,8 +168,8 @@
 </div>
 </div>
 
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/fullpage.css">
-<script src="${pageContext.request.contextPath}/js/fullpage.js"></script>
+
+<script src="<%=root %>/js/fullpage.js"></script>
 <script>
 new fullpage('#fullpage', {
 	licenseKey: '',

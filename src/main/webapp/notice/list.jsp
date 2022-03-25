@@ -2,11 +2,12 @@
     pageEncoding="UTF-8"%>
 <%@page import="java.util.ArrayList" %>
 <%@page import="bbs.CategoryDTO" %>
+<%@include file="/config.jsp" %>
 
 <jsp:useBean id="categoryBean" class="bbs.CategoryDAO" />
 
 <jsp:include page="/header.jsp" />
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/notice.css">
+<link rel="stylesheet" href="<%=root %>/css/notice.css">
 <div class="wrapper">
 	<div class="page-title">
 		<h2><span class="point salmon">N</span>otice</h2>
@@ -33,7 +34,7 @@
 		<ul>
 			<li>
 				<span class="cate">Notice</span>
-				<a class="title" href="view.skin.jsp">공지사항 제목</a>
+				<a class="title" href="viewSkin.jsp">공지사항 제목</a>
 				<span class="date">00.00.00</span>
 			</li>
 			

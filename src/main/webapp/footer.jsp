@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@include file="/config.jsp" %>
     </section>
     <footer>
         <div class="left">
@@ -18,10 +19,10 @@
         <div class="center"><p class="txt-center">POKE</p></div>
         <div class="right">
             <ul>
-                <li><a href="">Make</a></li>
-                <li><a href="">Bowls</a></li>
-                <li><a href="">Shop</a></li>
-                <li><a href="">Review</a></li>
+                <li><a href="<%=root%>/make/make.jsp">Make</a></li>
+                <li><a href="<%=root%>/bowls/bowls.jsp">Bowls</a></li>
+                <li><a href="<%=root%>/shop/list.jsp">Shop</a></li>
+                <li><a href="<%=root%>/review/list.jsp">Review</a></li>
             </ul>
         </div>
     </footer>

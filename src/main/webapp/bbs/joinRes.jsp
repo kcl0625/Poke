@@ -2,8 +2,10 @@
     pageEncoding="UTF-8"%>
 <%@page import="java.util.ArrayList" %>
 <%@ page import="member.*" %>
+<%@include file="/config.jsp" %>
+
 <jsp:include page="/header.jsp" />
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/join.css">
+<link rel="stylesheet" href="<%=root %>/css/join.css">
 <style>
 .wrapper {padding-top: 0;}
 footer {margin-top: 0;}
@@ -33,8 +35,8 @@ dao.join(member);
 		</div>
 			
 		<div class="pn" style="flex-wrap: wrap;">
-	    	<a class="ui-btn full" onclick="${pageContext.request.contextPath}/bbs/loginForm.jsp">Log in</a>
-		    <a class="ui-btn point full" href="${pageContext.request.contextPath}/index.jsp">Main</a>
+	    	<a class="ui-btn full" onclick="<%=root%>/bbs/loginForm.jsp">Log in</a>
+		    <a class="ui-btn point full" href="<%=root%>/index.jsp">Main</a>
 		</div>
 	</div>
 </div>

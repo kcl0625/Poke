@@ -2,12 +2,13 @@
     pageEncoding="UTF-8"%>
 <%@page import="java.util.ArrayList" %>
 <%@page import="review.ReviewDTO" %>
+<%@include file="/config.jsp" %>
 
 <jsp:include page="/header.jsp" />
 
 <jsp:useBean id="reviewBean" class="review.ReviewDAO" />
 
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/review.css">
+<link rel="stylesheet" href="<%=root %>/css/review.css">
 <div class="wrapper">
 	<div class="page-title">
 		<h2><span class="point salmon">R</span>eview</h2>
@@ -15,7 +16,7 @@
 	</div>
 	
 	<div class="list">
-		<a href="write.skin.jsp"><i class="fas fa-pen"></i></a>
+		<a href="writeSkin.jsp"><i class="fas fa-pen"></i></a>
 		<ul>
 			<%
 				ArrayList<ReviewDTO> reviewList = reviewBean.getReviewList();

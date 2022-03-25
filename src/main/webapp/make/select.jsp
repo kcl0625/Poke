@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="poke.*"%>
+<%@include file="/config.jsp" %>
+
 <jsp:useBean id="ingreBean" class="poke.IngreDAO" />
 <%
 request.setCharacterEncoding("utf-8");
@@ -20,7 +22,7 @@ for(int i=0;i<ingre.size();i++) {
 	String fileName = ingre.get(i).getFileName();
 	%>
 	<li data-name="<%=name %>" data-price="<%=price %>" data-cal="<%=cal %>" data-origin="<%=origin %>" ondragstart="dragStart(this);" onmouseenter="showInfo(this, event);" onmouseleave="hideInfo(this, event);">
-		<div class="item" draggable="true"><img src="${pageContext.request.contextPath}/data/ingre/<%=fileName %>.png"></div>
+		<div class="item" draggable="true"><img src="<%=root %>/data/ingre/<%=fileName %>.png"></div>
 		<span class="name"><%=name %></span>
 	</li>
 <%}%>

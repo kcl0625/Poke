@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@include file="/config.jsp" %>
 <jsp:include page="/header.jsp" />
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/mypage.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/memForm.css">
+<link rel="stylesheet" href="<%=root%>/css/mypage.css">
+<link rel="stylesheet" href="<%=root%>/css/memForm.css">
 <div class="wrapper">
 	<jsp:include page="submenu.jsp" />
 
