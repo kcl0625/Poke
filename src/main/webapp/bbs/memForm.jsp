@@ -189,19 +189,16 @@
     				method: 'get',
     				parameter: memForm.id,
     				onComplete: (response) => {
-    			    	let res = response.responseText;
-    					console.log('res', response);
+    			    	let res = response.responseText.trim();
     					
     					if (res == 'no'){
     						msg = '사용할 수 없는 아이디예요';
-    						//memForm.id.parentNode.classList.add('false');
-    						console.log(msg);
+    						memForm.id.parentNode.classList.add('false');
     					} else {
     						msg = '';
-    						//memForm.id.parentNode.classList.remove('false');
-    						console.log(msg);
+    						memForm.id.parentNode.classList.remove('false');
     					}
-    					//printMsg(msg, memForm.id.parentNode.querySelector('.indicator'));
+    					printMsg(msg, memForm.id.parentNode.querySelector('.indicator'));
     				}
     			})
     		})

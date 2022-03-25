@@ -9,4 +9,5 @@ String id = request.getParameter("id");
 
 MemberDAO dao = new MemberDAO();
 String res = dao.idChk(id);
+out.println(res);
 %>
