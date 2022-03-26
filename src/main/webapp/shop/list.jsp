@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@page import="java.util.ArrayList" %>
 <%@page import="bbs.CategoryDTO" %>
+<%@page import="order.ItemDTO"%>
+
 <%@include file="/config.jsp" %>
 
 <jsp:useBean id="categoryBean" class="bbs.CategoryDAO" />
@@ -16,7 +18,7 @@
 	
 	<div class="page category">
 		<ul>
-			<li data-cate="전체">전체</li>
+			<li data-cate="전체" onclick="selectCategory(this.dataset.cate)">전체</li>
 			<%
 			ArrayList<CategoryDTO> cateList = categoryBean.getCategory("shop");
 			int total = cateList.size();
@@ -28,115 +30,7 @@
 	
 	<div class="list">
 		<ul>
-			<li>
-				<div class="img"></div>
-				<div class="content-bottom">
-					<p class="name">이름1</p>
-					<span class="price">￦0,000</span>
-					
-					<form name="">
-						<a>+</a><input type="number" name="qua"><a>-</a>
-						<button class="cart"><i class="fas fa-shopping-cart"></i></button>
-					</form>
-				</div>
-			</li>
-			<li>
-				<div class="img"></div>
-				<div class="content-bottom">
-					<p class="name">이름1</p>
-					<span class="price">￦0,000</span>
-					
-					<form name="">
-						<a>+</a><input type="number" name="qua"><a>-</a>
-						<button class="cart"><i class="fas fa-shopping-cart"></i></button>
-					</form>
-				</div>
-			</li>
-			<li>
-				<div class="img"></div>
-				
-				<div class="content-bottom">
-					<p class="name">이름1</p>
-					<span class="price">￦0,000</span>
-					
-					<form name="">
-						<a>+</a><input type="number" name="qua"><a>-</a>
-						<button class="cart"><i class="fas fa-shopping-cart"></i></button>
-					</form>
-				</div>
-			</li>
-			<li>
-				<div class="img"></div>
-				<div class="content-bottom">
-					<p class="name">이름1</p>
-					<span class="price">￦0,000</span>
-					
-					<form name="">
-						<a>+</a><input type="number" name="qua"><a>-</a>
-						<button class="cart"><i class="fas fa-shopping-cart"></i></button>
-					</form>
-				</div>
-			</li>
-			<li>
-				<div class="img"></div>
-				<div class="content-bottom">
-					<p class="name">이름1</p>
-					<span class="price">￦0,000</span>
-					
-					<form name="">
-						<a>+</a><input type="number" name="qua"><a>-</a>
-						<button class="cart"><i class="fas fa-shopping-cart"></i></button>
-					</form>
-				</div>
-			</li>
-			<li>
-				<div class="img"></div>
-				<div class="content-bottom">
-					<p class="name">이름1</p>
-					<span class="price">￦0,000</span>
-					
-					<form name="">
-						<a>+</a><input type="number" name="qua"><a>-</a>
-						<button class="cart"><i class="fas fa-shopping-cart"></i></button>
-					</form>
-				</div>
-			</li>
-			<li>
-				<div class="img"></div>
-				<div class="content-bottom">
-					<p class="name">이름1</p>
-					<span class="price">￦0,000</span>
-					
-					<form name="">
-						<a>+</a><input type="number" name="qua"><a>-</a>
-						<button class="cart"><i class="fas fa-shopping-cart"></i></button>
-					</form>
-				</div>
-			</li>
-			<li>
-				<div class="img"></div>
-				<div class="content-bottom">
-					<p class="name">이름1</p>
-					<span class="price">￦0,000</span>
-					
-					<form name="">
-						<a>+</a><input type="number" name="qua"><a>-</a>
-						<button class="cart"><i class="fas fa-shopping-cart"></i></button>
-					</form>
-				</div>
-			</li>
-			<li>
-				<div class="img"></div>
-				<div class="content-bottom">
-					<p class="name">이름1</p>
-					<span class="price">￦0,000</span>
-					
-					<form name="">
-						<a>+</a><input type="number" name="qua"><a>-</a>
-						<button class="cart"><i class="fas fa-shopping-cart"></i></button>
-					</form>
-				</div>
-			</li>
+			
 		</ul>
 	</div>
 	
@@ -159,5 +53,51 @@
 		</nav>
 		<div class="btn next"><svg viewBox="0 0 25 50"><polyline class="stroke only" stroke-miterlimit="10" points="0,0 25,25 0,50"/></svg></div>
 	</div>
+	
+	<div id="item-viewer"></div>
+	<div id="mask"></div>
+	<script>
+		let selectCategory = (cate) => {
+			let categoryLi = document.querySelectorAll('.category li');
+			for(let i=0;i<categoryLi.length;i++){
+				categoryLi[i].classList.remove('cur');
+				if(categoryLi[i].dataset.cate == cate)
+					categoryLi[i].classList.add('cur');
+			}
+			
+			new Ajax.Request('select.jsp?cate=' + cate, {
+				method: 'get',
+				parameter: cate,
+				onComplete: (response) => {
+					document.querySelector('.list ul').innerHTML = response.responseText;
+				}
+			})
+		}
+		
+		selectCategory('전체');
+		
+		
+		let showDesc = (no) => {
+			new Ajax.Request('view.jsp?no=' + no, {
+				method: 'get',
+				parameter: no,
+				onComplete: (response) => {
+					let viewer = document.querySelector('#item-viewer');
+					let mask = document.querySelector('#mask');
+					viewer.innerHTML = response.responseText;
+					viewer.classList.add('show');
+					mask.classList.add('show');
+				}
+			})
+		}
+		
+		let closeReview = () => {
+			let viewer = document.querySelector('#item-viewer');
+			let mask = document.querySelector('#mask');
+			viewer.innerHTML = '';
+			viewer.classList.remove('show');
+			mask.classList.remove('show');
+		}
+	</script>
 </div>
 <jsp:include page="/footer.jsp" />

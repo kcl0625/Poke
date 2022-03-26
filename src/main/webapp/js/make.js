@@ -44,6 +44,7 @@ window.addEventListener('resize', () => {
 
 //재료 툴팁
 let toolTip1 = (price, cal, origin, infoBox) => {
+	origin = origin.split('/');
 	infoBox.innerHTML = `￦${price}<br>${cal}kcal<hr class="line">`;
 	for(let i=0;i<origin.length;i++)
 		infoBox.innerHTML += `${origin[i]}<br>`;
@@ -57,7 +58,7 @@ let showInfo = (item, e) => {
 	let name = item.dataset.name;
 	let price = item.dataset.price;
 	let cal = item.dataset.cal;
-	let origin = item.dataset.origin.split('/');
+	let origin = item.dataset.origin;
 	
 	let div = document.createElement('div');
 	item.appendChild(div);
@@ -88,13 +89,14 @@ let drop = () => {
 
 let itemL = 0; //넣은 재료의 수
 let itemMax = 13; //최대 재료 개수(시간 되면 관리자 페이지에서 수정 가능하게)
-let indicator = document.querySelector('.indicator');
 let msg;
 
 let totPrice = 0;
 let totCal = 0;
 
 let addItem = (e) => {
+	let indicator = document.querySelector('.indicator');
+	let bowl = document.querySelector('#bowl');
 	if (itemL != itemMax){
 		itemL++;
 		
@@ -129,11 +131,15 @@ let addItem = (e) => {
 		li.innerHTML = `<span class="name">${name}</span> <span class="cal">${cal}kcal</span> <span class="dot">···</span> <span class="price">￦${price}</span>`;
 		receiptUl.appendChild(li); 
 		
+		let priceShow = document.querySelector('#price');
+		let calShow = document.querySelector('#cal');
 		totPrice += price;
 		totCal += cal;
 		
-		menu.price.value = `￦${totPrice}`;
-		menu.cal.value = `${totCal}kcal`;
+		priceShow.innerHTML = `￦${totPrice}`;
+		calShow.innerHTML = `${totCal}kcal`;
+		menu.price.value = totPrice;
+		menu.cal.value = totCal;
 		menu.ingre.value += `${name}/`;
 	} else {
 		msg = `그릇이 꽉 찼어요<br>재료는 최대 ${itemMax}개까지 담을 수 있어요`;
@@ -143,6 +149,9 @@ let addItem = (e) => {
 
 let dropItem = (item) => {
 	let id = item.id.charAt(item.id.length - 1);
+	let indicator = document.querySelector('.indicator');
+	let priceShow = document.querySelector('#price');
+	let calShow = document.querySelector('#cal');
 	
 	msg = '';
 	printMsg(msg, indicator);
@@ -154,8 +163,10 @@ let dropItem = (item) => {
 	totPrice -= price;
 	totCal -= cal;
 	
-	menu.price.value = `￦${totPrice}`;
-	menu.cal.value = `${totCal}kcal`;
+	priceShow.innerHTML = `￦${totPrice}`;
+	calShow.innerHTML = `${totCal}kcal`;
+	menu.price.value = totPrice;
+	menu.cal.value = totCal;
 	
 	delItem[0].remove();
 	delItem[1].remove();
@@ -166,24 +177,26 @@ let dropItem = (item) => {
 let addCart = (e) => {
 	e.preventDefault();
 	check();
-	if(itemL != 0 && menu.poke_name.value)
-		menu.submit();
+	if(itemL != 0 && menu.name.value) menu.submit();
 }
 
 let check = () => { //유효성 검사
-	if(!menu.poke_name.value)
-		menu.poke_name.value = 'POKE';
+	let indicator = document.querySelector('.indicator');
+	if(!menu.name.value)
+		menu.name.value = 'POKE';
 	else {
-		if(itemL == 0)
-			msg = '재료를 담아주세요';
-		else
-			msg = '';
+		if(itemL == 0) msg = '재료를 담아주세요';
+		else msg = '';
+		
+		printMsg(msg, indicator);
 	}
-	
-	printMsg(msg, indicator);
 }
 
 let clear = () => {
+	let indicator = document.querySelector('.indicator');
+	let priceShow = document.querySelector('#price');
+	let calShow = document.querySelector('#cal');
+	
 	let bowl = document.querySelector('#bowl');
 	let receipt = document.querySelector('.receipt');
 	
@@ -201,6 +214,8 @@ let clear = () => {
 	itemL = 0;
 
 	printMsg(msg, indicator);
-	menu.price.value = `￦${totPrice}`;
-	menu.cal.value = `${totCal}kcal`;
+	priceShow.innerHTML = `￦${totPrice}`;
+	calShow.innerHTML = `${totCal}kcal`;
+	menu.price.value = totPrice;
+	menu.cal.value = totCal;
 }

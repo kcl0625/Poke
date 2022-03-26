@@ -2,13 +2,20 @@
     pageEncoding="UTF-8"%>
 <%@page import="java.util.ArrayList" %>
 <%@page import="bbs.CategoryDTO" %>
-<%@page import="poke.IngreDTO" %>
+<%@page import="order.IngreDTO" %>
 <%@include file="/config.jsp" %>
 
+<%
+if (isMem == 0){response.sendRedirect(root + "/bbs/loginForm.jsp");}
+if (isAdm == 1) {
+	out.write("<script>alert('관리자는 주문할 수 없습니다');location.href = '" + root + "/index.jsp';</script>");
+}%>
+
 <jsp:useBean id="categoryBean" class="bbs.CategoryDAO" />
-<jsp:useBean id="ingreBean" class="poke.IngreDAO" />
+<jsp:useBean id="ingreBean" class="order.IngreDAO" />
 
 <link rel="stylesheet" href="<%=root %>/css/make.css">
+<script src="<%=root %>/js/make.js"></script>
 <jsp:include page="/header.jsp" />
 
 <div class="wrapper">
@@ -54,10 +61,16 @@
 		</div>
 		
 		<div class="form-wrapper">
-			<form name="menu" method="post" action="<%=root %>/bbs/menuRes.jsp" style="width: 100%;">
+			<form name="menu" method="post" action="<%=root %>/member/addCart.jsp" style="width: 100%;">
+				<input type="hidden" name="type" value="poke">
+				<input type="hidden" name="ingre">
+				<input type="hidden" name="price">
+				<input type="hidden" name="cal">
+				<input type="hidden" name="custom" value="1">
+				
 				<div id="bowl" ondragover="drop();" ondrop="addItem(event);">
 					<div class="write-name">
-						<input type="text" name="poke_name" id="poke_name" onsubmit="return false;" value="POKE">
+						<input type="text" name="name" id="name" onsubmit="return false;" value="POKE">
 						<hr class="line">
 					</div>
 					<span class="indicator"></span>
@@ -65,7 +78,6 @@
 				</div>
 				
 				<div class="receipt">
-					<input type="hidden" name="ingre">
 					<div class="paper">
 						<div class="head">
 							<legend>receipt</legend>
@@ -75,8 +87,8 @@
 							<ul></ul>
 						</div>
 						<div class="total">
-							<p class="price"><input type="text" name="price" value="￦0" readonly></p>
-							<p class="cal"><input type="text" name="cal" value="0kcal" readonly></p>
+							<p id="price">￦0</p>
+							<p id="cal">0kcal</p>
 						</div>
 					</div>
 					<button type="button" class="ui-btn point big full" onclick="addCart(event);">담기</button>
@@ -85,5 +97,4 @@
 		</div>
 	</div>
 </div>
-<script src="<%=root %>/js/make.js"></script>
 <jsp:include page="/footer.jsp" />

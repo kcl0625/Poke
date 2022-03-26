@@ -1,4 +1,4 @@
-package poke;
+package order;
 public class IngreDTO {
 	private String name;
 	private int order;

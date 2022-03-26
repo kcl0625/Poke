@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="poke.*"%>
+<%@ page import="order.IngreDTO"%>
+<%@ page import="order.IngreDAO"%>
 <%@include file="/config.jsp" %>
 
-<jsp:useBean id="ingreBean" class="poke.IngreDAO" />
+<jsp:useBean id="ingreBean" class="order.IngreDAO" />
 <%
 request.setCharacterEncoding("utf-8");
 response.setCharacterEncoding("utf-8");

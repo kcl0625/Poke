@@ -1,5 +1,8 @@
 @charset 'utf-8';
 
+.category li {cursor: pointer;}
+.category li.cur {font-weight: 600;}
+
 .list {width: 45vw; margin: 0 auto;}
 .list ul {display: grid;justify-content: center;grid-template-columns: 1fr 1fr 1fr;gap: 5vw;}
 .list li {position: relative;}
@@ -20,6 +23,62 @@
 .list li .content-bottom form input {width: 2em; text-align: center;}
 
 .search {float: right; margin-top: 50px;}
+
+#item-viewer {
+	visibility: hidden;
+	position: fixed;
+	width: 70vw;
+	height: 75vh;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 100;
+	opacity: 0;
+	transition: .4s .2s ease;
+}
+#item-viewer .close {position: absolute;right: 0;top: -1.8em;width: 3em;height: 3em;}
+#item-viewer .close span {
+	position: absolute;
+	display: block;
+	width: 100%;
+	height: 0;
+	border-top: 1px solid;
+}
+#item-viewer .close span:first-child {transform: rotate(45deg);}
+#item-viewer .close span:last-child {transform: rotate(-45deg);}
+#item-viewer .theme-box {background: var(--color-bak);}
+
+#mask {
+	position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    background: rgba(0,0,0,.1);
+    backdrop-filter: blur(3px);
+    visibility: hidden;
+    opacity: 0;
+    transition: .4s ease;
+    z-index: 99;
+}
+#item-viewer.show,
+#mask.show {visibility: visible; opacity: 1;}
+
+#item-viewer .theme-box {position: relative; height: 100%; overflow: hidden;}
+
+#item-viewer .photo {width: 60%;height: 100%;position: absolute;top: 0;left: 0;border-right: 1px solid;}
+#item-viewer .review-area {width: 40%;height: calc(100% - 60px);position: absolute;right: 0;padding: 0 30px;overflow-y: scroll;}
+
+#item-viewer .review-area .review-header .user-info {display: flex; align-items: center; gap: 1em; padding-bottom: 1em; }
+#item-viewer .review-area .review-header .user-info .pic {width: 2em; height: 2em; border-radius: 50%; border: 1px solid;}
+
+#item-viewer .review-area .review-header .poke-info {padding: 1em 0 3em;border-top: 1px solid;}
+#item-viewer .review-area .review-header .poke-info .star-ratings {direction: rtl;position: absolute;margin-top: .5em;}
+#item-viewer .review-area .review-header .poke-info .star-ratings input + label {color: transparent;-webkit-text-stroke: 1px var(--color-default);font-size: var(--accent-font-size);}
+#item-viewer .review-area .review-header .poke-info .star-ratings :checked ~ label {color: var(--color-default);}
+#item-viewer .review-area .review-header .poke-info .poke-ingre {font-size: var(--small-font-size);}
+#item-viewer .review-area .review-header .poke-info .add-btns {font-size: var(--small-font-size);position: absolute;right: 30px;margin-top: .5em;}
+#item-viewer .review-area .review-content {padding-top: 1em;border-top: 1px solid;position: relative;}
 
 @media all and (max-width: 750px) {
 	.list {width: 100%;}

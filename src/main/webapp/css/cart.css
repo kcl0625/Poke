@@ -8,7 +8,8 @@
 .cart-left .item-list ul {display: flex; flex-wrap: wrap; gap: 1em;}
 
 .cart-left .item-list li {position: relative; padding-left: 10em; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;}
-.cart-left .item-list li .img {position: absolute; top: 50%; left: 2em; transform: translateY(-50%); width: 6em; height: 6em; background: #eee;}
+.cart-left .item-list li .img {position: absolute;top: 50%;left: 2em;transform: translateY(-50%);width: 6em;height: 6em;}
+.cart-left .item-list li .img svg {position: relative;top: 50%;transform: translateY(-50%);stroke-width: .6;}
 .cart-left .item-list li .item-info {border-left: 1px solid; padding-left: 1.5em;}
 .cart-left .item-list li .item-info fieldset.day label {font-size: var(--small-font-size);opacity: .4;cursor: pointer;padding-right: 0.5em;}
 .cart-left .item-list li .item-info fieldset.day :checked + label {opacity: 1;}
@@ -24,11 +25,11 @@
 .cart-right .receipt .price {position: relative; border-bottom: 1px solid;}
 .cart-right .receipt .price .price-name {font-size: var(--small-font-size);}
 .cart-right .receipt .price .txt-right {padding-bottom: .5em;}
-.cart-right .receipt .price .txt-right p {font-size: var(--accent-font-size);font-weight: 200;display: flex;justify-content: end;gap: 1em;}
-.cart-right .receipt .price > span {position: absolute; bottom: 0; font-size: var(--accent-font-size); font-weight: 200;}
+.cart-right .receipt .price .txt-right p {font-size: var(--accent-font-size);font-weight: 300;display: flex;justify-content: end;gap: 1em;}
+.cart-right .receipt .price > span {position: absolute;bottom: 0;font-size: var(--accent-font-size);font-weight: 300;}
 .cart-right .receipt .total {padding: 1.2em 0;}
 .cart-right .receipt .total span {vertical-align: sub;}
-.cart-right .receipt .total .total-price {float: right; font-size: var(--big-font-size); font-weight: 100;}
+.cart-right .receipt .total .total-price {float: right;font-size: var(--big-font-size);font-weight: 200;}
 
 @media all and (max-width: 750px){
     .cart-left {width: 100%;}

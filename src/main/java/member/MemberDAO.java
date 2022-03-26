@@ -15,7 +15,7 @@ public class MemberDAO {
 	public void join(MemberDTO dto) {
 		try {
 			con = Config.getConnection();
-			sql = "insert into member(id, pw, name, nick, zip, add1, add2, tel, email, admin) values(?,?,?,?,?,?,?,?,?, 0)";
+			sql = "insert into member(id, pw, name, nick, zip, add1, add2, tel, email, admin) values(?,?,?,?,?,?,?,?,?)";
 			pstmt = con.prepareStatement(sql);
 			
 			pstmt.setString(1, dto.getId());
@@ -30,7 +30,7 @@ public class MemberDAO {
 			
 			pstmt.executeUpdate();
 			pstmt.close();
-			System.out.println("회원가입 성공!!");
+			con.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

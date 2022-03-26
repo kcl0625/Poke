@@ -35,7 +35,7 @@
 .slider {height: 4em;position: relative;width: 50%;max-height: 80px;}
 .slider .btn.prev {position: absolute;width: 1.5em;max-width: 40px;top: .5em;left: -3em;cursor: pointer;z-index: 10;}
 .slider .btn.next {position: absolute;width: 1.5em;max-width: 40px;top: .5em;right: -3em;cursor: pointer;z-index: 10;}
-.slider .btn svg {stroke-width: .8;}
+.slider .btn svg {stroke-width: 1.1;}
 
 .info-box {
 	position: absolute;
@@ -161,16 +161,17 @@
 
 .making .receipt .paper {
 	width: 15em;
-    height: 20em;
+	height: 20em;
 	max-width: 300px;
-    max-height: 400px;
+	max-height: 400px;
 	padding: 20px;
-    border: 1px solid;
+	border: 1px solid;
+	position: relative;
 }
 
 .making .receipt .list {
 	position: relative;
-	height: 210px;
+	height: 203px;
 	max-height: 14rem;
 	overflow-y: scroll;
 }
@@ -186,10 +187,10 @@
 .making .receipt li .cal {font-size: var(--small-font-size);}
 .making .receipt li:last-child {border: 0;}
 
-.making .receipt .total {position: absolute;padding: 19px 20px 0 0;margin-top: -10px;}
-.making .receipt .total p input {border: 0; width: 100%; text-align: right; padding: 0;}
-.making .receipt .total .price input {font-size: var(--big-font-size);font-weight: 200;}
-
+.making .receipt .total {position: absolute;padding-top: 19px;margin-top: -10px;width: calc(100% - 40px);left: 20px;bottom: 20px;}
+.making .receipt .total p {position: relative; width: 100%; text-align: right; padding: 0;}
+.making .receipt .total p#price {font-size: var(--big-font-size);font-weight: 200;}
+.making .receipt .total p#cal {padding-top: .5em;}
 .making .receipt button {margin-top: 15px;}
 
 @media all and (min-width: 1281px) {

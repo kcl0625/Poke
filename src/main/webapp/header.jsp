@@ -52,7 +52,7 @@
 	    	<% if(isAdm == 1) {%>
 	    		<a href="<%=root %>/admin/index.jsp"><i class="fas fa-cog"></i></a>
 	    	<%} else { %>
-	    		<a href="<%=root %>/bbs/cartList.jsp"><i class="fas fa-shopping-cart"></i></a>
+	    		<a href="<%=root %>/member/cart.jsp"><i class="fas fa-shopping-cart"></i></a>
 	    	<%} %>
 	    </div>
 	</div>

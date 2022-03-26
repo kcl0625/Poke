@@ -38,8 +38,8 @@ public class ReviewDAO {
 		return reviewList;
 	}
 	
-	public ArrayList<ReviewDTO> showReview(int no) {
-		ArrayList<ReviewDTO> review = new ArrayList<ReviewDTO>();
+	public ReviewDTO showReview(int no) {
+		ReviewDTO review = new ReviewDTO();
 		try {
 			con = Config.getConnection();
 			sql = "select star, content from review where no = ?";
@@ -50,10 +50,8 @@ public class ReviewDAO {
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
-				ReviewDTO dto = new ReviewDTO();
-				dto.setStar(rs.getInt("star"));
-				dto.setContent(rs.getString("content"));
-				review.add(dto);
+				review.setStar(rs.getInt("star"));
+				review.setContent(rs.getString("content"));
 			}
 			rs.close();
 			pstmt.close();
