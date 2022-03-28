@@ -9,6 +9,7 @@ public class ItemDTO {
 	private int price;
 	private String id;
 	private int custom;
+	private int quantity;
 	
 	String description;
 	String filename;
@@ -72,5 +73,11 @@ public class ItemDTO {
 	}
 	public void setFilename(String filename) {
 		this.filename = filename;
+	}
+	public int getQuantity() {
+		return quantity;
+	}
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
 	}
 }

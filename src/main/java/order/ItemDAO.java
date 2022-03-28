@@ -14,7 +14,7 @@ public class ItemDAO {
 		ArrayList<ItemDTO> shop = new ArrayList<ItemDTO>();
 		try {
 			con = Config.getConnection();
-			sql = "select no, name, price from shop where category = ?";
+			sql = "select no, name, price, filename from shop where category = ?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, cate);
 			
@@ -25,6 +25,7 @@ public class ItemDAO {
 				dto.setNo(rs.getInt("no"));
 				dto.setName(rs.getString("name"));
 				dto.setPrice(rs.getInt("price"));
+				dto.setFilename(rs.getString("filename"));
 				shop.add(dto);
 			}
 			rs.close();
@@ -40,7 +41,7 @@ public class ItemDAO {
 		ArrayList<ItemDTO> shop = new ArrayList<ItemDTO>();
 		try {
 			con = Config.getConnection();
-			sql = "select no, name, price from shop";
+			sql = "select no, name, price, filename from shop";
 			pstmt = con.prepareStatement(sql);
 			
 			ResultSet rs = pstmt.executeQuery();
@@ -50,6 +51,7 @@ public class ItemDAO {
 				dto.setNo(rs.getInt("no"));
 				dto.setName(rs.getString("name"));
 				dto.setPrice(rs.getInt("price"));
+				dto.setFilename(rs.getString("filename"));
 				shop.add(dto);
 			}
 			rs.close();
@@ -85,7 +87,7 @@ public class ItemDAO {
 		return item;
 	}
 	
-	public void addCart(ItemDTO dto, String id, String date) {
+	public void addCart(ItemDTO dto, String id, String date) { //plan
 		try	{
 			con = Config.getConnection();
 			sql = "insert into cartitem(type, name, ingre, price, cal, id, date, custom) values(?,?,?,?,?,?,?,?)";
@@ -108,7 +110,28 @@ public class ItemDAO {
 		}
 	}
 	
-	public ArrayList<ItemDTO> getCart(String id) {
+	public void addCart(ItemDTO dto, int quantity, String id, String date) { //plan
+		try	{
+			con = Config.getConnection();
+			sql = "insert into cartitem(type, name, price, id, date, quantity) values(?,?,?,?,?,?)";
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, dto.getType());
+			pstmt.setString(2, dto.getName());
+			pstmt.setInt(3, dto.getPrice());
+			pstmt.setString(4, id);
+			pstmt.setString(5, date);
+			pstmt.setInt(6, dto.getQuantity());
+			
+			pstmt.executeUpdate();
+			pstmt.close();
+			con.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public ArrayList<ItemDTO> getCart(String id) { //etc
 		ArrayList<ItemDTO> cart = new ArrayList<ItemDTO>();
 		try{
 			con = Config.getConnection();
@@ -122,11 +145,11 @@ public class ItemDAO {
 			while(rs.next()) {
 				ItemDTO dto = new ItemDTO();
 				dto.setType(rs.getString("type"));
-				dto.setNo(rs.getInt("no"));
 				dto.setName(rs.getString("name"));
 				dto.setIngre(rs.getString("ingre"));
 				dto.setPrice(rs.getInt("price"));
 				dto.setCustom(rs.getInt("custom"));
+				dto.setQuantity(rs.getInt("quantity"));
 				cart.add(dto);
 			}
 			rs.close();

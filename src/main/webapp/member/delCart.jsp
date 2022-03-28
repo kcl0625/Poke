@@ -17,7 +17,6 @@ String now = format.format(date);
 
 ItemDAO dao = new ItemDAO();
 ItemDTO item = orderBean;
-dao.addItem(item, sessionId, now);
 
 response.sendRedirect("cart.jsp");
 %>

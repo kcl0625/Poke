@@ -16,7 +16,7 @@ ItemDTO item = itemBean.showView(no);
 String name = item.getName();
 int price = item.getPrice();
 String desc = item.getDescription();
-String filename = item.get(i).getFilename();%>
+String filename = item.getFilename();%>
 
 <a class="close" href="javascript:close();">
 	<span></span>

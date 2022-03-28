@@ -25,7 +25,6 @@ for(int i=0;i<shopItem.size();i++) {
 	int no = shopItem.get(i).getNo();
 	String name = shopItem.get(i).getName();
 	int price = shopItem.get(i).getPrice();
-	int quantity = shopItem.get(i).getQuantity();
 	String filename = shopItem.get(i).getFilename();%>
 	<li id="item_<%=no %>">
 		<div class="img" onclick="showDesc(<%=no%>);" style="background-image: url('<%=root %>/data/mealkit/<%=filename %>');"></div>
