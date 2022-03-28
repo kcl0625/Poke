@@ -32,25 +32,8 @@
 }
 #review-viewer .close span:first-child {transform: rotate(45deg);}
 #review-viewer .close span:last-child {transform: rotate(-45deg);}
-#review-viewer .theme-box {background: var(--color-bak);}
-
-#mask {
-	position: fixed;
-    width: 100vw;
-    height: 100vh;
-    top: 0;
-    left: 0;
-    background: rgba(0,0,0,.1);
-    backdrop-filter: blur(3px);
-    visibility: hidden;
-    opacity: 0;
-    transition: .4s ease;
-    z-index: 99;
-}
-#review-viewer.show,
-#mask.show {visibility: visible; opacity: 1;}
-
-#review-viewer .theme-box {position: relative; height: 100%; overflow: hidden;}
+#review-viewer .theme-box {position: relative; height: 100%; overflow: hidden; background: var(--color-bak);}
+#review-viewer.show {visibility: visible; opacity: 1;}
 
 #review-viewer .photo {width: 60%;height: 100%;position: absolute;top: 0;left: 0;border-right: 1px solid;}
 #review-viewer .review-area {width: 40%;height: calc(100% - 60px);position: absolute;right: 0;padding: 0 30px;overflow-y: scroll;}

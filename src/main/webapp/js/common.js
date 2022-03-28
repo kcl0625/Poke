@@ -82,12 +82,30 @@ let openSearch = (e) => {
 		}
 	}
 } 
-/*const mysql = require('mysql');
-const conn = mysql.createConnection({
-	host: 'localhost',
-	user: 'root',
-	database: 'nodetest',
-	password: '1234'
-})
-conn.connect();
-conosole.log('연결 성공!');*/
+
+let addCart = (type, name, quantity, price) => {
+	new Ajax.Request('../member/addCart.jsp?type=' + type + '&name=' + name + '&quantity=' + quantity + '&price=' + price, {
+		method: 'get',
+		parameter: {
+			type: type,
+			name: name,
+			quantity: quantity,
+			price: price
+		},
+		onComplete: (response) => {
+			let popup = document.querySelector('#popup');
+			let mask = document.querySelector('#mask');
+			popup.classList.remove('desc');
+			popup.innerHTML = response.responseText;
+			popup.classList.add('show');
+			mask.classList.add('show');
+		}
+	})
+}
+
+let close = () => {
+	let popup = document.querySelector('#popup');
+	let mask = document.querySelector('#mask');
+	popup.classList.remove('show');
+	mask.classList.remove('show');
+}

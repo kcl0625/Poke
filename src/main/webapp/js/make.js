@@ -25,7 +25,6 @@ let prev = () => {
 	let itemW = item[0].offsetWidth;
 	if(cur != 0) cur--;
 	ul.style.left = `-${cur * wrapperL * (itemW + gap)}px`;
-	console.log(cur);
 }
 
 //next
@@ -35,7 +34,6 @@ let next = () => {
 	let itemW = item[0].offsetWidth;
 	if(cur < (item.length / wrapperL - 1)) cur++;
 	ul.style.left = `-${cur * wrapperL * (itemW + gap)}px`;
-	console.log(cur);
 }
 
 window.addEventListener('resize', () => {
@@ -94,6 +92,8 @@ let msg;
 let totPrice = 0;
 let totCal = 0;
 
+let ingre = [];
+
 let addItem = (e) => {
 	let indicator = document.querySelector('.indicator');
 	let bowl = document.querySelector('#bowl');
@@ -136,11 +136,11 @@ let addItem = (e) => {
 		totPrice += price;
 		totCal += cal;
 		
-		priceShow.innerHTML = `￦${totPrice}`;
-		calShow.innerHTML = `${totCal}kcal`;
+		priceShow.innerHTML = `￦${totPrice.toLocaleString('en-IE')}`;
+		calShow.innerHTML = `${totCal.toLocaleString('en-IE')}kcal`;
 		menu.price.value = totPrice;
 		menu.cal.value = totCal;
-		menu.ingre.value += `${name}/`;
+		ingre.push(name);
 	} else {
 		msg = `그릇이 꽉 찼어요<br>재료는 최대 ${itemMax}개까지 담을 수 있어요`;
 		printMsg(msg, indicator);
@@ -149,6 +149,7 @@ let addItem = (e) => {
 
 let dropItem = (item) => {
 	let id = item.id.charAt(item.id.length - 1);
+	let name = item.dataset.name;
 	let indicator = document.querySelector('.indicator');
 	let priceShow = document.querySelector('#price');
 	let calShow = document.querySelector('#cal');
@@ -163,10 +164,13 @@ let dropItem = (item) => {
 	totPrice -= price;
 	totCal -= cal;
 	
-	priceShow.innerHTML = `￦${totPrice}`;
-	calShow.innerHTML = `${totCal}kcal`;
+	priceShow.innerHTML = `￦${totPrice.toLocaleString('en-IE')}`;;
+	calShow.innerHTML = `${totCal.toLocaleString('en-IE')}kcal`;
 	menu.price.value = totPrice;
 	menu.cal.value = totCal;
+	
+	let i = ingre.indexOf(name);
+	ingre.splice(i, 1);
 	
 	delItem[0].remove();
 	delItem[1].remove();
@@ -174,10 +178,34 @@ let dropItem = (item) => {
 	itemL--;
 }
 
-let addCart = (e) => {
+addMenu = (e) => {
 	e.preventDefault();
 	check();
-	if(itemL != 0 && menu.name.value) menu.submit();
+	if(itemL != 0 && menu.name.value) {
+		for(let i=0;i<ingre.length;i++){
+			if(i == 0)
+				menu.ingre.value = ingre[i];
+			else
+				menu.ingre.value += `/${ingre[i]}`;
+		}
+		
+		new Ajax.Request('../member/addCart.jsp?type=' + menu.type.value + '&name=' + menu.name.value + '&ingre=' + menu.ingre.value + '&price=' + menu.price.value, {
+			method: 'post',
+			parameter: {
+				type: menu.type.value,
+				name: menu.name.value,
+				ingre: menu.ingre.value,
+				price: menu.price.value
+			},
+			onComplete: (response) => {
+				let popup = document.querySelector('#popup');
+				let mask = document.querySelector('#mask');
+				popup.innerHTML = response.responseText;
+				popup.classList.add('show');
+				mask.classList.add('show');
+			}
+		})
+	}
 }
 
 let check = () => { //유효성 검사
@@ -187,7 +215,6 @@ let check = () => { //유효성 검사
 	else {
 		if(itemL == 0) msg = '재료를 담아주세요';
 		else msg = '';
-		
 		printMsg(msg, indicator);
 	}
 }
@@ -214,8 +241,8 @@ let clear = () => {
 	itemL = 0;
 
 	printMsg(msg, indicator);
-	priceShow.innerHTML = `￦${totPrice}`;
-	calShow.innerHTML = `${totCal}kcal`;
+	priceShow.innerHTML = `￦${totPrice.toLocaleString('en-IE')}`;
+	calShow.innerHTML = `${totCal.toLocaleString('en-IE')}kcal`;
 	menu.price.value = totPrice;
 	menu.cal.value = totCal;
 }

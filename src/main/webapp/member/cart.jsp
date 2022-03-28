@@ -46,8 +46,7 @@ String[] dayEng = {"mon", "tue", "wed", "thu", "fri", "sat", "sun"};
 				
 				<div class="item-list">
 					<ul>
-						<%
-						ArrayList<ItemDTO> itemList = itemBean.getCart(sessionId);
+						<% ArrayList<ItemDTO> itemList = itemBean.getCart(sessionId);
 						int total = itemList.size();
 						
 						ArrayList<ItemDTO> pokeList = new ArrayList<ItemDTO>();
@@ -61,47 +60,47 @@ String[] dayEng = {"mon", "tue", "wed", "thu", "fri", "sat", "sun"};
 								etcList.add(itemList.get(i));
 							}
 						}
-						for(int i=0;i<pokeList.size();i++){
-							int no = itemList.get(i).getNo();
-							String name = itemList.get(i).getName();
-							String ingre = itemList.get(i).getIngre();
-							int price = itemList.get(i).getPrice();
-							int custom = itemList.get(i).getCustom();
-							//int figure = (int)(Math.log10(price)) + 1;
-							
-							//String priceStr = Integer.toString(price);
-							%>
-							<li id="item_<%=no %>" class="theme-box round">
-								<input type="hidden" name="poke_<%=no %>_price" id="poke_<%=no %>_price">								
-								<div class="img">
-									<% if(custom == 1){%>
-										<svg viewBox="0 0 50 33.431"><path class="stroke only" d="M49.5,8.431c0,13.53-10.968,24.5-24.5,24.5 c-13.531,0-24.5-10.97-24.5-24.5 M13.377,12.084c-2.762,0-5,2.218-5,4.953c0,2.736,2.238,4.956,5,4.956s5-2.22,5-4.956 C18.377,14.302,16.139,12.084,13.377,12.084z M33.276,14.931c-2.761,0-5,2.314-5,5.17c0,2.854,2.239,5.17,5,5.17s5-2.316,5-5.17 C38.276,17.245,36.037,14.931,33.276,14.931z M27.085,0.5c-2.762,0-5.001,2.282-5.001,5.097c0,2.814,2.239,5.096,5.001,5.096 c2.761,0,4.999-2.281,4.999-5.096C32.084,2.782,29.846,0.5,27.085,0.5z"/></svg>
-									<%} else {%>
-										<img src="">
-									<%} %> 
-								</div>
-								<div class="item-info">
-									<fieldset class="day">
-									<%for(int j=0;j<day.length;j++) {%>
-										<input type="checkbox" name="day" id="<%=dayEng[j]%>">
-										<label for="<%=dayEng[j]%>"><%=day[j]%></label>
-									<%} %>
-									</fieldset>
-									<h3 class="name"><%=name %></h3>
-									<p class="ingre"><%=ingre %></p>
-								</div>
-								
-								<p class="price">￦<%=itemList.get(i).getPrice() %></p>
-								
-								<fieldset class="quantity">
-									<a href="javascript:adjust('+')">+</a><input type="number" name="qua" value="1"><a href="javascript:adjust('-');">-</a>
-								</fieldset>
-								<div class="btns">
-									<button class="cart"><i class="fas fa-pen"></i></button>
-									<button class="cart"><i class="fas fa-trash"></i></button>
-								</div>
-							</li>
-						<%} %>
+						
+						if(pokeList.size() == 0){
+							out.println("<p style=\"width: 100%;\" class=\"txt-center\">내역이 없습니다</p>");
+						} else {
+							for(int i=0;i<pokeList.size();i++){
+								String name = pokeList.get(i).getName();
+								String ingre = pokeList.get(i).getIngre();
+								int price = pokeList.get(i).getPrice();
+								int custom = pokeList.get(i).getCustom();%>
+								<li id="item_<%=i %>" class="theme-box round">
+									<input type="hidden" name="poke_<%=i %>_price" id="poke_<%=i %>_price">								
+									<div class="img">
+										<% if(custom == 1){%>
+											<svg viewBox="0 0 50 33.431"><path class="stroke only" d="M49.5,8.431c0,13.53-10.968,24.5-24.5,24.5 c-13.531,0-24.5-10.97-24.5-24.5 M13.377,12.084c-2.762,0-5,2.218-5,4.953c0,2.736,2.238,4.956,5,4.956s5-2.22,5-4.956 C18.377,14.302,16.139,12.084,13.377,12.084z M33.276,14.931c-2.761,0-5,2.314-5,5.17c0,2.854,2.239,5.17,5,5.17s5-2.316,5-5.17 C38.276,17.245,36.037,14.931,33.276,14.931z M27.085,0.5c-2.762,0-5.001,2.282-5.001,5.097c0,2.814,2.239,5.096,5.001,5.096 c2.761,0,4.999-2.281,4.999-5.096C32.084,2.782,29.846,0.5,27.085,0.5z"/></svg>
+										<%} else {%>
+											<img src="">
+										<%} %> 
+									</div>
+									<div class="item-info">
+										<fieldset class="day">
+										<%for(int j=0;j<day.length;j++) {%>
+											<input type="checkbox" name="day" id="<%=dayEng[j]%>">
+											<label for="<%=dayEng[j]%>"><%=day[j]%></label>
+										<%} %>
+										</fieldset>
+										<h3 class="name"><%=name %></h3>
+										<p class="ingre"><%=ingre %></p>
+									</div>
+									
+									<p class="price">￦<%=String.format("%,d", price) %></p>
+									
+									<div class="qua">
+										<a href="javascript:adjust('+')">+</a><input type="number" name="qua" value="1"><a href="javascript:adjust('-');">-</a>
+									</div>
+									<div class="btns">
+										<button class="mod" type="button"><i class="fas fa-pen"></i></button>
+										<button class="del" type="button"><i class="fas fa-trash"></i></button>
+									</div>
+								</li>
+							<%}
+						} %>
 					</ul>
 				</div>
 			</div>
@@ -112,21 +111,31 @@ String[] dayEng = {"mon", "tue", "wed", "thu", "fri", "sat", "sun"};
 				
 				<div class="item-list">
 					<ul>
-						<li class="theme-box round">
-							<div class="img"></div>
-							<div class="item-info">
-								<h3 class="name">이름1</h3>
-							</div>
-							
-							<p class="price">￦00,000</p>
-							
-							<fieldset class="quantity">
-								<a>+</a><input type="number" name="qua"><a>-</a>
-							</fieldset>
-							<div class="btns">
-								<button class="cart"><i class="fas fa-trash"></i></button>
-							</div>
-						</li>
+						<%
+						if(etcList.size() == 0) {
+							out.println("<p style=\"width: 100%;\" class=\"txt-center\">내역이 없습니다</p>");
+						} else {
+							for(int i=0;i<etcList.size();i++){
+								String name = etcList.get(i).getName();
+								int price = etcList.get(i).getPrice();
+								int qua = etcList.get(i).getQuantity();%>
+								<li id="item_<%=i %>" class="theme-box round">
+									<div class="img"></div>
+									<div class="item-info">
+										<h3 class="name"><%=name %></h3>
+									</div>
+									
+									<p class="price">￦<%=String.format("%,d", price) %></p>
+									
+									<div class="qua">
+										<a>+</a><input type="number" name="qua" value="<%=qua%>"><a>-</a>
+									</div>
+									<div class="btns">
+										<button class="cart" type="button"><i class="fas fa-trash"></i></button>
+									</div>
+								</li>
+							<%}
+						} %>
 					</ul>
 				</div>
 			</div>

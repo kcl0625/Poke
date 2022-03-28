@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@page import="java.util.ArrayList" %>
 <%@page import="bbs.CategoryDTO" %>
 <%@page import="order.ItemDTO"%>
@@ -29,9 +28,7 @@
 	</div>
 	
 	<div class="list">
-		<ul>
-			
-		</ul>
+		<ul></ul>
 	</div>
 	
 	<div class="search">
@@ -54,8 +51,9 @@
 		<div class="btn next"><svg viewBox="0 0 25 50"><polyline class="stroke only" stroke-miterlimit="10" points="0,0 25,25 0,50"/></svg></div>
 	</div>
 	
-	<div id="item-viewer"></div>
+	<div id="popup" class="theme-box round"></div>
 	<div id="mask"></div>
+	
 	<script>
 		let selectCategory = (cate) => {
 			let categoryLi = document.querySelectorAll('.category li');
@@ -65,7 +63,7 @@
 					categoryLi[i].classList.add('cur');
 			}
 			
-			new Ajax.Request('select.jsp?cate=' + cate, {
+			new Ajax.Request('item.jsp?cate=' + cate, {
 				method: 'get',
 				parameter: cate,
 				onComplete: (response) => {
@@ -76,27 +74,19 @@
 		
 		selectCategory('전체');
 		
-		
 		let showDesc = (no) => {
+			let viewer = document.querySelector('#popup');
+			popup.classList.add('desc');
 			new Ajax.Request('view.jsp?no=' + no, {
 				method: 'get',
 				parameter: no,
 				onComplete: (response) => {
-					let viewer = document.querySelector('#item-viewer');
 					let mask = document.querySelector('#mask');
 					viewer.innerHTML = response.responseText;
 					viewer.classList.add('show');
 					mask.classList.add('show');
 				}
 			})
-		}
-		
-		let closeReview = () => {
-			let viewer = document.querySelector('#item-viewer');
-			let mask = document.querySelector('#mask');
-			viewer.innerHTML = '';
-			viewer.classList.remove('show');
-			mask.classList.remove('show');
 		}
 	</script>
 </div>

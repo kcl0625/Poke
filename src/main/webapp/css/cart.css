@@ -7,15 +7,15 @@
 .cart-left .item-list {clear: both; margin-top: 1em;}
 .cart-left .item-list ul {display: flex; flex-wrap: wrap; gap: 1em;}
 
-.cart-left .item-list li {position: relative; padding-left: 10em; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;}
+.cart-left .item-list li {position: relative;padding-left: 10em;display: flex;justify-content: space-between;align-items: center;flex-wrap: wrap;min-height: 9.5em;}
 .cart-left .item-list li .img {position: absolute;top: 50%;left: 2em;transform: translateY(-50%);width: 6em;height: 6em;}
 .cart-left .item-list li .img svg {position: relative;top: 50%;transform: translateY(-50%);stroke-width: .6;}
-.cart-left .item-list li .item-info {border-left: 1px solid; padding-left: 1.5em;}
+.cart-left .item-list li .item-info {position: relative;width: 42%; white-space: nowrap; height: 100%;padding-left: 1.5em;border-left: 1px solid;}
 .cart-left .item-list li .item-info fieldset.day label {font-size: var(--small-font-size);opacity: .4;cursor: pointer;padding-right: 0.5em;}
 .cart-left .item-list li .item-info fieldset.day :checked + label {opacity: 1;}
-.cart-left .item-list li .item-info .name {font-size: var(--big-font-size); font-weight: 200; padding: .4rem 0;}
-.cart-left .item-list li .item-info .ingre {font-size: var(--small-font-size);}
-.cart-left .item-list li .quantity input {width: 2em; text-align: center;}
+.cart-left .item-list li .item-info .name {font-size: var(--big-font-size);font-weight: 200;padding: .4rem 0;overflow: hidden;text-overflow: ellipsis;}
+.cart-left .item-list li .item-info .ingre {font-size: var(--small-font-size);overflow: hidden;text-overflow: ellipsis;white-space: nowrap;width: 70%;position: absolute;}
+.cart-left .item-list li .qua input {width: 2em; text-align: center;}
 .cart-left .item-list li .btns button {padding-left: .5em;}
 
 .cart-left .etc {margin-top: 3em;}

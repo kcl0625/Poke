@@ -91,10 +91,12 @@ if (isAdm == 1) {
 							<p id="cal">0kcal</p>
 						</div>
 					</div>
-					<button type="button" class="ui-btn point big full" onclick="addCart(event);">담기</button>
+					<button type="button" class="ui-btn point big full" onclick="addMenu(event);">담기</button>
 				</div>
 			</form>
 		</div>
 	</div>
 </div>
+<div id="mask"></div>
+<div id="popup" class="theme-box round"></div>
 <jsp:include page="/footer.jsp" />
