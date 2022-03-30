@@ -2,9 +2,11 @@
     pageEncoding="UTF-8"%>
 <%@page import="java.util.ArrayList" %>
 <%@page import="bbs.CategoryDTO" %>
+<%@page import="order.ItemDTO" %>
 <%@include file="/config.jsp" %>
 
 <jsp:useBean id="categoryBean" class="bbs.CategoryDAO" />
+<jsp:useBean id="pokeBean" class="order.ItemDAO" />
 
 <jsp:include page="/header.jsp" />
 <link rel="stylesheet" href="<%=root %>/css/bowls.css">
@@ -18,50 +20,41 @@
 		<ul>
 			<%
 			ArrayList<CategoryDTO> cateList = categoryBean.getCategory("make");
-			int total = cateList.size();
-			for(int i=0;i<total;i++){%>
+			int cateSize = cateList.size();
+			for(int i=0;i<cateSize;i++){%>
 					<li data-cate="<%=cateList.get(i).getName() %>" onclick="selectCategory(this.dataset.cate)"><%=cateList.get(i).getName()%></li>
 			<%} %>
 		</ul>
 	</div>
 	
 	<div class="list">
-		<p class="result">전체 - 총 0개</p>
+		<%ArrayList<ItemDTO> pokeList = pokeBean.getPoke();
+		int pokeSize = pokeList.size();%>
+		<p class="result">전체 - 총 <%=pokeSize %>개</p>
 
 		<ul>
-			<li>
-				<div class="img"></div>
-				<h2 class="name">이름1</h2>
-				<p class="sub">소개소개소개소개<br>재료1/재료2/재료3/재료4</p>
-				<p class="price">￦00,000</p>
-				
-				<div class="add">
-					<a>이대로 담기</a> / <a>수정하기</a>
-					<svg viewBox="0 0 25 50"><polyline class="stroke only" stroke-miterlimit="10" points="0,0 25,25 0,50"/></svg>
-				</div>
-			</li>
-			<li>
-				<div class="img"></div>
-				<h2 class="name">이름2</h2>
-				<p class="sub">소개소개소개소개<br>재료1/재료2/재료3/재료4</p>
-				<p class="price">￦00,000</p>
-				
-				<div class="add">
-					<a>이대로 담기</a> / <a>수정하기</a>
-					<svg viewBox="0 0 25 50"><polyline class="stroke only" stroke-miterlimit="10" points="0,0 25,25 0,50"/></svg>
-				</div>
-			</li>
-			<li>
-				<div class="img"></div>
-				<h2 class="name">이름3</h2>
-				<p class="sub">소개소개소개소개<br>재료1/재료2/재료3/재료4</p>
-				<p class="price">￦00,000</p>
-				
-				<div class="add">
-					<a>이대로 담기</a> / <a>수정하기</a>
-					<svg viewBox="0 0 25 50"><polyline class="stroke only" stroke-miterlimit="10" points="0,0 25,25 0,50"/></svg>
-				</div>
-			</li>
+			<% for(int i=0;i<pokeSize;i++){
+				int no = pokeList.get(i).getNo();
+				String name = pokeList.get(i).getName();
+				String desc = pokeList.get(i).getDescription();
+				String ingre = pokeList.get(i).getIngre();
+				int price = pokeList.get(i).getPrice();
+				String filename = pokeList.get(i).getFilename();
+				int custom = pokeList.get(i).getCustom();%>
+					<li id="poke_<%=no %>" data-name="<%=name%>" data-price="<%=price%>" data-ingre="<%=ingre%>">
+						<div class="img" style="background-image:url('<%=root%>/data/poke/<%=filename%>');"></div>
+						<h2 class="name"><%=name %></h2>
+						<p class="sub"><%=desc %><br><span class="ingre"><%=ingre %></span></p>
+						<p class="price">￦<%=String.format("%,d", price)%></p>
+						
+						<div class="add">
+							<a href="javascript:void(0);"
+							<%if(isMem == 1 && isAdm == 0) {%>onclick="addMenu(<%=no %>, 'poke', '<%=name%>', '<%=ingre%>', <%=price%>, <%=custom%>);"<%}
+							else {%>onclick="location.href='<%=root %>/bbs/loginForm.jsp';"<%} %>>이대로 담기</a> / <a>수정하기</a>
+							<svg viewBox="0 0 25 50"><polyline class="stroke only" stroke-miterlimit="10" points="0,0 25,25 0,50"/></svg>
+						</div>
+					</li>
+			<%} %>
 		</ul>
 	</div>
 	
@@ -84,5 +77,8 @@
 		</nav>
 		<div class="btn next"><svg viewBox="0 0 25 50"><polyline class="stroke only" stroke-miterlimit="10" points="0,0 25,25 0,50"/></svg></div>
 	</div>
+	
+	<div id="mask"></div>
+	<div id="popup"></div>
 </div>
 <jsp:include page="/footer.jsp" />

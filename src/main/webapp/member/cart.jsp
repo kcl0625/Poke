@@ -6,7 +6,7 @@
 <%if (isAdm == 1) out.write("<script>alert('잘못된 접근입니다');location.href = '" + root + "/index.jsp';</script>");
 if (isMem == 0) response.sendRedirect(root + "/bbs/loginForm.jsp");%>
 
-<jsp:useBean id="itemBean" class="order.ItemDAO" />
+<jsp:useBean id="cartBean" class="order.cart.CartDAO" />
 
 <link rel="stylesheet" href="<%=root %>/css/cart.css">
 <jsp:include page="/header.jsp" />
@@ -46,20 +46,8 @@ String[] dayEng = {"mon", "tue", "wed", "thu", "fri", "sat", "sun"};
 				
 				<div class="item-list">
 					<ul>
-						<% ArrayList<ItemDTO> itemList = itemBean.getCart(sessionId);
-						int total = itemList.size();
-						
-						ArrayList<ItemDTO> pokeList = new ArrayList<ItemDTO>();
-						ArrayList<ItemDTO> etcList = new ArrayList<ItemDTO>();
-						
-						for(int i=0;i<total;i++){
-							String type = itemList.get(i).getType();
-							if(type.equals("poke")) {
-								pokeList.add(itemList.get(i));
-							} else {
-								etcList.add(itemList.get(i));
-							}
-						}
+						<% ArrayList<ItemDTO> pokeList = cartBean.getPokeCart(sessionId);
+						ArrayList<ItemDTO> etcList = cartBean.getEtcCart(sessionId);
 						
 						if(pokeList.size() == 0){
 							out.println("<p style=\"width: 100%;\" class=\"txt-center\">내역이 없습니다</p>");
@@ -92,7 +80,9 @@ String[] dayEng = {"mon", "tue", "wed", "thu", "fri", "sat", "sun"};
 									<p class="price">￦<%=String.format("%,d", price) %></p>
 									
 									<div class="qua">
-										<a href="javascript:adjust('+')">+</a><input type="number" name="qua" value="1"><a href="javascript:adjust('-');">-</a>
+										<a href="javascript:void(0);" onclick="adjust('+', this)">+</a>
+										<input type="number" name="quantity" value="1">
+										<a href="javascript:void(0);" onclick="adjust('-', this)">-</a>
 									</div>
 									<div class="btns">
 										<button class="mod" type="button"><i class="fas fa-pen"></i></button>
@@ -118,9 +108,10 @@ String[] dayEng = {"mon", "tue", "wed", "thu", "fri", "sat", "sun"};
 							for(int i=0;i<etcList.size();i++){
 								String name = etcList.get(i).getName();
 								int price = etcList.get(i).getPrice();
-								int qua = etcList.get(i).getQuantity();%>
+								int qua = etcList.get(i).getQuantity();
+								String filename = etcList.get(i).getFilename();%>
 								<li id="item_<%=i %>" class="theme-box round">
-									<div class="img"></div>
+									<div class="img" style="background-image:url('<%=root%>/data/mealkit/<%=filename%>');"></div>
 									<div class="item-info">
 										<h3 class="name"><%=name %></h3>
 									</div>
@@ -128,7 +119,9 @@ String[] dayEng = {"mon", "tue", "wed", "thu", "fri", "sat", "sun"};
 									<p class="price">￦<%=String.format("%,d", price) %></p>
 									
 									<div class="qua">
-										<a>+</a><input type="number" name="qua" value="<%=qua%>"><a>-</a>
+										<a href="javascript:void(0);" onclick="adjust('+', this)">+</a>
+										<input type="number" name="quantity" value="<%=qua%>">
+										<a href="javascript:void(0);" onclick="adjust('-', this)">-</a>
 									</div>
 									<div class="btns">
 										<button class="cart" type="button"><i class="fas fa-trash"></i></button>
@@ -168,13 +161,16 @@ String[] dayEng = {"mon", "tue", "wed", "thu", "fri", "sat", "sun"};
 			<button class="ui-btn full point" type="submit">주문하기</button>
 		</div>
 	</form>
-	
-	
-	
 	<script>
-		let adjust = (opr) => {
-			if(opr == '+') console.log('증가');
-			else console.log('감소');
+		let adjust = (opr, btn) => {
+			let qua = btn.closest('.qua').querySelector('input[name="quantity"]');
+			if(opr == '+') {
+				qua.value++;
+			} else {
+				if(qua.value != 1) qua.value--;
+			}
+			
+			let planTot = [];
 		}
 		
 		let planSelect = document.querySelectorAll('.select-wrapper li');
@@ -185,8 +181,6 @@ String[] dayEng = {"mon", "tue", "wed", "thu", "fri", "sat", "sun"};
 				receiptWeek.innerText = week;
 			})
 		})
-		
-		
 	</script>
 </div>
 <jsp:include page="/footer.jsp" />

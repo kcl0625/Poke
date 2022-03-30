@@ -51,7 +51,7 @@
 		<div class="btn next"><svg viewBox="0 0 25 50"><polyline class="stroke only" stroke-miterlimit="10" points="0,0 25,25 0,50"/></svg></div>
 	</div>
 	
-	<div id="popup" class="theme-box round"></div>
+	<div id="popup"></div>
 	<div id="mask"></div>
 	
 	<script>
@@ -76,7 +76,8 @@
 		
 		let showDesc = (no) => {
 			let viewer = document.querySelector('#popup');
-			popup.classList.add('desc');
+			viewer.classList.add('desc');
+			viewer.classList.remove('cart');
 			new Ajax.Request('view.jsp?no=' + no, {
 				method: 'get',
 				parameter: no,
@@ -87,6 +88,15 @@
 					mask.classList.add('show');
 				}
 			})
+		}
+		
+		let adjust = (opr, btn) => {
+			let qua = btn.closest('.qua').querySelector('input[name="quantity"]');
+			if(opr == '+') {
+				qua.value++;
+			} else {
+				if(qua.value != 1) qua.value--;
+			}
 		}
 	</script>
 </div>

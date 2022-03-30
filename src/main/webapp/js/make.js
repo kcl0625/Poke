@@ -85,21 +85,18 @@ let drop = () => {
 	event.preventDefault();
 }
 
-let itemL = 0; //넣은 재료의 수
 let itemMax = 13; //최대 재료 개수(시간 되면 관리자 페이지에서 수정 가능하게)
 let msg;
 
 let totPrice = 0;
 let totCal = 0;
 
-let ingre = [];
+let ingreList = [];
 
 let addItem = (e) => {
 	let indicator = document.querySelector('.indicator');
 	let bowl = document.querySelector('#bowl');
-	if (itemL != itemMax){
-		itemL++;
-		
+	if (ingreList.length != itemMax){
 		let name = dragged.dataset.name;
 		let price = parseInt(dragged.dataset.price);
 		let cal= parseFloat(dragged.dataset.cal);
@@ -107,9 +104,9 @@ let addItem = (e) => {
 		
 		let div = document.createElement('div');
 		
-		div.id = `item_${itemL}`;
+		div.id = `item_${ingreList.length}`;
 		div.classList.add('item');
-		div.classList.add(`ingre_${itemL}`);
+		div.classList.add(`ingre_${ingreList.length}`);
 		div.innerHTML = `<img src="${imgSrc}">`;
 		div.setAttribute('onclick', 'dropItem(this)');
 		div.setAttribute('onmouseenter', 'showInfo(this, event)');
@@ -125,7 +122,7 @@ let addItem = (e) => {
 		
 		let li = document.createElement('li');
 		li.classList.add('ingre');
-		li.classList.add(`ingre_${itemL}`);
+		li.classList.add(`ingre_${ingreList.length}`);
 		li.setAttribute('data-name', name);
 		
 		li.innerHTML = `<span class="name">${name}</span> <span class="cal">${cal}kcal</span> <span class="dot">···</span> <span class="price">￦${price}</span>`;
@@ -140,7 +137,7 @@ let addItem = (e) => {
 		calShow.innerHTML = `${totCal.toLocaleString('en-IE')}kcal`;
 		menu.price.value = totPrice;
 		menu.cal.value = totCal;
-		ingre.push(name);
+		ingreList.push(name);
 	} else {
 		msg = `그릇이 꽉 찼어요<br>재료는 최대 ${itemMax}개까지 담을 수 있어요`;
 		printMsg(msg, indicator);
@@ -169,41 +166,34 @@ let dropItem = (item) => {
 	menu.price.value = totPrice;
 	menu.cal.value = totCal;
 	
-	let i = ingre.indexOf(name);
-	ingre.splice(i, 1);
+	let i = ingreList.indexOf(name);
+	ingreList.splice(i, 1);
 	
 	delItem[0].remove();
 	delItem[1].remove();
-	
-	itemL--;
 }
 
-addMenu = (e) => {
-	e.preventDefault();
+let menuSubmit = (no, type, name, price, custom) => {
 	check();
-	if(itemL != 0 && menu.name.value) {
-		for(let i=0;i<ingre.length;i++){
-			if(i == 0)
-				menu.ingre.value = ingre[i];
-			else
-				menu.ingre.value += `/${ingre[i]}`;
-		}
-		
-		new Ajax.Request('../member/addCart.jsp?type=' + menu.type.value + '&name=' + menu.name.value + '&ingre=' + menu.ingre.value + '&price=' + menu.price.value, {
-			method: 'post',
-			parameter: {
-				type: menu.type.value,
-				name: menu.name.value,
-				ingre: menu.ingre.value,
-				price: menu.price.value
-			},
-			onComplete: (response) => {
-				let popup = document.querySelector('#popup');
-				let mask = document.querySelector('#mask');
-				popup.innerHTML = response.responseText;
-				popup.classList.add('show');
-				mask.classList.add('show');
-			}
+	let ingre;
+	for(let i=0;i<ingreList.length;i++){
+		if(i == 0)
+			ingre = ingreList[i];
+		else
+			ingre += `/${ingreList[i]}`;
+	}
+	
+	if(ingreList.length != 0 && name) {
+		new Promise((resolve, reject) => {
+			window.setTimeout(() => {
+			resolve();
+			}, 1);
+		})
+		.then(() => {
+			addMenu(no, type, name, ingre, price, custom);
+		})
+		.catch((val) => {
+			console.log('beforeend', val);
 		})
 	}
 }
@@ -213,7 +203,7 @@ let check = () => { //유효성 검사
 	if(!menu.name.value)
 		menu.name.value = 'POKE';
 	else {
-		if(itemL == 0) msg = '재료를 담아주세요';
+		if(ingreList.length == 0) msg = '재료를 담아주세요';
 		else msg = '';
 		printMsg(msg, indicator);
 	}
@@ -238,7 +228,6 @@ let clear = () => {
 	totPrice = 0;
 	totCal = 0;
 	msg = '';
-	itemL = 0;
 
 	printMsg(msg, indicator);
 	priceShow.innerHTML = `￦${totPrice.toLocaleString('en-IE')}`;

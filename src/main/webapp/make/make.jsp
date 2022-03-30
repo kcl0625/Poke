@@ -62,11 +62,9 @@ if (isAdm == 1) {
 		
 		<div class="form-wrapper">
 			<form name="menu" method="post" action="<%=root %>/member/addCart.jsp" style="width: 100%;">
-				<input type="hidden" name="type" value="poke">
 				<input type="hidden" name="ingre">
 				<input type="hidden" name="price">
 				<input type="hidden" name="cal">
-				<input type="hidden" name="custom" value="1">
 				
 				<div id="bowl" ondragover="drop();" ondrop="addItem(event);">
 					<div class="write-name">
@@ -91,12 +89,19 @@ if (isAdm == 1) {
 							<p id="cal">0kcal</p>
 						</div>
 					</div>
-					<button type="button" class="ui-btn point big full" onclick="addMenu(event);">담기</button>
+					<button id="submit" type="button" class="ui-btn point big full">담기</button>
 				</div>
 			</form>
+			<script>
+			let submitBtn = document.querySelector("#submit");
+			
+			submitBtn.addEventListener('click', () => {
+				menuSubmit(0, 'poke', menu.name.value, menu.price.value, 1);
+			})
+			</script>
 		</div>
 	</div>
 </div>
 <div id="mask"></div>
-<div id="popup" class="theme-box round"></div>
+<div id="popup"></div>
 <jsp:include page="/footer.jsp" />

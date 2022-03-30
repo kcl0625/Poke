@@ -83,10 +83,33 @@ let openSearch = (e) => {
 	}
 } 
 
-let addCart = (type, name, quantity, price) => {
-	new Ajax.Request('../member/addCart.jsp?type=' + type + '&name=' + name + '&quantity=' + quantity + '&price=' + price, {
+let addMenu = (no, type, name, ingre, price, custom) => {
+	new Ajax.Request(`../member/addCart.jsp?no=${no}&type=${type}&name=${name}&ingre=${ingre}&price=${price}&custom=${custom}`, {
+		method: 'post',
+		parameter: {
+			no: no,
+			type: type,
+			name: name,
+			ingre: ingre,
+			price: price,
+			custom: custom
+		},
+		onComplete: (response) => {
+			let popup = document.querySelector('#popup');
+			let mask = document.querySelector('#mask');
+			popup.innerHTML = response.responseText;
+			popup.classList.add('cart');
+			popup.classList.add('show');
+			mask.classList.add('show');
+		}
+	})
+}
+
+let addCart = (no, type, name, quantity, price) => {
+	new Ajax.Request(`../member/addCart.jsp?no=${no}&type=${type}&name=${name}&quantity=${quantity}&price=${price}`, {
 		method: 'get',
 		parameter: {
+			no: no,
 			type: type,
 			name: name,
 			quantity: quantity,
@@ -95,8 +118,9 @@ let addCart = (type, name, quantity, price) => {
 		onComplete: (response) => {
 			let popup = document.querySelector('#popup');
 			let mask = document.querySelector('#mask');
-			popup.classList.remove('desc');
 			popup.innerHTML = response.responseText;
+			popup.classList.remove('desc');
+			popup.classList.add('cart');
 			popup.classList.add('show');
 			mask.classList.add('show');
 		}

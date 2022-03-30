@@ -10,9 +10,8 @@ public class ItemDTO {
 	private String id;
 	private int custom;
 	private int quantity;
-	
-	String description;
-	String filename;
+	private String description;
+	private String filename;
 	
 	public int getNo() {
 		return no;

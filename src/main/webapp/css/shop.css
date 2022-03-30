@@ -14,7 +14,7 @@
     cursor: pointer;
     background-repeat: no-repeat;
     background-position: center center;
-    background-size: contain;
+    background-size: cover;
 }
 .list li .img::before {
 	content: '';
@@ -32,8 +32,6 @@
 #popup.desc {
 	visibility: hidden;
 	position: fixed;
-	width: 70vw;
-	max-width: unset;
 	height: 75vh;
 	top: 50%;
 	left: 50%;
@@ -65,19 +63,6 @@
 #popup.desc .qua input {text-align: center; width: 2em;}
 
 #popup.desc .desc {padding-top: 1em;}
-
-#popup:not(.desc) .content {
-    padding-top: 1em;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-#popup:not(.desc) .content .border {
-    display: block;
-    width: 6em;
-    height: 0;
-    border-top: 1px solid;
-}
 
 @media all and (max-width: 750px) {
 	.list {width: 100%;}

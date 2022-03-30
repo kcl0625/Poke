@@ -4,13 +4,14 @@
 
 .list li {
     position: relative;
-    padding: 40px 0 40px 11em;
+    padding: 40px 0 40px 13em;
     border-top: 1px solid;
 }
 .list li:last-of-type {border-bottom: 1px solid;}
-.list li .img {position: absolute; top: 50%; left: 2em; transform: translateY(-50%); width: 6em; height: 6em;}
+.list li .img {position: absolute;top: 50%;left: 2em;transform: translateY(-50%);width: 8em;height: 8em;background-size: cover;background-position: center center;background-repeat: no-repeat;}
 .list li h2 {font-size: var(--big-font-size); font-weight: 200;}
 .list li .sub {padding: 1.2em 0;line-height: 1.5em;}
+.list li .sub .ingre {display: block; width: 55%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
 .list li .price {font-size: var(--accent-font-size); font-weight: 200;}
 .list li .add {
     position: absolute;
