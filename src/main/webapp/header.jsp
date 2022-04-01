@@ -48,6 +48,7 @@
 	            </ul>
 	        </div>
 	    </div>
+	    <div id="mask"></div>
 	    <div id="header-right-btn">
 	    	<% if(isAdm == 1) {%>
 	    		<a href="<%=root %>/admin/index.jsp"><i class="fas fa-cog"></i></a>

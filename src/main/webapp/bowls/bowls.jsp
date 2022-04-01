@@ -77,8 +77,7 @@
 		</nav>
 		<div class="btn next"><svg viewBox="0 0 25 50"><polyline class="stroke only" stroke-miterlimit="10" points="0,0 25,25 0,50"/></svg></div>
 	</div>
-	
-	<div id="mask"></div>
+
 	<div id="popup"></div>
 </div>
 <jsp:include page="/footer.jsp" />

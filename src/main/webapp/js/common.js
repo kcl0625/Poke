@@ -96,11 +96,10 @@ let addMenu = (no, type, name, ingre, price, custom) => {
 		},
 		onComplete: (response) => {
 			let popup = document.querySelector('#popup');
-			let mask = document.querySelector('#mask');
 			popup.innerHTML = response.responseText;
 			popup.classList.add('cart');
 			popup.classList.add('show');
-			mask.classList.add('show');
+			document.body.classList.add('open-popup');
 		}
 	})
 }
@@ -117,19 +116,18 @@ let addCart = (no, type, name, quantity, price) => {
 		},
 		onComplete: (response) => {
 			let popup = document.querySelector('#popup');
-			let mask = document.querySelector('#mask');
 			popup.innerHTML = response.responseText;
 			popup.classList.remove('desc');
 			popup.classList.add('cart');
 			popup.classList.add('show');
-			mask.classList.add('show');
+			document.body.classList.add('open-popup');
 		}
 	})
 }
 
 let close = () => {
 	let popup = document.querySelector('#popup');
-	let mask = document.querySelector('#mask');
 	popup.classList.remove('show');
-	mask.classList.remove('show');
+	document.body.classList.remove('open-popup');
+	document.body.classList.remove('open-desc');
 }
