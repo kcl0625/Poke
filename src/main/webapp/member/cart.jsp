@@ -56,21 +56,23 @@ String[] dayEng = {"mon", "tue", "wed", "thu", "fri", "sat", "sun"};
 								String name = pokeList.get(i).getName();
 								String ingre = pokeList.get(i).getIngre();
 								int price = pokeList.get(i).getPrice();
-								int custom = pokeList.get(i).getCustom();%>
+								int custom = pokeList.get(i).getCustom();
+								String filename = pokeList.get(i).getFilename();%>
 								<li id="item_<%=i %>" class="theme-box round">
-									<input type="hidden" name="poke_<%=i %>_price" id="poke_<%=i %>_price">								
+									<input type="hidden" name="poke_<%=i %>_ingre" id="poke_<%=i %>_ingre" value="<%=ingre%>">
+									<input type="hidden" name="poke_<%=i %>_price" id="poke_<%=i %>_price">
 									<div class="img">
 										<% if(custom == 1){%>
 											<svg viewBox="0 0 50 33.431"><path class="stroke only" d="M49.5,8.431c0,13.53-10.968,24.5-24.5,24.5 c-13.531,0-24.5-10.97-24.5-24.5 M13.377,12.084c-2.762,0-5,2.218-5,4.953c0,2.736,2.238,4.956,5,4.956s5-2.22,5-4.956 C18.377,14.302,16.139,12.084,13.377,12.084z M33.276,14.931c-2.761,0-5,2.314-5,5.17c0,2.854,2.239,5.17,5,5.17s5-2.316,5-5.17 C38.276,17.245,36.037,14.931,33.276,14.931z M27.085,0.5c-2.762,0-5.001,2.282-5.001,5.097c0,2.814,2.239,5.096,5.001,5.096 c2.761,0,4.999-2.281,4.999-5.096C32.084,2.782,29.846,0.5,27.085,0.5z"/></svg>
 										<%} else {%>
-											<img src="">
+											<img src="<%=root %>/data/poke/<%=filename%>">
 										<%} %> 
 									</div>
 									<div class="item-info">
 										<fieldset class="day">
 										<%for(int j=0;j<day.length;j++) {%>
-											<input type="checkbox" name="day" id="<%=dayEng[j]%>">
-											<label for="<%=dayEng[j]%>"><%=day[j]%></label>
+											<input type="checkbox" name="day" id="poke_<%=i %>_<%=dayEng[j]%>">
+											<label for="poke_<%=i %>_<%=dayEng[j]%>"><%=day[j]%></label>
 										<%} %>
 										</fieldset>
 										<h3 class="name"><%=name %></h3>
@@ -85,13 +87,18 @@ String[] dayEng = {"mon", "tue", "wed", "thu", "fri", "sat", "sun"};
 										<a href="javascript:void(0);" onclick="adjust('-', this)">-</a>
 									</div>
 									<div class="btns">
-										<button class="mod" type="button"><i class="fas fa-pen"></i></button>
+										<button class="mod" type="button" onclick="modify(poke_<%=i %>_ingre.value);"><i class="fas fa-pen"></i></button>
 										<button class="del" type="button"><i class="fas fa-trash"></i></button>
 									</div>
 								</li>
 							<%}
 						} %>
 					</ul>
+					<script>
+						let modify = (ingre) => {
+							
+						}
+					</script>
 				</div>
 			</div>
 			<div class="etc list-container">

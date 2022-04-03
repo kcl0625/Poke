@@ -19,7 +19,7 @@ public class CartDAO {
 			sql = "select c.*, p.filename";
 			sql += " from cart c, poke p";
 			sql += " where c.id = ? and type = 'poke'";
-			sql += " and c.name = p.name";
+			sql += " and c.no = p.no";
 			
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
@@ -33,10 +33,26 @@ public class CartDAO {
 				dto.setIngre(rs.getString("ingre"));
 				dto.setPrice(rs.getInt("price"));
 				dto.setCustom(rs.getInt("custom"));
-				dto.setQuantity(rs.getInt("quantity"));
 				dto.setFilename(rs.getString("filename"));
 				cart.add(dto);
 			}
+			
+			sql = "select * from cart where id = ? and type = 'poke' and custom = 1";
+			pstmt= con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				ItemDTO dto = new ItemDTO();
+				dto.setType(rs.getString("type"));
+				dto.setName(rs.getString("name"));
+				dto.setIngre(rs.getString("ingre"));
+				dto.setPrice(rs.getInt("price"));
+				dto.setCustom(rs.getInt("custom"));
+				dto.setQuantity(rs.getInt("quantity"));
+				cart.add(dto);
+			}
+			
 			rs.close();
 			pstmt.close();
 			con.close();
