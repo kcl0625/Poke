@@ -38,7 +38,6 @@ for(int i=0;i<shopItem.size();i++) {
 				<button class="cart" type="button"
 					<%if(isMem == 1 && isAdm == 0) {%>onclick="addCart(<%=no%>, 'etc', '<%=name%>', this.closest('.qua').querySelector('input').value, '<%=price%>');"<%}
 					else {%>onclick="location.href='<%=root %>/bbs/loginForm.jsp';"<%} %>><i class="fas fa-shopping-cart"></i></button>
-				
 			</div>
 		</div>
 	</li>

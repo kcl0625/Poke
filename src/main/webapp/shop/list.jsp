@@ -82,10 +82,9 @@
 				method: 'get',
 				parameter: no,
 				onComplete: (response) => {
-					let mask = document.querySelector('#mask');
 					viewer.innerHTML = response.responseText;
 					viewer.classList.add('show');
-					mask.classList.add('show');
+					document.body.classList.remove('open-desc');
 				}
 			})
 		}

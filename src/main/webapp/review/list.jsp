@@ -49,10 +49,9 @@
 				parameter: no,
 				onComplete: (response) => {
 					let viewer = document.querySelector('#review-viewer');
-					let mask = document.querySelector('#mask');
 					viewer.innerHTML = response.responseText;
 					viewer.classList.add('show');
-					mask.classList.add('show');
+					document.body.classList.add('open-review');
 				}
 			})
 		}
@@ -62,7 +61,7 @@
 			let mask = document.querySelector('#mask');
 			viewer.innerHTML = '';
 			viewer.classList.remove('show');
-			mask.classList.remove('show');
+			document.body.classList.remove('open-review');
 		}
 	</script>
 </div>
