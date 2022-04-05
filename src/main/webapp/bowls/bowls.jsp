@@ -10,6 +10,8 @@
 
 <jsp:include page="/header.jsp" />
 <link rel="stylesheet" href="<%=root %>/css/bowls.css">
+<script src="<%=root%>/js/order.js"></script>
+
 <div class="wrapper">
 	<div class="page-title">
 		<h2><span class="point salmon">B</span>owls</h2>

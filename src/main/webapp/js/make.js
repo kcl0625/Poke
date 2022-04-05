@@ -93,9 +93,10 @@ let totCal = 0;
 
 let ingreList = [];
 
-let addItem = (e) => {
+let addItem = (e) => { //재료 추가
 	let indicator = document.querySelector('.indicator');
 	let bowl = document.querySelector('#bowl');
+	
 	if (ingreList.length != itemMax){
 		let name = dragged.dataset.name;
 		let price = parseInt(dragged.dataset.price);
@@ -144,7 +145,7 @@ let addItem = (e) => {
 	}
 }
 
-let dropItem = (item) => {
+let dropItem = (item) => { //재료 삭제
 	let id = item.id.charAt(item.id.length - 1);
 	let name = item.dataset.name;
 	let indicator = document.querySelector('.indicator');

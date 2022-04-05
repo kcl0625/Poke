@@ -3,6 +3,7 @@
 <%@page import="java.util.ArrayList" %>
 <%@page import="bbs.CategoryDTO" %>
 <%@page import="order.IngreDTO" %>
+<%@page import="order.ItemDTO" %>
 <%@include file="/config.jsp" %>
 
 <%
@@ -13,6 +14,7 @@ if (isAdm == 1) {
 
 <jsp:useBean id="categoryBean" class="bbs.CategoryDAO" />
 <jsp:useBean id="ingreBean" class="order.IngreDAO" />
+<jsp:useBean id="cartBean" class="order.cart.CartDAO" />
 
 <link rel="stylesheet" href="<%=root %>/css/make.css">
 <script src="<%=root %>/js/make.js"></script>
@@ -59,7 +61,10 @@ if (isAdm == 1) {
 			selectCategory('<%=cateList.get(0).getName()%>');
 			</script>
 		</div>
-		
+		<%
+		ArrayList<ItemDTO> cartList = cartBean.getPokeCart(sessionId);
+		int pokeSize = cartList.size();
+		%>
 		<div class="form-wrapper">
 			<form name="menu" method="post" action="<%=root %>/member/addCart.jsp" style="width: 100%;">
 				<input type="hidden" name="ingre">
@@ -68,7 +73,7 @@ if (isAdm == 1) {
 				
 				<div id="bowl" ondragover="drop();" ondrop="addItem(event);">
 					<div class="write-name">
-						<input type="text" name="name" id="name" onsubmit="return false;" value="POKE">
+						<input type="text" name="name" id="name" onsubmit="return false;" value="POKE - <%=pokeSize + 1%>">
 						<hr class="line">
 					</div>
 					<span class="indicator"></span>

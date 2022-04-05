@@ -11,8 +11,8 @@ if (isMem == 0) response.sendRedirect(root + "/bbs/loginForm.jsp");%>
 <link rel="stylesheet" href="<%=root %>/css/cart.css">
 <jsp:include page="/header.jsp" />
 <%
-String[] day = {"월", "화", "수", "목", "금", "토", "일"};
-String[] dayEng = {"mon", "tue", "wed", "thu", "fri", "sat", "sun"};
+String[] day = {"월", "화", "수", "목", "금", "토"};
+String[] dayEng = {"mon", "tue", "wed", "thu", "fri", "sat"};
 %>
 <div class="wrapper">
 	<form name="cart" method="post" action="orderForm.jsp">
@@ -80,25 +80,14 @@ String[] dayEng = {"mon", "tue", "wed", "thu", "fri", "sat", "sun"};
 									</div>
 									
 									<p class="price">￦<%=String.format("%,d", price) %></p>
-									
-									<div class="qua">
-										<a href="javascript:void(0);" onclick="adjust('+', this)">+</a>
-										<input type="number" name="quantity" value="1">
-										<a href="javascript:void(0);" onclick="adjust('-', this)">-</a>
-									</div>
 									<div class="btns">
-										<button class="mod" type="button" onclick="modify(poke_<%=i %>_ingre.value);"><i class="fas fa-pen"></i></button>
+										<button class="mod" type="button" onclick="location.href='<%=root%>/make/make.jsp?name=<%=name%>&ingre=<%=ingre%>'"><i class="fas fa-pen"></i></button>
 										<button class="del" type="button"><i class="fas fa-trash"></i></button>
 									</div>
 								</li>
 							<%}
 						} %>
 					</ul>
-					<script>
-						let modify = (ingre) => {
-							
-						}
-					</script>
 				</div>
 			</div>
 			<div class="etc list-container">

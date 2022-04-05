@@ -81,7 +81,8 @@ left: 0;}
 	left: 50%;
 	transform: translate(-50%, -50%);
 	margin-left: 21vw;
-z-index: 10;}
+	z-index: 10;
+}
 .section#make .section-slide .slide-item:first-child .txt-area.section-main-txt .section-title {font-size: var(--page-title-font-size); font-weight: 100; line-height: 1.2em;}
 .section#make .section-slide .slide-item:first-child .txt-area.section-main-txt .section-sub-title {padding: 1.5em 0;} 
 .section#make .section-slide .slide-item:first-child .txt-area.section-main-txt .section-txt {font-size: var(--small-font-size);}
@@ -115,7 +116,7 @@ z-index: 10;}
 	right: 0;
 	transform: rotate(-45deg);
 }
-.section#make .bowl {width: 50vw; max-width: 400px;height: 50vw;max-height: 400px;position: fixed;top: 50%;left: 50%;transform: translate(-50%, -50%);}
+.section#make .bowl {width: 50vw; max-width: 300px;height: 50vw;max-height: 300px;position: fixed;top: 50%;left: 50%;transform: translate(-50%, -50%);}
 .section#make .bowl svg {stroke-width: .2; position: absolute; bottom: 0;}
 
 .section#make .section-slide .go-next-slide {
@@ -175,13 +176,12 @@ z-index: 10;}
 	left: 50%;
 	transform: translate(-50%, -50%);
 	width: 60vw;
-	max-width: 500px;
+	max-width: 400px;
 	height: 60vw;
-	max-height: 500px;
+	max-height: 400px;
 	z-index: 1;
 }
 .section#make .slide-item .select span {display: block; text-align: center; font-size: var(--small-font-size); padding-top: 2rem;}
-
 
 .section#make .slide-item:nth-child(3) .select-day img {position: absolute; top: 50%; left: 50%; width: 70%; height: auto; transform: translate(-50%, -50%);}
 .section#make .slide-item:nth-child(3) .select-day text {font-size: .4em; font-weight: 100; animation: rotate 90s linear infinite; transform-origin: center;}

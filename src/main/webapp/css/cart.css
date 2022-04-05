@@ -14,7 +14,7 @@
 .cart-left .item-list li .item-info fieldset.day label {font-size: var(--small-font-size);opacity: .4;cursor: pointer;padding-right: 0.5em;}
 .cart-left .item-list li .item-info fieldset.day :checked + label {opacity: 1;}
 .cart-left .item-list li .item-info .name {font-size: var(--big-font-size);font-weight: 200;padding: .4rem 0;overflow: hidden;text-overflow: ellipsis;}
-.cart-left .item-list li .item-info .ingre {font-size: var(--small-font-size);overflow: hidden;text-overflow: ellipsis;white-space: nowrap;width: 70%;position: absolute;}
+.cart-left .item-list li .item-info .ingre {font-size: var(--small-font-size);overflow: hidden;text-overflow: ellipsis;white-space: nowrap;width: 100%;position: absolute;}
 .cart-left .item-list li .qua input {width: 2em; text-align: center;}
 .cart-left .item-list li .btns button {padding-left: .5em;}
 
