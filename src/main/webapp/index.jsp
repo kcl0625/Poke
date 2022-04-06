@@ -1,6 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.ArrayList"%>
+<%@ page import="order.IngreDTO"%>
+<%@ page import="order.IngreDAO"%>
 <%@include file="/config.jsp" %>
+
+<jsp:useBean id="ingreBean" class="order.IngreDAO" />
+
 <jsp:include page="header.jsp" />
 <link rel="stylesheet" href="<%=root %>/css/fullpage.css">
 <link rel="stylesheet" href="<%=root %>/css/main.css">
@@ -14,12 +20,8 @@
 			<p class="sub-txt">; one of the Hawaiian dishes,<br>in which diced fish served</p>
 			<h2 class="sub-title">내가 좋아하는 것들만 담아서</h2>
 		</div>
-		<div class="bg-slide">
-			<div class="bg-item" style="background-image: url('<%=root%>/img/bg1.jpg');"></div>
-			<div class="bg-item"></div>
-			<div class="bg-item"></div>
-			<div class="bg-item"></div>
-		</div>
+		<div class="main-bg" style="background-image: url('<%=root%>/img/main.jpg');"></div>
+		<span class="arrow"></span>
 	</div>
 	<div id="about" class="wrapper section">
 		<div class="txt-area txt-right">
@@ -43,7 +45,7 @@
 					</h1>
 					<p class="section-sub-title">내가 <span class="point cheese">좋아하는</span> 재료들로<br>나만의 <span class="point salmon">POKE</span>를!</p>
 					<p class="section-txt">어떤 것들이 준비되어있을까요?<br>당신을 위해 다양하게 준비했어요</p>
-					<a href="javascript:goNext();"><span class="point cheese">E</span>xpl<span class="point salmon">o</span>re <span class="point salary">N</span>ow</a>
+					<a href="javascript:move();"><span class="point cheese">E</span>xpl<span class="point salmon">o</span>re <span class="point salary">N</span>ow</a>
 				</div>
 				
 				<div id="ingre-wrapper">
@@ -133,11 +135,25 @@
 			<!-- 재료담기 -->
 			<div class="slide-item">
 				<div class="txt-area">
-					<p>원하는 재료들을 담아보세요</p>
+					<p>재료를 담고</p>
 				</div>
 				
-				<div class="select">
+				<div class="select select-ingre">
+					<ul>
+					<%IngreDAO dao = new IngreDAO();
+					ArrayList<IngreDTO> ingre = ingreBean.get5Ingre();
 					
+					for(int i=0;i<ingre.size();i++) {
+						String name = ingre.get(i).getName();
+						int price = ingre.get(i).getPrice();
+						double cal = ingre.get(i).getCal();
+						String origin = ingre.get(i).getOrigin();
+						String fileName = ingre.get(i).getFileName();%>
+						<li class="item" ondragstart="dragStart(this);" draggable="true">
+							<img src="<%=root %>/data/ingre/<%=fileName %>">
+						</li>
+					<%}%>
+					</ul>
 					<span>재료들을 드래그해서 그릇에 담아주세요</span>
 				</div>
 			</div>
@@ -145,7 +161,7 @@
 			<!-- 요일선택 -->
 			<div class="slide-item">
 				<div class="txt-area">
-					<p>각 포케별로 요일을 선택하고</p>
+					<p>요일을 선택하고</p>
 				</div>
 				<div class="select select-day">
 					<svg viewBox="0 0 100 100">
@@ -184,10 +200,10 @@
 			</div>
 			
 			<!-- fixed element -->
-			<div class="bowl">
+			<div class="bowl" ondragover="drop();" ondrop="addItem(event);">
 				<svg viewBox="0 0 100 50"><path class="stroke only" d="M99.5,0c0,27.339-22.162,49.5-49.5,49.5C22.662,49.5,0.5,27.339,0.5,0"></path></svg>
 			</div>
-			<div class="go-next-slide" onclick="goNext()"><span class="arrow"></span>next</div>
+			<div class="go-next-slide" onclick="move()"><span class="arrow"></span>next</div>
 			
 			<script>
 				let sectionSlide = document.querySelector('.section-slide');
@@ -203,16 +219,37 @@
 					})
 				}
 					
-				let goNext = () => {
+				let move = () => {
 					let selectedDayUl = sectionSlide.querySelector('ul');
 					if (cur < slideItem.length - 1) cur++;
 					sectionSlide.style.left = -cur * 100 + 'vw';
 					
-					/*for(let i=0;i<selected.length;i++){
-						let li = document.createElement('li');
-						li.innerHTML = selected[i];
-						selectedDayUl.appendChild(li.cloneNode(true));
-					}*/
+					if (cur == slideItem.length - 1) document.querySelector('.section-slide').classList.add('last');
+					else document.querySelector('.section-slide').classList.remove('last');
+				}
+				
+				let dragged;
+				let ingreList = [];
+				let dragStart = (item) => {
+					dragged = item;
+				}
+				let drop = () => {
+					event.preventDefault();
+				}
+				
+				let addItem = (e) => { //재료 추가
+					let bowl = document.querySelector('.bowl');
+					
+					if (ingreList.length != 5){
+						let imgSrc = dragged.querySelector('img').getAttribute('src');
+						
+						let div = document.createElement('div');
+						div.classList.add('item');
+						div.innerHTML = '<img src="' + imgSrc + '">';
+						
+						bowl.appendChild(div);
+						ingreList.push('추가');
+					}
 				}
 			</script>
 		</div>	
@@ -228,7 +265,7 @@
 		<div class="section-content"></div>
 		
 		<div class="txt-area">
-			<p class="section-txt">Bowls에서는 저희가 추천하는 조합을 선택하고,<br>내가 원하는대로 수정할 수 있어요.</p>
+			<p class="section-txt">cs에서는 저희가 추천하는 조합을 선택하고,<br>내가 원하는대로 수정할 수 있어요.</p>
 		</div>
 	</div>
 	<div id="order" class="wrapper section">
@@ -242,7 +279,18 @@
 <script>
 new fullpage('#fullpage', {
 	licenseKey: '',
-	scrollingSpeed: 1500
+	scrollingSpeed: 1500,
+	afterLoad: (index, anchorLink) => {
+		console.log(index);
+		if(index == 2) console.log('this');
+	},
+	onLeave : (index, nextIndex, direction) => {
+		if (index == 3 && direction == 'down'){
+			alert ('3번에서 4번으로');
+		} else if (index == 3 && direction == 'up'){
+			alert ('3번에서 2번으로');
+		}
+	}
 });
 </script>
 <jsp:include page="footer.jsp" />

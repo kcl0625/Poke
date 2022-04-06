@@ -73,7 +73,7 @@ let hideInfo = (item, e) => {
 	item.querySelector('.info-box').remove();
 }
 
-//재료 드래그 앤 드롭
+//재료 드래그 앤 드랍
 let bowl = document.querySelector("#bowl");
 let bowlSVG = document.querySelector('#bowl svg');
 let dragged;

@@ -41,4 +41,28 @@ public class IngreDAO {
 		}
 		return ingreList;
 	}
+	
+	public ArrayList<IngreDTO> get5Ingre() {
+		ArrayList<IngreDTO> ingreList = new ArrayList<IngreDTO>();
+		try {
+			con = Config.getConnection();
+			sql = "select fileName from ingre limit 5";
+			
+			pstmt = con.prepareStatement(sql);
+			ResultSet rs = null;
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				IngreDTO dto = new IngreDTO();
+				dto.setFileName(rs.getString("fileName"));
+				ingreList.add(dto);
+			}
+			rs.close();
+			pstmt.close();
+			con.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return ingreList;
+	}
 }
