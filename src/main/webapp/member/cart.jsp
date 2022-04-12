@@ -21,8 +21,6 @@ String[] dayEng = {"mon", "tue", "wed", "thu", "fri", "sat"};
 		<input type="hidden" name="planWeek">
 		<input type="hidden" name="etcPrice">
 		<input type="hidden" name="totPrice">
-		<input type="hidden" name="orderPlan">
-		<input type="hidden" name="orderEtc">
 		
 		<div class="page-title">
 			<h2><span class="point cheese">C</span>art</h2>	
@@ -49,6 +47,7 @@ String[] dayEng = {"mon", "tue", "wed", "thu", "fri", "sat"};
 					<ul>
 						<% ArrayList<ItemDTO> pokeList = cartBean.getPokeCart(sessionId);
 						ArrayList<ItemDTO> etcList = cartBean.getEtcCart(sessionId);
+						int pokeTotPrice = 0;
 						
 						if(pokeList.size() == 0){
 							out.println("<p style=\"width: 100%;\" class=\"txt-center\">내역이 없습니다</p>");
@@ -59,7 +58,7 @@ String[] dayEng = {"mon", "tue", "wed", "thu", "fri", "sat"};
 								int price = pokeList.get(i).getPrice();
 								int custom = pokeList.get(i).getCustom();
 								String filename = pokeList.get(i).getFilename();%>
-								<li id="item_<%=i %>" class="theme-box round">
+								<li id="poke_<%=i %>" class="theme-box round">
 									<input type="hidden" name="poke_<%=i %>_ingre" id="poke_<%=i %>_ingre" value="<%=ingre%>">
 									<input type="hidden" name="poke_<%=i %>_price" id="poke_<%=i %>_price" value="<%=price%>">
 									<div class="img">
@@ -72,7 +71,7 @@ String[] dayEng = {"mon", "tue", "wed", "thu", "fri", "sat"};
 									<div class="item-info">
 										<fieldset class="day">
 										<%for(int j=0;j<day.length;j++) {%>
-											<input type="checkbox" name="day" id="poke_<%=i %>_<%=dayEng[j]%>" class="<%=dayEng[i]%>">
+											<input type="checkbox" name="day" id="poke_<%=i %>_<%=dayEng[j]%>" class="<%=dayEng[j]%>">
 											<label for="poke_<%=i %>_<%=dayEng[j]%>"><%=day[j]%></label>
 										<%} %>
 										</fieldset>
@@ -98,7 +97,7 @@ String[] dayEng = {"mon", "tue", "wed", "thu", "fri", "sat"};
 				
 				<div class="item-list">
 					<ul>
-						<%
+						<% int etcTotPrice = 0;
 						if(etcList.size() == 0) {
 							out.println("<p style=\"width: 100%;\" class=\"txt-center\">내역이 없습니다</p>");
 						} else {
@@ -106,8 +105,12 @@ String[] dayEng = {"mon", "tue", "wed", "thu", "fri", "sat"};
 								String name = etcList.get(i).getName();
 								int price = etcList.get(i).getPrice();
 								int qua = etcList.get(i).getQuantity();
-								String filename = etcList.get(i).getFilename();%>
-								<li id="item_<%=i %>" class="theme-box round">
+								String filename = etcList.get(i).getFilename();
+								
+								int etcItemPrice = price * qua;
+								etcTotPrice += etcItemPrice;%>
+								<li id="etc_<%=i %>" class="theme-box round">
+									<input type="hidden" name="etc_<%=i %>_price" id="etc_<%=i %>_price" value="<%=price%>">
 									<div class="img" style="background-image:url('<%=root%>/data/mealkit/<%=filename%>');"></div>
 									<div class="item-info">
 										<h3 class="name"><%=name %></h3>
@@ -116,9 +119,9 @@ String[] dayEng = {"mon", "tue", "wed", "thu", "fri", "sat"};
 									<p class="price">￦<%=String.format("%,d", price) %></p>
 									
 									<div class="qua">
-										<a href="javascript:void(0);" onclick="adjust('+', this)">+</a>
+										<a href="javascript:void(0);" onclick="adjust('+', this, <%=price%>)">+</a>
 										<input type="number" name="quantity" value="<%=qua%>">
-										<a href="javascript:void(0);" onclick="adjust('-', this)">-</a>
+										<a href="javascript:void(0);" onclick="adjust('-', this, <%=price%>)">-</a>
 									</div>
 									<div class="btns">
 										<button class="cart" type="button"><i class="fas fa-trash"></i></button>
@@ -137,39 +140,28 @@ String[] dayEng = {"mon", "tue", "wed", "thu", "fri", "sat"};
 					<div class="plan txt-right">
 						<span class="price-name">플랜 금액</span>
 						<p>(
-							<span class="plan-price">￦00,000</span>*<span class="plan-week">1</span>
+							<span class="plan-price">￦0</span>*<span class="plan-week">1</span>
 						)</p>
 					</div>
 					<div class="additional txt-right">
 						<span class="price-name">추가 구매</span>
-						<p>￦00,000</p>
+						<p>￦<%=String.format("%,d", etcTotPrice) %></p>
 					</div>
 					<div class="ship txt-right">
 						<span class="price-name">배송비</span>
-						<p>￦00,000</p>
+						<p>￦<%=String.format("%,d", 3000) %></p>
 					</div>
 					<span>+</span>
 				</div>
 				<div class="total">
 					<span>total</span>
-					<span class="total-price">￦00,000</span>
+					<span class="total-price">￦<%=String.format("%,d", etcTotPrice + 3000) %></span>
 				</div>
 			</div>
 			<button class="ui-btn full point" type="submit">주문하기</button>
 		</div>
 	</form>
 	<script>
-		let adjust = (opr, btn) => {
-			let qua = btn.closest('.qua').querySelector('input[name="quantity"]');
-			if(opr == '+') {
-				qua.value++;
-			} else {
-				if(qua.value != 1) qua.value--;
-			}
-			
-			let planTot = [];
-		}
-		
 		let planSelect = document.querySelectorAll('.select-wrapper li');
 		planSelect.forEach((item, i) => {
 			planSelect[i].addEventListener('click', () => {

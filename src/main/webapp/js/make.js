@@ -126,7 +126,7 @@ let addItem = (e) => { //재료 추가
 		li.classList.add(`ingre_${ingreList.length}`);
 		li.setAttribute('data-name', name);
 		
-		li.innerHTML = `<span class="name">${name}</span> <span class="cal">${cal}kcal</span> <span class="dot">···</span> <span class="price">￦${price}</span>`;
+		li.innerHTML = `<span class="name">${name}</span> <span class="cal">${cal}kcal</span> <span class="dot">···</span> <span class="price">￦${price.toLocaleString('en-IE')}</span>`;
 		receiptUl.appendChild(li); 
 		
 		let priceShow = document.querySelector('#price');
@@ -187,7 +187,7 @@ let menuSubmit = (no, type, name, price, custom) => {
 	if(ingreList.length != 0 && name) {
 		new Promise((resolve, reject) => {
 			window.setTimeout(() => {
-			resolve();
+				resolve();
 			}, 1);
 		})
 		.then(() => {

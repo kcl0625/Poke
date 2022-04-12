@@ -160,9 +160,6 @@
 			
 			<!-- 요일선택 -->
 			<div class="slide-item">
-				<div class="txt-area">
-					<p>요일을 선택하고</p>
-				</div>
 				<div class="select select-day">
 					<svg viewBox="0 0 100 100">
 						<defs><path id="circle" d="M0,50a50,50 0 1,0 100,0a50,50 0 1,0 -100,0"></path></defs>
@@ -178,24 +175,23 @@
 						</text>
 					</svg>
 					
-					<span>요일을 선택해보세요</span>
+					<div class="txt-area">
+						<p>요일을 선택하고</p>
+					</div>
 				</div>
 			</div>
 			<div class="slide-item">
 				<div class="selected">
 					<ul></ul>
 				</div>
-				<div class="section-content" style="width: 50%; margin: 0 auto;">
+				<div class="week">
+					<p>구독도 내 마음대로</p>
 					<ul>
-						<li>1 week</li>
-						<li>2 week</li>
-						<li>3 week</li>
-						<li>4 week</li>
+						<li class="theme-box round">1 week</li>
+						<li class="theme-box round">2 week</li>
+						<li class="theme-box round">3 week</li>
+						<li class="theme-box round">4 week</li>
 					</ul>
-				</div>
-				
-				<div class="txt-area">
-					<p>내가 원하는 기간만큼 구독할 수 있어요.</p>
 				</div>
 			</div>
 			
@@ -224,8 +220,15 @@
 					if (cur < slideItem.length - 1) cur++;
 					sectionSlide.style.left = -cur * 100 + 'vw';
 					
-					if (cur == slideItem.length - 1) document.querySelector('.section-slide').classList.add('last');
-					else document.querySelector('.section-slide').classList.remove('last');
+					if (cur == slideItem.length - 1) {
+						document.querySelector('.section-slide').classList.add('last');
+						let selectedUl = document.querySelector('.selected ul');
+						for(let i=0;i<selected.length;i++) {
+							let li = document.createElement('li');
+							selectedUl.appendChild(li);
+							li.innerHTML = selected[i];
+						}
+					} else document.querySelector('.section-slide').classList.remove('last');
 				}
 				
 				let dragged;
@@ -258,19 +261,15 @@
 	</div>
 	<div id="offer" class="wrapper section">
 		<div class="txt-area">
-			<p class="section-txt">고민이 될 때에는 레시피 북이나<br>다른 사람의 리뷰를 참고해보는 것은 어떨까요?<br><br>
+			<p>고민이 될 때에는 레시피 북이나<br>다른 사람의 리뷰를 참고해보는 것은 어떨까요?<br><br>
 			분명 마음에 드는 것을 찾을 수 있을 거예요.</p>
 		</div>
 		
 		<div class="section-content"></div>
 		
 		<div class="txt-area">
-			<p class="section-txt">cs에서는 저희가 추천하는 조합을 선택하고,<br>내가 원하는대로 수정할 수 있어요.</p>
+			<p>bowls에서는 저희가 추천하는 조합을 선택하고,<br>내가 원하는대로 수정할 수 있어요.</p>
 		</div>
-	</div>
-	<div id="order" class="wrapper section">
-		
-		
 	</div>
 </div>
 
@@ -279,18 +278,7 @@
 <script>
 new fullpage('#fullpage', {
 	licenseKey: '',
-	scrollingSpeed: 1500,
-	afterLoad: (index, anchorLink) => {
-		console.log(index);
-		if(index == 2) console.log('this');
-	},
-	onLeave : (index, nextIndex, direction) => {
-		if (index == 3 && direction == 'down'){
-			alert ('3번에서 4번으로');
-		} else if (index == 3 && direction == 'up'){
-			alert ('3번에서 2번으로');
-		}
-	}
+	scrollingSpeed: 1500
 });
 </script>
 <jsp:include page="footer.jsp" />
