@@ -36,7 +36,7 @@ String filename = item.getFilename();%>
 					<input type="number" name="quantity" value="1">
 					<a href="javascript:void(0);" onclick="adjust('-', this)">-</a>
 				</div>
-				<button class="ui-btn point" type="button" <%if(isMem == 1 && isAdm == 0) {%>onclick="addCart('etc', '<%=name%>', this.closest('.qua').querySelector('input').value, '<%=price%>');<%}
+				<button class="ui-btn point" type="button" <%if(isMem == 1 && isAdm == 0) {%>onclick="addCart(<%=no %>, 'etc', '<%=name%>', this.closest('.qua').querySelector('input').value, '<%=price%>');<%}
 					else {%>onclick="location.href='<%=root %>/bbs/loginForm.jsp';"<%} %>">담기</button>
 			</div>
 		</div>

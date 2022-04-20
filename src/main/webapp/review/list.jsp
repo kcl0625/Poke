@@ -40,7 +40,6 @@
 	</div>
 	
 	<div id="review-viewer"></div>
-	<div id="mask"></div>
 	
 	<script>
 		let showReview = (no) => {
@@ -51,7 +50,7 @@
 					let viewer = document.querySelector('#review-viewer');
 					viewer.innerHTML = response.responseText;
 					viewer.classList.add('show');
-					document.body.classList.add('open-review');
+					document.body.classList.add('open');
 				}
 			})
 		}
@@ -61,7 +60,7 @@
 			let mask = document.querySelector('#mask');
 			viewer.innerHTML = '';
 			viewer.classList.remove('show');
-			document.body.classList.remove('open-review');
+			document.body.classList.remove('open');
 		}
 	</script>
 </div>

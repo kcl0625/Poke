@@ -1,4 +1,4 @@
-let wrapperL = 4; //한 번에 보여줄 개수
+let wrapperL = 2; //한 번에 보여줄 개수
 let gap = 30; //간격
 			
 let cur = 0;
@@ -43,18 +43,18 @@ window.addEventListener('resize', () => {
 //재료 툴팁
 let toolTip1 = (price, cal, origin, infoBox) => {
 	origin = origin.split('/');
-	infoBox.innerHTML = `￦${price}<br>${cal}kcal<hr class="line">`;
+	infoBox.innerHTML = `￦${price.toLocaleString('en-IE')}<br>${cal}kcal<hr class="line">`;
 	for(let i=0;i<origin.length;i++)
 		infoBox.innerHTML += `${origin[i]}<br>`;
 }
 let toolTip2 = (name, price, cal, infoBox) => {
-	infoBox.innerHTML = `${name}<hr class="line">￦${price}<br>${cal}kcal`;
+	infoBox.innerHTML = `${name}<hr class="line">￦${price.toLocaleString('en-IE')}<br>${cal}kcal`;
 }
 
 let showInfo = (item, e) => {
 	e.stopImmediatePropagation();
 	let name = item.dataset.name;
-	let price = item.dataset.price;
+	let price = parseInt(item.dataset.price);
 	let cal = item.dataset.cal;
 	let origin = item.dataset.origin;
 	
@@ -126,7 +126,7 @@ let addItem = (e) => { //재료 추가
 		li.classList.add(`ingre_${ingreList.length}`);
 		li.setAttribute('data-name', name);
 		
-		li.innerHTML = `<span class="name">${name}</span> <span class="cal">${cal}kcal</span> <span class="dot">···</span> <span class="price">￦${price}</span>`;
+		li.innerHTML = `<span class="name">${name}</span> <span class="cal">${cal}kcal</span> <span class="dot">···</span> <span class="price">￦${price.toLocaleString('en-IE')}</span>`;
 		receiptUl.appendChild(li); 
 		
 		let priceShow = document.querySelector('#price');

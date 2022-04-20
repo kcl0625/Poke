@@ -13,7 +13,10 @@
 	    	<span></span>
 	    </div>
 	    <script>
-	    	let openGnb = () => {document.querySelector('body').classList.toggle('open');}
+	    	let openGnb = () => {document.querySelector('body').classList.toggle('open-gnb');}
+	    	window.addEventListener('resize', () => {
+	    		if (matchMedia('all and (min-width: 1281px)').matches) document.body.classList.remove('open-gnb');
+	    	})
 	    </script>
 	    <div id="logo">
 	    	<a href="<%=root %>/index.jsp">
@@ -48,7 +51,6 @@
 	            </ul>
 	        </div>
 	    </div>
-	    <div id="mask"></div>
 	    <div id="header-right-btn">
 	    	<% if(isAdm == 1) {%>
 	    		<a href="<%=root %>/admin/index.jsp"><i class="fas fa-cog"></i></a>
@@ -59,5 +61,6 @@
 	</div>
 	<div class="left side"><p>everyday, every meal</p></div>
 	<div class="right side"><p>best Ingredients, best Experiences</p></div>
+	<div id="mask"></div>
 </header>
 <section id="body">

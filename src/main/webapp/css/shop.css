@@ -3,7 +3,7 @@
 .category li {cursor: pointer;}
 .category li.cur {font-weight: 600;}
 
-.list {width: 45vw; margin: 0 auto;}
+.list {width: 45vw; max-width: 650px; margin: 0 auto;}
 .list ul {display: grid;justify-content: center;grid-template-columns: 1fr 1fr 1fr;gap: 5vw;}
 .list li {position: relative;}
 
@@ -39,7 +39,7 @@
 	z-index: 100;
 	opacity: 0;
 }
-#popup.desc .close {position: absolute;right: 0;top: -1.8em;width: 3em;height: 3em;}
+#popup.desc .close {position: absolute;right: 0;top: -2.8em;width: 3em;height: 3em;}
 #popup.desc .close span {
 	position: absolute;
 	display: block;

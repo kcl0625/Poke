@@ -40,8 +40,9 @@
 .info-box {
 	position: absolute;
 	top: 100%;
-	width: 100%;
-	font-size: .6rem;
+	left: -25%;
+	width: 150%;
+	font-size: var(--small-font-size);
 	line-height: 1.2em;
 	padding: 10px;
 	border-radius: 1.2rem;

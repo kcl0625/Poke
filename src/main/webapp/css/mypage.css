@@ -1,5 +1,7 @@
 @charset 'utf-8';
 
+.wrapper {max-width: 650px;}
+
 .show-submenu {display: none;}
 .show-submenu  + .submenu {position: fixed;margin-left: -12em;text-align: right;}
 .show-submenu  + .submenu li {padding-bottom: .8em;}

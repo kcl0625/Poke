@@ -22,7 +22,7 @@
 	opacity: 0;
 	transition: .4s .2s ease;
 }
-#review-viewer .close {position: absolute;right: 0;top: -1.8em;width: 3em;height: 3em;}
+#review-viewer .close {position: absolute;right: 0;top: -2.8em;width: 3em;height: 3em;}
 #review-viewer .close span {
 	position: absolute;
 	display: block;

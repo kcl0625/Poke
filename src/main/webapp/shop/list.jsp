@@ -52,7 +52,6 @@
 	</div>
 	
 	<div id="popup"></div>
-	<div id="mask"></div>
 	
 	<script>
 		let selectCategory = (cate) => {
@@ -84,7 +83,7 @@
 				onComplete: (response) => {
 					viewer.innerHTML = response.responseText;
 					viewer.classList.add('show');
-					document.body.classList.remove('open-desc');
+					document.body.classList.add('open');
 				}
 			})
 		}

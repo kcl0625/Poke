@@ -122,11 +122,7 @@
 		                openZipWrap.style.height = size.height+'px';
 		            },
 		            width : '100%',
-		            height : '100%',
-		            theme : {
-		            	searchBgColor: 'pink',
-		            	queryTextColor: 'blue'
-		            }
+		            height : '100%'
 		        }).embed(openZipWrap);
 		
 		        // iframe을 넣은 element를 보이게 한다.
