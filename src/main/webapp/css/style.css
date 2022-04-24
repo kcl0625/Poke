@@ -122,7 +122,7 @@ header .side::before {
 }
 
 #gnb {position: relative; width: calc(100% - 120px); height: 100%; margin: 0 auto; padding: 0 60px; z-index: 98; visibility: visible;}
-#gnb div {position: relative;height: 100%;}
+#gnb > div {height: 100%;}
 #gnb ul {position: relative;display: flex;height: 100%;align-items: center;gap: 40px;flex-wrap: wrap;}
 #gnb ul li {position: relative;}
 #gnb ul li::before {
@@ -146,7 +146,7 @@ header .side::before {
     height: 60px;
     justify-content: center;
     align-items: center;
-    z-index: 99;
+    z-index: 98;
 }
 
 #gnb .menu {float: left;}
@@ -169,34 +169,20 @@ header .side::before {
   #logo {left: 50%; transform: translateX(-50%);}
   #gnb {
   	position: fixed;
-  	width: 100%;
-  	left: 0;
+  	width: 200px;
+  	left: -200px;
   	visibility: hidden;
-  	display: flex;
-  	justify-content: center;
-  	align-content: center;
-  	flex-wrap: wrap;
+  	display: block;
   	z-index: 100;
+  	background: var(--color-bak);
+	border-right: 1px solid;
+	transition: .4s ease;
   }
-  #gnb > div {width: 51%;padding: 30px 0;}
-  #gnb ul {display: flex;justify-content: center;flex-wrap: wrap;gap: 20px;flex-direction: column;}
+  #gnb ul {display: flex;justify-content: center;flex-wrap: wrap;gap: 20px;flex-direction: column;align-items: start;}
   #gnb ul li {margin-left: -50px; transition: .4s ease; transition-delay: calc(.07s * var(--i)); opacity: 0;}
-  #gnb .menu {height: 48%;}
-  #gnb .login {height: 23%;}
-
-#gnb::before {
-    content: '';
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    left: 0;
-    background: rgba(0,0,0,.1);
-    backdrop-filter: blur(3px);
-    z-index: -1;
-    visibility: hidden;
-    opacity: 0;
-    transition: .4s .2s ease;
-}
+  #gnb .menu {position: absolute;top: 50%;transform: translateY(calc(-50% + -5.5em));}
+  #gnb .login {position: absolute;top: 50%;transform: translateY(calc(-50% + 5.5em));}
+	
   #gnb_open {
   	position: absolute;
   	top: 0;
@@ -216,12 +202,11 @@ header .side::before {
 }
   #gnb_open span {position: relative;display: block;width: 51%;height: 0;border-bottom: 1px solid;transition: .4s ease;}
   
-  .open #gnb {visibility: visible;}
-  .open #gnb ul li {margin-left: 0px;opacity: 1;}
-  .open #gnb_open {gap: 0;}
-  .open #gnb_open span:first-of-type {transform: rotate(45deg); top: 1px;}
-  .open #gnb_open span:last-of-type {transform: rotate(-45deg);}
-  .open #gnb::before {opacity: 1; visibility: visible;}
+  .open-gnb #gnb {left: 0; opacity: 1;visibility: visible;}
+  .open-gnb #gnb ul li {margin-left: 0px;opacity: 1;}
+  .open-gnb #gnb_open {gap: 0;}
+  .open-gnb #gnb_open span:first-of-type {transform: rotate(45deg); top: 1px;}
+  .open-gnb #gnb_open span:last-of-type {transform: rotate(-45deg);}
 }
 
 /*헤더 끝*/
@@ -323,7 +308,7 @@ input[type="password"] {letter-spacing: .5em;}
 input[type="password"]::placeholder {letter-spacing: normal;}
 input.full {width: 100%;}
 
-.input-item {position: relative; padding: 10px 0; margin-bottom: 15px; width: 100%;}
+.input-item {clear: both; position: relative; padding: 10px 0; margin-bottom: 15px; width: 100%;}
 .input-item input:not([type="checkbox"]) {padding-left: 110px;}
 .input-item input:not([type="checkbox"]) + label {top: 50%; transform: translateY(-50%); position: absolute; left: 0;}
 .input-item.false {color: var(--color-salmon);}
@@ -410,7 +395,7 @@ legend::first-letter {color: var(--color-salary);}
     visibility: hidden;
     transition: .2s .1s ease;
 }
-#popup .close {position: absolute;right: 0;top: -1.8em;width: 3em;height: 3em;}
+#popup .close {position: absolute;right: 0;top: -2.8em;width: 3em;height: 3em; cursor: pointer;padding-top: 1em;z-index: -1;}
 #popup .close span {
 	position: absolute;
 	display: block;
@@ -420,12 +405,13 @@ legend::first-letter {color: var(--color-salary);}
 }
 #popup .close span:first-child {transform: rotate(45deg);}
 #popup .close span:last-child {transform: rotate(-45deg);}
-#popup p.header {border-bottom: 1px solid; padding-bottom: .5em; font-size: var(--accent-font-size);}
 #popup .theme-box {background: var(--color-bak);}
+#popup p.header {border-bottom: 1px solid; padding-bottom: .5em; font-size: var(--accent-font-size);}
+#popup .content {padding-top: 1em;}
 
+#popup.common,
 #popup.cart {max-width: 400px;}
 #popup.cart .content .top-content {
-    padding-top: 1em;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -449,11 +435,12 @@ legend::first-letter {color: var(--color-salary);}
     visibility: hidden;
     opacity: 0;
     transition: .2s ease;
-    z-index: 99;
-}
+    
+z-index: 98;}
 
 #popup.show,
-#mask.show {opacity: 1 !important; visibility: visible !important;}
+.open #mask,
+.open-gnb #mask {opacity: 1 !important; visibility: visible !important;}
 
 @media all and (max-width: 750px) {
 	#popup.desc .photo {width: 100%; height: 50%; border-right: 0; border-bottom: 1px solid;}

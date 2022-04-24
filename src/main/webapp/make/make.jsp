@@ -107,6 +107,5 @@ if (isAdm == 1) {
 		</div>
 	</div>
 </div>
-<div id="mask"></div>
 <div id="popup"></div>
 <jsp:include page="/footer.jsp" />

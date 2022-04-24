@@ -22,11 +22,12 @@
 .cart-left .etc .item-list li .item-info .name {padding: 2.4rem 0;}
 
 .cart-right {position: relative; float: right; width: 23%;}
+.cart-right .receipt {margin-bottom: .8em;}
 .cart-right .receipt .price {position: relative; border-bottom: 1px solid;}
 .cart-right .receipt .price .price-name {font-size: var(--small-font-size);}
 .cart-right .receipt .price .txt-right {padding-bottom: .5em;}
 .cart-right .receipt .price .txt-right p {font-size: var(--accent-font-size);font-weight: 300;display: flex;justify-content: end;gap: 1em;}
-.cart-right .receipt .price > span {position: absolute;bottom: 0;font-size: var(--accent-font-size);font-weight: 300;}
+.cart-right .receipt .price > span {position: absolute;bottom: .3em;font-size: var(--accent-font-size);font-weight: 300;}
 .cart-right .receipt .total {padding: 1.2em 0;}
 .cart-right .receipt .total span {vertical-align: sub;}
 .cart-right .receipt .total .total-price {float: right;font-size: var(--big-font-size);font-weight: 200;}

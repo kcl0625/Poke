@@ -256,23 +256,23 @@
 				}
 			</script>
 		</div>	
-	
-		
 	</div>
+	
 	<div id="offer" class="wrapper section">
 		<div class="txt-area">
 			<p>고민이 될 때에는 레시피 북이나<br>다른 사람의 리뷰를 참고해보는 것은 어떨까요?<br><br>
 			분명 마음에 드는 것을 찾을 수 있을 거예요.</p>
 		</div>
+
+		<div class="section-content">
 		
-		<div class="section-content"></div>
+		</div>
 		
 		<div class="txt-area">
 			<p>bowls에서는 저희가 추천하는 조합을 선택하고,<br>내가 원하는대로 수정할 수 있어요.</p>
 		</div>
 	</div>
 </div>
-
 
 <script src="<%=root %>/js/fullpage.js"></script>
 <script>

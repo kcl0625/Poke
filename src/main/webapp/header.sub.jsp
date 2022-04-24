@@ -11,6 +11,7 @@
 	<link rel="stylesheet" href="<%=root %>/css/style.css">
 	<link rel="icon" href="<%=root %>/favicon.svg">
 	<script src="https://ajax.googleapis.com/ajax/libs/prototype/1.7.2.0/prototype.js"></script>
+	<script src="<%=root %>/js/json2.js"></script>
 	<script src="<%=root %>/js/common.js"></script>
 	<title>POKE</title>
 </head>

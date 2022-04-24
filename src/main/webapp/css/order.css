@@ -1,0 +1,5 @@
+@charset "UTF-8";
+
+form .input-item .ui-btn {position: absolute; top: 12px; right: 0;}
+form fieldset {margin-bottom: 3em;}
+form .select {width: 100%; float: right;margin: 1em 0;}

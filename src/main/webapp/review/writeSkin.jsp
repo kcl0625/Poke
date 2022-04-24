@@ -4,7 +4,6 @@
 <jsp:include page="/header.sub.jsp" />
 <link rel="stylesheet" href="<%=root%>/css/write.css">
 
-
 <script>
 	let run = () => {
 		document.querySelector('.textarea').contentWindow.document.designMode = 'on';
@@ -66,11 +65,12 @@
 	
 	<script>
 		write.photo.addEventListener('change', (e) => {
-			let fReader = new FileReader();
-			fReader.readAsDataURL(write.photo.files[0]);
-			fReader.onloaded = (e) => {
-				document.querySelector('.photo img').src = e.target.result;
+			let img = document.querySelector('.photo img');
+			let reader = new FileReader();
+			reader.onload = (e) => {
+				img.src = e.target.result;
 			}
+			reader.readAsDataURL(write.photo.files[0]);
 		})
 	</script>
 </div>

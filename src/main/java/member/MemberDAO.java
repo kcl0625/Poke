@@ -66,7 +66,6 @@ public class MemberDAO {
 			con = Config.getConnection();
 			sql = "delete member where id = ?";
 			pstmt = con.prepareStatement(sql);
-			ResultSet rs = null;
 			
 			pstmt.setString(1, dto.getId());
 			pstmt.setString(2, dto.getPw());
@@ -79,11 +78,11 @@ public class MemberDAO {
 		}
 	}
 	
-	public ArrayList<MemberDTO> getList(String id) {
-		ArrayList<MemberDTO> member = new ArrayList<MemberDTO>();
+	public MemberDTO getMember(String id) {
+		MemberDTO member = new MemberDTO();
 		try {
 			con = Config.getConnection();
-			sql = "select pw, name, nick, zip, add1, add2, tel, email from member where id = ?";
+			sql = "select name, nick, zip, add1, add2, tel, email from member where id = ?";
 			pstmt = con.prepareStatement(sql);
 			ResultSet rs = null;
 			
@@ -93,8 +92,6 @@ public class MemberDAO {
 			while(rs.next()) {
 				MemberDTO dto = new MemberDTO();
 				
-				dto.setId(rs.getString("id"));
-				dto.setPw(rs.getString("pw"));
 				dto.setName(rs.getString("name"));
 				dto.setNick(rs.getString("nick"));
 				dto.setZip(rs.getString("zip"));
@@ -102,8 +99,6 @@ public class MemberDAO {
 				dto.setAdd2(rs.getString("add2"));
 				dto.setTel(rs.getString("tel"));
 				dto.setEmail(rs.getString("email"));
-				
-				member.add(dto);
 			}
 			rs.close();
 			pstmt.close();

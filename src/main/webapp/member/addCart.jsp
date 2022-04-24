@@ -68,7 +68,7 @@ int max = 6;%>
 			<span class="border"></span>
 			<p class="price">￦<%=String.format("%,d", item.getPrice()) %></p>
 			</div>
-			<span class="ingre"><%=item.getIngre() %></span>
+			<%if (item.getIngre() != null){ %><span class="ingre"><%=item.getIngre() %></span><%} %>
 		</div>
 	</div>
 <% }%>

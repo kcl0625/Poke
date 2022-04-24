@@ -14,7 +14,7 @@
 	    	<span></span>
 	    </div>
 	    <script>
-	    	let openGnb = () => {document.querySelector('body').classList.toggle('open');}
+	    	let openGnb = () => {document.querySelector('body').classList.toggle('open-gnb');}
 	    </script>
 	    <div id="logo">
 	    	<a href="<%=root%>/index.jsp">
