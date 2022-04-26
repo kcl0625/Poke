@@ -39,7 +39,7 @@ public class MemberDAO {
 	public void updateMember(MemberDTO dto) {
 		try {
 			con = Config.getConnection();
-			sql = "update member(pw, name, nick, zip, add1, add2, tel, email) values(?,?,?,?,?,?,?,?) where id = ?";
+			sql = "update member set pw = ?, name = ?, nick = ?, zip = ?, add1 = ?, add2 = ?, tel = ?, email = ? where id = ?";
 			pstmt = con.prepareStatement(sql);
 			ResultSet rs = null;
 			
@@ -82,23 +82,22 @@ public class MemberDAO {
 		MemberDTO member = new MemberDTO();
 		try {
 			con = Config.getConnection();
-			sql = "select name, nick, zip, add1, add2, tel, email from member where id = ?";
+			sql = "select pw, name, nick, zip, add1, add2, tel, email from member where id = ?";
 			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
 			ResultSet rs = null;
 			
-			pstmt.setString(1, id);
-			
 			rs = pstmt.executeQuery();
+			
 			while(rs.next()) {
-				MemberDTO dto = new MemberDTO();
-				
-				dto.setName(rs.getString("name"));
-				dto.setNick(rs.getString("nick"));
-				dto.setZip(rs.getString("zip"));
-				dto.setAdd1(rs.getString("add1"));
-				dto.setAdd2(rs.getString("add2"));
-				dto.setTel(rs.getString("tel"));
-				dto.setEmail(rs.getString("email"));
+				member.setPw(rs.getString("pw"));
+				member.setName(rs.getString("name"));
+				member.setNick(rs.getString("nick"));
+				member.setZip(rs.getString("zip"));
+				member.setAdd1(rs.getString("add1"));
+				member.setAdd2(rs.getString("add2"));
+				member.setTel(rs.getString("tel"));
+				member.setEmail(rs.getString("email"));
 			}
 			rs.close();
 			pstmt.close();

@@ -5,6 +5,10 @@ request.setCharacterEncoding("utf-8");
 String root = request.getContextPath();
 
 String sessionId = null;
+String sessionNo = null;
+
+sessionNo = session.getId();
+
 int isAdm = 0;
 int isMem = 0;
 

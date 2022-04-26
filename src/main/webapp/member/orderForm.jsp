@@ -1,29 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@page import="java.util.ArrayList" %>
-<%@page import="order.ItemDTO"%>
+<%@page import="org.json.simple.parser.JSONParser"%>
+<%@page import="org.json.simple.JSONObject"%>
+<%@page import="org.json.simple.JSONArray"%>
+<%@page import="order.OrderDTO"%>
 <%@page import="member.MemberDTO"%>
 <%@include file="/config.jsp" %>
 <%if (isAdm == 1) out.write("<script>alert('잘못된 접근입니다');location.href = '" + root + "/index.jsp';</script>");
-if (isMem == 0) response.sendRedirect(root + "/bbs/loginForm.jsp");
+if (isMem == 0) response.sendRedirect(root + "/bbs/loginForm.jsp");%>
 
-String param = request.getParameter("param"); //json 객체 받아오기
-
-
-%>
-<jsp:useBean id="cartBean" class="order.cart.CartDAO" />
 <jsp:useBean id="memberBean" class="member.MemberDAO" />
+<%
+request.setCharacterEncoding("utf-8");
+response.setCharacterEncoding("utf-8");
+MemberDTO member = memberBean.getMember(sessionId);%>
 
 <link rel="stylesheet" href="<%=root %>/css/order.css">
 <script src="<%=root %>/js/order.js"></script>
 <jsp:include page="/header.jsp" />
-<%
-String[] day = {"월", "화", "수", "목", "금", "토"};
-String[] dayEng = {"mon", "tue", "wed", "thu", "fri", "sat"};
 
-MemberDTO member = memberBean.getMember(sessionId);
-%>
-<div class="wrapper form-wrapper" style="width: 100%;">
+<div class="wrapper form-wrapper" style="flex-wrap: wrap;">
 	<form name="order" method="post" action="order.jsp">
 		<div class="form-item">
 			<fieldset class="address">
@@ -54,39 +51,61 @@ MemberDTO member = memberBean.getMember(sessionId);
 					<span class="indicator">숫자만 입력해주세요</span>
 				</div>
 			</fieldset>
-			<fieldset class="discount">
-				<legend>discount</legend>
-				<div class="theme-box">
-					
-				</div>
-			</fieldset>
 			<fieldset class="payment">
 				<legend>payment</legend>
-				<div class="input-item">
-					<input class="full" type="text" name="depositor" id="depositor" oninput="chk(this);" minlength="2" maxlength="10">
-					<label for="tel">입금자명</label>
+				<input type="hidden" name="payment" value="무통장입금">
+				<input type="hidden" name="isPaid" value="n">
+				<div class="input-item check">
+					<input type="radio" name="chkpayment" id="deposit" onclick="showPaymentForm(this.id, '무통장입금', 'n');" checked>
+					<label for="deposit"><span></span>무통장입금</label>
+				</div>
+				<div class="input-item check">
+					<input type="radio" name="chkpayment" id="kakaopay" onclick="showPaymentForm(this.id, '카카오페이', 'y');">
+					<label for="kakaopay"><span></span>카카오페이</label>
 				</div>
 				
-				<div class="input-item">
-					<label>입금은행</label>
-					<div class="select">
-						<input type="hidden" name="week" value="우리은행 :: 1002-123-456789 홍길동">
-						<div class="selected select-item">우리은행 :: 1002-123-456789 홍길동</div>
-						<div class="select-wrapper">
-							<ul>
-								<li class="select-item" data-data="우리은행 :: 1002-123-456789 홍길동" style="--i: 1;">우리은행 :: 1002-123-456789 홍길동</li>
-								<li class="select-item" data-data="NH농협은행 :: 352-1234-5678-90 홍길동" style="--i: 2;">NH농협은행 :: 352-1234-5678-90 홍길동</li>
-								<li class="select-item" data-data="카카오뱅크 :: 3333-12-3456789 홍길동" style="--i: 3;">카카오뱅크 :: 3333-12-3456789 홍길동</li>
-								<li class="select-item" data-data="국민은행 :: 103002-12-3456789 홍길동" style="--i: 4;">국민은행 :: 103002-12-3456789 홍길동</li>
-							</ul>
+				<div class="deposit payform" style="display:block;">
+					<div class="input-item">
+						<input class="full" type="text" name="depositor" id="depositor" oninput="chk(this);" minlength="2" maxlength="10" value="<%=member.getName()%>">
+						<label for="tel">입금자명</label>
+						<span class="indicator"></span>
+					</div>
+					
+					<div class="input-item">
+						<label>입금은행</label>
+						<div class="select">
+							<input type="hidden" name="week" value="우리은행 :: 1002-123-456789 홍길동">
+							<div class="selected select-item">우리은행 :: 1002-123-456789 홍길동</div>
+							<div class="select-wrapper">
+								<ul>
+									<li class="select-item" data-data="우리은행 :: 1002-123-456789 홍길동" style="--i: 1;">우리은행 :: 1002-123-456789 홍길동</li>
+									<li class="select-item" data-data="NH농협은행 :: 352-1234-5678-90 홍길동" style="--i: 2;">NH농협은행 :: 352-1234-5678-90 홍길동</li>
+									<li class="select-item" data-data="카카오뱅크 :: 3333-12-3456789 홍길동" style="--i: 3;">카카오뱅크 :: 3333-12-3456789 홍길동</li>
+									<li class="select-item" data-data="국민은행 :: 103002-12-3456789 홍길동" style="--i: 4;">국민은행 :: 103002-12-3456789 홍길동</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					
+					<div class="input-item">
+						<label>현금영수증 신청</label>
+						
+						<div class="input-item check">
+							<input type="radio" name="receipt" id="y">
+							<label for="y"><span></span>현금영수증 신청</label>
+						</div>
+						<div class="input-item check">
+							<input type="radio" name="receipt" id="n" checked>
+							<label for="n"><span></span>신청안함</label>
 						</div>
 					</div>
 				</div>
 				
-				<div class="input-item">
-					<label>현금영수증 신청</label>
-					
-					
+				<div class="kakaopay payform" style="display:none;">
+					<p>- 카카오톡 앱을 설치한 후, 최초 1회 카드정보를 등록하셔야 사용 가능합니다.<br>
+					- 인터넷 익스플로러는 8 이상에서만 결제 가능합니다.<br>
+					- 카카오머니로 결제 시, 현금영수증 발급은 ㈜카카오페이에서 발급가능합니다.
+					</p>
 				</div>
 			</fieldset>
 		</div>
@@ -95,15 +114,110 @@ MemberDTO member = memberBean.getMember(sessionId);
 			<fieldset class="cart">
 				<legend>cart</legend>
 				<div class="theme-box">
-					
+					<div class="list">
+						<%
+						int week = Integer.parseInt(request.getParameter("week"));
+						String param = request.getParameter("param"); //json 객체 받아오기
+						JSONParser jsonParser = new JSONParser();
+						JSONObject jsonObj = (JSONObject) jsonParser.parse(param);
+	
+						JSONArray pokeArr = (JSONArray) jsonObj.get("pokeArr");
+						JSONArray etcArr = (JSONArray) jsonObj.get("etcArr");
+						
+						ArrayList<OrderDTO> orderArr = new ArrayList<OrderDTO>();
+						int planTot = 0;
+						int etcTot = 0;%>
+						<ul>
+							<% for(int i=0;i<pokeArr.size();i++){
+								JSONObject poke = (JSONObject) pokeArr.get(i);
+								String day = (String)poke.get("day");
+								int itemPrice = Integer.parseInt(String.valueOf(poke.get("price")));
+								int quantity = day.split("/").length;
+								planTot += itemPrice * quantity;
+								
+								OrderDTO dto = new OrderDTO();
+								
+								dto.setType("poke");
+								dto.setName((String)poke.get("name"));
+								dto.setIngre((String)poke.get("ingre"));
+								dto.setDay(day);
+								dto.setPrice(itemPrice);
+								dto.setWeek(week);
+								
+								orderArr.add(dto);%>
+								<li>
+									<input type="hidden" name="type" value="poke">
+									<input type="hidden" name="name" value="<%=poke.get("name") %>">
+									<input type="hidden" name="ingre" value="<%=poke.get("ingre") %>">
+									<input type="hidden" name="day" value="<%=day %>">
+									<input type="hidden" name="price" value="<%=itemPrice%>">
+									<p class="name"><%=poke.get("name") %></p>
+									<p class="quantity"><%=day.split("/").length %></p>
+									<p class="price">￦<%=String.format("%,d", quantity * itemPrice) %></p>
+								</li>
+							<%} %>
+							<% for(int i=0;i<etcArr.size();i++){
+								JSONObject etc = (JSONObject) etcArr.get(i);
+								int itemPrice = Integer.parseInt(String.valueOf(etc.get("price"))); 
+								int quantity = Integer.parseInt(String.valueOf(etc.get("quantity")));
+								etcTot += itemPrice * quantity;
+								
+								OrderDTO dto = new OrderDTO();
+								
+								dto.setType("etc");
+								dto.setName((String)etc.get("name"));
+								dto.setQuantity(quantity);
+								dto.setPrice(itemPrice);
+								
+								orderArr.add(dto);%>
+								<li>
+									<input type="hidden" name="type" value="etc">
+									<input type="hidden" name="name" value="<%=etc.get("name") %>">
+									<input type="hidden" name="quantity" value="<%=quantity%>">
+									<input type="hidden" name="price" value="<%=itemPrice%>">
+									<p class="name"><%=etc.get("name") %></p>
+									<p class="quantity"><%=etc.get("quantity") %></p>
+									<p class="price">￦<%=String.format("%,d", quantity * itemPrice) %></p>
+								</li>
+							<%}
+							session.setAttribute("orderItem", orderArr);%>
+						</ul>
+					</div>
+					<p class="leng txt-center" style="margin-top: .75rem;">
+						<script>
+							let li = document.querySelectorAll('.cart li');
+							document.write('총 ' + li.length + '개');
+						</script>
+					</p>
 				</div>
 			</fieldset>
 			<fieldset class="receipt">
 				<legend>receipt</legend>
 				<div class="theme-box">
-					
+					<div class="price">
+						<div class="plan txt-right">
+							<span class="price-name">플랜 금액</span>
+							<p>(
+								<span class="plan-price">￦<%=String.format("%,d", planTot) %></span>*<span class="plan-week"><%=week %></span>
+							)</p>
+						</div>
+						<div class="additional txt-right">
+							<span class="price-name">추가 구매</span>
+							<p>￦<%=String.format("%,d", etcTot) %></p>
+						</div>
+						<div class="ship txt-right">
+							<span class="price-name">배송비</span>
+							<p>￦<%=String.format("%,d", 3000) %></p>
+						</div>
+					</div>
+					<div class="total">
+						<input type="hidden" name="totPrice" value="<%=planTot * week + etcTot + 3000 %>">
+						<span>total</span>
+						<span class="total-price">￦<%=String.format("%,d", planTot * week + etcTot + 3000) %></span>
+					</div>
 				</div>
 			</fieldset>
+			<button type="button" class="ui-btn point big full" onclick="formSubmit(order);">주문하기</button>
 		</div>
 	</form>
 </div>
@@ -113,7 +227,7 @@ MemberDTO member = memberBean.getMember(sessionId);
 </div>
 
 <script type="text/javascript" src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-	<script type="text/javascript">
+<script type="text/javascript">
 	// 우편번호 찾기 찾기 화면을 넣을 element
 	let openZipWrap = document.querySelector('#open-zip');
 	let foldDaumPostcode = () => {openZipWrap.classList.remove('show');}
@@ -138,8 +252,8 @@ MemberDTO member = memberBean.getMember(sessionId);
 					//false 상태 없애기
 		    		order.zip.parentNode.classList.remove('false');
 		    		order.add1.parentNode.classList.remove('false');
-		    		printMsg('', memForm.zip.parentNode.querySelector('.indicator'));
-		    		printMsg('', memForm.add1.parentNode.querySelector('.indicator'));
+		    		printMsg('', order.zip.parentNode.querySelector('.indicator'));
+		    		printMsg('', order.add1.parentNode.querySelector('.indicator'));
 						
 		            // iframe을 넣은 element를 안보이게 한다.
 		            openZipWrap.classList.remove('show');
@@ -155,102 +269,102 @@ MemberDTO member = memberBean.getMember(sessionId);
 		        height : '100%'
 		    }).embed(openZipWrap);
 		        // iframe을 넣은 element를 보이게 한다.
-		        openZipWrap.classList.add('show');
-		    }
+		    openZipWrap.classList.add('show');
+		}
 		    
-		    // 유효성 검사
-		    let chk = (input) => {
-		    	let value = input.value;
-		    	let inputItem = input.parentNode;
-		    	let indicator = inputItem.querySelector('.indicator');
-		    	let id = input.getAttribute('id');
+		// 유효성 검사
+		let chk = (input) => {
+		  	let value = input.value;
+		    let inputItem = input.parentNode;
+		    let indicator = inputItem.querySelector('.indicator');
+		    let id = input.getAttribute('id');
 		    	
-		    	let min = input.getAttribute('minlength');
-		    	let max = input.getAttribute('maxlength');
-		    	let ptn = '';
-		    	let msg = '';
+		    let min = input.getAttribute('minlength');
+		    let max = input.getAttribute('maxlength');
+		    let ptn = '';
+		    let msg = '';
 		    	
-		    	if(value){
-		    		if(min && max){
-		        		if(value.length < min || value.length > max){ //값이 있을 때 max와 min을 충족하는지
-		        			msg = '길이가 너무 짧거나 길어요';
-		        			inputItem.classList.add('false');
-		        		} else {
-		        			//id 중복검사
-		    		    	if(id == 'id') {
-		    		    		memForm.id.addEventListener('change', (e) => {
-		    		    			e.stopImmediatePropagation();
-		    		    			new Ajax.Request('idChk.jsp?id=' + memForm.id.value, {
-		    		    				method: 'get',
-		    		    				parameter: memForm.id,
-		    		    				onComplete: (response) => {
-		    		    			    	let res = response.responseText.trim();
-		    		    					
-		    		    					if (res == 'no'){
-		    		    						msg = '사용할 수 없는 아이디예요';
-		    		    						inputItem.classList.add('false');
-		    		    						printMsg(msg, indicator);
-		    		    					}
-		    		    				}
-		    		    			})
-		    		    		})
-		    		    	} else {
-		    		    		msg = '';
-			        			inputItem.classList.remove('false');
-		    		    	}
-		        		}
-		        	}
-		    		//패턴 검사
-		    		switch(id){ //정규식 정의
-		    			case 'name':
-		    				ptn = /^[가-힣]+$/;
-		    				break;
-		    			case 'add2':
-		    				ptn = /[a-zA-Z0-9가-힣]+$/;
-		    				break;
-		    			case 'tel':
-		    				ptn = /[0-9]+$/;
-		    				break;
-		    		}
-		    		if(ptn && !ptn.test(value)){
-		    			msg = '형식이 올바르지 않아요';
-		    			inputItem.classList.add('false');
-		    		} else { //형식에 맞을 때
-		    			if(min && max){
-		            		if(value.length > min && value.length < max){
-		            			msg = '';
-		            			inputItem.classList.remove('false');
-		            		}
-		            	} else {
-		            		msg = '';
-		        			inputItem.classList.remove('false');
-		            	}
-		    		}
-		    	} else { //값 입력 안 함
-		    		msg = '값을 입력해주세요';
-		    		inputItem.classList.add('false');
+		    if(value){
+		    	if(min && max && value.length < min || value.length > max){
+		    		msg = '길이가 너무 짧거나 길어요';
+	        		inputItem.classList.add('false');
+		        }
+		    	//패턴 검사
+		   		switch(id){ //정규식 정의
+		    		case 'name':
+		    			ptn = /^[가-힣]+$/;
+		    			break;
+		   			case 'add2':
+		    			ptn = /[a-zA-Z0-9가-힣]+$/;
+		    			break;
+		    		case 'tel':
+		    			ptn = /[0-9]+$/;
+		   				break;
+		   			case 'depositor':
+		    			ptn = /^[가-힣]+$/;
+		    			break;
 		    	}
-		    	if(indicator) printMsg(msg, indicator);
+		    	if(ptn && !ptn.test(value)){
+		   			msg = '형식이 올바르지 않아요';
+		   			inputItem.classList.add('false');
+		   		} else { //형식에 맞을 때
+		   			if(min && max){
+		            	if(value.length > min && value.length < max){
+		            		msg = '';
+		           			inputItem.classList.remove('false');
+		           		}
+		           	} else {
+		           		msg = '';
+		       			inputItem.classList.remove('false');
+		           	}
+		    	}
+		   	} else { //값 입력 안 함
+		   		msg = '값을 입력해주세요';
+		   		inputItem.classList.add('false');
+		   	}
+	    	if(indicator) printMsg(msg, indicator);
+		}
+		
+		let showPaymentForm = (id, val, isPaidVal) => {
+			let payForm = document.querySelectorAll('.payform');
+			let selected = document.querySelector('.' + id);
+			
+			for(let i=0;i<payForm.length;i++)
+				payForm[i].style.display = 'none';
+			selected.style.display = 'block';
+			order.payment.value = val;
+			order.isPaid.value = isPaidVal;
+		}
+		//폼 제출
+	    let formSubmit = (form) => {
+	    	let inputItem = form.querySelectorAll('.input-item');
+		    let msg = '';
+		    inputItem.forEach((item, i) => {
+		    	let input = inputItem[i].querySelector('input');
+		    	let indicator = inputItem[i].querySelector('.indicator');
+		    	if(!inputItem[i].querySelector('input').value) {
+		    		msg = '값을 입력해주세요';
+		    		inputItem[i].classList.add('false');
+		    	} else {
+		    		msg = '';
+		    		inputItem[i].classList.remove('false');
+		    	}
+		    	printMsg(msg, indicator);
+		    })
+		    if(!form.querySelector('.false')) {
+		    	form.submit();
 		    }
-		    
-		    //폼 제출
-		    let formSubmit = (form) => {
-		    	let inputItem = form.querySelectorAll('.input-item');
-		    	let msg = '';
-		    	inputItem.forEach((item, i) => {
-		    		let input = inputItem[i].querySelector('input');
-		    		let indicator = inputItem[i].querySelector('.indicator');
-		    		if(!inputItem[i].querySelector('input').value) {
-		    			msg = '값을 입력해주세요';
-		    			inputItem[i].classList.add('false');
-		    		} else {
-		    			msg = '';
-		    			inputItem[i].classList.remove('false');
-		    		}
-		    		printMsg(msg, indicator);
-		    	})
-		    	if(!form.querySelector('.false')) form.submit();
-		    }
+		}
+		
+	    let payment = (userAgent) => {
+	        var url = '/demo/pay/prepare'
+	        var params = {
+	            agent: userAgent,
+	            itemCode: '1',
+	            quantity: '5',
+	        }
+	        location.href = url + '?' + $.param(params)
+	    }    
 </script>
 
 <jsp:include page="/footer.jsp" />

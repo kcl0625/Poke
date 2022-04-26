@@ -178,6 +178,7 @@ header .side::before {
 	border-right: 1px solid;
 	transition: .4s ease;
   }
+  #gnb > div {height: unset;}
   #gnb ul {display: flex;justify-content: center;flex-wrap: wrap;gap: 20px;flex-direction: column;align-items: start;}
   #gnb ul li {margin-left: -50px; transition: .4s ease; transition-delay: calc(.07s * var(--i)); opacity: 0;}
   #gnb .menu {position: absolute;top: 50%;transform: translateY(calc(-50% + -5.5em));}

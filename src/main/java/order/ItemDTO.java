@@ -5,8 +5,11 @@ public class ItemDTO {
 	private String type;
 	private String name;
 	private String ingre;
+	private String day;
 	private double cal;
 	private int price;
+	private int week;
+	
 	private String id;
 	private int custom;
 	private int quantity;
@@ -37,6 +40,12 @@ public class ItemDTO {
 	public void setIngre(String ingre) {
 		this.ingre = ingre;
 	}
+	public void setDay(String day) {
+		this.day = day;
+	}
+	public String getDay() {
+		return day;
+	}
 	public double getCal() {
 		return cal;
 	}
@@ -49,6 +58,7 @@ public class ItemDTO {
 	public void setPrice(int price) {
 		this.price = price;
 	}
+	
 	public String getId() {
 		return id;
 	}

@@ -17,20 +17,7 @@ String[] dayEng = {"mon", "tue", "wed", "thu", "fri", "sat"};
 %>
 <div class="wrapper">
 	<form name="cart" method="post" action="orderForm.jsp">
-		<input type="hidden" name="planPrice">
-		<input type="hidden" name="planWeek">
-		<input type="hidden" name="etcPrice">
-		<input type="hidden" name="totPrice">
 		<input type="hidden" name="weekPlan" value="1">
-		
-		<input type="hidden" name="namePoke">
-		<input type="hidden" name="ingrePoke">
-		<input type="hidden" name="pricePoke">
-		<input type="hidden" name="dayPoke">
-		
-		<input type="hidden" name="nameEtc">
-		<input type="hidden" name="priceEtc">
-		<input type="hidden" name="quantityEtc">
 		
 		<div class="page-title">
 			<h2><span class="point cheese">C</span>art</h2>	

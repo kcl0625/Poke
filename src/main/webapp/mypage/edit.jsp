@@ -13,13 +13,9 @@
 	request.setCharacterEncoding("utf-8");
 	response.setCharacterEncoding("utf-8");
 	MemberDTO member = memberBean.getMember(sessionId);
-	String name = member.getName();
-
-	System.out.println("name is " + name);
-	
 	%>
 	<div class="form-wrapper" style="flex-wrap: wrap;">
-		<form name="memForm" action="joinRes.jsp" method="post">
+		<form name="memForm" action="editRes.jsp" method="post" style="flex-wrap: nowrap;">
 			<input type="hidden" name="id" id="id" value="<%=sessionId%>">
 			<fieldset class="form-item">
 				<legend>회원 정보</legend>
@@ -35,12 +31,12 @@
 					<span class="indicator">1~20자</span>
 				</div>
 				<div class="input-item">
-					<input class="full" type="password" name="pw" id="pw" oninput="chk(this);" minlength="6" maxlength="20">
+					<input class="full" type="password" name="pw" id="pw" oninput="chk(this);" minlength="6" maxlength="20" value="<%=member.getPw()%>">
 					<label for="pw">비밀번호</label>
 					<span class="indicator">6~20자의 영문 및 숫자</span>
 				</div>
 				<div class="input-item">
-					<input class="full" type="password" oninput="chk(this);" oninput="chk(this);" name="pwChk" id="pwChk" minlength="6" maxlength="20">
+					<input class="full" type="password" oninput="chk(this);" oninput="chk(this);" name="pwChk" id="pwChk" minlength="6" maxlength="20" value="<%=member.getPw()%>">
 					<label for="pwChk">비밀번호 확인</label>
 					<span class="indicator"></span>
 				</div>
@@ -228,8 +224,7 @@
 		</script>
 		
 		<div class="pn" style="flex-direction: column;align-items: center;">
-			<a class="ui-btn point big" onclick="formSubmit(memForm);">회원가입</a>
-			<a class="ui-btn big" href="index.jsp">취소</a>
+			<a class="ui-btn point big" onclick="formSubmit(memForm);">수정하기</a>
 		</div>
 	</div>
 </div>
