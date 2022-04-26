@@ -50,6 +50,11 @@ MemberDTO member = memberBean.getMember(sessionId);%>
 					<label for="tel">연락처</label>
 					<span class="indicator">숫자만 입력해주세요</span>
 				</div>
+				<div class="input-item">
+					<input class="full" type="email" name="email" id="email" oninput="chk(this);" value="<%=member.getEmail()%>">
+					<label for="email">e-mail</label>
+					<span class="indicator">abc123@domain.net</span>
+				</div>
 			</fieldset>
 			<fieldset class="payment">
 				<legend>payment</legend>
@@ -303,6 +308,9 @@ MemberDTO member = memberBean.getMember(sessionId);%>
 		   			case 'depositor':
 		    			ptn = /^[가-힣]+$/;
 		    			break;
+		   			case 'email':
+	    				ptn = /^[a-z0-9_+.-]+@([a-z0-9-]+\.)+[a-z0-9]{2,4}.*$/;
+	    				break;
 		    	}
 		    	if(ptn && !ptn.test(value)){
 		   			msg = '형식이 올바르지 않아요';
@@ -328,7 +336,11 @@ MemberDTO member = memberBean.getMember(sessionId);%>
 		let showPaymentForm = (id, val, isPaidVal) => {
 			let payForm = document.querySelectorAll('.payform');
 			let selected = document.querySelector('.' + id);
-			
+			if (id == 'kakaopay') {
+				order.action = 'kakaopay.jsp';
+			} else {
+				order.action = 'order.jsp';
+			}
 			for(let i=0;i<payForm.length;i++)
 				payForm[i].style.display = 'none';
 			selected.style.display = 'block';

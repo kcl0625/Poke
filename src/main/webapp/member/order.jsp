@@ -24,23 +24,14 @@ String depositor = request.getParameter("depositor");
 
 ArrayList<OrderDTO> orderArr = (ArrayList<OrderDTO>)session.getAttribute("orderItem");
 OrderDAO orderDAO = new OrderDAO();
-MemberDAO memDAO = new MemberDAO();
 MemberDTO member = memberBean;
 
 LocalDateTime now = LocalDateTime.now();
 String formatedNow = now.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
 
+if(session.getAttribute("member") != null) {
+	member = (MemberDTO)session.getAttribute("member");
+}
 orderDAO.setOrder(sessionNo, orderArr, member, sessionId, formatedNow, payment, isPaid, totPrice, depositor);
+response.sendRedirect("orderOk.jsp");
 %>
-<jsp:include page="/header.jsp" />
-
-<div class="wrapper">
-	<div class="theme-box leaf">
-		<p>
-		주문이 완료되었어요!<br>
-		안전하게 보내드릴게요
-		</p>
-	</div>
-	<a class="ui-btn full point" href="<%=root%>/index.jsp">메인으로</a>
-</div>
-<jsp:include page="/footer.jsp" />
