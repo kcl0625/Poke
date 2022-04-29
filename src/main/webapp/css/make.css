@@ -28,20 +28,19 @@
 	font-weight: 100;
 	display: none;
 }
-.making .category {z-index: 1;position: absolute; top: -1em;}
-.making .category li {cursor: pointer; font-size: var(--small-font-size);}
+.making .category {z-index: 1;position: absolute; top: -2em;}
+.making .category li {cursor: pointer; /* font-size: var(--small-font-size); */}
 .making .category li.cur {font-weight: 600;}
 
 .slider {height: 4em;position: relative;width: 50%;max-height: 80px;}
 .slider .btn.prev {position: absolute;width: 1.5em;max-width: 40px;top: .5em;left: -3em;cursor: pointer;z-index: 10;}
 .slider .btn.next {position: absolute;width: 1.5em;max-width: 40px;top: .5em;right: -3em;cursor: pointer;z-index: 10;}
 .slider .btn svg {stroke-width: 1.1;}
-
 .info-box {
 	position: absolute;
 	top: 100%;
-	left: -25%;
-	width: 150%;
+	left: 0%;
+	width: 100%;
 	font-size: var(--small-font-size);
 	line-height: 1.2em;
 	padding: 10px;
@@ -52,6 +51,7 @@
 	animation: fade .3s ease forwards;
 	z-index: 12;
 }
+.info-box .sub {font-size: .6rem;line-height: 1.2em;}
 .info-box .line {
 	margin: 5px 0 7px;
 	position: relative;
@@ -107,8 +107,9 @@
     white-space: nowrap;
 }
 .slider-container .info-box {margin-top: 40px;}
+#bowl .info-box {width: 150%; left: -25%;}
 
-#bowl {position: relative;width: 70vw;max-width: 600px;z-index: 11;bottom: 0;padding-top: 29em;}
+#bowl {position: relative;width: 70vw;max-width: 500px;z-index: 11;bottom: 0;padding-top: 29em;}
 #bowl svg {position: absolute; bottom: 0;}
 #bowl svg .stroke {stroke-width: .15;}
 #bowl .item {position: absolute; transform: scale(0); animation: pop .3s ease forwards;}
@@ -149,10 +150,7 @@
 	height: 0;
 	border: 0;
 	border-bottom: 1px solid;
-	transform: scaleX(0);
-	transition: .3s ease;
 }
-.making .write-name input:focus + .line {transform: scaleX(1);}
 
 .making .indicator {display: block;width: 100%;top: 4.5em;height: 0;text-align: center;line-height: 1.2rem;z-index: 10;background: gray;}
 
@@ -202,7 +200,7 @@
 }
 
 @media all and (max-width: 1280px){
-	.making {top: -3em; gap: 4em;}
+	.making {top: 1em; gap: 4em;}
 	.making #bowl {padding-top: 25em;}
 	.form-wrapper {width: 100%;justify-content: space-between;}
 	.making .receipt {right: 0;}

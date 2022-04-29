@@ -21,7 +21,8 @@ MemberDTO member = memberBean.getMember(sessionId);%>
 <jsp:include page="/header.jsp" />
 
 <div class="wrapper form-wrapper" style="flex-wrap: wrap;">
-	<form name="order" method="post" action="order.jsp">
+	<%int week = Integer.parseInt(request.getParameter("weekPlan")); %>
+	<form name="order" method="post" action="order.jsp?weekPlan=<%=week%>">
 		<div class="form-item">
 			<fieldset class="address">
 				<legend>address</legend>
@@ -65,8 +66,8 @@ MemberDTO member = memberBean.getMember(sessionId);%>
 					<label for="deposit"><span></span>무통장입금</label>
 				</div>
 				<div class="input-item check">
-					<input type="radio" name="chkpayment" id="kakaopay" onclick="showPaymentForm(this.id, '카카오페이', 'y');">
-					<label for="kakaopay"><span></span>카카오페이</label>
+					<input type="radio" name="chkpayment" id="card" onclick="showPaymentForm(this.id, '전자결제', 'y');">
+					<label for="card"><span></span>전자결제</label>
 				</div>
 				
 				<div class="deposit payform" style="display:block;">
@@ -106,11 +107,8 @@ MemberDTO member = memberBean.getMember(sessionId);%>
 					</div>
 				</div>
 				
-				<div class="kakaopay payform" style="display:none;">
-					<p>- 카카오톡 앱을 설치한 후, 최초 1회 카드정보를 등록하셔야 사용 가능합니다.<br>
-					- 인터넷 익스플로러는 8 이상에서만 결제 가능합니다.<br>
-					- 카카오머니로 결제 시, 현금영수증 발급은 ㈜카카오페이에서 발급가능합니다.
-					</p>
+				<div class="card payform" style="display:none;">
+					<p>- 소액 결제의 경우 PG사 정책에 따라 결제 금액 제한이 있을 수 있습니다.</p>
 				</div>
 			</fieldset>
 		</div>
@@ -121,7 +119,6 @@ MemberDTO member = memberBean.getMember(sessionId);%>
 				<div class="theme-box">
 					<div class="list">
 						<%
-						int week = Integer.parseInt(request.getParameter("week"));
 						String param = request.getParameter("param"); //json 객체 받아오기
 						JSONParser jsonParser = new JSONParser();
 						JSONObject jsonObj = (JSONObject) jsonParser.parse(param);
@@ -336,10 +333,10 @@ MemberDTO member = memberBean.getMember(sessionId);%>
 		let showPaymentForm = (id, val, isPaidVal) => {
 			let payForm = document.querySelectorAll('.payform');
 			let selected = document.querySelector('.' + id);
-			if (id == 'kakaopay') {
-				order.action = 'kakaopay.jsp';
+			if (id == 'card') {
+				order.action = 'card.jsp?weekPlan=<%=week%>';
 			} else {
-				order.action = 'order.jsp';
+				order.action = 'order.jsp?weekPlan=<%=week%>';
 			}
 			for(let i=0;i<payForm.length;i++)
 				payForm[i].style.display = 'none';

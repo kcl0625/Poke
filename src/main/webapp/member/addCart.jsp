@@ -45,6 +45,8 @@ int max = 6;%>
 				<p class="price">￦<%=String.format("%,d", item.getPrice()) %></p>
 				</div>
 			</div>
+			<a href="<%=root %>/member/cart.jsp">장바구니로</a>
+			<div class="clear"></div>
 		</div>
 	<% } else { %>
 		<div class="theme-box round">
@@ -70,5 +72,7 @@ int max = 6;%>
 			</div>
 			<%if (item.getIngre() != null){ %><span class="ingre"><%=item.getIngre() %></span><%} %>
 		</div>
+		<a href="<%=root %>/member/cart.jsp">장바구니로</a>
+		<div class="clear"></div>
 	</div>
 <% }%>

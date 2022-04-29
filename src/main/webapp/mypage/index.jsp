@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file="/config.jsp" %>
+<%@page import="java.util.ArrayList" %>
+<%@page import="order.OrderDTO"%>
+
+<jsp:useBean id="orderBean" class="order.OrderDAO" />
 <jsp:include page="/header.jsp" />
 <link rel="stylesheet" href="<%=root%>/css/mypage.css">
 <div class="wrapper">
@@ -44,62 +48,27 @@
 	<div class="plan">
 		<div class="top">
 			<h2>My POKE</h2>
-			<span>0 week plan</span>
+			<%ArrayList<OrderDTO> pokeOrderList = orderBean.getPokeOrder(sessionId);
+			int total = pokeOrderList.size();%>
+			<span><%=pokeOrderList.get(0).getWeek()%> week plan</span>
 		</div>
 			
 		<div class="list">
 			<ul>
-				<li class="theme-box round">
-					<div class="img"></div>
-					<div class="content-right">
-						<div class="info">
-							<p class="name">이름</p>
-							<p class="ingre">재료1/재료2/재료3</p>
+				<%for(int i=0;i<total;i++){%>
+					<li class="theme-box round">
+						<div class="img">
+							
 						</div>
-						<p class="price">￦00,000</p>
-						<form name="">
-							<a>+</a><input type="number" name="qua"><a>-</a>
-						</form>
-						<div class="btns">
-							<a href=""><i class="fas fa-pen"></i></a>
-							<a href=""><i class="fas fa-trash"></i></a>
+						<div class="content-right">
+							<div class="info">
+								<p class="name"><%=pokeOrderList.get(i).getName() %></p>
+								<p class="ingre"><%=pokeOrderList.get(i).getIngre() %></p>
+								<p class="day"><%=pokeOrderList.get(i).getDay() %></p>
+							</div>
 						</div>
-					</div>
-				</li>
-				<li class="theme-box round">
-					<div class="img"></div>
-					<div class="content-right">
-						<div class="info">
-							<p class="name">이름</p>
-							<p class="ingre">재료1/재료2/재료3</p>
-						</div>
-						<p class="price">￦00,000</p>
-						<form name="">
-							<a>+</a><input type="number" name="qua"><a>-</a>
-						</form>
-						<div class="btns">
-							<a href=""><i class="fas fa-pen"></i></a>
-							<a href=""><i class="fas fa-trash"></i></a>
-						</div>
-					</div>
-				</li>
-				<li class="theme-box round">
-					<div class="img"></div>
-					<div class="content-right">
-						<div class="info">
-							<p class="name">이름</p>
-							<p class="ingre">재료1/재료2/재료3</p>
-						</div>
-						<p class="price">￦00,000</p>
-						<form name="">
-							<a>+</a><input type="number" name="qua"><a>-</a>
-						</form>
-						<div class="btns">
-							<a href=""><i class="fas fa-pen"></i></a>
-							<a href=""><i class="fas fa-trash"></i></a>
-						</div>
-					</div>
-				</li>
+					</li>
+				<%} %>
 			</ul>
 		</div>
 	</div>

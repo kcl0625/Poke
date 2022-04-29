@@ -28,6 +28,7 @@ public class CartDAO {
 			
 			while(rs.next()) {
 				ItemDTO dto = new ItemDTO();
+				dto.setNo(rs.getString("no"));
 				dto.setType(rs.getString("type"));
 				dto.setName(rs.getString("name"));
 				dto.setIngre(rs.getString("ingre"));
@@ -44,6 +45,7 @@ public class CartDAO {
 			
 			while(rs.next()) {
 				ItemDTO dto = new ItemDTO();
+				dto.setNo(rs.getString("no"));
 				dto.setType(rs.getString("type"));
 				dto.setName(rs.getString("name"));
 				dto.setIngre(rs.getString("ingre"));
@@ -69,7 +71,7 @@ public class CartDAO {
 			sql = "select c.*, s.filename";
 			sql += " from cart c, shop s";
 			sql += " where c.id = ?";
-			sql += " and c.name = s.name";
+			sql += " and c.no = s.no";
 			
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
@@ -78,6 +80,7 @@ public class CartDAO {
 			
 			while(rs.next()) {
 				ItemDTO dto = new ItemDTO();
+				dto.setNo(rs.getString("no"));
 				dto.setType(rs.getString("type"));
 				dto.setName(rs.getString("name"));
 				dto.setIngre(rs.getString("ingre"));
@@ -102,7 +105,7 @@ public class CartDAO {
 			sql = "insert into cart(no, type, name, ingre, price, cal, id, date, custom) values(?,?,?,?,?,?,?,?,?)";
 			pstmt = con.prepareStatement(sql);
 			
-			pstmt.setInt(1, dto.getNo());
+			pstmt.setString(1, dto.getNo());
 			pstmt.setString(2, dto.getType());
 			pstmt.setString(3, dto.getName());
 			pstmt.setString(4, dto.getIngre());
@@ -126,7 +129,7 @@ public class CartDAO {
 			sql = "insert into cart(no, type, name, price, id, date, quantity) values(?,?,?,?,?,?,?)";
 			pstmt = con.prepareStatement(sql);
 			
-			pstmt.setInt(1, dto.getNo());
+			pstmt.setString(1, dto.getNo());
 			pstmt.setString(2, dto.getType());
 			pstmt.setString(3, dto.getName());
 			pstmt.setInt(4, dto.getPrice());
@@ -142,13 +145,13 @@ public class CartDAO {
 		}
 	}
 	
-	public void delCart(int no, String id) {
+	public void delCart(String no, String id) {
 		try {
 			con = Config.getConnection();
 			sql = "delete from cart where no = ? and id = ?";
 			
 			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, no);
+			pstmt.setString(1, no);
 			pstmt.setString(2, id);
 			pstmt.executeUpdate();
 			

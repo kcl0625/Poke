@@ -48,7 +48,6 @@ System.out.println(memberBean);
             buyer_add2 : '<%=memberBean.getAdd2()%>',
             buyer_postcode : '<%=memberBean.getZip()%>',
             buyer_email : '<%=memberBean.getEmail()%>',
-            //m_redirect_url : 'http://www.naver.com'
         }, function(rsp) {
             if ( rsp.success ) {
                 //[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
@@ -61,7 +60,8 @@ System.out.println(memberBean);
                         merchant_uid : rsp.merchant_uidmerchan,
                         payment: 'card',
                         isPaid: 'y',
-                        totPrice : <%=totPrice%>
+                        totPrice : <%=totPrice%>,
+                        weekPlan: <%=Integer.parseInt(request.getParameter("weekPlan"))%>,
                         //기타 필요한 데이터가 있으면 추가 전달
                     }
                 }).done(function(data) {

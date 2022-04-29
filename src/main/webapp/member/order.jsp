@@ -21,7 +21,7 @@ String payment = request.getParameter("payment");
 String isPaid = request.getParameter("isPaid");
 int totPrice = Integer.parseInt(request.getParameter("totPrice"));
 String depositor = request.getParameter("depositor");
-
+int week = Integer.parseInt(request.getParameter("weekPlan"));
 ArrayList<OrderDTO> orderArr = (ArrayList<OrderDTO>)session.getAttribute("orderItem");
 OrderDAO orderDAO = new OrderDAO();
 MemberDTO member = memberBean;
@@ -32,6 +32,6 @@ String formatedNow = now.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss
 if(session.getAttribute("member") != null) {
 	member = (MemberDTO)session.getAttribute("member");
 }
-orderDAO.setOrder(sessionNo, orderArr, member, sessionId, formatedNow, payment, isPaid, totPrice, depositor);
+orderDAO.setOrder(sessionNo, orderArr, member, sessionId, formatedNow, payment, isPaid, totPrice, depositor, week);
 response.sendRedirect("orderOk.jsp");
 %>

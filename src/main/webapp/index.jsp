@@ -20,7 +20,7 @@
 			<p class="sub-txt">; one of the Hawaiian dishes,<br>in which diced fish served</p>
 			<h2 class="sub-title">내가 좋아하는 것들만 담아서</h2>
 		</div>
-		<div class="main-bg" style="background-image: url('<%=root%>/img/main.jpg');"></div>
+		<div class="main-bg" style="background-image: url('https://images.unsplash.com/photo-1544536871-6e891baa163f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1887&q=80');"></div>
 		<span class="arrow"></span>
 	</div>
 	<div id="about" class="wrapper section">

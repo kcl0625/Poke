@@ -43,9 +43,12 @@ window.addEventListener('resize', () => {
 //재료 툴팁
 let toolTip1 = (price, cal, origin, infoBox) => {
 	origin = origin.split('/');
-	infoBox.innerHTML = `￦${price.toLocaleString('en-IE')}<br>${cal}kcal<hr class="line">`;
-	for(let i=0;i<origin.length;i++)
-		infoBox.innerHTML += `${origin[i]}<br>`;
+	infoBox.innerHTML = `<span class="sub">￦${price.toLocaleString('en-IE')}<br>${cal}kcal</span><hr class="line">`;
+	for(let i=0;i<origin.length;i++){
+		let txt = origin[i].split(': ');
+		if (txt[1] != undefined) infoBox.innerHTML += `<strong>${txt[0]}</strong><br>${txt[1]}<br>`;
+		else infoBox.innerHTML += `${txt[0]}<br>`;
+	}
 }
 let toolTip2 = (name, price, cal, infoBox) => {
 	infoBox.innerHTML = `${name}<hr class="line">￦${price.toLocaleString('en-IE')}<br>${cal}kcal`;

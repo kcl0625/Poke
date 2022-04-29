@@ -22,7 +22,7 @@ public class ItemDAO {
 			
 			while(rs.next()) {
 				ItemDTO dto = new ItemDTO();
-				dto.setNo(rs.getInt("no"));
+				dto.setNo(rs.getString("no"));
 				dto.setName(rs.getString("name"));
 				dto.setPrice(rs.getInt("price"));
 				dto.setFilename(rs.getString("filename"));
@@ -48,7 +48,7 @@ public class ItemDAO {
 			
 			while(rs.next()) {
 				ItemDTO dto = new ItemDTO();
-				dto.setNo(rs.getInt("no"));
+				dto.setNo(rs.getString("no"));
 				dto.setName(rs.getString("name"));
 				dto.setPrice(rs.getInt("price"));
 				dto.setFilename(rs.getString("filename"));
@@ -74,7 +74,7 @@ public class ItemDAO {
 			
 			while(rs.next()) {
 				ItemDTO dto = new ItemDTO();
-				dto.setNo(rs.getInt("no"));
+				dto.setNo(rs.getString("no"));
 				dto.setName(rs.getString("name"));
 				dto.setPrice(rs.getInt("price"));
 				dto.setIngre(rs.getString("ingre"));

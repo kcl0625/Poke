@@ -23,7 +23,7 @@ fieldset.cart ul li p.quantity {position: absolute; left: 60%; transform: transl
 fieldset.cart ul li:first-child {padding-top: 0;}
 fieldset.cart ul li:last-of-type {border: 0;}
 
-.payment .kakaopay p {font-size: var(--small-font-size);}
+.payment .card p {font-size: var(--small-font-size);}
 
 .input-item.check:first-of-type {margin-top: 1em;}
 input[type="radio"] + label {padding-left: 40px; position: relative;}

@@ -36,7 +36,7 @@
 
 		<ul>
 			<% for(int i=0;i<pokeSize;i++){
-				int no = pokeList.get(i).getNo();
+				String no = pokeList.get(i).getNo();
 				String name = pokeList.get(i).getName();
 				String desc = pokeList.get(i).getDescription();
 				String ingre = pokeList.get(i).getIngre();

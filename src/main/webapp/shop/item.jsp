@@ -22,7 +22,7 @@ if(cate.equals("전체")){
 }
 
 for(int i=0;i<shopItem.size();i++) {
-	int no = shopItem.get(i).getNo();
+	String no = shopItem.get(i).getNo();
 	String name = shopItem.get(i).getName();
 	int price = shopItem.get(i).getPrice();
 	String filename = shopItem.get(i).getFilename();%>

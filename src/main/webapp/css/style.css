@@ -247,6 +247,7 @@ footer div:last-of-type ul {float: right;}
 .txt-left {text-align: left;}
 .txt-right {text-align: right;}
 .txt-center {text-align: center;}
+.clear {clear: both;}
 
 .point.salmon {color: var(--color-salmon);}
 .point.cheese {color: var(--color-cheese);}
@@ -396,7 +397,7 @@ legend::first-letter {color: var(--color-salary);}
     visibility: hidden;
     transition: .2s .1s ease;
 }
-#popup .close {position: absolute;right: 0;top: -2.8em;width: 3em;height: 3em; cursor: pointer;padding-top: 1em;z-index: -1;}
+#popup .close {position: absolute;right: 0;top: -3.8em;width: 3em;height: 3em; cursor: pointer;padding-top: 1em;z-index: -1;}
 #popup .close span {
 	position: absolute;
 	display: block;
@@ -409,6 +410,7 @@ legend::first-letter {color: var(--color-salary);}
 #popup .theme-box {background: var(--color-bak);}
 #popup p.header {border-bottom: 1px solid; padding-bottom: .5em; font-size: var(--accent-font-size);}
 #popup .content {padding-top: 1em;}
+#popup a {font-size: var(--small-font-size); margin-top: 1em; float: right;}
 
 #popup.common,
 #popup.cart {max-width: 400px;}

@@ -7,7 +7,7 @@ public class OrderDTO extends ItemDTO {
 	private String isPaid;
 	private String date;
 	private String depositor;
-	
+
 	public int getWeek() {
 		return week;
 	}

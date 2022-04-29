@@ -50,11 +50,13 @@ String[] dayEng = {"mon", "tue", "wed", "thu", "fri", "sat"};
 							out.println("<p style=\"width: 100%;\" class=\"txt-center\">내역이 없습니다</p>");
 						} else {
 							for(int i=0;i<pokeList.size();i++){
+								String no = pokeList.get(i).getNo();
 								String name = pokeList.get(i).getName();
 								String ingre = pokeList.get(i).getIngre();
 								int price = pokeList.get(i).getPrice();
 								int custom = pokeList.get(i).getCustom();
-								String filename = pokeList.get(i).getFilename();%>
+								String filename = pokeList.get(i).getFilename();
+								%>
 								<li id="poke_<%=i %>" class="theme-box round">
 									<input type="hidden" name="poke_<%=i %>_ingre" id="poke_<%=i %>_ingre" value="<%=ingre%>">
 									<input type="hidden" name="poke_<%=i %>_price" id="poke_<%=i %>_price" value="<%=price%>">
@@ -82,7 +84,7 @@ String[] dayEng = {"mon", "tue", "wed", "thu", "fri", "sat"};
 									<p class="price">￦<%=String.format("%,d", price) %></p>
 									<div class="btns">
 										<button class="mod" type="button" onclick="location.href='<%=root%>/make/make.jsp?name=<%=name%>&ingre=<%=ingre%>'"><i class="fas fa-pen"></i></button>
-										<button class="del" type="button"><i class="fas fa-trash"></i></button>
+										<button class="del" type="button"><i class="fas fa-trash" onclick="location.href='delCart.jsp?no=<%=no%>'"></i></button>
 									</div>
 								</li>
 							<%}
@@ -102,6 +104,7 @@ String[] dayEng = {"mon", "tue", "wed", "thu", "fri", "sat"};
 							out.println("<p style=\"width: 100%;\" class=\"txt-center\">내역이 없습니다</p>");
 						} else {
 							for(int i=0;i<etcList.size();i++){
+								String no = etcList.get(i).getNo();
 								String name = etcList.get(i).getName();
 								int price = etcList.get(i).getPrice();
 								int qua = etcList.get(i).getQuantity();
@@ -126,7 +129,7 @@ String[] dayEng = {"mon", "tue", "wed", "thu", "fri", "sat"};
 										<a href="javascript:void(0);" onclick="adjust('-', this, <%=price%>)">-</a>
 									</div>
 									<div class="btns">
-										<button class="cart" type="button"><i class="fas fa-trash"></i></button>
+										<button class="del" type="button" onclick="location.href='delCart.jsp?no=<%=no%>'"><i class="fas fa-trash"></i></button>
 									</div>
 								</li>
 							<%}

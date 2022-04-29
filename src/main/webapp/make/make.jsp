@@ -101,7 +101,8 @@ if (isAdm == 1) {
 			let submitBtn = document.querySelector("#submit");
 			
 			submitBtn.addEventListener('click', () => {
-				menuSubmit(0, 'poke', menu.name.value, menu.price.value, 1);
+				let no = Math.floor(Math.random() * 90000 + 10000);
+				menuSubmit(no, 'poke', menu.name.value, menu.price.value, 1);
 			})
 			</script>
 		</div>

@@ -139,7 +139,7 @@ let goOrder = () => {
 			etcArr.push(cartItem);
 		}
 		
-		location.href = "orderForm.jsp?param=" + encodeURIComponent(JSON.stringify({pokeArr: pokeArr, etcArr: etcArr})) + "&week=" + cart.weekPlan.value;
+		location.href = "orderForm.jsp?param=" + encodeURIComponent(JSON.stringify({pokeArr: pokeArr, etcArr: etcArr})) + "&weekPlan=" + cart.weekPlan.value;
 		new Ajax.Request('orderForm.jsp', {
 			method: 'post',
 			contentType: 'application/json',

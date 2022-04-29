@@ -1,14 +1,13 @@
 package order;
 
 public class ItemDTO {
-	private int no;
+	private String no;
 	private String type;
 	private String name;
 	private String ingre;
 	private String day;
 	private double cal;
 	private int price;
-	private int week;
 	
 	private String id;
 	private int custom;
@@ -16,10 +15,10 @@ public class ItemDTO {
 	private String description;
 	private String filename;
 	
-	public int getNo() {
+	public String getNo() {
 		return no;
 	}
-	public void setNo(int no) {
+	public void setNo(String no) {
 		this.no = no;
 	}
 	public String getType() {
