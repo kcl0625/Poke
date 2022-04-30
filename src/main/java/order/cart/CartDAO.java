@@ -71,6 +71,7 @@ public class CartDAO {
 			sql = "select c.*, s.filename";
 			sql += " from cart c, shop s";
 			sql += " where c.id = ?";
+			sql += " and type = 'etc'";
 			sql += " and c.no = s.no";
 			
 			pstmt = con.prepareStatement(sql);
@@ -99,50 +100,84 @@ public class CartDAO {
 		return cart;
 	}
 	
-	public void addCart(ItemDTO dto, String id, String date) { //plan
+	public String addCart(ItemDTO dto, String id, String date) { //plan
+		String res = "";
 		try	{
 			con = Config.getConnection();
-			sql = "insert into cart(no, type, name, ingre, price, cal, id, date, custom) values(?,?,?,?,?,?,?,?,?)";
+			String no = dto.getNo();
+			
+			sql = "select * from cart where no = ?";
 			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, no);
 			
-			pstmt.setString(1, dto.getNo());
-			pstmt.setString(2, dto.getType());
-			pstmt.setString(3, dto.getName());
-			pstmt.setString(4, dto.getIngre());
-			pstmt.setInt(5, dto.getPrice());
-			pstmt.setDouble(6, dto.getCal());
-			pstmt.setString(7, id);
-			pstmt.setString(8, date);
-			pstmt.setInt(9, dto.getCustom());
+			ResultSet rs = null;
+			rs = pstmt.executeQuery();
 			
-			pstmt.executeUpdate();
+			if(!rs.next()) { //중복 메뉴 없음
+				sql = "insert into cart(no, type, name, ingre, price, cal, id, date, custom) values(?,?,?,?,?,?,?,?,?)";
+				pstmt = con.prepareStatement(sql);
+				
+				pstmt.setString(1, dto.getNo());
+				pstmt.setString(2, dto.getType());
+				pstmt.setString(3, dto.getName());
+				pstmt.setString(4, dto.getIngre());
+				pstmt.setInt(5, dto.getPrice());
+				pstmt.setDouble(6, dto.getCal());
+				pstmt.setString(7, id);
+				pstmt.setString(8, date);
+				pstmt.setInt(9, dto.getCustom());
+				
+				pstmt.executeUpdate();
+				res = "y";
+			} else {
+				res = "n";
+			}
+			
 			pstmt.close();
 			con.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		return res;
 	}
 	
-	public void addCart(ItemDTO dto, int quantity, String id, String date) { //etc
+	public String addCart(ItemDTO dto, int quantity, String id, String date) { //etc
+		String res = "";
 		try	{
 			con = Config.getConnection();
-			sql = "insert into cart(no, type, name, price, id, date, quantity) values(?,?,?,?,?,?,?)";
+			String no = dto.getNo();
+			
+			sql = "select * from cart where no = ?";
 			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, no);
 			
-			pstmt.setString(1, dto.getNo());
-			pstmt.setString(2, dto.getType());
-			pstmt.setString(3, dto.getName());
-			pstmt.setInt(4, dto.getPrice());
-			pstmt.setString(5, id);
-			pstmt.setString(6, date);
-			pstmt.setInt(7, dto.getQuantity());
+			ResultSet rs = null;
+			rs = pstmt.executeQuery();
 			
-			pstmt.executeUpdate();
+			if(!rs.next()) {
+				con = Config.getConnection();
+				sql = "insert into cart(no, type, name, price, id, date, quantity) values(?,?,?,?,?,?,?)";
+				pstmt = con.prepareStatement(sql);
+				
+				pstmt.setString(1, dto.getNo());
+				pstmt.setString(2, dto.getType());
+				pstmt.setString(3, dto.getName());
+				pstmt.setInt(4, dto.getPrice());
+				pstmt.setString(5, id);
+				pstmt.setString(6, date);
+				pstmt.setInt(7, dto.getQuantity());
+				
+				pstmt.executeUpdate();
+				res = "y";
+			} else {
+				res = "n";
+			}
 			pstmt.close();
 			con.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		return res;
 	}
 	
 	public void delCart(String no, String id) {

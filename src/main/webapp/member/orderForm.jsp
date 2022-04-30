@@ -14,14 +14,15 @@ if (isMem == 0) response.sendRedirect(root + "/bbs/loginForm.jsp");%>
 <%
 request.setCharacterEncoding("utf-8");
 response.setCharacterEncoding("utf-8");
-MemberDTO member = memberBean.getMember(sessionId);%>
+MemberDTO member = memberBean.getMember(sessionId);
+
+int week = Integer.parseInt(request.getParameter("weekPlan"));%>
 
 <link rel="stylesheet" href="<%=root %>/css/order.css">
 <script src="<%=root %>/js/order.js"></script>
 <jsp:include page="/header.jsp" />
 
 <div class="wrapper form-wrapper" style="flex-wrap: wrap;">
-	<%int week = Integer.parseInt(request.getParameter("weekPlan")); %>
 	<form name="order" method="post" action="order.jsp?weekPlan=<%=week%>">
 		<div class="form-item">
 			<fieldset class="address">

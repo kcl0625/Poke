@@ -52,7 +52,10 @@
 						<div class="add">
 							<a href="javascript:void(0);"
 							<%if(isMem == 1 && isAdm == 0) {%>onclick="addMenu(<%=no %>, 'poke', '<%=name%>', '<%=ingre%>', <%=price%>, <%=custom%>);"<%}
-							else {%>onclick="location.href='<%=root %>/bbs/loginForm.jsp';"<%} %>>이대로 담기</a> / <a>수정하기</a>
+							else {%>onclick="location.href='<%=root %>/bbs/loginForm.jsp';"<%} %>>이대로 담기</a> /
+							<a href="javascript:void(0);"
+							<%if(isMem == 1 && isAdm == 0) {%>onclick="location.href='<%=root %>/make/modify.jsp?name=<%=name %>&ingre=<%=ingre%>'"<%}
+							else {%>onclick="location.href='<%=root %>/bbs/loginForm.jsp';"<%} %>>수정하기</a>
 							<svg viewBox="0 0 25 50"><polyline class="stroke only" stroke-miterlimit="10" points="0,0 25,25 0,50"/></svg>
 						</div>
 					</li>

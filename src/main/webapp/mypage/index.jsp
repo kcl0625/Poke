@@ -4,6 +4,12 @@
 <%@page import="java.util.ArrayList" %>
 <%@page import="order.OrderDTO"%>
 
+<%
+if (isMem == 0){response.sendRedirect(root + "/bbs/loginForm.jsp");}
+if (isAdm == 1) {
+	out.write("<script>잘못된 접근입니다</script>");
+}%>
+
 <jsp:useBean id="orderBean" class="order.OrderDAO" />
 <jsp:include page="/header.jsp" />
 <link rel="stylesheet" href="<%=root%>/css/mypage.css">
@@ -50,7 +56,8 @@
 			<h2>My POKE</h2>
 			<%ArrayList<OrderDTO> pokeOrderList = orderBean.getPokeOrder(sessionId);
 			int total = pokeOrderList.size();%>
-			<span><%=pokeOrderList.get(0).getWeek()%> week plan</span>
+			<span><%if (total != 0) out.println(pokeOrderList.get(0).getWeek());
+			else out.println(0);%> week plan</span>
 		</div>
 			
 		<div class="list">

@@ -35,7 +35,8 @@ int max = 6;%>
 </a>
 <%if(type.equals("poke")) {
 	if(pokeSize < max) {
-		dao.addCart(item, sessionId, now);%>
+		String isAdded = dao.addCart(item, sessionId, now);
+		if (isAdded == "y") {%>
 		<div class="theme-box round">
 			<p class="header">장바구니에 담겼어요</p>
 			<div class="content">
@@ -49,6 +50,14 @@ int max = 6;%>
 			<div class="clear"></div>
 		</div>
 	<% } else { %>
+			<div class="theme-box round">
+				<p class="header">이런!</p>
+				<div class="content">
+					<p>장바구니에 담을 수 없어요<br>이미 같은 메뉴가 있어요</p>
+				</div>
+			</div>
+		<%}
+	} else { %>
 		<div class="theme-box round">
 			<p class="header">이런!</p>
 			<div class="content">
@@ -56,9 +65,10 @@ int max = 6;%>
 			</div>
 		</div>
 	<% }
-} else {
-	dao.addCart(item, qua, sessionId, now);%>
-	<div class="theme-box round">
+} else if(type.equals("etc")) {
+	String res = dao.addCart(item, qua, sessionId, now);
+	if (res == "y") {%>
+		<div class="theme-box round">
 		<p class="header">장바구니에 담겼어요</p>
 		<div class="content">
 			<div class="top-content">
@@ -75,4 +85,12 @@ int max = 6;%>
 		<a href="<%=root %>/member/cart.jsp">장바구니로</a>
 		<div class="clear"></div>
 	</div>
+	<%} else {%>
+		<div class="theme-box round">
+			<p class="header">이런!</p>
+			<div class="content">
+				<p>이미 담겨진 상품이에요<br>수량을 변경은 장바구니에서 해주세요</p>
+			</div>
+		</div>
+	<%} %>
 <% }%>

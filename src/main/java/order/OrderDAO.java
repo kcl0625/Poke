@@ -33,7 +33,7 @@ public class OrderDAO {
 			pstmt.setString(12, depositor);
 			pstmt.setString(13, memberDto.getEmail());
 			
-			pstmt.executeUpdate();
+			//pstmt.executeUpdate();
 
 			sql = "insert into ordereditem(no, type, name, ingre, day, quantity, price, week) values(?,?,?,?,?,?,?,?)";
 			pstmt = con.prepareStatement(sql);
@@ -50,12 +50,15 @@ public class OrderDAO {
 				pstmt.setInt(7, orderDto.getPrice());
 				pstmt.setInt(8, week);
 				
-				pstmt.executeUpdate();
+				//pstmt.executeUpdate();
 			}
-			sql = "delete from cart where id = ? and no = ?";
+			sql = "delete from cart where id = ?";
 			pstmt.setString(1, id);
-			pstmt.setString(2, no);
 			pstmt.executeUpdate();
+			System.out.println(sql);
+			System.out.println(id);
+			
+			
 			
 			pstmt.close();
 			con.close();

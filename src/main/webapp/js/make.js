@@ -1,4 +1,4 @@
-let wrapperL = 2; //한 번에 보여줄 개수
+let wrapperL = 4; //한 번에 보여줄 개수
 let gap = 30; //간격
 			
 let cur = 0;

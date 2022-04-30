@@ -91,6 +91,69 @@ public class ItemDAO {
 		return shop;
 	}
 	
+	public ItemDTO getPoke(String name, String ingre) { //메뉴 수정
+		ItemDTO poke = new ItemDTO();
+		try {
+			con = Config.getConnection();
+			sql = "select name, ingre from poke where name = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, name);
+			
+			ResultSet rs = pstmt.executeQuery();
+			if (rs.next()) { //bowls에 있는 메뉴
+				poke.setName(rs.getString("name"));
+				
+				String[] ingreArr = rs.getString("ingre").split("/");
+				sql = "select name, price, cal, filename from ingre where name = ?";
+				pstmt = con.prepareStatement(sql);
+				ArrayList<IngreDTO> ingreList = new ArrayList<IngreDTO>();
+				
+				for (int i=0;i<ingreArr.length;i++) {
+					pstmt.setString(1, ingreArr[i]);
+					ResultSet rs2 = pstmt.executeQuery();
+					
+					while(rs2.next()) {
+						IngreDTO dto = new IngreDTO();
+						dto.setName(rs2.getString("name"));
+						dto.setPrice(rs2.getInt("price"));
+						dto.setCal(rs2.getDouble("cal"));
+						dto.setFileName(rs2.getString("filename"));
+						ingreList.add(dto);
+					}
+					poke.setIngreList(ingreList);
+				}
+			} else { //사용자가 직접 만든 메뉴
+				con = Config.getConnection();
+				sql = "select name, price, cal, filename from ingre where name = ?";
+				pstmt = con.prepareStatement(sql);
+				
+				String[] ingreArr = ingre.split("/");
+				ArrayList<IngreDTO> ingreList = new ArrayList<IngreDTO>();
+				
+				for(int i=0;i<ingreArr.length;i++) {
+					pstmt.setString(1, ingreArr[i]);
+					ResultSet rs2 = pstmt.executeQuery();
+					
+					while(rs2.next()) {
+						IngreDTO dto = new IngreDTO();
+						dto.setName(rs2.getString("name"));
+						dto.setPrice(rs2.getInt("price"));
+						dto.setCal(rs2.getDouble("cal"));
+						dto.setFileName(rs2.getString("filename"));
+						ingreList.add(dto);
+					}
+					poke.setIngreList(ingreList);
+				}	
+			}
+			rs.close();
+			pstmt.close();
+			con.close();
+		} catch(Exception e){
+			e.printStackTrace();
+		}
+		return poke;
+	}
+	
 	public ItemDTO showView(int no){
 		ItemDTO item = new ItemDTO();
 		try {

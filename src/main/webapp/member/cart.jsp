@@ -16,9 +16,9 @@ String[] day = {"월", "화", "수", "목", "금", "토"};
 String[] dayEng = {"mon", "tue", "wed", "thu", "fri", "sat"};
 %>
 <div class="wrapper">
-	<form name="cart" method="post" action="orderForm.jsp">
-		<input type="hidden" name="weekPlan" value="1">
-		
+	<form name="cart" method="post">
+		<input type="hidden" name="weekPlan" value="1">	
+	
 		<div class="page-title">
 			<h2><span class="point cheese">C</span>art</h2>	
 		</div>
@@ -57,12 +57,12 @@ String[] dayEng = {"mon", "tue", "wed", "thu", "fri", "sat"};
 								int custom = pokeList.get(i).getCustom();
 								String filename = pokeList.get(i).getFilename();
 								%>
-								<li id="poke_<%=i %>" class="theme-box round">
-									<input type="hidden" name="poke_<%=i %>_ingre" id="poke_<%=i %>_ingre" value="<%=ingre%>">
-									<input type="hidden" name="poke_<%=i %>_price" id="poke_<%=i %>_price" value="<%=price%>">
-									<input type="hidden" name="name" id="etc_<%=i %>_price" value="<%=name%>">
-									<input type="hidden" name="ingre" id="poke_<%=i %>_ingre" value="<%=ingre%>">
-									<input type="hidden" name="price" id="poke_<%=i %>_price" value="<%=price%>">
+								<li id="poke_<%=no %>" class="theme-box round">
+									<input type="hidden" name="poke_<%=no %>_ingre" id="poke_<%=no %>_ingre" value="<%=ingre%>">
+									<input type="hidden" name="poke_<%=no %>_price" id="poke_<%=no %>_price" value="<%=price%>">
+									<input type="hidden" name="name" id="etc_<%=no %>_price" value="<%=name%>">
+									<input type="hidden" name="ingre" id="poke_<%=no %>_ingre" value="<%=ingre%>">
+									<input type="hidden" name="price" id="poke_<%=no %>_price" value="<%=price%>">
 									<div class="img">
 										<% if(custom == 1){%>
 											<svg viewBox="0 0 50 33.431"><path class="stroke only" d="M49.5,8.431c0,13.53-10.968,24.5-24.5,24.5 c-13.531,0-24.5-10.97-24.5-24.5 M13.377,12.084c-2.762,0-5,2.218-5,4.953c0,2.736,2.238,4.956,5,4.956s5-2.22,5-4.956 C18.377,14.302,16.139,12.084,13.377,12.084z M33.276,14.931c-2.761,0-5,2.314-5,5.17c0,2.854,2.239,5.17,5,5.17s5-2.316,5-5.17 C38.276,17.245,36.037,14.931,33.276,14.931z M27.085,0.5c-2.762,0-5.001,2.282-5.001,5.097c0,2.814,2.239,5.096,5.001,5.096 c2.761,0,4.999-2.281,4.999-5.096C32.084,2.782,29.846,0.5,27.085,0.5z"/></svg>
@@ -73,8 +73,8 @@ String[] dayEng = {"mon", "tue", "wed", "thu", "fri", "sat"};
 									<div class="item-info">
 										<fieldset class="day">
 										<%for(int j=0;j<day.length;j++) {%>
-											<input type="checkbox" name="day" id="poke_<%=i %>_<%=dayEng[j]%>" class="<%=dayEng[j]%>" value="<%=dayEng[j]%>">
-											<label for="poke_<%=i %>_<%=dayEng[j]%>"><%=day[j]%></label>
+											<input type="checkbox" name="day" id="poke_<%=no %>_<%=dayEng[j]%>" class="<%=dayEng[j]%>" value="<%=dayEng[j]%>">
+											<label for="poke_<%=no %>_<%=dayEng[j]%>"><%=day[j]%></label>
 										<%} %>
 										</fieldset>
 										<h3 class="name"><%=name %></h3>
@@ -83,7 +83,7 @@ String[] dayEng = {"mon", "tue", "wed", "thu", "fri", "sat"};
 									
 									<p class="price">￦<%=String.format("%,d", price) %></p>
 									<div class="btns">
-										<button class="mod" type="button" onclick="location.href='<%=root%>/make/make.jsp?name=<%=name%>&ingre=<%=ingre%>'"><i class="fas fa-pen"></i></button>
+										<button class="mod" type="button" onclick="location.href='<%=root%>/make/modify.jsp?name=<%=name%>&ingre=<%=ingre%>'"><i class="fas fa-pen"></i></button>
 										<button class="del" type="button"><i class="fas fa-trash" onclick="location.href='delCart.jsp?no=<%=no%>'"></i></button>
 									</div>
 								</li>
@@ -112,10 +112,10 @@ String[] dayEng = {"mon", "tue", "wed", "thu", "fri", "sat"};
 								
 								int etcItemPrice = price * qua;
 								etcTotPrice += etcItemPrice;%>
-								<li id="etc_<%=i %>" class="theme-box round">
-									<input type="hidden" name="etc_<%=i %>_price" id="etc_<%=i %>_price" value="<%=price%>">
-									<input type="hidden" name="name" id="etc_<%=i %>_name" value="<%=name%>">
-									<input type="hidden" name="price" id="etc_<%=i %>_price" value="<%=price%>">
+								<li id="etc_<%=no %>" class="theme-box round">
+									<input type="hidden" name="etc_<%=no %>_price" id="etc_<%=no %>_price" value="<%=price%>">
+									<input type="hidden" name="name" id="etc_<%=no %>_name" value="<%=name%>">
+									<input type="hidden" name="price" id="etc_<%=no %>_price" value="<%=price%>">
 									<div class="img" style="background-image:url('<%=root%>/data/mealkit/<%=filename%>');"></div>
 									<div class="item-info">
 										<h3 class="name"><%=name %></h3>

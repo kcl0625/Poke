@@ -5,7 +5,10 @@
 <%if (isAdm == 1) out.write("<script>alert('잘못된 접근입니다');location.href = '" + root + "/index.jsp';</script>");
 if (isMem == 0) response.sendRedirect(root + "/bbs/loginForm.jsp");%>
 <jsp:include page="/header.jsp" />
-
+<style>
+.wrapper {padding: 0;display: flex;flex-wrap: wrap;align-content: center;height: 100vh;}
+footer {margin-top: 0;}
+</style>
 <div class="wrapper form-item">
 	<div class="theme-box leaf txt-center">
 		<p>

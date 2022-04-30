@@ -3,6 +3,8 @@
 <%@page import="java.util.ArrayList" %>
 <%@page import="bbs.CategoryDTO" %>
 <%@page import="order.IngreDTO" %>
+<%@page import="order.ItemDTO" %>
+<%@page import="order.ItemDAO" %>
 <%@include file="/config.jsp" %>
 
 <%
@@ -13,6 +15,7 @@ if (isAdm == 1) {
 
 <jsp:useBean id="categoryBean" class="bbs.CategoryDAO" />
 <jsp:useBean id="ingreBean" class="order.IngreDAO" />
+<jsp:useBean id="cartBean" class="order.cart.CartDAO" />
 
 <link rel="stylesheet" href="<%=root %>/css/make.css">
 <script src="<%=root %>/js/make.js"></script>
@@ -59,23 +62,40 @@ if (isAdm == 1) {
 			selectCategory('<%=cateList.get(0).getName()%>');
 			</script>
 		</div>
-		<%
-			String name = request.getParameter("name");
-			String ingre = request.getParameter("ingre");
-		%>
 		<div class="form-wrapper">
 			<form name="menu" method="post" action="<%=root %>/member/addCart.jsp" style="width: 100%;">
 				<input type="hidden" name="ingre">
 				<input type="hidden" name="price">
 				<input type="hidden" name="cal">
-				
 				<div id="bowl" ondragover="drop();" ondrop="addItem(event);">
 					<div class="write-name">
-						<input type="text" name="name" id="name" onsubmit="return false;" value="<%=name%>">
+						<%String selectedPoke = request.getParameter("name"); 
+						String ingreStr = request.getParameter("ingre");%>
+						<input type="text" name="name" id="name" onsubmit="return false;" value="<%=selectedPoke%>">
 						<hr class="line">
 					</div>
 					<span class="indicator"></span>
 					<svg viewBox="0 0 100 50"><path class="stroke only" d="M99.5,0c0,27.339-22.162,49.5-49.5,49.5C22.662,49.5,0.5,27.339,0.5,0" /></svg>
+					
+					<% ItemDAO dao = new ItemDAO();
+					ItemDTO poke = dao.getPoke(selectedPoke, ingreStr);
+					
+					int totPrice = 0;
+					double totCal = 0;
+					
+					for (int i=0;i<poke.getIngreList().size();i++){
+						String nameIngre = poke.getIngreList().get(i).getName();
+						int priceIngre = poke.getIngreList().get(i).getPrice();
+						double calIngre = poke.getIngreList().get(i).getCal();
+						String filenameIngre = poke.getIngreList().get(i).getFileName();
+						
+						totPrice += priceIngre;
+						totCal += calIngre;%>
+						<div id="item_<%=i%>" class="item ingre_<%=i%>" onclick="dropItem(this)" onmouseenter="showInfo(this, event)" onmouseleave="hideInfo(this, event)"
+						data-name="<%=nameIngre%>" data-price="<%=priceIngre%>" data-cal="<%=calIngre%>">
+							<img src="<%=root%>/data/ingre/<%=filenameIngre%>">
+						</div>
+					<%}	%>
 				</div>
 				
 				<div class="receipt">
@@ -85,21 +105,36 @@ if (isAdm == 1) {
 							<a class="clear" href="javascript:clear();"><i class="fas fa-trash"></i></a>
 						</div>
 						<div class="list">
-							<ul></ul>
+							<ul>
+								<%for (int i=0;i<poke.getIngreList().size();i++){
+									String nameIngre = poke.getIngreList().get(i).getName();
+									int priceIngre = poke.getIngreList().get(i).getPrice();
+									double calIngre = poke.getIngreList().get(i).getCal();
+									String filenameIngre = poke.getIngreList().get(i).getFileName();%>
+									<li class="ingre ingre_<%=i%>" data-name="<%=nameIngre %>">
+										<span class="name"><%=nameIngre %></span>
+										<span class="cal"><%=calIngre %>kcal</span>
+										<span class="dot">···</span>
+										<span class="price">￦<%=String.format("%,d", priceIngre) %></span>
+									</li>
+								<%}%>
+							</ul>
 						</div>
 						<div class="total">
-							<p id="price">￦0</p>
-							<p id="cal">0kcal</p>
+							<p id="price">￦<%=totPrice %></p>
+							<p id="cal"><%=totCal %>kcal</p>
 						</div>
 					</div>
 					<button id="submit" type="button" class="ui-btn point big full">담기</button>
 				</div>
 			</form>
+			
 			<script>
 			let submitBtn = document.querySelector("#submit");
 			
 			submitBtn.addEventListener('click', () => {
-				menuSubmit(0, 'poke', menu.name.value, menu.price.value, 1);
+				let no = Math.floor(Math.random() * 90000 + 10000);
+				menuSubmit(no, 'poke', menu.name.value, menu.price.value, 1);
 			})
 			</script>
 		</div>

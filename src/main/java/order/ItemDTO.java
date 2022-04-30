@@ -1,4 +1,5 @@
 package order;
+import java.util.ArrayList;
 
 public class ItemDTO {
 	private String no;
@@ -8,6 +9,7 @@ public class ItemDTO {
 	private String day;
 	private double cal;
 	private int price;
+	private ArrayList<IngreDTO> ingreList;
 	
 	private String id;
 	private int custom;
@@ -87,5 +89,11 @@ public class ItemDTO {
 	}
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
+	}
+	public ArrayList<IngreDTO> getIngreList() {
+		return ingreList;
+	}
+	public void setIngreList(ArrayList<IngreDTO> ingreList) {
+		this.ingreList = ingreList;
 	}
 }
