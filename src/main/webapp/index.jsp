@@ -200,10 +200,10 @@
 			</div>
 			
 			<!-- fixed element -->
-			<div class="bowl" ondragover="drop();" ondrop="addItem(event);">
+			<div class="bowl fixed" ondragover="drop();" ondrop="addItem(event);">
 				<svg viewBox="0 0 100 50"><path class="stroke only" d="M99.5,0c0,27.339-22.162,49.5-49.5,49.5C22.662,49.5,0.5,27.339,0.5,0"></path></svg>
 			</div>
-			<div class="go-next-slide" onclick="move()"><span class="arrow"></span>next</div>
+			<div class="go-next-slide fixed" onclick="move()"><span class="arrow"></span>next</div>
 			
 			<script>
 				let sectionSlide = document.querySelector('.section-slide');
@@ -265,13 +265,21 @@
 				}
 				
 				window.addEventListener('scroll', () => {
-					
-				})
-				
-				chkVisible = (elm, eval) => {
 					let h = window.innerHeight;
-					console.log(h);
-				}
+					let top = window.scrollY;
+					
+					let fixedElm =  document.querySelectorAll('.fixed');
+					let ingreWrapper = document.querySelector('#ingre-wrapper');
+					
+					fixedElm[0].classList.remove('show');
+					fixedElm[1].classList.remove('show');
+					
+					if(top >= h * 2 - 50 && top < h * 3 + 50) {
+						ingreWrapper.classList.add('show');
+						fixedElm[0].classList.add('show');
+						fixedElm[1].classList.add('show');
+					}
+				})
 			</script>
 		</div>
 	</div>

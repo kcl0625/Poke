@@ -75,9 +75,12 @@ footer {margin-top: 0;}
 #ingre-wrapper .item svg polygon,
 #ingre-wrapper .item svg circle {stroke-width: .5;}
 #ingre-wrapper .item svg image {width: 100%; visibility: hidden; opacity: 0; transition: .4s ease; transform-origin: center center; filter: blur(2px);}
-#ingre-wrapper .item svg .stroke {animation: draw 1.5s ease forwards; stroke-dasharray: 200; stroke-dashoffset: 200;}
-#ingre-wrapper .item svg .fill {animation: fade 1s 1.3s ease forwards; opacity: 0;}
+#ingre-wrapper .item svg .stroke {stroke-dasharray: 200; stroke-dashoffset: 200;}
+#ingre-wrapper .item svg .fill {opacity: 0;}
 #ingre-wrapper .item:hover svg image {visibility: visible; opacity: 1; filter: none;}
+
+#ingre-wrapper.show .stroke {animation: draw 1.5s ease forwards;}
+#ingre-wrapper.show .fill {animation: fade 1s 1.3s ease forwards;}
 
 @keyframes draw {
     0% {stroke-dasharray: 200; stroke-dashoffset: 200;}
@@ -190,7 +193,6 @@ flex-wrap: wrap;position: relative;z-index: 2;}
 	visibility: hidden;
 	transition: .3s 1s ease;
 }
-.wrapper#make .bowl.show {opacity: 1; visibility: visible;}
 .wrapper#make .bowl svg {stroke-width: .2; position: absolute; bottom: 0;}
 
 .wrapper#make .section-slide .go-next-slide {
@@ -208,10 +210,6 @@ flex-wrap: wrap;position: relative;z-index: 2;}
 	opacity: 0;
 	visibility: hidden;
 	transition: .3s 1.2s ease;
-}
-.wrapper#make .section-slide .go-next-slide.show {
-	opacity: 1;
-	visibility: visible;
 }
 .wrapper#make .section-slide .go-next-slide .arrow {
 	position: relative;
@@ -246,6 +244,9 @@ flex-wrap: wrap;position: relative;z-index: 2;}
 	top: .985em;
 	right: -.5em;
 }
+.wrapper#make .fixed {opacity: 0; transition: .3s ease; visibility: hidden;}
+.wrapper#make .fixed.show {opacity: 1; visibility: visible;}
+
 .wrapper#make .last .bowl {animation: move .8s .6s ease forwards; margin-left: 0;}
 .wrapper#make .section-slide.last .go-next-slide {visibility: hidden; opacity: 0;}
 
