@@ -88,6 +88,7 @@
 	align-items: center;
 	flex-wrap: wrap;
 	cursor: pointer;
+	overflow: hidden;
 }
 .making .item img {position: relative;width: 70%;height: auto;}
 

@@ -1,4 +1,5 @@
 package order;
+import java.util.ArrayList;
 
 public class OrderDTO extends ItemDTO {
 	private int week;
@@ -7,6 +8,7 @@ public class OrderDTO extends ItemDTO {
 	private String isPaid;
 	private String date;
 	private String depositor;
+	private ArrayList<ItemDTO> poke;
 
 	public int getWeek() {
 		return week;
@@ -43,5 +45,11 @@ public class OrderDTO extends ItemDTO {
 	}
 	public void setDepositor(String depositor) {
 		this.depositor = depositor;
+	}
+	public ArrayList<ItemDTO> getPoke() {
+		return poke;
+	}
+	public void setPoke(ArrayList<ItemDTO> poke) {
+		this.poke = poke;
 	}
 }

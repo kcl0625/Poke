@@ -5,15 +5,18 @@ a.go-back svg {width: .8em; stroke-width: 1.6;}
 
 .photo {
 	position: fixed;
-	width: 20vw;
-	height: 30vw;
+	width: 25vw;
+	height: 37.5vw;
+	max-width: 20vw;
+	max-height: 30vw;
 	border: 1px solid;
 	max-width: 380px;
 	max-height: 570px;
 	top: 50%;
 	transform: translateY(-50%);
+	overflow: hidden;
 }
-
+.photo img {position: absolute; top: 0; left: 0;}
 .form-right {
 	position: absolute;
 	right: 0;
@@ -29,13 +32,11 @@ a.go-back svg {width: .8em; stroke-width: 1.6;}
 
 .form-right .textarea {padding-top: 1em;}
 
-@media all and (max-width: 1280px) {
-	.photo {width: 25vw; height: 37.5vw;}
-}
 @media all and (max-width: 750px) {
-	.photo {position: relative; width: 100%; height: unset;}
+	.wrapper {padding: 0;}
+	.photo {position: relative; width: 100%; max-width: 100%; height: unset; margin-top: 5em; transform: none;}
 	.photo::before {content:''; display: block; padding-bottom: 150%;}
-	.form-right {position: relative; width: 100%;margin-top: 2em;}
+	.form-right {position: relative; width: 100%; max-width: 100%;margin-top: 2em;}
 }
 
 .write-bottom {

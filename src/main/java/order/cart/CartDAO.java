@@ -155,7 +155,6 @@ public class CartDAO {
 			rs = pstmt.executeQuery();
 			
 			if(!rs.next()) {
-				con = Config.getConnection();
 				sql = "insert into cart(no, type, name, price, id, date, quantity) values(?,?,?,?,?,?,?)";
 				pstmt = con.prepareStatement(sql);
 				

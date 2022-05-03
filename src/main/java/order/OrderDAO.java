@@ -33,7 +33,7 @@ public class OrderDAO {
 			pstmt.setString(12, depositor);
 			pstmt.setString(13, memberDto.getEmail());
 			
-			//pstmt.executeUpdate();
+			pstmt.executeUpdate();
 
 			sql = "insert into ordereditem(no, type, name, ingre, day, quantity, price, week) values(?,?,?,?,?,?,?,?)";
 			pstmt = con.prepareStatement(sql);
@@ -50,15 +50,13 @@ public class OrderDAO {
 				pstmt.setInt(7, orderDto.getPrice());
 				pstmt.setInt(8, week);
 				
-				//pstmt.executeUpdate();
+				pstmt.executeUpdate();
 			}
-			sql = "delete from cart where id = ?";
+			
+			sql = "delete from poke.cart where id = ?";
+			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
 			pstmt.executeUpdate();
-			System.out.println(sql);
-			System.out.println(id);
-			
-			
 			
 			pstmt.close();
 			con.close();
@@ -67,26 +65,67 @@ public class OrderDAO {
 		}
 	}
 	
-	public ArrayList<OrderDTO> getPokeOrder(String id) {
-		ArrayList<OrderDTO> pokeOrder = new ArrayList<OrderDTO>();
+	public OrderDTO getPokeOrder(String id) { //마이페이지에서 메뉴 주문 정보 불러오기
+		OrderDTO pokeOrder = new OrderDTO();
 		try {
 			con = Config.getConnection();
-			sql = "select * from ordereditem having no = (select no from poke.order where id = ?)";
+			sql = "select * from ordereditem where type = 'poke' having no = (select no from poke.order where id = ?)";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			ResultSet rs = pstmt.executeQuery();
+			
+			ArrayList<ItemDTO> pokeArr = new ArrayList<ItemDTO>();
+			
+			while(rs.next()) {
+				ItemDTO dto = new ItemDTO();
+				dto.setName(rs.getString("name"));
+				dto.setPrice(rs.getInt("price"));
+				dto.setIngre(rs.getString("ingre"));
+				dto.setDay(rs.getString("day"));
+				pokeArr.add(dto);
+				
+				sql = "select name, filename from poke where name = ?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, rs.getString("name"));
+				ResultSet rs2 = pstmt.executeQuery();
+				
+				while(rs2.next()) {
+					if(rs.getString("name").equals(rs2.getString("name")))
+						dto.setFilename(rs2.getString("filename"));
+				}
+				pokeOrder.setWeek(rs.getInt("week"));
+			}
+			pokeOrder.setPoke(pokeArr);
+			rs.close();
+			pstmt.close();
+			con.close();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return pokeOrder;
+	}
+	public ArrayList<ItemDTO> getEtcOrder(String id) {
+		ArrayList<ItemDTO> etcArr = new ArrayList<ItemDTO>();
+		try {
+			con = Config.getConnection();
+			sql = "select * from ordereditem where type = 'etc' having no = (select no from poke.order where id = ?)";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
 			ResultSet rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
-				OrderDTO dto = new OrderDTO();
+				ItemDTO dto = new ItemDTO();
 				dto.setName(rs.getString("name"));
 				dto.setPrice(rs.getInt("price"));
-				dto.setIngre(rs.getString("ingre"));
-				dto.setDay(rs.getString("day"));
-				pokeOrder.add(dto);
+				dto.setQuantity(rs.getInt("quantity"));
+				etcArr.add(dto);
 			}
-		}catch(Exception e) {
+			rs.close();
+			pstmt.close();
+			con.close();
+		} catch(Exception e) {
 			e.printStackTrace();
 		}
-		return pokeOrder;
+		return etcArr;
 	}
 }

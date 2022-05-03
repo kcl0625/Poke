@@ -1,5 +1,6 @@
 @charset 'utf-8';
-
+.category li {cursor: pointer;}
+.category .cur {font-weight: 600;}
 .result {font-size: var(--big-font-size); font-weight: 200; padding-bottom: 30px;}
 
 .list li {

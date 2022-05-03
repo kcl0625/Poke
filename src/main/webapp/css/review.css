@@ -1,6 +1,6 @@
 @charset 'utf-8';
 
-.list {width: 45vw; margin: 0 auto;}
+.list {width: 45vw; margin: 0 auto;max-width: 650px;}
 .list a {float: right; padding-bottom: 1em;}
 .list ul {display: grid;justify-content: center;grid-template-columns: 1fr 1fr 1fr;gap: 2em; clear: both;}
 .list li {position: relative; border: 1px solid;}

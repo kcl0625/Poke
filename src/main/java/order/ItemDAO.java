@@ -63,12 +63,13 @@ public class ItemDAO {
 		return shop;
 	}
 	
-	public ArrayList<ItemDTO> getPoke() {
-		ArrayList<ItemDTO> shop = new ArrayList<ItemDTO>();
+	public ArrayList<ItemDTO> getPokeList(String cate) {
+		ArrayList<ItemDTO> poke = new ArrayList<ItemDTO>();
 		try {
 			con = Config.getConnection();
-			sql = "select no, name, price, ingre, description, filename from poke";
+			sql = "select no, name, description, ingre, price, filename from poke where cate = ?";
 			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, cate);
 			
 			ResultSet rs = pstmt.executeQuery();
 			
@@ -80,7 +81,7 @@ public class ItemDAO {
 				dto.setIngre(rs.getString("ingre"));
 				dto.setDescription(rs.getString("description"));
 				dto.setFilename(rs.getString("filename"));
-				shop.add(dto);
+				poke.add(dto);
 			}
 			rs.close();
 			pstmt.close();
@@ -88,7 +89,7 @@ public class ItemDAO {
 		}catch(Exception e){
 			e.printStackTrace();
 		}
-		return shop;
+		return poke;
 	}
 	
 	public ItemDTO getPoke(String name, String ingre) { //메뉴 수정

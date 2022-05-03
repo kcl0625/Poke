@@ -8,10 +8,9 @@
 <jsp:useBean id="ingreBean" class="order.IngreDAO" />
 
 <jsp:include page="header.jsp" />
-<link rel="stylesheet" href="<%=root %>/css/fullpage.css">
 <link rel="stylesheet" href="<%=root %>/css/main.css">
-<div id="fullpage">
-	<div id= "main" class="wrapper section">
+
+	<div id= "main" class="wrapper">
 		<div class="main-txt">
 			<h1><span class="point salmon">D</span>esign <span class="point salary">Y</span>our<br>
 			<span class="point cheese">O</span>wn <span class="point salmon">B</span>owl
@@ -20,10 +19,15 @@
 			<p class="sub-txt">; one of the Hawaiian dishes,<br>in which diced fish served</p>
 			<h2 class="sub-title">내가 좋아하는 것들만 담아서</h2>
 		</div>
-		<div class="main-bg" style="background-image: url('https://images.unsplash.com/photo-1544536871-6e891baa163f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1887&q=80');"></div>
+		<div class="main-bg">
+			<svg viewBox="0 0 150 100">
+				<clipPath id="bg-mask"><path d="M1.378,0c0,0-11.667,33.5,32.883,55.199C60.379,67.921,75.105,80.167,70.027,100h80.186V0H1.378z"/></clipPath>
+				<image href="<%=root %>/img/main.jpg" clip-path="url(#bg-mask)"></image>
+			</svg>
+		</div>
 		<span class="arrow"></span>
 	</div>
-	<div id="about" class="wrapper section">
+	<div id="about" class="wrapper">
 		<div class="txt-area txt-right">
 			<h2 class="section-title"><span class="point salmon">P</span>O<span class="point cheese">K</span><span class="point salary">E</span>(포케)가 뭔가요?</h2>
 			<p class="section-txt">
@@ -34,7 +38,7 @@
 		</div>
 		<div class="img"><img src="<%=root %>/img/main-img.png" alt="main-img"></div>
 	</div>
-	<div id="make" class="wrapper section">
+	<div id="make" class="wrapper">
 		<!-- 첫번째 -->
 		<div class="section-slide">
 			<div class="slide-item">
@@ -214,9 +218,14 @@
 						selected.push(day[i].innerHTML);
 					})
 				}
-					
+				
 				let move = () => {
 					let selectedDayUl = sectionSlide.querySelector('ul');
+					if (cur == 0) {
+						document.querySelector('.bowl').classList.add('show');
+						document.querySelector('.go-next-slide').classList.add('show');
+					}
+					
 					if (cur < slideItem.length - 1) cur++;
 					sectionSlide.style.left = -cur * 100 + 'vw';
 					
@@ -254,11 +263,20 @@
 						ingreList.push('추가');
 					}
 				}
+				
+				window.addEventListener('scroll', () => {
+					
+				})
+				
+				chkVisible = (elm, eval) => {
+					let h = window.innerHeight;
+					console.log(h);
+				}
 			</script>
-		</div>	
+		</div>
 	</div>
 	
-	<div id="offer" class="wrapper section">
+	<div id="offer" class="wrapper">
 		<div class="txt-area">
 			<p>고민이 될 때에는 레시피 북이나<br>다른 사람의 리뷰를 참고해보는 것은 어떨까요?<br><br>
 			분명 마음에 드는 것을 찾을 수 있을 거예요.</p>
@@ -272,13 +290,6 @@
 			<p>bowls에서는 저희가 추천하는 조합을 선택하고,<br>내가 원하는대로 수정할 수 있어요.</p>
 		</div>
 	</div>
-</div>
 
-<script src="<%=root %>/js/fullpage.js"></script>
-<script>
-new fullpage('#fullpage', {
-	licenseKey: '',
-	scrollingSpeed: 1500
-});
-</script>
+
 <jsp:include page="footer.jsp" />

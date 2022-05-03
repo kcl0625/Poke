@@ -6,6 +6,7 @@ public class IngreDTO {
 	private double cal;
 	private String origin;
 	private String fileName;
+	private String cate;
 	
 	public String getName() {
 		return name;
@@ -42,5 +43,11 @@ public class IngreDTO {
 	}
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
+	}
+	public String getCate() {
+		return cate;
+	}
+	public void setCate(String cate) {
+		this.cate = cate;
 	}
 }

@@ -9,6 +9,7 @@ public class ItemDTO {
 	private String day;
 	private double cal;
 	private int price;
+	private String cate;
 	private ArrayList<IngreDTO> ingreList;
 	
 	private String id;
@@ -59,7 +60,6 @@ public class ItemDTO {
 	public void setPrice(int price) {
 		this.price = price;
 	}
-	
 	public String getId() {
 		return id;
 	}
@@ -89,6 +89,12 @@ public class ItemDTO {
 	}
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
+	}
+	public String getCate() {
+		return cate;
+	}
+	public void setCate(String cate) {
+		this.cate = cate;
 	}
 	public ArrayList<IngreDTO> getIngreList() {
 		return ingreList;

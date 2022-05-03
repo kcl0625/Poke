@@ -65,4 +65,31 @@ public class IngreDAO {
 		}
 		return ingreList;
 	}
+	public ArrayList<IngreDTO> getIngreList() {
+		ArrayList<IngreDTO> ingreList = new ArrayList<IngreDTO>();
+		try {
+			con = Config.getConnection();
+			sql = "select * from ingre";
+			pstmt = con.prepareStatement(sql);
+			ResultSet rs = null;
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				IngreDTO dto = new IngreDTO();
+				dto.setName(rs.getString("name"));
+				dto.setPrice(rs.getInt("price"));
+				dto.setCal(rs.getDouble("cal"));
+				dto.setOrigin(rs.getString("origin"));
+				dto.setFileName(rs.getString("filename"));
+				dto.setCate(rs.getString("cate"));
+				ingreList.add(dto);
+			}
+			rs.close();
+			pstmt.close();
+			con.close();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return ingreList;
+	}
 }

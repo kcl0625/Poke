@@ -42,7 +42,7 @@
 .profile .sub-info p {float: left; margin-right: 3em;}
 .profile .sub-info p span {padding-left: 10px; font-weight: 600;}
 
-.procedure {display: flex; margin: 7em 0; justify-content: space-between; align-items: center;}
+.procedure {display: flex; margin: 7em 0 3em; justify-content: space-between; align-items: center;}
 .procedure > a {position: absolute; right: 0; margin-top: -17em; font-size: var(--small-font-size);}
 .procedure div {position: relative; text-align: center;}
 .procedure div::before {
@@ -57,37 +57,53 @@
 .procedure div .num {font-size: 3.5em; font-weight: 100; padding-bottom: .7em;}
 .procedure svg {width: 1.6em;}
 
-.plan .top h2 {font-size: var(--big-font-size); float: left; font-weight: 200;}
-.plan .top span {padding-left: 1em; vertical-align: sub;}
+.order-list-container {clear: both;float: left;width: 100%; margin-top: 4em;}
+.order-list-container .top {height: 1em;}
+.order-list-container .top h2 {font-size: var(--big-font-size); float: left; font-weight: 200;}
+.order-list-container .top span {padding-left: 1em; vertical-align: sub;}
 
-.plan .list {margin-top: 2em;}
-.plan .list li {position: relative;height: calc(5em + 60px);margin-bottom: 20px;}
-.plan .list li .img {width: 5em;height: 5em;background: #eee;position: absolute;}
-.plan .list li .img::after {
+.order-list-container .list {margin-top: 2em;}
+.order-list-container .list li {position: relative;height: calc(5em + 60px);margin-bottom: 20px;}
+.order-list-container .list li .img {width: 5rem;height: 5rem;position: absolute;display: flex;justify-content: center;align-items: center;flex-wrap: w;}
+.order-list-container .list li .img::after {
 	content: '';
 	position: relative;
 	display: block;
 	width: 0;
 	height: 5em;
-	margin-left: calc(5em + 30px);
+	left: 30px;
 	border-left: 1px solid;
 }
-.plan .list li .content-right {position: absolute;display: flex;width: calc(100% - (5em + (30px*4)));align-items: center;justify-content: space-between;flex-wrap: wrap;right: 30px;top: 50%;transform: translateY(-50%);}
-.plan .list li .content-right > * {display: flex;height: 100%;flex-wrap: wrap;align-content: center;}
-.plan .list li .content-right .info p {width: 100%;}
-.plan .list li .content-right .info p.name {font-size: var(--accent-font-size);}
-.plan .list li .content-right .info p.ingre {font-size: var(--small-font-size);}
-.plan .list li .content-right form {text-align: center; gap: 1em;}
-.plan .list li .content-right form input {width: 2em; text-align: center;}
-.plan .list li .content-right .btns a {padding-left: 1em;}
+.order-list-container .list li .img * {width: 100%;}
+.order-list-container .list li .img svg {stroke-width: .7;}
+.order-list-container .list li .content-right {position: absolute;display: flex;width: calc(100% - (5em + (30px*4)));align-items: center;justify-content: space-between;flex-wrap: wrap;right: 30px;top: 50%;transform: translateY(-50%);}
+.order-list-container .list li .content-right > * {display: flex;height: 100%;flex-wrap: wrap;align-content: center;}
+.order-list-container .list li .content-right .info p {width: 100%;}
+.order-list-container .list li .content-right .info p.ingre {font-size: var(--small-font-size);}
+.order-list-container .list li .content-right form {text-align: center; gap: 1em;}
+.order-list-container .list li .content-right form input {width: 2em; text-align: center;}
+.order-list-container .list li .content-right .btns a {padding-left: 1em;}
+
+.order-list-container .list li p.name {font-size: var(--accent-font-size);}
+.order-list-container.etc .list li {display: flex; justify-content: space-between; align-items: center;}
+.order-list-container.etc .list li p.name::after {
+	content: '';
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 8em;
+	height: 0;
+	border-top: 1px solid;
+}
 
 @media all and (max-width: 750px) {
-	.plan .list li .content-right .info {width: 100%;}
+	.order-list-container .list li .content-right .info {width: 100%;}
 }
 
 /* my review */
 .review .page-sub-title a {float: right;}
-.review .list {width: 45vw; margin: 0 auto;}
+.review .list {width: 45vw; margin: 0 auto;max-width: 650px;}
 .review .list ul {display: grid;justify-content: center;grid-template-columns: 1fr 1fr 1fr;gap: 2em; clear: both;}
 .review .list li {position: relative; border: 1px solid;}
 .review .list li::before {

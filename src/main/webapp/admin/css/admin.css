@@ -3,3 +3,8 @@
 @media all and (min-width: 1281px) {
 	#logo {border-right: 1px solid;}
 }
+input[type="text"],
+input[type="num"] {border-bottom: 1px solid; padding: 10px 0;}
+
+table {position: relative; top: 150px; padding: 1em; margin: 0 auto; border: 1px solid;}
+td {padding: 0 1em;}

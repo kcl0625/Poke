@@ -5,6 +5,7 @@
 <jsp:include page="/header.jsp" />
 <link rel="stylesheet" href="<%=root%>/css/mypage.css">
 <link rel="stylesheet" href="<%=root%>/css/memForm.css">
+<link rel="stylesheet" href="<%=root%>/css/mypageEdit.css">
 
 <jsp:useBean id="memberBean" class="member.MemberDAO" />
 <div class="wrapper">
@@ -14,63 +15,70 @@
 	response.setCharacterEncoding("utf-8");
 	MemberDTO member = memberBean.getMember(sessionId);
 	%>
-	<div class="form-wrapper" style="flex-wrap: wrap;">
+	<div>
 		<form name="memForm" action="editRes.jsp" method="post" style="flex-wrap: nowrap;">
+			<input type="file" name="pic" style="display: none;">
+			<div class="upload-pic">
+				<a href="javascript:void(0)" onclick="memForm.pic.click();"><i class="fas fa-camera"></i></a>
+				<img src>
+			</div>
 			<input type="hidden" name="id" id="id" value="<%=sessionId%>">
-			<fieldset class="form-item">
-				<legend>회원 정보</legend>
-			
-				<div class="input-item">
-					<input class="full" type="text" name="name" id="name" oninput="chk(this);" minlength="2" maxlength="10" value="<%=member.getName()%>">
-					<label for="name">이름</label>
-					<span class="indicator"></span>
-				</div>
-				<div class="input-item">
-					<input class="full" type="text" name="nick" id="nick" oninput="chk(this);" minlength="1" maxlength="20" value="<%=member.getNick()%>">
-					<label for="nick">별명</label>
-					<span class="indicator">1~20자</span>
-				</div>
-				<div class="input-item">
-					<input class="full" type="password" name="pw" id="pw" oninput="chk(this);" minlength="6" maxlength="20" value="<%=member.getPw()%>">
-					<label for="pw">비밀번호</label>
-					<span class="indicator">6~20자의 영문 및 숫자</span>
-				</div>
-				<div class="input-item">
-					<input class="full" type="password" oninput="chk(this);" oninput="chk(this);" name="pwChk" id="pwChk" minlength="6" maxlength="20" value="<%=member.getPw()%>">
-					<label for="pwChk">비밀번호 확인</label>
-					<span class="indicator"></span>
-				</div>
-			</fieldset>
-			<hr class="line">
-			<fieldset class="form-item">
-				<legend>배송지 정보</legend>
+			<div class="form-wrapper">
+				<fieldset class="form-item">
+					<legend>회원 정보</legend>
 				
-				<div class="input-item">
-					<input class="full" type="text" name="zip" id="zip" readonly oninput="chk(this);" value="<%=member.getZip()%>">
-					<label for="zip">우편번호</label>
-					<a class="ui-btn point small" onclick="openZip();">주소 찾기</a>
-					<span class="indicator"></span>
-				</div>
-				<div class="input-item">
-					<input class="full" type="text" name="add1" id="add1" readonly oninput="chk(this);" value="<%=member.getAdd1()%>">
-					<label for="add1">주소</label>
-				</div>
-				<div class="input-item">
-					<input class="full" type="text" name="add2" id="add2" style="padding-left:0;" minlength="1" maxlength="45" oninput="chk(this);" value="<%=member.getAdd2()%>">
-					<span class="indicator"></span>
-				</div>
-				<div class="input-item">
-					<input class="full" type="tel" name="tel" id="tel" minlength="10" maxlength="11" oninput="chk(this);" value="<%=member.getTel()%>">
-					<label for="tel">연락처</label>
-					<span class="indicator">숫자만 입력해주세요</span>
-				</div>
-				<div class="input-item">
-					<input class="full" type="email" name="email" id="email" oninput="chk(this);" value="<%=member.getEmail()%>">
-					<label for="email">e-mail</label>
-					<span class="indicator">abc123@domain.net</span>
-				</div>
-			</fieldset>
-		</form>
+					<div class="input-item">
+						<input class="full" type="text" name="name" id="name" oninput="chk(this);" minlength="2" maxlength="10" value="<%=member.getName()%>">
+						<label for="name">이름</label>
+						<span class="indicator"></span>
+					</div>
+					<div class="input-item">
+						<input class="full" type="text" name="nick" id="nick" oninput="chk(this);" minlength="1" maxlength="20" value="<%=member.getNick()%>">
+						<label for="nick">별명</label>
+						<span class="indicator">1~20자</span>
+					</div>
+					<div class="input-item">
+						<input class="full" type="password" name="pw" id="pw" oninput="chk(this);" minlength="6" maxlength="20" value="<%=member.getPw()%>">
+						<label for="pw">비밀번호</label>
+						<span class="indicator">6~20자의 영문 및 숫자</span>
+					</div>
+					<div class="input-item">
+						<input class="full" type="password" oninput="chk(this);" oninput="chk(this);" name="pwChk" id="pwChk" minlength="6" maxlength="20" value="<%=member.getPw()%>">
+						<label for="pwChk">비밀번호 확인</label>
+						<span class="indicator"></span>
+					</div>
+				</fieldset>
+				<hr class="line">
+				<fieldset class="form-item">
+					<legend>배송지 정보</legend>
+					
+					<div class="input-item">
+						<input class="full" type="text" name="zip" id="zip" readonly oninput="chk(this);" value="<%=member.getZip()%>">
+						<label for="zip">우편번호</label>
+						<a class="ui-btn point small" onclick="openZip();">주소 찾기</a>
+						<span class="indicator"></span>
+					</div>
+					<div class="input-item">
+						<input class="full" type="text" name="add1" id="add1" readonly oninput="chk(this);" value="<%=member.getAdd1()%>">
+						<label for="add1">주소</label>
+					</div>
+					<div class="input-item">
+						<input class="full" type="text" name="add2" id="add2" style="padding-left:0;" minlength="1" maxlength="45" oninput="chk(this);" value="<%=member.getAdd2()%>">
+						<span class="indicator"></span>
+					</div>
+					<div class="input-item">
+						<input class="full" type="tel" name="tel" id="tel" minlength="10" maxlength="11" oninput="chk(this);" value="<%=member.getTel()%>">
+						<label for="tel">연락처</label>
+						<span class="indicator">숫자만 입력해주세요</span>
+					</div>
+					<div class="input-item">
+						<input class="full" type="email" name="email" id="email" oninput="chk(this);" value="<%=member.getEmail()%>">
+						<label for="email">e-mail</label>
+						<span class="indicator">abc123@domain.net</span>
+					</div>
+				</fieldset>
+			</form>
+		</div>
 		
 		<div id="open-zip">
 		<img src="https://t1.daumcdn.net/postcode/resource/images/close.png" id="btnFoldWrap" style="cursor:pointer;position:absolute;right:0px;top:-1px;z-index:1" onclick="foldDaumPostcode()" alt="접기 버튼">
@@ -221,6 +229,16 @@
 		    	})
 		    	if(!form.querySelector('.false')) form.submit();
 		    }
+		    
+
+			memForm.pic.addEventListener('change', (e) => {
+				let img = document.querySelector('.upload-pic img');
+				let reader = new FileReader();
+				reader.onload = (e) => {
+					img.src = e.target.result;
+				}
+				reader.readAsDataURL(memForm.pic.files[0]);
+			})
 		</script>
 		
 		<div class="pn" style="flex-direction: column;align-items: center;">
