@@ -61,4 +61,27 @@ public class ReviewDAO {
 		}
 		return review;
 	}
+	
+	public void insertReview(String id, String nick, String date, ReviewDTO dto) {
+		try {
+			con = Config.getConnection();
+			sql = "insert into review(id, nick, pokename, ingre, star, content, date) values(?,?,?,?,?,?,?)";
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, id);
+			pstmt.setString(2, nick);
+			pstmt.setString(3, dto.getPoke());
+			pstmt.setString(4, dto.getIngre());
+			pstmt.setInt(5, dto.getStar());
+			pstmt.setString(6, dto.getContent());
+			pstmt.setString(7, date);
+			
+			pstmt.executeUpdate();
+			
+			pstmt.close();
+			con.close();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
 }

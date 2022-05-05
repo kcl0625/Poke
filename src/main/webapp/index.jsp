@@ -274,7 +274,7 @@
 					fixedElm[0].classList.remove('show');
 					fixedElm[1].classList.remove('show');
 					
-					if(top >= h * 2 - 50 && top < h * 3 + 50) {
+					if(top >= h * 2 - 100 && top < h * 3 + 100) {
 						ingreWrapper.classList.add('show');
 						fixedElm[0].classList.add('show');
 						fixedElm[1].classList.add('show');

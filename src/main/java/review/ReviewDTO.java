@@ -10,24 +10,11 @@ public class ReviewDTO {
 	private String poke;
 	private String filename;
 	private String date;
-	
 	public int getNo() {
 		return no;
 	}
 	public void setNo(int no) {
 		this.no = no;
-	}
-	public int getStar() {
-		return star;
-	}
-	public void setStar(int star) {
-		this.star = star;
-	}
-	public String getContent() {
-		return content;
-	}
-	public void setContent(String content) {
-		this.content = content;
 	}
 	public String getId() {
 		return id;
@@ -40,6 +27,18 @@ public class ReviewDTO {
 	}
 	public void setNick(String nick) {
 		this.nick = nick;
+	}
+	public int getStar() {
+		return star;
+	}
+	public void setStar(int star) {
+		this.star = star;
+	}
+	public String getContent() {
+		return content;
+	}
+	public void setContent(String content) {
+		this.content = content;
 	}
 	public String getIngre() {
 		return ingre;

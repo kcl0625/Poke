@@ -1,44 +1,37 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@page import="java.util.Enumeration" %>
-<%@page import="java.util.Date"%>
+<%@page import="java.time.LocalDateTime" %>
+<%@page import="java.time.format.DateTimeFormatter" %>
 <%@page import="java.sql.*" %>
 <%@page import="com.oreilly.servlet.MultipartRequest" %>
 <%@page import="com.oreilly.servlet.multipart.DefaultFileRenamePolicy" %>
 <%@page import="javax.servlet.http.*" %>
-<%@page import="review.ReviewDTO" %>
-<%@page import="member.MemberDTO" %>
+<%@page import="review.*" %>
+<%@page import="member.*" %>
 <%@include file="/config.jsp" %>
-
-<jsp:useBean id="reviewBean" class="review.ReviewDAO" />
 
 <%
 request.setCharacterEncoding("utf-8");
 
 MultipartRequest multi = null;
-String dir = request.getServletContext().getRealPath("data");
+String dir = request.getServletContext().getRealPath("data/review");
 int max = 1024*1024*15;
 DefaultFileRenamePolicy policy = new DefaultFileRenamePolicy();
 
 String filename = "";
 String originalfile = "";
-String menu = "";
-String tit = "";
+String poke = "";
+String ingre = "";
 int rating = 0;
-String taste = "";
-String quantity = "";
-String quality = "";
-String contents = "";
+String content = "";
 
 try {
 	multi = new MultipartRequest(request, dir, max, "utf-8", policy); //서버 데이터 폴더에 파일 업로드
-	menu = multi.getParameter("menu");
-    tit = multi.getParameter("tit");    		
+	poke = multi.getParameter("poke");
+	ingre = multi.getParameter("ingre");		
     rating = Integer.parseInt(multi.getParameter("rating"));
-    taste = multi.getParameter("taste");
-    quantity = multi.getParameter("quantity");
-    quality = multi.getParameter("quality");
-    contents = multi.getParameter("contents");
+    content = multi.getParameter("contents");
      
     Enumeration files = multi.getFileNames(); 
    	String file = (String) files.nextElement();
@@ -48,16 +41,21 @@ try {
     e.printStackTrace();
 }
 
-reviewBean.setId(sessionId); //multipartrequest쓰면 다 일일히 해줘야하나봄
-reviewBean.setNick(sessionId);
-reviewBean.setDate(date);
-reviewBean.setStar(rating);
-reviewBean.setContents(contents);
-reviewBean.setFilename(filename);
-
-ReviewDAO dao = new ReviewDAO();
-dao.insertReview(rbean);
-
 MemberDTO member = new MemberDTO();
-System.out.println(member.getNick());
+MemberDAO mDao = new MemberDAO();
+member = mDao.getMember(sessionId);
+
+ReviewDTO review = new ReviewDTO();
+ReviewDAO rDao = new ReviewDAO();
+
+LocalDateTime now = LocalDateTime.now();
+String formatedNow = now.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+
+review.setPoke(poke);
+review.setIngre(ingre);
+review.setStar(rating);
+review.setContent(content);
+review.setFilename(filename);
+
+rDao.insertReview(sessionId, member.getNick(), formatedNow, review);
 %>

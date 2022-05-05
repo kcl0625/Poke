@@ -17,7 +17,6 @@ OrderDTO pokeOrder = orderBean.getPokeOrder(sessionId);
 ArrayList<ItemDTO> pokeOrderArr = pokeOrder.getPoke();
 
 int total = 0;
-
 if(pokeOrderArr != null) total = pokeOrderArr.size();
 else out.write("<script>alert('주문을 먼저 진행해주세요'); location.href = '" + root + "/index.jsp';</script>");
 MemberDTO member = memberBean.getMember(sessionId);
@@ -31,6 +30,8 @@ MemberDTO member = memberBean.getMember(sessionId);
 	<form name="write" action="write.jsp" method="post" enctype="multipart/form-data">
 		<input type="hidden" name="nick" value="<%=member.getNick()%>">
 		<input type="file" name="photo" style="display:none;" accept="image/jpeg, image/png">
+		<input type="hidden" name="poke">
+		<input type="hidden" name="ingre">
 		<div class="photo"><img src=""></div>
 		<div class="form-right">
 			<div class="write-top">
@@ -94,8 +95,8 @@ MemberDTO member = memberBean.getMember(sessionId);
 		let pokeLi = document.querySelectorAll('.select-wrapper li');
 		pokeLi.forEach((item, i) => {
 			pokeLi[i].addEventListener('click', () => {
-				console.log('name: ', pokeLi[i].dataset.data);
-				console.log('ingre: ', pokeLi[i].dataset.ingre);
+				write.poke.value = pokeLi[i].dataset.data;
+				write.ingre.value = pokeLi[i].dataset.ingre;
 			})
 		})
 		
