@@ -8,7 +8,7 @@ public class ReviewDTO {
 	private String content;
 	private String ingre;
 	private String poke;
-	private String filename;
+	private String fileName;
 	private String date;
 	public int getNo() {
 		return no;
@@ -52,11 +52,11 @@ public class ReviewDTO {
 	public void setPoke(String poke) {
 		this.poke = poke;
 	}
-	public String getFilename() {
-		return filename;
+	public String getFileName() {
+		return fileName;
 	}
-	public void setFilename(String filename) {
-		this.filename = filename;
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
 	}
 	public String getDate() {
 		return date;

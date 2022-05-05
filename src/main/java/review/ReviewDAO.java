@@ -18,7 +18,7 @@ public class ReviewDAO {
 		ArrayList<ReviewDTO> reviewList = new ArrayList<ReviewDTO>();
 		try{
 			con = Config.getConnection();
-			sql = "select no from review order by no";
+			sql = "select no, filename from review order by no";
 			pstmt = con.prepareStatement(sql);
 			ResultSet rs = null;
 			
@@ -27,6 +27,7 @@ public class ReviewDAO {
 			while(rs.next()) {
 				ReviewDTO dto = new ReviewDTO();
 				dto.setNo(rs.getInt("no"));
+				dto.setFileName(rs.getString("filename"));
 				reviewList.add(dto);
 			}
 			rs.close();
@@ -42,7 +43,7 @@ public class ReviewDAO {
 		ReviewDTO review = new ReviewDTO();
 		try {
 			con = Config.getConnection();
-			sql = "select star, content from review where no = ?";
+			sql = "select * from review where no = ?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, no);
 			ResultSet rs = null;
@@ -50,8 +51,12 @@ public class ReviewDAO {
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
+				review.setNick(rs.getString("nick"));
+				review.setPoke(rs.getString("pokename"));
+				review.setIngre(rs.getString("ingre"));
 				review.setStar(rs.getInt("star"));
 				review.setContent(rs.getString("content"));
+				review.setFileName(rs.getString("filename"));
 			}
 			rs.close();
 			pstmt.close();
@@ -65,7 +70,7 @@ public class ReviewDAO {
 	public void insertReview(String id, String nick, String date, ReviewDTO dto) {
 		try {
 			con = Config.getConnection();
-			sql = "insert into review(id, nick, pokename, ingre, star, content, date) values(?,?,?,?,?,?,?)";
+			sql = "insert into review(id, nick, pokename, ingre, star, content, date, filename) values(?,?,?,?,?,?,?,?)";
 			pstmt = con.prepareStatement(sql);
 			
 			pstmt.setString(1, id);
@@ -75,6 +80,7 @@ public class ReviewDAO {
 			pstmt.setInt(5, dto.getStar());
 			pstmt.setString(6, dto.getContent());
 			pstmt.setString(7, date);
+			pstmt.setString(8, dto.getFileName());
 			
 			pstmt.executeUpdate();
 			

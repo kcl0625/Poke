@@ -31,12 +31,14 @@ try {
 	poke = multi.getParameter("poke");
 	ingre = multi.getParameter("ingre");		
     rating = Integer.parseInt(multi.getParameter("rating"));
-    content = multi.getParameter("contents");
+    content = multi.getParameter("content");
      
     Enumeration files = multi.getFileNames(); 
    	String file = (String) files.nextElement();
    	filename = multi.getFilesystemName(file); //서버에 업로드된 파일명
    	originalfile = multi.getOriginalFileName(file); //원래 선택한 원본파일명
+   	
+   	System.out.println(content);
 } catch(Exception e) {
     e.printStackTrace();
 }
@@ -55,7 +57,9 @@ review.setPoke(poke);
 review.setIngre(ingre);
 review.setStar(rating);
 review.setContent(content);
-review.setFilename(filename);
+review.setFile(filename);
 
 rDao.insertReview(sessionId, member.getNick(), formatedNow, review);
+
+response.sendRedirect(root + "/review/list.jsp");
 %>

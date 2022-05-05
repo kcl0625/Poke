@@ -22,8 +22,12 @@
 				ArrayList<ReviewDTO> reviewList = reviewBean.getReviewList();
 				int total = reviewBean.getReviewList().size();
 				for(int i=0;i<total;i++){%>
-					<li id="review_<%=reviewList.get(i).getNo() %>" onclick="showReview(<%=reviewList.get(i).getNo() %>);"></li>
-			<%} %>
+					<li id="review_<%=reviewList.get(i).getNo() %>"
+					onclick="showReview(<%=reviewList.get(i).getNo() %>);"
+					style="background-image:url(<%=root%>/data/review/<%=reviewList.get(i).getFileName()%>);"></li>
+			<%}
+				if (total == 0) out.println("<p class=\"txt-center no-data\">아직 리뷰가 없어요<br>첫 리뷰를 작성해주세요!</p>");
+			%>
 		</ul>
 	</div>
 	
