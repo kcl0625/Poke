@@ -30,14 +30,16 @@ MemberDTO member = memberBean.getMember(sessionId);
 	<form name="write" action="write.jsp" method="post" enctype="multipart/form-data">
 		<input type="hidden" name="nick" value="<%=member.getNick()%>">
 		<input type="file" name="photo" style="display:none;" accept="image/jpeg, image/png">
-		<input type="hidden" name="poke">
-		<input type="hidden" name="ingre">
+		<input type="hidden" name="poke" value="<%=pokeOrderArr.get(0).getName()%>">
+		<input type="hidden" name="ingre" value="<%=pokeOrderArr.get(0).getIngre()%>">
+		<input type="hidden" name="content">
+		
 		<div class="photo"><img src=""><span class="indicator"></span></div>
 		<div class="form-right">
 			<div class="write-top">
 				<div class="select">
 					<input type="hidden" name="poke_name" value="POKE - 1">
-					<div class="selected select-item">POKE - 1</div>
+					<div class="selected select-item"><%=pokeOrderArr.get(0).getName() %></div>
 					<div class="select-wrapper">
 						<ul>
 							<%for (int i=0;i<total;i++){%>
@@ -126,8 +128,9 @@ MemberDTO member = memberBean.getMember(sessionId);
 				textarea.textContent = '내용을 입력해주세요!';
 				return false;
 			}
-			console.log(textarea.innerHTML);
-			//write.submit();
+			
+			write.content.value = textarea.innerHTML;
+			write.submit();
 		}
 	</script>
 </div>

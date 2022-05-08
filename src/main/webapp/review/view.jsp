@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="order.ItemDTO"%>
+<%@ page import="order.ItemDAO"%>
 <%@ page import="bbs.board.*"%>
 <%@include file="/config.jsp" %>
 
@@ -8,10 +10,8 @@
 request.setCharacterEncoding("utf-8");
 response.setCharacterEncoding("utf-8");
 
-int no = Integer.parseInt(request.getParameter("no"));
-
-BoardDTO review = reviewBean.showReview(no);
-
+int reviewNo = Integer.parseInt(request.getParameter("no"));
+BoardDTO review = reviewBean.showReview(reviewNo);
 int star = review.getStar();
 %>
 
@@ -38,8 +38,9 @@ int star = review.getStar();
 					<%}%>
 				</div>
 				<div class="add-btns">
-					<a href="">이 구성으로 담기</a>/
-					<a href="">수정하기</a>
+					<a href="javascript:void(0);"
+					<%if(isMem == 1 && isAdm == 0) {%>onclick="location.href='<%=root %>/make/modify.jsp?name=<%=review.getPoke() %>&ingre=<%=review.getIngre()%>'"<%}
+					else {%>onclick="location.href='<%=root %>/bbs/loginForm.jsp';"<%} %>>수정하기</a>
 				</div>
 			</div>
 		</div>

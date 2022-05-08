@@ -96,6 +96,19 @@ let totCal = 0;
 
 let ingreList = [];
 
+document.addEventListener('DOMContentLoaded', () => {
+	let li = document.querySelectorAll('#bowl .item');
+	
+	if (li.length != 0) {
+		for(let i=0;i<li.length;i++) {
+			totPrice += parseInt(li[i].dataset.price);
+			totCal += parseFloat(li[i].dataset.cal);
+			ingreList.push(li[i].dataset.name);
+		}
+	}
+})
+
+
 let addItem = (e) => { //재료 추가
 	let indicator = document.querySelector('.indicator');
 	let bowl = document.querySelector('#bowl');

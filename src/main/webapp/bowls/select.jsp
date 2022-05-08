@@ -5,7 +5,6 @@
 <%@ page import="order.ItemDAO"%>
 <%@include file="/config.jsp" %>
 
-<jsp:useBean id="itemBean" class="order.ItemDAO" />
 <%
 request.setCharacterEncoding("utf-8");
 response.setCharacterEncoding("utf-8");
@@ -13,7 +12,7 @@ response.setCharacterEncoding("utf-8");
 String cate = request.getParameter("cate");
 
 ItemDAO dao = new ItemDAO();
-ArrayList<ItemDTO> pokeList = itemBean.getPokeList(cate);%>
+ArrayList<ItemDTO> pokeList = dao.getPokeList(cate);%>
 <p class="result">전체 - 총 <%=pokeList.size() %>개</p>
 <ul>
 <% for(int i=0;i<pokeList.size();i++) {
