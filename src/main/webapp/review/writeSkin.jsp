@@ -32,7 +32,7 @@ MemberDTO member = memberBean.getMember(sessionId);
 		<input type="file" name="photo" style="display:none;" accept="image/jpeg, image/png">
 		<input type="hidden" name="poke">
 		<input type="hidden" name="ingre">
-		<div class="photo"><img src=""></div>
+		<div class="photo"><img src=""><span class="indicator"></span></div>
 		<div class="form-right">
 			<div class="write-top">
 				<div class="select">
@@ -48,6 +48,7 @@ MemberDTO member = memberBean.getMember(sessionId);
 				</div>
 				
 				<div class="star-ratings">
+					<span class="indicator"></span>
 					<input type="radio" id="5-star" name="rating" value="5" v-model="ratings"/>
 					<label for="5-star" class="star pr-4"><i class="fas fa-star"></i></label>
 					<input type="radio" id="4-star" name="rating" value="4" v-model="ratings"/>
@@ -61,7 +62,7 @@ MemberDTO member = memberBean.getMember(sessionId);
 				</div>
 			</div>
 			<hr class="line">
-			<div id="textarea" class="textarea" contenteditable="true" placeholder="내용을 입력해주세요"></div>
+			<div id="textarea" class="textarea" name="content" contenteditable="true" placeholder="내용을 입력해주세요"></div>
 		</div>
 		
 		<div class="write-bottom">
@@ -86,9 +87,11 @@ MemberDTO member = memberBean.getMember(sessionId);
 		write.photo.addEventListener('change', (e) => {
 			let img = document.querySelector('.photo img');
 			let reader = new FileReader();
+			let indicator = document.querySelector('.photo .indicator');
 			reader.onload = (e) => {
 				img.src = e.target.result;
 			}
+			indicator.innerHTML = '';
 			reader.readAsDataURL(write.photo.files[0]);
 		})
 		
@@ -101,12 +104,30 @@ MemberDTO member = memberBean.getMember(sessionId);
 		})
 		
 		let formWrite = () => {
-			if (write.photo.value == '') {
-				console.log('사진 없음');
+			let textarea = document.querySelector('#textarea');
+			
+			if (!write.photo.value) {
+				let indicator = document.querySelector('.photo .indicator');
+				indicator.innerHTML = '사진을 업로드해주세요';
+				return false;
 			} else {
-				
-				write.submit();
+				let indicator = document.querySelector('.photo .indicator');
+				indicator.innerHTML = '';
 			}
+			if (!write.rating.value) {
+				let indicator = document.querySelector('.star-ratings .indicator');
+				indicator.innerHTML = '별점을 입력해주세요';
+				return false;
+			} else {
+				let indicator = document.querySelector('.star-ratings .indicator');
+				indicator.innerHTML = '';
+			}
+			if (!textarea.textContent) {
+				textarea.textContent = '내용을 입력해주세요!';
+				return false;
+			}
+			console.log(textarea.innerHTML);
+			//write.submit();
 		}
 	</script>
 </div>

@@ -1,18 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="review.*"%>
+<%@ page import="bbs.board.*"%>
 <%@include file="/config.jsp" %>
 
-<jsp:useBean id="reviewBean" class="review.ReviewDAO" />
+<jsp:useBean id="reviewBean" class="bbs.board.BoardDAO" />
 <%
 request.setCharacterEncoding("utf-8");
 response.setCharacterEncoding("utf-8");
 
 int no = Integer.parseInt(request.getParameter("no"));
 
-ReviewDTO review = reviewBean.showReview(no);
+BoardDTO review = reviewBean.showReview(no);
 
-int star = review.getStar();%>
+int star = review.getStar();
+%>
 
 <a class="close" href="javascript:closeReview();">
 	<span></span>

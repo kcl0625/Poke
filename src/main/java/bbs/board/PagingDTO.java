@@ -1,17 +1,17 @@
-package bbs;
+package bbs.board;
 
 public class PagingDTO {
-	private int cur; //현재 페이지
+	private int page; //현재 페이지
 	public int totalCnt; //전체 row 수
 	private int start;
 	private int end;
 	private int displayItem; //한 페이지에 몇 개의 목록 보여줄 건지
 	private int displayRow; //페이징 묶음
-	public int getCur() {
-		return cur;
+	public int getPage() {
+		return page;
 	}
-	public void setCur(int cur) {
-		this.cur = cur;
+	public void setPage(int page) {
+		this.page = page;
 	}
 	public int getTotalCnt() {
 		return totalCnt;

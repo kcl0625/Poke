@@ -1,6 +1,6 @@
-package review;
+package bbs.board;
 
-public class ReviewDTO {
+public class BoardDTO {
 	private int no;
 	private String id;
 	private String nick;

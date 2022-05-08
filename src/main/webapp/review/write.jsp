@@ -7,7 +7,7 @@
 <%@page import="com.oreilly.servlet.MultipartRequest" %>
 <%@page import="com.oreilly.servlet.multipart.DefaultFileRenamePolicy" %>
 <%@page import="javax.servlet.http.*" %>
-<%@page import="review.*" %>
+<%@page import="bbs.board.*" %>
 <%@page import="member.*" %>
 <%@include file="/config.jsp" %>
 
@@ -33,10 +33,10 @@ try {
     rating = Integer.parseInt(multi.getParameter("rating"));
     content = multi.getParameter("content");
      
-    Enumeration files = multi.getFileNames(); 
-   	String file = (String) files.nextElement();
-   	filename = multi.getFilesystemName(file); //서버에 업로드된 파일명
-   	originalfile = multi.getOriginalFileName(file); //원래 선택한 원본파일명
+    //Enumeration files = multi.getFileNames(); 
+   	//String file = (String) files.nextElement();
+   	//filename = multi.getFilesystemName(file); //서버에 업로드된 파일명
+   	//originalfile = multi.getOriginalFileName(file); //원래 선택한 원본파일명
    	
    	System.out.println(content);
 } catch(Exception e) {
@@ -47,19 +47,19 @@ MemberDTO member = new MemberDTO();
 MemberDAO mDao = new MemberDAO();
 member = mDao.getMember(sessionId);
 
-ReviewDTO review = new ReviewDTO();
-ReviewDAO rDao = new ReviewDAO();
+BoardDTO review = new BoardDTO();
+BoardDAO rDao = new BoardDAO();
 
 LocalDateTime now = LocalDateTime.now();
 String formatedNow = now.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-
+/*
 review.setPoke(poke);
 review.setIngre(ingre);
 review.setStar(rating);
 review.setContent(content);
-review.setFile(filename);
-
-rDao.insertReview(sessionId, member.getNick(), formatedNow, review);
+review.setFileName(filename);
+*/
+//rDao.insertReview(sessionId, member.getNick(), formatedNow, review);
 
 response.sendRedirect(root + "/review/list.jsp");
 %>

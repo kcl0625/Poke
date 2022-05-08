@@ -1,4 +1,4 @@
-package review;
+package bbs.board;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -6,16 +6,15 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 
 import config.Config;
-import review.ReviewDTO;
 
-public class ReviewDAO {
+public class BoardDAO {
 	Connection con = null;
 	String sql = null;
 	PreparedStatement pstmt = null;
 	int res = 0;
 	
-	public ArrayList<ReviewDTO> getReviewList() {
-		ArrayList<ReviewDTO> reviewList = new ArrayList<ReviewDTO>();
+	public ArrayList<BoardDTO> getReviewList() {
+		ArrayList<BoardDTO> reviewList = new ArrayList<BoardDTO>();
 		try{
 			con = Config.getConnection();
 			sql = "select no, filename from review order by no";
@@ -25,7 +24,7 @@ public class ReviewDAO {
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
-				ReviewDTO dto = new ReviewDTO();
+				BoardDTO dto = new BoardDTO();
 				dto.setNo(rs.getInt("no"));
 				dto.setFileName(rs.getString("filename"));
 				reviewList.add(dto);
@@ -39,8 +38,8 @@ public class ReviewDAO {
 		return reviewList;
 	}
 	
-	public ReviewDTO showReview(int no) {
-		ReviewDTO review = new ReviewDTO();
+	public BoardDTO showReview(int no) {
+		BoardDTO review = new BoardDTO();
 		try {
 			con = Config.getConnection();
 			sql = "select * from review where no = ?";
@@ -67,7 +66,7 @@ public class ReviewDAO {
 		return review;
 	}
 	
-	public void insertReview(String id, String nick, String date, ReviewDTO dto) {
+	public void insertReview(String id, String nick, String date, BoardDTO dto) {
 		try {
 			con = Config.getConnection();
 			sql = "insert into review(id, nick, pokename, ingre, star, content, date, filename) values(?,?,?,?,?,?,?,?)";

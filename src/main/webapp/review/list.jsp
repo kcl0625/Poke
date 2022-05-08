@@ -1,14 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@page import="java.util.ArrayList" %>
-<%@page import="review.ReviewDTO" %>
+<%@page import="bbs.board.BoardDTO" %>
 <%@include file="/config.jsp" %>
 
 <jsp:include page="/header.jsp" />
 
-<jsp:useBean id="reviewBean" class="review.ReviewDAO" />
+<jsp:useBean id="reviewBean" class="bbs.board.BoardDAO" />
 
-<link rel="stylesheet" href="<%=root %>/css/review.css">
+<link rel="stylesheet" href="<%=root%>/css/review.css">
 <div class="wrapper">
 	<div class="page-title">
 		<h2><span class="point salmon">R</span>eview</h2>
@@ -19,9 +19,10 @@
 		<a href="writeSkin.jsp"><i class="fas fa-pen"></i></a>
 		<ul>
 			<%
-				ArrayList<ReviewDTO> reviewList = reviewBean.getReviewList();
-				int total = reviewBean.getReviewList().size();
-				for(int i=0;i<total;i++){%>
+			ArrayList<BoardDTO> reviewList = reviewBean.getReviewList();
+					int total = reviewBean.getReviewList().size();
+					for(int i=0;i<total;i++){
+			%>
 					<li id="review_<%=reviewList.get(i).getNo() %>"
 					onclick="showReview(<%=reviewList.get(i).getNo() %>);"
 					style="background-image:url(<%=root%>/data/review/<%=reviewList.get(i).getFileName()%>);"></li>
