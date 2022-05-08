@@ -33,5 +33,9 @@ if(session.getAttribute("member") != null) {
 	member = (MemberDTO)session.getAttribute("member");
 }
 orderDAO.setOrder(sessionNo, orderArr, member, sessionId, formatedNow, payment, isPaid, totPrice, depositor, week);
+
+session.removeAttribute("member");
+session.removeAttribute("orderItem");
+
 response.sendRedirect("orderOk.jsp");
 %>
