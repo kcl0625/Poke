@@ -21,7 +21,7 @@
             <ul>
                 <li><a href="<%=root%>/make/make.jsp">Make</a></li>
                 <li><a href="<%=root%>/bowls/bowls.jsp">Bowls</a></li>
-                <li><a href="<%=root%>/shop/list.jsp">Shop</a></li>
+                <li><a href="<%=root%>/etc/list.jsp">Etc</a></li>
                 <li><a href="<%=root%>/review/list.jsp">Review</a></li>
             </ul>
         </div>

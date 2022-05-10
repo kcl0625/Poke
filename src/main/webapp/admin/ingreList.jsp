@@ -1,13 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList"%>
-<%@ page import="bbs.CategoryDTO"%>
 <%@ page import="order.IngreDAO"%>
 <%@ page import="order.IngreDTO"%>
+<%@ page import="bbs.*"%>
 <%@include file="/config.jsp" %>
-
-<jsp:useBean id="ingreBean" class="order.IngreDAO" />
-<jsp:useBean id="categoryBean" class="bbs.CategoryDAO" />
 
 <jsp:include page="adm.header.jsp" />
 <form name="ingre">
@@ -20,8 +17,8 @@
 		<th>가격</th>
 		<th>원산지</th>
 	</tr>
-	<%IngreDAO dao = new IngreDAO();
-		ArrayList<IngreDTO> ingre = ingreBean.getIngreList();
+	<%IngreDAO ingreDAO = new IngreDAO();
+		ArrayList<IngreDTO> ingre = ingreDAO.getIngreList();
 					
 		for(int i=0;i<ingre.size();i++) {%>
 			<tr>
@@ -33,7 +30,9 @@
 				</td>
 				<td>
 					<select name="cate">
-						<% ArrayList<CategoryDTO> cateList = categoryBean.getCategory("make");
+						<%
+						CategoryDAO categoryDAO = new CategoryDAO();
+						ArrayList<CategoryDTO> cateList = categoryDAO.getCategory("make");
 						int total = cateList.size();
 						for(int j=0;j<total;j++){%>
 							<option value="<%=cateList.get(j).getName() %>"

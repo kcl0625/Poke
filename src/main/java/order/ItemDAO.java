@@ -10,13 +10,15 @@ public class ItemDAO {
 	String sql = null;
 	PreparedStatement pstmt = null;
 	
-	public ArrayList<ItemDTO> getEtc(String cate) { //카테고리 선택
-		ArrayList<ItemDTO> shop = new ArrayList<ItemDTO>();
+	public ArrayList<ItemDTO> getEtc(String cate, int pageNum, int pageItemMax) { //카테고리 선택
+		ArrayList<ItemDTO> etc = new ArrayList<ItemDTO>();
 		try {
 			con = Config.getConnection();
-			sql = "select no, name, price, filename from shop where category = ?";
+			sql = "select no, name, price, filename from etc where category = ? limit ?, ?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, cate);
+			pstmt.setInt(2, pageItemMax * pageNum);
+			pstmt.setInt(3, pageItemMax);
 			
 			ResultSet rs = pstmt.executeQuery();
 			
@@ -26,7 +28,7 @@ public class ItemDAO {
 				dto.setName(rs.getString("name"));
 				dto.setPrice(rs.getInt("price"));
 				dto.setFilename(rs.getString("filename"));
-				shop.add(dto);
+				etc.add(dto);
 			}
 			rs.close();
 			pstmt.close();
@@ -34,15 +36,17 @@ public class ItemDAO {
 		}catch(Exception e){
 			e.printStackTrace();
 		}
-		return shop;
+		return etc;
 	}
 	
-	public ArrayList<ItemDTO> getEtc() { //전체 보기
-		ArrayList<ItemDTO> shop = new ArrayList<ItemDTO>();
+	public ArrayList<ItemDTO> getEtc(int pageNum, int pageItemMax) { //전체 보기
+		ArrayList<ItemDTO> etc = new ArrayList<ItemDTO>();
 		try {
 			con = Config.getConnection();
-			sql = "select no, name, price, filename from shop";
+			sql = "select no, name, price, filename from etc limit ?, ?";
 			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, pageItemMax * pageNum);
+			pstmt.setInt(2, pageItemMax);
 			
 			ResultSet rs = pstmt.executeQuery();
 			
@@ -52,7 +56,7 @@ public class ItemDAO {
 				dto.setName(rs.getString("name"));
 				dto.setPrice(rs.getInt("price"));
 				dto.setFilename(rs.getString("filename"));
-				shop.add(dto);
+				etc.add(dto);
 			}
 			rs.close();
 			pstmt.close();
@@ -60,16 +64,61 @@ public class ItemDAO {
 		}catch(Exception e){
 			e.printStackTrace();
 		}
-		return shop;
+		return etc;
 	}
 	
-	public ArrayList<ItemDTO> getPokeList(String cate) {
+	public int getEtcListPageMax(String cate, int pageItemMax) {
+		int pageMax = 0;
+		try {
+			con = Config.getConnection();
+			sql = "select ceil(count(*)/?) as pagemax from etc where category = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, pageItemMax);
+			pstmt.setString(2, cate);
+			
+			ResultSet rs = pstmt.executeQuery();
+			
+			if(rs.next()) pageMax = rs.getInt("pagemax");
+			
+			rs.close();
+			pstmt.close();
+			con.close();
+		} catch(Exception e){
+			e.printStackTrace();
+		}
+		return pageMax;
+	}
+	
+	public int getEtcListPageMax(int pageItemMax) {
+		int pageMax = 0;
+		try {
+			con = Config.getConnection();
+			sql = "select ceil(count(*)/?) as pagemax from etc";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, pageItemMax);
+			
+			ResultSet rs = pstmt.executeQuery();
+			
+			if(rs.next()) pageMax = rs.getInt("pagemax");
+			
+			rs.close();
+			pstmt.close();
+			con.close();
+		} catch(Exception e){
+			e.printStackTrace();
+		}
+		return pageMax;
+	} 
+	
+	public ArrayList<ItemDTO> getPokeList(String cate, int pageNum, int pageItemMax) {
 		ArrayList<ItemDTO> poke = new ArrayList<ItemDTO>();
 		try {
 			con = Config.getConnection();
-			sql = "select no, name, description, ingre, price, filename from poke where cate = ?";
+			sql = "select no, name, description, ingre, price, filename from poke where cate = ? limit ?, ?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, cate);
+			pstmt.setInt(2, pageItemMax * pageNum);
+			pstmt.setInt(3, pageItemMax);
 			
 			ResultSet rs = pstmt.executeQuery();
 			
@@ -90,6 +139,28 @@ public class ItemDAO {
 			e.printStackTrace();
 		}
 		return poke;
+	}
+	
+	public int getPokeListPageMax(String cate, int pageItemMax) {
+		int pageMax = 0;
+		try {
+			con = Config.getConnection();
+			sql = "select ceil(count(*)/?) as pagemax from poke where cate = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, pageItemMax);
+			pstmt.setString(2, cate);
+			
+			ResultSet rs = pstmt.executeQuery();
+			
+			if(rs.next()) pageMax = rs.getInt("pagemax");
+			
+			rs.close();
+			pstmt.close();
+			con.close();
+		} catch(Exception e){
+			e.printStackTrace();
+		}
+		return pageMax;
 	}
 	
 	public ItemDTO getPoke(String name, String ingre) { //메뉴 수정
@@ -159,7 +230,7 @@ public class ItemDAO {
 		ItemDTO item = new ItemDTO();
 		try {
 			con = Config.getConnection();
-			sql = "select name, price, description, filename from shop where no = ?";
+			sql = "select name, price, description, filename from etc where no = ?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, no);
 			

@@ -32,10 +32,10 @@
 	    	<div class="menu">
 	            <ul>
 	                <li style="--i: 1;"><a href="<%=root %>/make/make.jsp">Make</a></li>
-	                <li style="--i: 2;"><a href="<%=root %>/bowls/bowls.jsp">Bowls</a></li>
-	                <li style="--i: 3;"><a href="<%=root %>/shop/list.jsp">Shop</a></li>
-	                <li style="--i: 4;"><a href="<%=root %>/notice/list.jsp">Notice</a></li>
-	                <li style="--i: 5;"><a href="<%=root %>/review/list.jsp">Review</a></li>
+	                <li style="--i: 2;"><a href="<%=root %>/bowls/bowls.jsp?cate=육류&page=0">Bowls</a></li>
+	                <li style="--i: 3;"><a href="<%=root %>/etc/list.jsp?cate=전체&page=0">Etc</a></li>
+	                <li style="--i: 4;"><a href="<%=root %>/notice/list.jsp?cate=전체&page=0">Notice</a></li>
+	                <li style="--i: 5;"><a href="<%=root %>/review/list.jsp?page=0">Review</a></li>
 	            </ul>
 	        </div>
 	        <div class="login">

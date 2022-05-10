@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 
 import config.Config;
-import bbs.CategoryDTO;
 
 public class CategoryDAO {
 	Connection con = null;

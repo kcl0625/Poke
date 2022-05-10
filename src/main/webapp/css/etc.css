@@ -1,8 +1,5 @@
 @charset 'utf-8';
 
-.category li {cursor: pointer;}
-.category li.cur {font-weight: 600;}
-
 .list {width: 45vw; max-width: 650px; margin: 0 auto;}
 .list ul {display: grid;justify-content: center;grid-template-columns: 1fr 1fr 1fr;gap: 5vw;}
 .list li {position: relative;}

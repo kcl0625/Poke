@@ -1,7 +1,8 @@
 @charset "UTF-8";
 
-.list {margin-top: 2em; border-top: 1px solid;}
+.list {margin-top: 2em;}
 .list li {border-bottom: 1px solid; padding: 1.2em 0;}
+.list li:first-of-type {border-top: 1px solid;}
 .list li span {font-size: var(--small-font-size);}
 .list li span.date {position: absolute; right: 0;}
 .list li a.title {padding-left: 1.5em;}

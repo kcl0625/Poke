@@ -68,11 +68,11 @@ public class CartDAO {
 		ArrayList<ItemDTO> cart = new ArrayList<ItemDTO>();
 		try{
 			con = Config.getConnection();
-			sql = "select c.*, s.filename";
-			sql += " from cart c, shop s";
+			sql = "select c.*, e.filename";
+			sql += " from cart c, etc e";
 			sql += " where c.id = ?";
 			sql += " and type = 'etc'";
-			sql += " and c.no = s.no";
+			sql += " and c.no = e.no";
 			
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);

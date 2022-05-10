@@ -1,12 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@page import="java.util.ArrayList" %>
-<%@page import="bbs.board.BoardDTO" %>
+<%@page import="bbs.board.*" %>
 <%@include file="/config.jsp" %>
 
 <jsp:include page="/header.jsp" />
 
 <jsp:useBean id="reviewBean" class="bbs.board.BoardDAO" />
+
+<%
+request.setCharacterEncoding("utf-8");
+response.setCharacterEncoding("utf-8");
+
+int pageNum = Integer.parseInt(request.getParameter("page"));
+%>
 
 <link rel="stylesheet" href="<%=root%>/css/review.css">
 <div class="wrapper">
@@ -16,32 +23,29 @@
 	</div>
 	
 	<div class="list">
-		<a href="writeSkin.jsp"><i class="fas fa-pen"></i></a>
+		<%if (isMem == 1 && isAdm == 0) {%><a href="writeSkin.jsp"><i class="fas fa-pen"></i></a><%} %>
 		<ul>
 			<%
-			ArrayList<BoardDTO> reviewList = reviewBean.getReviewList();
-					int total = reviewBean.getReviewList().size();
-					for(int i=0;i<total;i++){
+			ArrayList<BoardDTO> reviewList = reviewBean.getReviewList(pageNum, 9);
+			for(int i=0;i<reviewList.size();i++){
 			%>
-					<li id="review_<%=reviewList.get(i).getNo() %>"
-					onclick="showReview(<%=reviewList.get(i).getNo() %>);"
-					style="background-image:url(<%=root%>/data/review/<%=reviewList.get(i).getFileName()%>);"></li>
+				<li id="review_<%=reviewList.get(i).getNo() %>"
+				onclick="showReview(<%=reviewList.get(i).getNo() %>);"
+				style="background-image:url(<%=root%>/data/review/<%=reviewList.get(i).getFileName()%>);"></li>
 			<%}
-				if (total == 0) out.println("<p class=\"txt-center no-data\">아직 리뷰가 없어요<br>첫 리뷰를 작성해주세요!</p>");
+				if (reviewList.size() == 0) out.println("<p class=\"txt-center no-data\">아직 리뷰가 없어요<br>첫 리뷰를 작성해주세요!</p>");
 			%>
 		</ul>
 	</div>
 	
+	<%BoardDAO itemDAO = new BoardDAO();
+	int pageMax = itemDAO.getReviewPageMax(9);%>
 	<div class="paging">
-		<div class="btn prev"><svg viewBox="0 0 25 50"><polyline class="stroke only" stroke-miterlimit="10" points="25,0 0,25 25,50"/></svg></div>
 		<nav>
-			<a class="cur">1</a>
-			<a>2</a>
-			<a>3</a>
-			<a>4</a>
-			<a>5</a>
+			<%for(int i=0;i<pageMax;i++){%>
+				<a href="list.jsp?page=<%=i%>"><%=i+1 %></a>
+			<%} %>
 		</nav>
-		<div class="btn next"><svg viewBox="0 0 25 50"><polyline class="stroke only" stroke-miterlimit="10" points="0,0 25,25 0,50"/></svg></div>
 	</div>
 	
 	<div id="review-viewer"></div>

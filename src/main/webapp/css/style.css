@@ -299,6 +299,8 @@ svg .fill.salary {fill: var(--color-salary);}
 .page-sub-title h2 {font-weight: 200; font-size: var(--big-font-size);}
 
 .page.category {margin-bottom: 100px;}
+.page.category li {cursor: pointer;}
+.page.category li.cur {font-weight: 600;}
 .category ul {display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;}
  
 /* 폼 요소 */

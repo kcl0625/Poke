@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@page import="java.util.ArrayList" %>
-<%@page import="bbs.CategoryDTO" %>
-<%@page import="order.IngreDTO" %>
-<%@page import="order.ItemDTO" %>
+<%@page import="bbs.*" %>
+<%@page import="order.*" %>
+<%@page import="order.cart.*" %>
 <%@include file="/config.jsp" %>
 
 <%
@@ -11,10 +11,6 @@ if (isMem == 0){response.sendRedirect(root + "/bbs/loginForm.jsp");}
 if (isAdm == 1) {
 	out.write("<script>alert('관리자는 주문할 수 없습니다');location.href = '" + root + "/index.jsp';</script>");
 }%>
-
-<jsp:useBean id="categoryBean" class="bbs.CategoryDAO" />
-<jsp:useBean id="ingreBean" class="order.IngreDAO" />
-<jsp:useBean id="cartBean" class="order.cart.CartDAO" />
 
 <link rel="stylesheet" href="<%=root %>/css/make.css">
 <script src="<%=root %>/js/make.js"></script>
@@ -26,7 +22,8 @@ if (isAdm == 1) {
 		<div class="category">
 			<ul>
 				<%
-				ArrayList<CategoryDTO> cateList = categoryBean.getCategory("make");
+				CategoryDAO categoryDAO = new CategoryDAO();
+				ArrayList<CategoryDTO> cateList = categoryDAO.getCategory("make");
 				int total = cateList.size();
 				for(int i=0;i<total;i++){%>
 					<li data-cate="<%=cateList.get(i).getName() %>" onclick="selectCategory(this.dataset.cate);"><%=cateList.get(i).getName()%></li>
@@ -62,7 +59,8 @@ if (isAdm == 1) {
 			</script>
 		</div>
 		<%
-		ArrayList<ItemDTO> cartList = cartBean.getPokeCart(sessionId);
+		CartDAO cartDAO = new CartDAO();
+		ArrayList<ItemDTO> cartList = cartDAO.getPokeCart(sessionId);
 		int pokeSize = cartList.size();
 		%>
 		<div class="form-wrapper">

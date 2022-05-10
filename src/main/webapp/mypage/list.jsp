@@ -8,7 +8,6 @@
 	<div class="list">
 		<div class="page-sub-title">
 			<h2><span class="point salary">M</span>y Review</h2>
-			<a href="write.skin.jsp"><i class="fas fa-pen"></i></a>
 		</div>
 		<ul>
 			<li style="background: url('');"></li>

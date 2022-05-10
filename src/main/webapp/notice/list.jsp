@@ -1,10 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@page import="java.util.ArrayList" %>
+<%@page import="bbs.CategoryDAO" %>
 <%@page import="bbs.CategoryDTO" %>
+<%@page import="bbs.board.*" %>
 <%@include file="/config.jsp" %>
 
-<jsp:useBean id="categoryBean" class="bbs.CategoryDAO" />
+<%
+request.setCharacterEncoding("utf-8");
+response.setCharacterEncoding("utf-8");
+
+String cate = request.getParameter("cate");
+int pageNum = Integer.parseInt(request.getParameter("page"));
+
+BoardDAO dao = new BoardDAO();
+%>
 
 <jsp:include page="/header.jsp" />
 <link rel="stylesheet" href="<%=root %>/css/notice.css">
@@ -13,61 +23,38 @@
 		<h2><span class="point salmon">N</span>otice</h2>
 		<p class="sub">이벤트 및 공지사항</p>	
 	</div>
-	
-	<div class="select">
-		<input type="hidden" name="poke_name" value="POKE - 1">
-		<div class="selected select-item">전체</div>
-		<div class="select-wrapper">
-			<ul>
-				<li class="select-item" data-data="전체" style="--i: 1;">전체</li>
-				<%
-				ArrayList<CategoryDTO> cateList = categoryBean.getCategory("shop");
-				int total = cateList.size();
-				for(int i=0;i<total;i++){%>
-					<li class="select-item" data-data="<%=cateList.get(i).getName() %>" onclick="selectCategory(this.dataset.data);" style="--i: <%=i + 2%>"><%=cateList.get(i).getName()%></li>
-				<%} %>
-			</ul>
-		</div>
+	<div class="page category">
+		<ul>
+			<li <%if (cate.equals("전체")) out.println("class=\"cur\"");%>>
+				<a href="list.jsp?cate=전체&page=0">전체</a>
+			</li>
+			<%
+			CategoryDAO categoryDAO = new CategoryDAO();
+			ArrayList<CategoryDTO> cateList = categoryDAO.getCategory("notice");
+			int cateSize = cateList.size();
+			for(int i=0;i<cateSize;i++){%>
+				<li <%if (cate.equals(cateList.get(i).getName())) out.println("class=\"cur\"");%>><a href="list.jsp?cate=<%=cateList.get(i).getName()%>&page=0"><%=cateList.get(i).getName()%></a></li>
+			<%} %>
+		</ul>
 	</div>
 	
 	<div class="list">
 		<ul>
-			<li>
-				<span class="cate">Notice</span>
-				<a class="title" href="viewSkin.jsp">공지사항 제목</a>
-				<span class="date">00.00.00</span>
-			</li>
+			<%
+			ArrayList<BoardDTO> noticeList = new ArrayList<BoardDTO>();
+			if (cate.equals("전체")) noticeList = dao.getNoticeList(pageNum, 7);
+			else noticeList= dao.getNoticeList(cate, pageNum, 7);
 			
-			<li>
-				<span class="cate">Event</span>
-				<a class="title" href="view.skin.jsp">이벤트 제목</a>
-				<span class="date">00.00.00</span>
-			</li>
-			<li>
-				<span class="cate">Notice</span>
-				<a class="title" href="view.skin.jsp">공지사항 제목</a>
-				<span class="date">00.00.00</span>
-			</li>
-			<li>
-				<span class="cate">Notice</span>
-				<a class="title" href="view.skin.jsp">공지사항 제목</a>
-				<span class="date">00.00.00</span>
-			</li>
-			<li>
-				<span class="cate">Event</span>
-				<a class="title" href="view.skin.jsp">이벤트 제목</a>
-				<span class="date">00.00.00</span>
-			</li>
-			<li>
-				<span class="cate">Event</span>
-				<a class="title" href="view.skin.jsp">이벤트 제목</a>
-				<span class="date">00.00.00</span>
-			</li>
-			<li>
-				<span class="cate">Event</span>
-				<a class="title" href="view.skin.jsp">이벤트 제목</a>
-				<span class="date">00.00.00</span>
-			</li>
+			for(int i=0;i<noticeList.size();i++){ %>
+				<li>
+					<span class="cate"><%=noticeList.get(i).getCate() %></span>
+					<a class="title" href="viewSkin.jsp?no=<%=noticeList.get(i).getNo() %>"><%=noticeList.get(i).getTitle() %></a>
+					<span class="date"><%=noticeList.get(i).getDate() %></span>
+				</li>
+			<%} 
+			if(noticeList.size() == 0) out.println("<p class=\"txt-center\">아직 작성된 글이 없습니다</p>");
+			
+			%>
 		</ul>
 	</div>
 	
@@ -79,16 +66,15 @@
 		</form>
 	</div>
 	
+	<% int pageMax = 0;
+	if (cate.equals("전체")) pageMax = dao.getNoticeListPageMax(3);
+	else pageMax = dao.getNoticeListPageMax(cate, 3);%>
 	<div class="paging">
-		<div class="btn prev"><svg viewBox="0 0 25 50"><polyline class="stroke only" stroke-miterlimit="10" points="25,0 0,25 25,50"/></svg></div>
 		<nav>
-			<a class="cur">1</a>
-			<a>2</a>
-			<a>3</a>
-			<a>4</a>
-			<a>5</a>
+			<%for(int i=0;i<pageMax;i++){%>
+				<a href="list.jsp?cate=<%=cate%>&page=<%=i%>"><%=i+1 %></a>
+			<%} %>
 		</nav>
-		<div class="btn next"><svg viewBox="0 0 25 50"><polyline class="stroke only" stroke-miterlimit="10" points="0,0 25,25 0,50"/></svg></div>
 	</div>
 </div>
 <jsp:include page="/footer.jsp" />

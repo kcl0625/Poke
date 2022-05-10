@@ -10,6 +10,9 @@ public class BoardDTO {
 	private String poke;
 	private String fileName;
 	private String date;
+	private String cate;
+	private String title;
+	
 	public int getNo() {
 		return no;
 	}
@@ -63,5 +66,17 @@ public class BoardDTO {
 	}
 	public void setDate(String date) {
 		this.date = date;
+	}
+	public String getCate() {
+		return cate;
+	}
+	public void setCate(String cate) {
+		this.cate = cate;
+	}
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
 	}
 }
