@@ -1,6 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page import="java.util.ArrayList" %>
+<%@page import="bbs.board.*" %>
 <%@include file="/config.jsp" %>
+
+<%
+request.setCharacterEncoding("utf-8");
+response.setCharacterEncoding("utf-8");
+
+int pageNum = Integer.parseInt(request.getParameter("page"));
+BoardDAO dao = new BoardDAO();
+%>
+
 <jsp:include page="/header.jsp" />
 <link rel="stylesheet" href="<%=root%>/css/mypage.css">
 <div class="wrapper review">
@@ -10,28 +21,26 @@
 			<h2><span class="point salary">M</span>y Review</h2>
 		</div>
 		<ul>
-			<li style="background: url('');"></li>
-			<li style="background: url('');"></li>
-			<li style="background: url('');"></li>
-			<li style="background: url('');"></li>
-			<li style="background: url('');"></li>
-			<li style="background: url('');"></li>
-			<li style="background: url('');"></li>
-			<li style="background: url('');"></li>
-			<li style="background: url('');"></li>
+			<%
+			ArrayList<BoardDTO> reviewList = dao.getMyReviewList(pageNum, 9, sessionId);
+			for(int i=0;i<reviewList.size();i++){
+			%>
+				<li id="review_<%=reviewList.get(i).getNo() %>"
+				onclick="showReview(<%=reviewList.get(i).getNo() %>);"
+				style="background-image:url(<%=root%>/data/review/<%=reviewList.get(i).getFileName()%>);"></li>
+			<%}
+				if (reviewList.size() == 0) out.println("<p class=\"txt-center no-data\">아직 리뷰가 없어요<br>첫 리뷰를 작성해주세요!</p>");
+			%>
 		</ul>
 	</div>
 	
+	<%int pageMax = dao.getMyReviewPageMax(9, sessionId);%>
 	<div class="paging">
-		<div class="btn prev"><svg viewBox="0 0 25 50"><polyline class="stroke only" stroke-miterlimit="10" points="25,0 0,25 25,50"/></svg></div>
 		<nav>
-			<a class="cur">1</a>
-			<a>2</a>
-			<a>3</a>
-			<a>4</a>
-			<a>5</a>
+			<%for(int i=0;i<pageMax;i++){%>
+				<a href="list.jsp?page=<%=i%>"><%=i+1 %></a>
+			<%} %>
 		</nav>
-		<div class="btn next"><svg viewBox="0 0 25 50"><polyline class="stroke only" stroke-miterlimit="10" points="0,0 25,25 0,50"/></svg></div>
 	</div>
 </div>
 <jsp:include page="/footer.jsp" />

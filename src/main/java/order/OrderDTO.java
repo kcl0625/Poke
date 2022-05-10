@@ -5,7 +5,7 @@ public class OrderDTO extends ItemDTO {
 	private int week;
 	private String payment;
 	private String totPrice;
-	private String isPaid;
+	private String orderStatus;
 	private String date;
 	private String depositor;
 	private ArrayList<ItemDTO> poke;
@@ -28,11 +28,11 @@ public class OrderDTO extends ItemDTO {
 	public void setTotPrice(String totPrice) {
 		this.totPrice = totPrice;
 	}
-	public String getIsPaid() {
-		return isPaid;
+	public String getOrderStatus() {
+		return orderStatus;
 	}
-	public void setIsPaid(String isPaid) {
-		this.isPaid = isPaid;
+	public void setOrderStatus(String orderStatus) {
+		this.orderStatus = orderStatus;
 	}
 	public String getDate() {
 		return date;

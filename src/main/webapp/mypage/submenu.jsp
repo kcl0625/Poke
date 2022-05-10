@@ -6,7 +6,7 @@
 <div class="submenu">
 	<ul>
 		<li><a href="index.jsp">My POKE</a></li>
-		<li><a href="list.jsp">My Review</a></li>
+		<li><a href="list.jsp?page=0">My Review</a></li>
 		<li><a href="freq.jsp">자주 묻는 질문</a></li>
 		<li><a href="qna.jsp">Q&A</a></li>
 	</ul>

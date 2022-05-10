@@ -39,7 +39,7 @@
 #review-viewer .review-area {width: 40%;height: calc(100% - 60px);position: absolute;right: 0;padding: 0 30px;overflow-y: scroll;}
 
 #review-viewer .review-area .review-header .user-info {display: flex; align-items: center; gap: 1em; padding-bottom: 1em; }
-#review-viewer .review-area .review-header .user-info .pic {width: 2em; height: 2em; border-radius: 50%; border: 1px solid;}
+#review-viewer .review-area .review-header .user-info .pic {width: 2em; height: 2em; border-radius: 50%; border: 1px solid;background-repeat: no-repeat;background-size: cover;background-position: center center;}
 
 #review-viewer .review-area .review-header .poke-info {padding: 1em 0 3em;border-top: 1px solid;}
 #review-viewer .review-area .review-header .poke-info .star-ratings {direction: rtl;position: absolute;margin-top: .5em;}

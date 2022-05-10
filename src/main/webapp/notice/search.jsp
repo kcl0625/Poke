@@ -12,6 +12,7 @@ response.setCharacterEncoding("utf-8");
 
 String cate = request.getParameter("cate");
 int pageNum = Integer.parseInt(request.getParameter("page"));
+String keyword = request.getParameter("keyword");
 
 BoardDAO dao = new BoardDAO();
 %>
@@ -42,8 +43,7 @@ BoardDAO dao = new BoardDAO();
 		<ul>
 			<%
 			ArrayList<BoardDTO> noticeList = new ArrayList<BoardDTO>();
-			if (cate.equals("전체")) noticeList = dao.getBoardList(pageNum, 7);
-			else noticeList= dao.getBoardList(cate, pageNum, 7);
+			noticeList = dao.searchBoard(pageNum, 7, keyword);
 			
 			for(int i=0;i<noticeList.size();i++){ %>
 				<li>
@@ -52,7 +52,7 @@ BoardDAO dao = new BoardDAO();
 					<span class="date"><%=noticeList.get(i).getDate() %></span>
 				</li>
 			<%} 
-			if(noticeList.size() == 0) out.println("<p class=\"txt-center\">아직 작성된 글이 없습니다</p>");
+			if(noticeList.size() == 0) out.println("<p class=\"txt-center\">검색결과가 없습니다</p>");
 			
 			%>
 		</ul>
@@ -66,13 +66,11 @@ BoardDAO dao = new BoardDAO();
 		</form>
 	</div>
 	
-	<% int pageMax = 0;
-	if (cate.equals("전체")) pageMax = dao.getBoardListPageMax(3);
-	else pageMax = dao.getBoardListPageMax(cate, 3);%>
+	<% int pageMax = dao.getSearchBoardListPageMax(keyword, 7);%>
 	<div class="paging">
 		<nav>
 			<%for(int i=0;i<pageMax;i++){%>
-				<a href="list.jsp?cate=<%=cate%>&page=<%=i%>"><%=i+1 %></a>
+				<a href="search.jsp?cate=<%=cate%>&page=<%=i%>&keyword=<%=keyword%>"><%=i+1 %></a>
 			<%} %>
 		</nav>
 	</div>

@@ -59,7 +59,7 @@ System.out.println(memberBean);
                         imp_uid : rsp.imp_uid,
                         merchant_uid : rsp.merchant_uidmerchan,
                         payment: 'card',
-                        isPaid: 'y',
+                        orderStatus: '입금확인',
                         totPrice : <%=totPrice%>,
                         weekPlan: <%=Integer.parseInt(request.getParameter("weekPlan"))%>,
                         //기타 필요한 데이터가 있으면 추가 전달

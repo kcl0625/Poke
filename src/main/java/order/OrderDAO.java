@@ -13,10 +13,10 @@ public class OrderDAO {
 	String sql = null;
 	PreparedStatement pstmt = null;
 	
-	public void setOrder(String no, ArrayList<OrderDTO> orderArr, MemberDTO memberDto, String id, String date, String payment, String isPaid, int totPrice, String depositor, int week) {
+	public void setOrder(String no, ArrayList<OrderDTO> orderArr, MemberDTO memberDto, String id, String date, String payment, String orderStatus, int totPrice, String depositor, int week) {
 		try {
 			con = Config.getConnection();
-			sql = "insert into poke.order(no, name, id, zip, add1, add2, tel, payment, totprice, ispaid, date, depositor, email) values(?,?,?,?,?,?,?,?,?,?,?,?,?)";
+			sql = "insert into poke.order(no, name, id, zip, add1, add2, tel, payment, totprice, orderstatus, date, depositor, email) values(?,?,?,?,?,?,?,?,?,?,?,?,?)";
 			pstmt = con.prepareStatement(sql);
 			
 			pstmt.setString(1, no);
@@ -28,7 +28,7 @@ public class OrderDAO {
 			pstmt.setString(7, memberDto.getTel());
 			pstmt.setString(8, payment);
 			pstmt.setInt(9, totPrice);
-			pstmt.setString(10, isPaid);
+			pstmt.setString(10, orderStatus);
 			pstmt.setString(11, date);
 			pstmt.setString(12, depositor);
 			pstmt.setString(13, memberDto.getEmail());
@@ -127,5 +127,24 @@ public class OrderDAO {
 			e.printStackTrace();
 		}
 		return etcArr;
+	}
+	
+	public String getOrderStatus(String id) {
+		String orderStatus = "";
+		try {
+			con = Config.getConnection();
+			sql = "select orderstatus from poke.order where id = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			ResultSet rs = pstmt.executeQuery();
+			
+			if (rs.next()) orderStatus = rs.getString("orderstatus");
+			rs.close();
+			pstmt.close();
+			con.close();
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return orderStatus;
 	}
 }

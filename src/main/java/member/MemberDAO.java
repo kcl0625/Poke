@@ -39,9 +39,8 @@ public class MemberDAO {
 	public void updateMember(MemberDTO dto) {
 		try {
 			con = Config.getConnection();
-			sql = "update member set pw = ?, name = ?, nick = ?, zip = ?, add1 = ?, add2 = ?, tel = ?, email = ? where id = ?";
+			sql = "update member set pw = ?, name = ?, nick = ?, zip = ?, add1 = ?, add2 = ?, tel = ?, email = ?, profpic = ? where id = ?";
 			pstmt = con.prepareStatement(sql);
-			ResultSet rs = null;
 			
 			pstmt.setString(1, dto.getPw());
 			pstmt.setString(2, dto.getName());
@@ -51,7 +50,8 @@ public class MemberDAO {
 			pstmt.setString(6, dto.getAdd2());
 			pstmt.setString(7, dto.getTel());
 			pstmt.setString(8, dto.getEmail());
-			pstmt.setString(9, dto.getId());
+			pstmt.setString(9, dto.getProfpic());
+			pstmt.setString(10, dto.getId());
 			
 			pstmt.executeUpdate();
 			pstmt.close();
@@ -64,7 +64,7 @@ public class MemberDAO {
 	public void deleteMember(MemberDTO dto) {
 		try {
 			con = Config.getConnection();
-			sql = "delete member where id = ?";
+			sql = "delete from member where id = ?";
 			pstmt = con.prepareStatement(sql);
 			
 			pstmt.setString(1, dto.getId());
@@ -82,7 +82,7 @@ public class MemberDAO {
 		MemberDTO member = new MemberDTO();
 		try {
 			con = Config.getConnection();
-			sql = "select pw, name, nick, zip, add1, add2, tel, email from member where id = ?";
+			sql = "select pw, name, nick, zip, add1, add2, tel, email, profpic from member where id = ?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
 			ResultSet rs = null;
@@ -98,6 +98,7 @@ public class MemberDAO {
 				member.setAdd2(rs.getString("add2"));
 				member.setTel(rs.getString("tel"));
 				member.setEmail(rs.getString("email"));
+				member.setProfpic(rs.getString("profpic"));
 			}
 			rs.close();
 			pstmt.close();
@@ -129,5 +130,5 @@ public class MemberDAO {
 			e.printStackTrace();
 		}
 		return res;
-	}
+	} 
 }

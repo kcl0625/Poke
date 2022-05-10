@@ -14,6 +14,7 @@ response.setCharacterEncoding("utf-8");
 
 String cate = request.getParameter("cate");
 int pageNum = Integer.parseInt(request.getParameter("page"));
+String keyword = request.getParameter("keyword");
 
 ItemDAO dao = new ItemDAO();
 ArrayList<ItemDTO> pokeList = dao.getPokeList(cate, pageNum, 3);%>
@@ -21,6 +22,7 @@ ArrayList<ItemDTO> pokeList = dao.getPokeList(cate, pageNum, 3);%>
 <jsp:include page="/header.jsp" />
 <link rel="stylesheet" href="<%=root %>/css/etc.css">
 <div class="wrapper">
+	<input type="hidden" name="keyword" value="<%=keyword%>">
 	<div class="page-title">
 		<h2><span class="point salmon">S</span>hop</h2>
 		<p class="sub">포케 말고도 다른 하와이안 음식을 즐겨보세요<br>무엇이 있을까요?</p>	
@@ -47,11 +49,7 @@ ArrayList<ItemDTO> pokeList = dao.getPokeList(cate, pageNum, 3);%>
 			<%
 			ArrayList<ItemDTO> etcItem = new ArrayList<ItemDTO>();
 			
-			if(cate.equals("전체")){
-				etcItem = dao.getEtc(pageNum, 9);
-			} else {
-				etcItem = dao.getEtc(cate, pageNum, 9);
-			}
+			etcItem = dao.searchEtc(pageNum, 9, keyword);
 			
 			for(int i=0;i<etcItem.size();i++) {
 				String no = etcItem.get(i).getNo();
@@ -75,10 +73,11 @@ ArrayList<ItemDTO> pokeList = dao.getPokeList(cate, pageNum, 3);%>
 				</li>
 			<%}%>
 		</ul>
+		<%if(etcItem.size() == 0) out.println("<p class=\"txt-center\">검색결과가 없습니다</p>"); %>
 	</div>
 	
 	<div class="search">
-		<form name="search" method="post" action="search.jsp?cate=전체&page=0">
+		<form name="search" method="post" action="search.jsp?cate=<%=cate%>&page=0&keyword=<%=keyword%>">
 			<div class="input-item"><input type="text" name="keyword" autocomplete="off"></div>
 			<button type="button" onclick="openSearch(event);"><svg viewBox="0 0 14 14"><path class="stroke only" d="M10.832,5.417c0,2.993-2.424,5.419-5.416,5.419
 	C2.425,10.836,0,8.41,0,5.417C0,2.425,2.425,0,5.416,0C8.408,0,10.832,2.425,10.832,5.417z M9.246,9.248l4.901,4.903"/></svg></a>
@@ -88,11 +87,9 @@ ArrayList<ItemDTO> pokeList = dao.getPokeList(cate, pageNum, 3);%>
 	<div class="paging">
 		<nav>
 			<%
-			int pageMax = 0;
-			if (cate.equals("전체")) pageMax = dao.getEtcListPageMax(9); 
-			else pageMax = dao.getEtcListPageMax(cate, 9);
+			int pageMax = dao.getSearchEtcListPageMax(keyword, 9);
 			for(int i=0;i<pageMax;i++){%>
-				<a href="list.jsp?cate=<%=cate%>&page=<%=i%>"><%=i+1 %></a>
+				<a href="search.jsp?cate=<%=cate%>&page=<%=i%>&keyword=<%=keyword%>"><%=i+1 %></a>
 			<%} %>
 		</nav>
 	</div>

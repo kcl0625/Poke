@@ -250,4 +250,57 @@ public class ItemDAO {
 		}
 		return item;
 	}
+	
+	public ArrayList<ItemDTO> searchEtc(int pageNum, int pageItemMax, String keyword) { //카테고리 선택
+		ArrayList<ItemDTO> etc = new ArrayList<ItemDTO>();
+		try {
+			con = Config.getConnection();
+			sql = "select no, name, price, filename from etc where name like '%";
+			sql += keyword;
+			sql += "%' limit ?, ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, pageItemMax * pageNum);
+			pstmt.setInt(2, pageItemMax);
+			
+			ResultSet rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				ItemDTO dto = new ItemDTO();
+				dto.setNo(rs.getString("no"));
+				dto.setName(rs.getString("name"));
+				dto.setPrice(rs.getInt("price"));
+				dto.setFilename(rs.getString("filename"));
+				etc.add(dto);
+			}
+			rs.close();
+			pstmt.close();
+			con.close();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return etc;
+	}
+	
+	public int getSearchEtcListPageMax(String keyword, int pageItemMax) {
+		int pageMax = 0;
+		try {
+			con = Config.getConnection();
+			sql = "select ceil(count(*)/?) as pagemax from etc where name like '%";
+			sql += keyword;
+			sql += "%'";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, pageItemMax);
+			
+			ResultSet rs = pstmt.executeQuery();
+			
+			if(rs.next()) pageMax = rs.getInt("pagemax");
+			
+			rs.close();
+			pstmt.close();
+			con.close();
+		} catch(Exception e){
+			e.printStackTrace();
+		}
+		return pageMax;
+	}
 }

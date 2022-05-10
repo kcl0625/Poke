@@ -25,7 +25,7 @@ MemberDTO member = memberBean.getMember(sessionId);
 <jsp:include page="/header.sub.jsp" />
 <link rel="stylesheet" href="<%=root%>/css/write.css">
 
-<a class="go-back" href="<%=root%>/review/list.jsp"><svg viewBox="0 0 25 50"><polyline class="stroke only" stroke-miterlimit="10" points="25,0 0,25 25,50"/></svg>back</a>
+<a class="go-back" href="javascript:history.back();"><svg viewBox="0 0 25 50"><polyline class="stroke only" stroke-miterlimit="10" points="25,0 0,25 25,50"/></svg>back</a>
 <div class="wrapper">
 	<form name="write" action="write.jsp" method="post" enctype="multipart/form-data">
 		<input type="hidden" name="nick" value="<%=member.getNick()%>">

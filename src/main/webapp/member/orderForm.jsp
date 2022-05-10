@@ -61,7 +61,7 @@ int week = Integer.parseInt(request.getParameter("weekPlan"));%>
 			<fieldset class="payment">
 				<legend>payment</legend>
 				<input type="hidden" name="payment" value="무통장입금">
-				<input type="hidden" name="isPaid" value="n">
+				<input type="hidden" name="orderStatus" value="주문완료">
 				<div class="input-item check">
 					<input type="radio" name="chkpayment" id="deposit" onclick="showPaymentForm(this.id, '무통장입금', 'n');" checked>
 					<label for="deposit"><span></span>무통장입금</label>
@@ -331,7 +331,7 @@ int week = Integer.parseInt(request.getParameter("weekPlan"));%>
 	    	if(indicator) printMsg(msg, indicator);
 		}
 		
-		let showPaymentForm = (id, val, isPaidVal) => {
+		let showPaymentForm = (id, val, orderStatusVal) => {
 			let payForm = document.querySelectorAll('.payform');
 			let selected = document.querySelector('.' + id);
 			if (id == 'card') {
@@ -343,7 +343,7 @@ int week = Integer.parseInt(request.getParameter("weekPlan"));%>
 				payForm[i].style.display = 'none';
 			selected.style.display = 'block';
 			order.payment.value = val;
-			order.isPaid.value = isPaidVal;
+			order.orderStatus.value = orderStatusVal;
 		}
 		//폼 제출
 	    let formSubmit = (form) => {

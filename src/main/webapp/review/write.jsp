@@ -37,15 +37,9 @@ try {
    	String file = (String) files.nextElement();
    	filename = multi.getFilesystemName(file); //서버에 업로드된 파일명
    	originalfile = multi.getOriginalFileName(file); //원래 선택한 원본파일명
-   	
-   	System.out.println(content);
 } catch(Exception e) {
     e.printStackTrace();
 }
-
-MemberDTO member = new MemberDTO();
-MemberDAO mDao = new MemberDAO();
-member = mDao.getMember(sessionId);
 
 BoardDTO review = new BoardDTO();
 BoardDAO rDao = new BoardDAO();
@@ -59,7 +53,7 @@ review.setStar(rating);
 review.setContent(content);
 review.setFileName(filename);
 
-rDao.insertReview(sessionId, member.getNick(), formatedNow, review);
+rDao.insertReview(sessionId, formatedNow, review);
 
-response.sendRedirect(root + "/review/list.jsp");
+response.sendRedirect(root + "/review/list.jsp?page=0");
 %>

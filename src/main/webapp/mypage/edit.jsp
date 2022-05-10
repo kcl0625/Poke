@@ -16,13 +16,14 @@
 	MemberDTO member = memberBean.getMember(sessionId);
 	%>
 	<div>
-		<form name="memForm" action="editRes.jsp" method="post" style="flex-wrap: nowrap;">
-			<input type="file" name="pic" style="display: none;">
-			<div class="upload-pic">
-				<a href="javascript:void(0)" onclick="memForm.pic.click();"><i class="fas fa-camera"></i></a>
-				<img src>
-			</div>
+		<form name="memForm" action="editRes.jsp" method="post" enctype="multipart/form-data" style="flex-wrap: nowrap;">
 			<input type="hidden" name="id" id="id" value="<%=sessionId%>">
+			<input type="file" name="profpic" style="display: none;" accept="image/jpeg, image/png">
+			<div class="upload-pic">
+				<a href="javascript:void(0)" onclick="memForm.profpic.click();"><i class="fas fa-camera"></i></a>
+				<img <%if(member.getProfpic() != null) out.println("src=\"" + root + "/data/member/" + sessionId + "/" + member.getProfpic() + "\"");
+				else out.println("src");%>>
+			</div>
 			<div class="form-wrapper">
 				<fieldset class="form-item">
 					<legend>회원 정보</legend>
@@ -231,13 +232,13 @@
 		    }
 		    
 
-			memForm.pic.addEventListener('change', (e) => {
+			memForm.profpic.addEventListener('change', (e) => {
 				let img = document.querySelector('.upload-pic img');
 				let reader = new FileReader();
 				reader.onload = (e) => {
 					img.src = e.target.result;
 				}
-				reader.readAsDataURL(memForm.pic.files[0]);
+				reader.readAsDataURL(memForm.profpic.files[0]);
 			})
 		</script>
 		

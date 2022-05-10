@@ -75,8 +75,7 @@ let openSearch = (e) => {
 		searchBox.classList.add('open');
 	} else {
 		if(input.value){
-			console.log('제출!!');
-			//search.submit();
+			search.submit();
 		} else {
 			searchBox.classList.remove('open');
 		}

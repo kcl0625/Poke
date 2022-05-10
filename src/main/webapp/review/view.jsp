@@ -1,18 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="order.ItemDTO"%>
+<%@ page import="member.*"%>
+<%@ page import="order.ItemDAO"%>
 <%@ page import="order.ItemDAO"%>
 <%@ page import="bbs.board.*"%>
 <%@include file="/config.jsp" %>
 
-<jsp:useBean id="reviewBean" class="bbs.board.BoardDAO" />
 <%
 request.setCharacterEncoding("utf-8");
 response.setCharacterEncoding("utf-8");
 
+MemberDAO mdao = new MemberDAO();
+BoardDAO bdao = new BoardDAO();
+
 int reviewNo = Integer.parseInt(request.getParameter("no"));
-BoardDTO review = reviewBean.showReview(reviewNo);
+BoardDTO review = bdao.showReview(reviewNo);
 int star = review.getStar();
+
+MemberDTO mdto = mdao.getMember(review.getId());
 %>
 
 <a class="close" href="javascript:closeReview();">
@@ -25,8 +30,8 @@ int star = review.getStar();
 	<div class="review-area">
 		<div class="review-header">
 			<div class="user-info">
-				<div class="pic"></div>
-				<p class="name"><%=review.getNick() %></p>
+				<div class="pic" style="background-image:url('<%=root%>/data/member/<%=sessionId%>/<%=mdto.getProfpic() %>')"></div>
+				<p class="name"><%=mdto.getNick() %></p>
 			</div>
 			<div class="poke-info">
 				<p class="poke-name"><%=review.getPoke() %></p>

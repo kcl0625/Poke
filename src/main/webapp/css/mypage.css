@@ -34,7 +34,7 @@
 }
 
 .profile {display: flex; align-items: center; gap: 3em; flex-wrap: wrap;}
-.profile .pic {width: 10em; height: 10em; border-radius: 50%; border: 1px solid;}
+.profile .pic {width: 10em; height: 10em; border-radius: 50%; border: 1px solid;background-position: center center;background-size: cover;background-repeat: n;}
 .profile .name h2 {font-size: var(--big-font-size); font-weight: 200; float: left;}
 .profile .name a {margin-left: 10px; vertical-align: middle;}
 
@@ -54,6 +54,8 @@
     left: 50%;
     transform: translateX(-50%);
 }
+.procedure > *:not(a) {opacity: .3;}
+.procedure .cur {opacity: 1;}
 .procedure div .num {font-size: 3.5em; font-weight: 100; padding-bottom: .7em;}
 .procedure svg {width: 1.6em;}
 
@@ -105,7 +107,7 @@
 .review .page-sub-title a {float: right;}
 .review .list {width: 45vw; margin: 0 auto;max-width: 650px;}
 .review .list ul {display: grid;justify-content: center;grid-template-columns: 1fr 1fr 1fr;gap: 2em; clear: both;}
-.review .list li {position: relative; border: 1px solid;}
+.review .list li {position: relative; border: 1px solid; background-size: cover; background-repeat: no-repeat; background-position: center center;}
 .review .list li::before {
 	content: '';
 	display: block;
@@ -116,11 +118,8 @@
 }
 
 /* 자주 묻는 질문 */
-.freq .freq-category {display: grid;grid-template-columns: 1fr 1fr 1fr 1fr 1fr;}
+.freq .freq-category {display: grid;grid-template-columns: 1fr 1fr 1fr; justify-items: center; gap: .5em;}
 .freq .freq-category .ui-btn {font-size: var(--small-font-size);}
-@media all and (max-width: 1280px) {
-	.freq .freq-category {grid-template-columns: 1fr 1fr 1fr; justify-items: center; gap: .5em;}
-}
 @media all and (max-width: 750px) {
 	.freq .freq-category {grid-template-columns: 1fr 1fr;}
 }

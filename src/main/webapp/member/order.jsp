@@ -18,7 +18,7 @@ request.setCharacterEncoding("utf-8");
 response.setCharacterEncoding("utf-8");
 
 String payment = request.getParameter("payment");
-String isPaid = request.getParameter("isPaid");
+String orderStatus = request.getParameter("orderStatus");
 int totPrice = Integer.parseInt(request.getParameter("totPrice"));
 String depositor = request.getParameter("depositor");
 int week = Integer.parseInt(request.getParameter("weekPlan"));
@@ -32,7 +32,7 @@ String formatedNow = now.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss
 if(session.getAttribute("member") != null) {
 	member = (MemberDTO)session.getAttribute("member");
 }
-orderDAO.setOrder(sessionNo, orderArr, member, sessionId, formatedNow, payment, isPaid, totPrice, depositor, week);
+orderDAO.setOrder(sessionNo, orderArr, member, sessionId, formatedNow, payment, orderStatus, totPrice, depositor, week);
 
 session.removeAttribute("member");
 session.removeAttribute("orderItem");

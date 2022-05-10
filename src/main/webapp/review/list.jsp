@@ -38,8 +38,7 @@ int pageNum = Integer.parseInt(request.getParameter("page"));
 		</ul>
 	</div>
 	
-	<%BoardDAO itemDAO = new BoardDAO();
-	int pageMax = itemDAO.getReviewPageMax(9);%>
+	<%int pageMax = reviewBean.getReviewPageMax(9);%>
 	<div class="paging">
 		<nav>
 			<%for(int i=0;i<pageMax;i++){%>

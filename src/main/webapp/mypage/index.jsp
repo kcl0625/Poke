@@ -8,6 +8,7 @@
 
 <jsp:useBean id="memberBean" class="member.MemberDAO" />
 <jsp:useBean id="orderBean" class="order.OrderDAO" />
+<jsp:useBean id="bbsBean" class="bbs.board.BoardDAO" />
 <%
 if (isMem == 0){response.sendRedirect(root + "/bbs/loginForm.jsp");}
 if (isAdm == 1) {
@@ -22,36 +23,39 @@ MemberDTO member = memberBean.getMember(sessionId);
 	<jsp:include page="submenu.jsp" />
 
 	<div class="profile">
-		<div class="pic"></div>
+		<div class="pic" style="background-image:url('<%=root%>/data/member/<%=sessionId%>/<%=member.getProfpic() %>')"></div>
 		<div class="info">
 			<div class="name">
 				<h2><%=member.getNick() %></h2>
 				<a href="edit.jsp"><i class="fas fa-cog"></i></a>
 			</div>
 			<div class="sub-info">
-				<p>작성리뷰<span>00</span></p>
-				<p>보유 포인트<span>0,000</span></p>
+				<p>작성리뷰<span><%=String.format("%,d", bbsBean.getMyReviewLength(sessionId)) %></span></p>
 			</div>
 		</div>
 	</div>
 	<div class="procedure">
-		<a href="">운송장 번호 조회</a>
-		<div>
+		<a href="https://www.cjlogistics.com/ko/tool/parcel/tracking" target="_blank">운송장 번호 조회</a>
+		
+		<div <%if(orderBean.getOrderStatus(sessionId).equals("주문완료")) out.println("class=\"cur\""); %>>
 			<p class="num">1</p>
 			<span>주문완료</span>
 		</div>
-		<svg viewBox="0 0 25 50"><polyline class="stroke only" stroke-miterlimit="10" points="0,0 25,25 0,50"></polyline></svg>
-		<div>
+		<svg viewBox="0 0 25 50" <%if(orderBean.getOrderStatus(sessionId).equals("주문완료")) out.println("class=\"cur\""); %>><polyline class="stroke only" stroke-miterlimit="10" points="0,0 25,25 0,50"></polyline></svg>
+		
+		<div <%if(orderBean.getOrderStatus(sessionId).equals("입금확인")) out.println("class=\"cur\""); %>>
 			<p class="num">2</p>
 			<span>입금확인</span>
 		</div>
-		<svg viewBox="0 0 25 50"><polyline class="stroke only" stroke-miterlimit="10" points="0,0 25,25 0,50"></polyline></svg>
-		<div>
+		<svg viewBox="0 0 25 50" <%if(orderBean.getOrderStatus(sessionId).equals("입금확인")) out.println("class=\"cur\""); %>><polyline class="stroke only" stroke-miterlimit="10" points="0,0 25,25 0,50"></polyline></svg>
+		
+		<div <%if(orderBean.getOrderStatus(sessionId).equals("배송준비")) out.println("class=\"cur\""); %>>
 			<p class="num">3</p>
 			<span>배송준비</span>
 		</div>
-		<svg viewBox="0 0 25 50"><polyline class="stroke only" stroke-miterlimit="10" points="0,0 25,25 0,50"></polyline></svg>
-		<div>
+		<svg viewBox="0 0 25 50" <%if(orderBean.getOrderStatus(sessionId).equals("배송준비")) out.println("class=\"cur\""); %>><polyline class="stroke only" stroke-miterlimit="10" points="0,0 25,25 0,50"></polyline></svg>
+		
+		<div <%if(orderBean.getOrderStatus(sessionId).equals("배송완료")) out.println("class=\"cur\""); %>>
 			<p class="num">4</p>
 			<span>배송완료</span>
 		</div>

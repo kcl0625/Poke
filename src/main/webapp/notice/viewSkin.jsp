@@ -11,7 +11,7 @@ response.setCharacterEncoding("utf-8");
 int no = Integer.parseInt(request.getParameter("no"));
 
 BoardDAO dao = new BoardDAO();
-BoardDTO article = dao.getNotice(no);
+BoardDTO article = dao.getBoard(no);
 %>
 <div class="wrapper qna">
 	<div class="view-area">
