@@ -82,7 +82,7 @@ public class MemberDAO {
 		MemberDTO member = new MemberDTO();
 		try {
 			con = Config.getConnection();
-			sql = "select pw, name, nick, zip, add1, add2, tel, email, profpic from member where id = ?";
+			sql = "select id, pw, name, nick, zip, add1, add2, tel, email, profpic from member where id = ?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
 			ResultSet rs = null;
@@ -90,6 +90,7 @@ public class MemberDAO {
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
+				member.setId(rs.getString("id"));
 				member.setPw(rs.getString("pw"));
 				member.setName(rs.getString("name"));
 				member.setNick(rs.getString("nick"));

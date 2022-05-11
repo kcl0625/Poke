@@ -133,16 +133,15 @@
 
 /* qna */
 .qna .search {position: absolute; right: 0;}
-.qna .list {border-top: 1px solid; margin-top: 1em;}
+.qna .list {margin-top: 1em;}
 .qna .list li {position: relative; padding: 1em 0; border-bottom: 1px solid;}
+.qna .list li:first-of-type {border-top: 1px solid;}
 .qna .list li .date {float: right; font-size: var(--small-font-size);}
 .qna a.write {float: right; padding-top: 2em;}
 
 .qna .qna-form .input-item {position: relative; width: 100%;}
 .qna .qna-form .input-item input {padding-left: 0; width: 100%;}
 .qna .qna-form button {margin: 1em auto 0;}
-
-/* freq */
 
 
 a.quit {font-size: var(--small-font-size); float: right;}

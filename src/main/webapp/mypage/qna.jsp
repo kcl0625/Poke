@@ -34,7 +34,9 @@ BoardDAO dao = new BoardDAO();
 					<a href="viewSkin.jsp?no=<%=qnaList.get(i).getNo()%>"><%=qnaList.get(i).getTitle() %>
 					<span class="date"><%=qnaList.get(i).getDate() %></span></a>
 				</li>
-			<%} %>
+			<%}
+			if (qnaList.size() == 0) out.println("<p class=\"txt-center\">문의 내역이 없습니다.</p>");
+			%>
 		</ul>
 	</div>
 	<a class="write" href="writeSkin.jsp"><i class="fas fa-pen"></i></a>

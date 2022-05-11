@@ -30,7 +30,7 @@ MemberDTO mdto = mdao.getMember(review.getId());
 	<div class="review-area">
 		<div class="review-header">
 			<div class="user-info">
-				<div class="pic" style="background-image:url('<%=root%>/data/member/<%=sessionId%>/<%=mdto.getProfpic() %>')"></div>
+				<div class="pic" style="background-image:url('<%=root%>/data/member/<%=mdto.getId()%>/<%=mdto.getProfpic() %>')"></div>
 				<p class="name"><%=mdto.getNick() %></p>
 			</div>
 			<div class="poke-info">

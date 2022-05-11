@@ -139,6 +139,14 @@
 #bowl .info-box {margin-top: 15px;}
 
 .making .write-name {position: absolute;width: 300px;left: 50%;z-index: 30;transform: translateX(-50%);top: 0;}
+.making .write-name::before {
+    content: '\f304';
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    font-family: 'Font Awesome Free';
+}
 .making .write-name input {
 	width: 100%;
 	font-size: var(--accent-font-size);
