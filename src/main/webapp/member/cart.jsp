@@ -166,17 +166,6 @@ String[] dayEng = {"mon", "tue", "wed", "thu", "fri", "sat"};
 			<button class="ui-btn full point big" type="button" onclick="goOrder();">주문하기</button>
 		</div>
 	</form>
-	<script>
-		let planSelect = document.querySelectorAll('.select-wrapper li');
-		planSelect.forEach((item, i) => {
-			planSelect[i].addEventListener('click', () => {
-				let week = planSelect[i].dataset.data.substr(0, 1);
-				let receiptWeek = document.querySelector('.plan-week');
-				cart.weekPlan.value = week;
-				receiptWeek.innerText = week;
-			})
-		})
-	</script>
 </div>
 
 <div id="popup" class="common">

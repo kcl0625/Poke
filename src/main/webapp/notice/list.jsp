@@ -42,8 +42,8 @@ BoardDAO dao = new BoardDAO();
 		<ul>
 			<%
 			ArrayList<BoardDTO> noticeList = new ArrayList<BoardDTO>();
-			if (cate.equals("전체")) noticeList = dao.getBoardList(pageNum, 7);
-			else noticeList= dao.getBoardList(cate, pageNum, 7);
+			if (cate.equals("전체")) noticeList = dao.getBoardList(pageNum, 7, "notice");
+			else noticeList= dao.getBoardList(cate, pageNum, 7, "notice");
 			
 			for(int i=0;i<noticeList.size();i++){ %>
 				<li>
@@ -67,8 +67,8 @@ BoardDAO dao = new BoardDAO();
 	</div>
 	
 	<% int pageMax = 0;
-	if (cate.equals("전체")) pageMax = dao.getBoardListPageMax(3);
-	else pageMax = dao.getBoardListPageMax(cate, 3);%>
+	if (cate.equals("전체")) pageMax = dao.getBoardListPageMax(3, "notice");
+	else pageMax = dao.getBoardListPageMax(cate, 3, "notice");%>
 	<div class="paging">
 		<nav>
 			<%for(int i=0;i<pageMax;i++){%>

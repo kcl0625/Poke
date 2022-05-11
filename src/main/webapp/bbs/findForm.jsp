@@ -4,6 +4,9 @@
 <jsp:include page="/header.jsp" />
 <link rel="stylesheet" href="<%=root %>}/css/login.css">
 <style>
+form.form-item {flex-wrap: wrap; height: 400px; align-content: space-between;}
+form.form-item > * {width: 100%;}
+form.form-item legend {font-weight: 200; font-size: 2.2rem;}
 @media all and (min-width: 1281px) {
 	.wrapper {padding-top: 0;}
 	footer {margin-top: 0;}

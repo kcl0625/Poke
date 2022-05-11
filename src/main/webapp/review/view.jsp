@@ -45,7 +45,7 @@ MemberDTO mdto = mdao.getMember(review.getId());
 				<div class="add-btns">
 					<a href="javascript:void(0);"
 					<%if(isMem == 1 && isAdm == 0) {%>onclick="location.href='<%=root %>/make/modify.jsp?name=<%=review.getPoke() %>&ingre=<%=review.getIngre()%>'"<%}
-					else {%>onclick="location.href='<%=root %>/bbs/loginForm.jsp';"<%} %>>수정하기</a>
+					else {%>onclick="location.href='<%=root %>/bbs/loginForm.jsp';"<%} %>>메뉴 수정하기</a>
 				</div>
 			</div>
 		</div>

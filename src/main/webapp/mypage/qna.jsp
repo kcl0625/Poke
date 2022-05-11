@@ -1,6 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page import="java.util.ArrayList" %>
+<%@page import="bbs.board.*" %>
 <%@include file="/config.jsp" %>
+<%
+request.setCharacterEncoding("utf-8");
+response.setCharacterEncoding("utf-8");
+
+String cate = request.getParameter("cate");
+int pageNum = Integer.parseInt(request.getParameter("page"));
+
+BoardDAO dao = new BoardDAO();
+%>
 <jsp:include page="/header.jsp" />
 <link rel="stylesheet" href="<%=root%>/css/mypage.css">
 <div class="wrapper qna">
@@ -17,36 +28,15 @@
 		</div>
 	</div>
 	<div class="list">
-		<ul>
-			<li>
-				<a href="view.skin.jsp">질문 제목1
-				<span class="date">00.00.00</span></a>
-			</li>
-			<li>
-				<a href="">제목2
-				<span class="date">00.00.00</span></a>
-			</li>
-			<li>
-				<a href="">제목3
-				<span class="date">00.00.00</span></a>
-			</li>
-			<li>
-				<a href="">제목4
-				<span class="date">00.00.00</span></a>
-			</li>
-			<li>
-				<a href="">이것도 제목
-				<span class="date">00.00.00</span></a>
-			</li>
-			<li>
-				<a href="">6번째 제목
-				<span class="date">00.00.00</span></a>
-			</li>
-			<li>
-				<a href="">질문 7
-				<span class="date">00.00.00</span></a>
-			</li>
+		<ul><%ArrayList<BoardDTO> qnaList = dao.getMyQnaList(sessionId, pageNum, 7, "qna");%>
+			<%for(int i=0;i<qnaList.size();i++){%>
+				<li>
+					<a href="viewSkin.jsp?no=<%=qnaList.get(i).getNo()%>"><%=qnaList.get(i).getTitle() %>
+					<span class="date"><%=qnaList.get(i).getDate() %></span></a>
+				</li>
+			<%} %>
 		</ul>
 	</div>
+	<a class="write" href="writeSkin.jsp"><i class="fas fa-pen"></i></a>
 </div>
 <jsp:include page="/footer.jsp" />

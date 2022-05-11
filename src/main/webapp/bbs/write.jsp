@@ -16,7 +16,7 @@
 request.setCharacterEncoding("utf-8");
 
 MultipartRequest multi = null;
-String dir = request.getServletContext().getRealPath("data/review");
+String dir = request.getServletContext().getRealPath("data/member/" + sessionId);
 int max = 1024*1024*15;
 DefaultFileRenamePolicy policy = new DefaultFileRenamePolicy();
 
@@ -29,19 +29,19 @@ if (!folder.exists()) {
 	}        
 }
 
+String board = "";
+String title = "";
+String content = "";
 String filename = "";
 String originalfile = "";
-String poke = "";
-String ingre = "";
-int rating = 0;
-String content = "";
+String cate = "";
 
 try {
 	multi = new MultipartRequest(request, dir, max, "utf-8", policy); //서버 데이터 폴더에 파일 업로드
-	poke = multi.getParameter("poke");
-	ingre = multi.getParameter("ingre");		
-    rating = Integer.parseInt(multi.getParameter("rating"));
-    content = multi.getParameter("content");
+	board = multi.getParameter("board");
+	title = multi.getParameter("title");		
+	content = multi.getParameter("content");
+	cate = multi.getParameter("cate");
     
     Enumeration files = multi.getFileNames(); 
    	String file = (String) files.nextElement();
@@ -51,19 +51,17 @@ try {
     e.printStackTrace();
 }
 
-BoardDTO review = new BoardDTO();
-BoardDAO rDao = new BoardDAO();
+BoardDTO article = new BoardDTO();
+BoardDAO dao = new BoardDAO();
 
 LocalDateTime now = LocalDateTime.now();
-String formatedNow = now.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+String formatedNow = now.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 
-review.setPoke(poke);
-review.setIngre(ingre);
-review.setStar(rating);
-review.setContent(content);
-review.setFileName(filename);
+article.setTitle(title);
+article.setContent(content);
+article.setCate(cate);
+article.setFileName(filename);
 
-rDao.insertReview(sessionId, formatedNow, review);
-
-response.sendRedirect(root + "/review/list.jsp?page=0");
+dao.insertBoard(sessionId, board, article, formatedNow);
 %>
+<script>history.back();</script>

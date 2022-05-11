@@ -31,9 +31,13 @@ input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; -moz
 input[type="radio"],
 input[type="checkbox"] {display: none;}
 
+input::placeholder {color: inherit; opacity: .4;}
 [placeholder]:focus {outline: 0;}
 [placeholder]:empty::before {content: attr(placeholder); opacity: .4;}
 [placeholder]:empty:focus::before {content: '';}
+
+textarea {width: 100%; background: none; color: inherit; font-size: inherit; font-family: inherit; resize: vertical;min-height: 10em;border: 1px solid;padding: .8em;}
+textarea::placeholder {color: inherit; opacity: .4;}
 
 svg {overflow: visible; stroke-linejoin: round; stroke-linecap: round;}
 ::-webkit-scrollbar {display: none;}

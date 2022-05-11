@@ -64,6 +64,24 @@ public class OrderDAO {
 			e.printStackTrace();
 		}
 	}
+	public String getOrderNo(String id) {
+		String no = "";
+		try {
+			con = Config.getConnection();
+			sql = "select no from ordereditem where id = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			ResultSet rs = pstmt.executeQuery();
+			
+			if(rs.next()) no = rs.getString("no");
+			rs.close();
+			pstmt.close();
+			con.close();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return no;
+	}
 	
 	public OrderDTO getPokeOrder(String id) { //마이페이지에서 메뉴 주문 정보 불러오기
 		OrderDTO pokeOrder = new OrderDTO();
@@ -78,6 +96,7 @@ public class OrderDAO {
 			
 			while(rs.next()) {
 				ItemDTO dto = new ItemDTO();
+				dto.setNo(rs.getString("no"));
 				dto.setName(rs.getString("name"));
 				dto.setPrice(rs.getInt("price"));
 				dto.setIngre(rs.getString("ingre"));

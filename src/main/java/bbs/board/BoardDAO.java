@@ -188,11 +188,14 @@ public class BoardDAO {
 		}
 	}
 	
-	public ArrayList<BoardDTO> getBoardList(String cate, int pageNum, int pageItemMax) {
+	public ArrayList<BoardDTO> getBoardList(String cate, int pageNum, int pageItemMax, String board) {
 		ArrayList<BoardDTO> noticeList = new ArrayList<BoardDTO>();
 		try{
 			con = Config.getConnection();
-			sql = "select no, title, content, filename, date, cate from notice where cate = ? order by no limit ?, ?";
+			sql = "select id, no, title, content, filename, date, cate from `";
+			sql += board;
+			sql += "` where cate = ? order by no limit ?, ?";
+			
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, cate);
 			pstmt.setInt(2, pageItemMax * pageNum);
@@ -204,6 +207,7 @@ public class BoardDAO {
 			
 			while(rs.next()) {
 				BoardDTO dto = new BoardDTO();
+				dto.setId(rs.getString("id"));
 				dto.setNo(rs.getInt("no"));
 				dto.setTitle(rs.getString("title"));
 				dto.setContent(rs.getString("content"));
@@ -221,11 +225,13 @@ public class BoardDAO {
 		return noticeList;
 	}
 	
-	public ArrayList<BoardDTO> getBoardList(int pageNum, int pageItemMax) {
+	public ArrayList<BoardDTO> getBoardList(int pageNum, int pageItemMax, String board) {
 		ArrayList<BoardDTO> boardList = new ArrayList<BoardDTO>();
 		try{
 			con = Config.getConnection();
-			sql = "select no, title, date, cate from notice order by no limit ?, ?";
+			sql = "select id, no, title, date, cate from `";
+			sql += board;
+			sql += "` order by no limit ?, ?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, pageItemMax * pageNum);
 			pstmt.setInt(2, pageItemMax);
@@ -236,6 +242,7 @@ public class BoardDAO {
 			
 			while(rs.next()) {
 				BoardDTO dto = new BoardDTO();
+				dto.setId(rs.getString("id"));
 				dto.setNo(rs.getInt("no"));
 				dto.setTitle(rs.getString("title"));
 				dto.setDate(rs.getString("date"));
@@ -251,11 +258,13 @@ public class BoardDAO {
 		return boardList;
 	}
 	
-	public BoardDTO getBoard(int no) {
+	public BoardDTO getBoard(int no, String board) {
 		BoardDTO article = new BoardDTO();
 		try{
 			con = Config.getConnection();
-			sql = "select no, title, content, filename, date, cate from notice where no = ?";
+			sql = "select id, no, title, content, filename, date, cate from `";
+			sql += board;
+			sql += "` where no = ?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, no);
 			
@@ -264,6 +273,7 @@ public class BoardDAO {
 			rs = pstmt.executeQuery();
 			
 			while (rs.next()) {
+				article.setId(rs.getString("id"));
 				article.setNo(rs.getInt("no"));
 				article.setTitle(rs.getString("title"));
 				article.setContent(rs.getString("content"));
@@ -280,12 +290,14 @@ public class BoardDAO {
 		return article;
 	}
 	
-	public int getBoardListPageMax(int pageItemMax) {
+	public int getBoardListPageMax(int pageItemMax, String board) {
 		int pageMax = 0;
 		
 		try {
 			con = Config.getConnection();
-			sql = "select ceil(count(*)/?) as pagemax from notice";
+			sql = "select ceil(count(*)/?) as pagemax from `";
+			sql += board;
+			sql += "`";
 			
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, pageItemMax);
@@ -303,12 +315,14 @@ public class BoardDAO {
 		return pageMax;
 	}
 	
-	public int getBoardListPageMax(String cate, int pageItemMax) {
+	public int getBoardListPageMax(String cate, int pageItemMax, String board) {
 		int pageMax = 0;
 		
 		try {
 			con = Config.getConnection();
-			sql = "select ceil(count(*)/?) as pagemax from notice where cate = ?";
+			sql = "select ceil(count(*)/?) as pagemax from `";
+			sql += board;
+			sql += "` where cate = ?";
 			
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, pageItemMax);
@@ -327,11 +341,13 @@ public class BoardDAO {
 		return pageMax;
 	}
 	
-	public ArrayList<BoardDTO> searchBoard(int pageNum, int pageItemMax, String keyword) { //카테고리 선택
+	public ArrayList<BoardDTO> searchBoard(int pageNum, int pageItemMax, String keyword, String board) { //카테고리 선택
 		ArrayList<BoardDTO> boardList = new ArrayList<BoardDTO>();
 		try {
 			con = Config.getConnection();
-			sql = "select no, title, date, cate from notice where title like '%";
+			sql = "select no, title, date, cate from `";
+			sql += board;
+			sql += "` where title like '%";
 			sql += keyword;
 			sql += "%' order by no limit ?, ?";
 			pstmt = con.prepareStatement(sql);
@@ -357,12 +373,14 @@ public class BoardDAO {
 		return boardList;
 	}
 	
-	public int getSearchBoardListPageMax(String keyword, int pageItemMax) {
+	public int getSearchBoardListPageMax(String keyword, int pageItemMax, String board) {
 		int pageMax = 0;
 		
 		try {
 			con = Config.getConnection();
-			sql = "select ceil(count(*)/?) as pagemax from notice where title like '%";
+			sql = "select ceil(count(*)/?) as pagemax from `";
+			sql += board;
+			sql += "` where title like '%";
 			sql += keyword;
 			sql += "%'";
 			
@@ -380,5 +398,62 @@ public class BoardDAO {
 			e.printStackTrace();
 		}
 		return pageMax;
+	}
+	
+	public void insertBoard(String id, String board, BoardDTO dto, String date) {
+		try {
+			con = Config.getConnection();
+			sql = "insert into `";
+			sql += board;
+			sql += "` (id, title, content, filename, date, cate) values(?,?,?,?,?,?)";
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, id);
+			pstmt.setString(2, dto.getTitle());
+			pstmt.setString(3, dto.getContent());
+			pstmt.setString(4, dto.getFileName());
+			pstmt.setString(5, date);
+			pstmt.setString(6, dto.getCate());
+			
+			pstmt.executeUpdate();
+			
+			pstmt.close();
+			con.close();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public ArrayList<BoardDTO> getMyQnaList(String id, int pageNum, int pageItemMax, String board) {
+		ArrayList<BoardDTO> boardList = new ArrayList<BoardDTO>();
+		try{
+			con = Config.getConnection();
+			sql = "select no, title, date, cate from `";
+			sql += board;
+			sql += "` where id = ? order by no limit ?, ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			pstmt.setInt(2, pageItemMax * pageNum);
+			pstmt.setInt(3, pageItemMax);
+			
+			ResultSet rs = null;
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				BoardDTO dto = new BoardDTO();
+				dto.setNo(rs.getInt("no"));
+				dto.setTitle(rs.getString("title"));
+				dto.setDate(rs.getString("date"));
+				dto.setCate(rs.getString("cate"));
+				boardList.add(dto);
+			}
+			rs.close();
+			pstmt.close();
+			con.close();
+		} catch(Exception e){
+			e.printStackTrace();
+		}
+		return boardList;
 	}
 }

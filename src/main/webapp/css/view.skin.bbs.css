@@ -4,7 +4,7 @@
 .view-area .article-info a.back {display: flex;align-items: center;gap: 1.5em;font-size: var(--small-font-size); float: left; line-height: 1em;}
 .view-area .article-info a.back svg {width: .5em; stroke-width: 3.3;}
 .view-area .article-info .date {font-size: var(--small-font-size); float: right; order: 2; line-height: 1em;}
-.view-area .article-info .article-header {order: 1;}
+.view-area .article-info .article-header {order: 1;position: absolute;left: 50%;transform: translateX(-50%);}
 .view-area .article-info .article-header .category {position: relative; font-size: var(--small-font-size); text-align: center; top: -1.5rem; padding-bottom: .5em;}
 .view-area .article-info .article-header .category::before {
 	content: '';

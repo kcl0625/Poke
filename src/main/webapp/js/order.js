@@ -20,16 +20,15 @@ let getetcItem = () => {return new etcItem(type, name, price, quantity);}
 
 document.addEventListener('DOMContentLoaded', () => {
 	let plan = document.querySelectorAll('.plan.list-container .item-list li');
+	let planSelect = document.querySelectorAll('.select-wrapper li');
+	let spanPlanPrice = document.querySelector('.plan-price');
 	let pokeTotPrice = 0;
 
 	plan.forEach((item, i) => {
 		let dayChk = plan[i].querySelectorAll('input[type="checkbox"][name="day"]');
 		let price = parseInt(plan[i].querySelector('[name="price"]').value);
 		
-		let spanPlanPrice = document.querySelector('.plan-price');
-		
 		dayChk.forEach((item2, j) => {
-			
 			dayChk[j].addEventListener('change', () => {
 				if (dayChk[j].checked)
 					pokeTotPrice += price;
@@ -38,6 +37,26 @@ document.addEventListener('DOMContentLoaded', () => {
 				spanPlanPrice.innerHTML = `￦${pokeTotPrice.toLocaleString('en-IE')}`;
 
 				getTot();
+			})
+		})
+		
+		planSelect.forEach((item2, k) => {
+			planSelect[k].addEventListener('click', (e) => {
+				let week = planSelect[k].dataset.data.substr(0, 1);
+				let receiptWeek = document.querySelector('.plan-week');
+				
+				cart.weekPlan.value = week;
+				receiptWeek.innerText = week;
+				
+				let txtEtcPrice = document.querySelector('.additional p').innerHTML;
+				let txtShip = document.querySelector('.ship p').innerHTML;
+
+				let additional = parseInt(txtEtcPrice.substr(1).replace(',', ''));
+				let ship = parseInt(txtShip.substr(1).replace(',', ''));
+			
+				let totPrice = pokeTotPrice * week + additional + ship;
+				let spanTot = document.querySelector('.total-price');
+				spanTot.innerHTML = `￦${totPrice.toLocaleString('en-IE')}`;
 			})
 		})
 	})
@@ -85,7 +104,7 @@ let getTot = () => {
 
 	let plan = parseInt(txtPlanPrice.substr(1).replace(',', ''));
 	let additional = parseInt(txtEtcPrice.substr(1).replace(',', ''));
-	let week = document.querySelector('.selected.select-item').innerHTML.substr(0, 1);
+	let week = parseInt(cart.week.value.substr(0, 1));
 	let ship = parseInt(txtShip.substr(1).replace(',', ''));
 
 	let totPrice = plan * week + additional + ship;
@@ -152,9 +171,4 @@ let goOrder = () => {
 	} else {
 		showPopup();
 	}
-}
-
-/* 결제 */
-const setting = {
-	
 }

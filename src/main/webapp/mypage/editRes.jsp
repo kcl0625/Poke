@@ -13,17 +13,27 @@
 request.setCharacterEncoding("utf-8");
 
 MultipartRequest multi = null;
-String dir = request.getServletContext().getRealPath("data/member/" + sessionId);
+String dir = request.getServletContext().getRealPath("data/member/");
+String dir2 = request.getServletContext().getRealPath("data/member/" + sessionId);
 int max = 1024*1024*15;
 DefaultFileRenamePolicy policy = new DefaultFileRenamePolicy();
 
-File folder = new File(dir);
-if (!folder.exists()) {
+File memFolder = new File(dir);
+File memIdFolder = new File(dir2);
+if (!memFolder.exists()) {
 	try{
-		folder.mkdir(); //폴더 생성
+		memFolder.mkdir(); //폴더 생성
     } catch(Exception e){
 	    e.printStackTrace();
 	}        
+} else {
+	if (!memIdFolder.exists()) {
+		try{
+			memIdFolder.mkdir(); //폴더 생성
+	    } catch(Exception e){
+		    e.printStackTrace();
+		}        
+	}
 }
 
 String id = "";
@@ -39,7 +49,7 @@ String profpic = "";
 String originalfile = "";
 
 try {
-	multi = new MultipartRequest(request, dir, max, "utf-8", policy); //서버 데이터 폴더에 파일 업로드
+	multi = new MultipartRequest(request, dir2, max, "utf-8", policy); //서버 데이터 폴더에 파일 업로드
 	id = multi.getParameter("id");
 	name = multi.getParameter("name");
 	nick = multi.getParameter("nick");
