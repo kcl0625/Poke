@@ -456,4 +456,32 @@ public class BoardDAO {
 		}
 		return boardList;
 	}
+	
+	public ArrayList<BoardDTO> getFreqList (String cate) {
+		ArrayList<BoardDTO> freqList = new ArrayList<BoardDTO>();
+		try{
+			con = Config.getConnection();
+			sql = "select * from freq where cate = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, cate);
+			
+			ResultSet rs = null;
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				BoardDTO dto = new BoardDTO();
+				dto.setCate(rs.getString("cate"));
+				dto.setAns(rs.getString("ans"));
+				dto.setQues(rs.getString("ques"));
+				freqList.add(dto);
+			}
+			rs.close();
+			pstmt.close();
+			con.close();
+		} catch(Exception e){
+			e.printStackTrace();
+		}
+		return freqList;
+	}
 }

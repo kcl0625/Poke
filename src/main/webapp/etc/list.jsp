@@ -23,7 +23,7 @@ ArrayList<ItemDTO> pokeList = dao.getPokeList(cate, pageNum, 3);%>
 <div class="wrapper">
 	<div class="page-title">
 		<h2><span class="point salmon">S</span>hop</h2>
-		<p class="sub">포케 말고도 다른 하와이안 음식을 즐겨보세요<br>무엇이 있을까요?</p>	
+		<p class="sub">포케 말고도 다른 하와이안 음식을 즐겨보세요<br>하와이안 밀키트와 디저트를 준비해봤어요</p>	
 	</div>
 	
 	<div class="page category">
@@ -59,7 +59,7 @@ ArrayList<ItemDTO> pokeList = dao.getPokeList(cate, pageNum, 3);%>
 				int price = etcItem.get(i).getPrice();
 				String filename = etcItem.get(i).getFilename();%>
 				<li id="item_<%=no %>">
-					<div class="img" onclick="showDesc(<%=no%>);" style="background-image: url('<%=root %>/data/mealkit/<%=filename %>');"></div>
+					<div class="img" onclick="showDesc(<%=no%>);" style="background-image: url('<%=root %>/data/etc/<%=filename %>');"></div>
 					<div class="content-bottom">
 						<p class="name"><%=name %></p>
 						<span class="price">￦<%=String.format("%,d", price) %></span>

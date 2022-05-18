@@ -3,21 +3,21 @@
 <%@ page import="java.util.ArrayList"%>
 <%@ page import="order.IngreDTO"%>
 <%@ page import="order.IngreDAO"%>
+<%@ page import="order.ItemDTO"%>
+<%@ page import="order.ItemDAO"%>
 <%@include file="/config.jsp" %>
-
-<jsp:useBean id="ingreBean" class="order.IngreDAO" />
 
 <jsp:include page="header.jsp" />
 <link rel="stylesheet" href="<%=root %>/css/main.css">
 
 	<div id= "main" class="wrapper">
 		<div class="main-txt">
-			<h1><span class="point salmon">D</span>esign <span class="point salary">Y</span>our<br>
-			<span class="point cheese">O</span>wn <span class="point salmon">B</span>owl
+			<h1><span class="point salmon">D</span>esign <span class="point cheese">Y</span>our<br>
+			<span class="point salary">O</span>wn <span class="point salmon">B</span>owl
 			</h1>
 			
 			<p class="sub-txt">; one of the Hawaiian dishes,<br>in which diced fish served</p>
-			<h2 class="sub-title">내가 좋아하는 것들만 담아서</h2>
+			<h2 class="sub-title">내가 좋아하는 것들만 담아서 만드는 나만의 포케</h2>
 		</div>
 		<div class="main-bg">
 			<svg viewBox="0 0 150 100">
@@ -144,8 +144,8 @@
 				
 				<div class="select select-ingre">
 					<ul>
-					<%IngreDAO dao = new IngreDAO();
-					ArrayList<IngreDTO> ingre = ingreBean.get5Ingre();
+					<%IngreDAO ingreDAO = new IngreDAO();
+					ArrayList<IngreDTO> ingre = ingreDAO.get5Ingre();
 					
 					for(int i=0;i<ingre.size();i++) {
 						String name = ingre.get(i).getName();
@@ -289,9 +289,42 @@
 			<p>고민이 될 때에는 레시피 북이나<br>다른 사람의 리뷰를 참고해보는 것은 어떨까요?<br><br>
 			분명 마음에 드는 것을 찾을 수 있을 거예요.</p>
 		</div>
-
-		<div class="section-content">
 		
+		<%
+		ItemDAO pokeDAO = new ItemDAO();
+		ArrayList<ItemDTO> poke = pokeDAO.get8Poke();
+		%>
+		<div class="section-content book">
+			<div class="paper theme-box round">
+				<p>또 무엇이 있을까요?</p>
+				<div class="item-wrapper" style="background: var(--color-cheese);">
+					<%for (int i=0;i<Math.floor(poke.size()/2);i++){%>
+						<div class="item">
+							<img src="<%=root%>/data/poke/<%=poke.get(i).getFilename()%>">
+						</div>
+					<%}%>
+				</div>
+			</div>
+			
+			<div class="binder">
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+			</div>
+			
+			<div class="paper theme-box round">
+				<div class="item-wrapper" style="background: var(--color-salmon);">
+					<%for (int i=(int)Math.ceil(poke.size()/2);i<poke.size();i++){%>
+						<div class="item">
+							<img src="<%=root%>/data/poke/<%=poke.get(i).getFilename()%>">
+						</div>
+					<%} %>
+				</div>
+				<p>직접 찾아보시는 건 어떠세요?</p>
+			</div>
 		</div>
 		
 		<div class="txt-area">

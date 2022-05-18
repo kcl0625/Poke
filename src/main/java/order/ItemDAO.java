@@ -303,4 +303,27 @@ public class ItemDAO {
 		}
 		return pageMax;
 	}
+	
+	public ArrayList<ItemDTO> get8Poke() {
+		ArrayList<ItemDTO> poke = new ArrayList<ItemDTO>();
+		try {
+			con = Config.getConnection();
+			sql = "select no, name, description, ingre, price, filename from poke limit 8";
+			pstmt = con.prepareStatement(sql);
+			
+			ResultSet rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				ItemDTO dto = new ItemDTO();
+				dto.setFilename(rs.getString("filename"));
+				poke.add(dto);
+			}
+			rs.close();
+			pstmt.close();
+			con.close();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return poke;
+	}
 }

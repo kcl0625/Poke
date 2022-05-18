@@ -201,6 +201,9 @@
 .making .receipt .total p#cal {padding-top: .5em;}
 .making .receipt button {margin-top: 15px;}
 
+.making .receipt .btns {display: flex; justify-content: space-between;}
+.making .receipt .btns button  {width: 45% !important;}
+
 @media all and (min-width: 1281px) {
 	.wrapper {padding-top: 0 !important;}
 	.making .receipt {bottom: -60px;}

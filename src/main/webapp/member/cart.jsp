@@ -25,8 +25,12 @@ String[] dayEng = {"mon", "tue", "wed", "thu", "fri", "sat"};
 		<div class="cart-left">
 			<div class="plan list-container">
 				<div class="list-container-top">
-					<h3>plan</h3>
+					<div class="tit">
+						<h3>poke</h3>
+						<p>내가 고른 메뉴들</p>
+					</div>
 					<div class="select">
+						<p>몇 주동안<br>드실 건가요?</p>
 						<input type="hidden" name="week" value="1">
 						<div class="selected select-item">1주</div>
 						<div class="select-wrapper">
@@ -71,17 +75,19 @@ String[] dayEng = {"mon", "tue", "wed", "thu", "fri", "sat"};
 										<%} %> 
 									</div>
 									<div class="item-info">
-										<fieldset class="day">
-										<%for(int j=0;j<day.length;j++) {%>
-											<input type="checkbox" name="day" id="poke_<%=no %>_<%=dayEng[j]%>" class="<%=dayEng[j]%>" value="<%=dayEng[j]%>">
-											<label for="poke_<%=no %>_<%=dayEng[j]%>"><%=day[j]%></label>
-										<%} %>
-										</fieldset>
 										<h3 class="name"><%=name %></h3>
 										<p class="ingre"><%=ingre %></p>
+										<p class="price">￦<%=String.format("%,d", price) %></p>
 									</div>
-									
-									<p class="price">￦<%=String.format("%,d", price) %></p>
+									<fieldset class="day">
+										<div class="chks">
+											<%for(int j=0;j<day.length;j++) {%>
+												<input type="checkbox" name="day" id="poke_<%=no %>_<%=dayEng[j]%>" class="<%=dayEng[j]%>" value="<%=dayEng[j]%>">
+												<label for="poke_<%=no %>_<%=dayEng[j]%>"><%=day[j]%></label>
+											<%} %>
+										</div>
+										<p>요일을 선택해주세요</p>
+									</fieldset>
 									<div class="btns">
 										<button class="mod" type="button" onclick="location.href='<%=root%>/make/modify.jsp?name=<%=name%>&ingre=<%=ingre%>'"><i class="fas fa-pen"></i></button>
 										<button class="del" type="button"><i class="fas fa-trash" onclick="location.href='delCart.jsp?no=<%=no%>'"></i></button>
@@ -94,7 +100,10 @@ String[] dayEng = {"mon", "tue", "wed", "thu", "fri", "sat"};
 			</div>
 			<div class="etc list-container">
 				<div class="list-container-top">
-					<h3>etc</h3>	
+					<div class="tit">
+						<h3>etc</h3>
+						<p>추가 구매 상품들</p>
+					</div>
 				</div>
 				
 				<div class="item-list">
@@ -116,12 +125,11 @@ String[] dayEng = {"mon", "tue", "wed", "thu", "fri", "sat"};
 									<input type="hidden" name="etc_<%=no %>_price" id="etc_<%=no %>_price" value="<%=price%>">
 									<input type="hidden" name="name" id="etc_<%=no %>_name" value="<%=name%>">
 									<input type="hidden" name="price" id="etc_<%=no %>_price" value="<%=price%>">
-									<div class="img" style="background-image:url('<%=root%>/data/mealkit/<%=filename%>');"></div>
+									<div class="img" style="background-image:url('<%=root%>/data/etc/<%=filename%>');"></div>
 									<div class="item-info">
 										<h3 class="name"><%=name %></h3>
+										<p class="price">￦<%=String.format("%,d", price) %></p>
 									</div>
-									
-									<p class="price">￦<%=String.format("%,d", price) %></p>
 									
 									<div class="qua">
 										<a href="javascript:void(0);" onclick="adjust('+', this, <%=price%>)">+</a>
@@ -143,9 +151,9 @@ String[] dayEng = {"mon", "tue", "wed", "thu", "fri", "sat"};
 			<div class="receipt">
 				<div class="price">
 					<div class="plan txt-right">
-						<span class="price-name">플랜 금액</span>
+						<span class="price-name">포케 금액</span>
 						<p>(
-							<span class="plan-price">￦0</span>*<span class="plan-week">1</span>
+							<span class="plan-price">￦0</span>*<span class="plan-week">1</span><span class="txt">주동안</span>
 						)</p>
 					</div>
 					<div class="additional txt-right">

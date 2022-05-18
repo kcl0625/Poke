@@ -29,14 +29,14 @@
 #popup.desc {
 	visibility: hidden;
 	position: fixed;
-	height: 75vh;
+	height: 60vh;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
 	z-index: 100;
 	opacity: 0;
 }
-#popup.desc .close {position: absolute;right: 0;top: -2.8em;width: 3em;height: 3em;}
+#popup.desc .close {position: absolute;right: 0;width: 3em;height: 3em;}
 #popup.desc .close span {
 	position: absolute;
 	display: block;
@@ -57,6 +57,8 @@
 #popup.desc .info-area .info-header .name {font-size: var(--accent-font-size); font-weight: 300;}
 #popup.desc .info-area .info-header .price {font-size: var(--big-font-size); font-weight: 200;}
 #popup.desc .qua {display: flex;align-items: center;justify-content: space-between;width: 100%;}
+#popup.desc .qua > div {display: flex;align-items: center;}
+#popup.desc .qua > div > a {margin-top: 0 !important;}
 #popup.desc .qua input {text-align: center; width: 2em;}
 
 #popup.desc .desc {padding-top: 1em;}

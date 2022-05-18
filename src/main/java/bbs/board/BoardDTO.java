@@ -12,6 +12,8 @@ public class BoardDTO {
 	private String date;
 	private String cate;
 	private String title;
+	private String ques;
+	private String ans;
 	
 	public int getNo() {
 		return no;
@@ -78,5 +80,17 @@ public class BoardDTO {
 	}
 	public void setTitle(String title) {
 		this.title = title;
+	}
+	public String getQues() {
+		return ques;
+	}
+	public void setQues(String ques) {
+		this.ques = ques;
+	}
+	public String getAns() {
+		return ans;
+	}
+	public void setAns(String ans) {
+		this.ans = ans;
 	}
 }

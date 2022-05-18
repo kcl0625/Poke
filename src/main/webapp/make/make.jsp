@@ -74,7 +74,7 @@ if (isAdm == 1) {
 						<input type="text" name="name" id="name" onsubmit="return false;" value="POKE - <%=pokeSize + 1%>">
 						<hr class="line">
 					</div>
-					<span class="indicator"></span>
+					<span class="indicator">이름을 지어보세요</span>
 					<svg viewBox="0 0 100 50"><path class="stroke only" d="M99.5,0c0,27.339-22.162,49.5-49.5,49.5C22.662,49.5,0.5,27.339,0.5,0" /></svg>
 				</div>
 				
@@ -92,7 +92,10 @@ if (isAdm == 1) {
 							<p id="cal">0kcal</p>
 						</div>
 					</div>
-					<button id="submit" type="button" class="ui-btn point big full">담기</button>
+					<div class="btns">
+						<button id="submit" type="button" class="ui-btn point big">담기</button>
+						<button type="button" class="ui-btn big" onclick="location.href='<%=root %>/member/cart.jsp'">장바구니로</button>
+					</div>
 				</div>
 			</form>
 			<script>

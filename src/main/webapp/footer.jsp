@@ -5,8 +5,7 @@
     <footer>
         <div class="left">
             <ul>
-                <li><a href="">About</a></li>
-                <li><a href="">Notice</a></li>
+                <li><a href="<%=root %>/notice/list.jsp?cate=전체&page=0"">Notice</a></li>
             </ul>
             <p>
                 ㈜ POKE<br>
@@ -20,9 +19,9 @@
         <div class="right">
             <ul>
                 <li><a href="<%=root%>/make/make.jsp">Make</a></li>
-                <li><a href="<%=root%>/bowls/bowls.jsp">Bowls</a></li>
-                <li><a href="<%=root%>/etc/list.jsp">Etc</a></li>
-                <li><a href="<%=root%>/review/list.jsp">Review</a></li>
+                <li><a href="<%=root%>/bowls/bowls.jsp?cate=육류&page=0">Bowls</a></li>
+                <li><a href="<%=root%>/etc/list.jsp?cate=전체&page=0">Etc</a></li>
+                <li><a href="<%=root%>/review/list.jsp?page=0">Review</a></li>
             </ul>
         </div>
     </footer>

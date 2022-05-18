@@ -1,33 +1,55 @@
 @charset "UTF-8";
 
-.cart-left {position: relative; width: 70%; float: left;}
+.cart-left {position: relative; width: 65%; float: left;}
 .cart-left .list-container-top {display: flex; justify-content: space-between; align-items: center;}
-.cart-left .list-container-top h3 {font-size: var(--big-font-size); font-weight: 200;}
+.cart-left .list-container-top .tit {position: relative;}
+.cart-left .list-container-top .tit h3 {font-size: var(--big-font-size); font-weight: 200;float: left;}
+.cart-left .list-container-top .tit p {bottom: 0; font-size: var(--small-font-size);white-space: nowrap;height: 1rem;padding-left: 1em;float: left;line-height: 3;}
+.cart-left .list-container-top .select p {
+	text-align: right;
+    font-size: var(--small-font-size);
+    line-height: 1.2em;
+    padding-bottom: 1em;
+}
 
 .cart-left .item-list {clear: both; margin-top: 1em;}
 .cart-left .item-list ul {display: flex; flex-wrap: wrap; gap: 1em;}
 
-.cart-left .item-list li {position: relative;padding-left: 10em;display: flex;justify-content: space-between;align-items: center;flex-wrap: wrap;min-height: 9.5em;}
+.cart-left .item-list li {position: relative;padding-left: 10em;display: flex;justify-content: space-between;align-items: center;/* flex-wrap: wrap; */min-height: 9.5em;}
 .cart-left .item-list li .img {position: absolute;top: 50%;left: 2em;transform: translateY(-50%);width: 6em;height: 6em;background-size: cover;background-position: center center;background-repeat: no-repeat;border-radius: 1.2em;}
 .cart-left .item-list li .img svg {position: relative;top: 50%;transform: translateY(-50%);stroke-width: .6;}
-.cart-left .item-list li .item-info {position: relative;width: 42%; white-space: nowrap; height: 100%;padding-left: 1.5em;border-left: 1px solid;}
-.cart-left .item-list li .item-info fieldset.day label {font-size: var(--small-font-size);opacity: .4;cursor: pointer;padding-right: 0.5em;}
-.cart-left .item-list li .item-info fieldset.day :checked + label {opacity: 1;}
+.cart-left .item-list li .item-info {position: relative;width: 42%; white-space: nowrap; height: 100%;padding-left: 1.5em;border-left: 1px solid;display: flex;align-content: center;flex-wrap: wrap;}
 .cart-left .item-list li .item-info .name {font-size: var(--big-font-size);font-weight: 200;padding: .4rem 0;overflow: hidden;text-overflow: ellipsis;}
-.cart-left .item-list li .item-info .ingre {font-size: var(--small-font-size);overflow: hidden;text-overflow: ellipsis;white-space: nowrap;width: 100%;position: absolute;}
+.cart-left .item-list li .item-info .ingre {font-size: var(--small-font-size);overflow: hidden;text-overflow: ellipsis;white-space: nowrap;width: 100%;}
+.cart-left .item-list li .item-info .price {font-size: var(--accent-font-size); font-weight: 300;}
+.cart-left .item-list li fieldset.day {}
+.cart-left .item-list li fieldset.day .chks {
+	background: var(--color-default);
+    color: var(--color-bak);
+    padding: 1em;
+    border-top-left-radius: 1.2rem;
+    border-bottom-right-radius: 1.2rem;
+    display: flex;
+    justify-content: center;
+    gap: .4em;
+}
+.cart-left .item-list li fieldset.day .chks label {font-size: var(--small-font-size);opacity: .4;cursor: pointer;}
+.cart-left .item-list li fieldset.day .chks :checked + label {opacity: 1;}
+.cart-left .item-list li fieldset.day p {position: absolute; bottom: 1rem; font-size: var(--small-font-size);}
+
 .cart-left .item-list li .qua input {width: 2em; text-align: center;}
 .cart-left .item-list li .btns button {padding-left: .5em; cursor: pointer;}
 
 .cart-left .etc {margin-top: 3em;}
-.cart-left .etc .item-list li .item-info .name {padding: 2.4rem 0;}
 
-.cart-right {position: relative; float: right; width: 23%;}
+.cart-right {position: relative; float: right; width: 26%;}
 .cart-right .receipt {margin-bottom: .8em;}
 .cart-right .receipt .price {position: relative; border-bottom: 1px solid;}
 .cart-right .receipt .price .price-name {font-size: var(--small-font-size);}
 .cart-right .receipt .price .txt-right {padding-bottom: .5em;}
-.cart-right .receipt .price .txt-right p {font-size: var(--accent-font-size);font-weight: 300;display: flex;justify-content: end;gap: 1em;}
+.cart-right .receipt .price .txt-right p {font-size: var(--accent-font-size);font-weight: 300;display: flex;justify-content: end;gap: 1em;flex-wrap: wrap;}
 .cart-right .receipt .price > span {position: absolute;bottom: .3em;font-size: var(--accent-font-size);font-weight: 300;}
+.cart-right .receipt .price .plan .txt {font-size: var(--small-font-size);}
 .cart-right .receipt .total {padding: 1.2em 0;}
 .cart-right .receipt .total span {vertical-align: sub;}
 .cart-right .receipt .total .total-price {float: right;font-size: var(--big-font-size);font-weight: 200;}
