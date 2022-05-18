@@ -43,7 +43,7 @@ BoardDAO dao = new BoardDAO();
 		<ul>
 			<%
 			ArrayList<BoardDTO> noticeList = new ArrayList<BoardDTO>();
-			noticeList = dao.searchBoard(pageNum, 7, keyword);
+			noticeList = dao.searchBoard(pageNum, 7, keyword, "notice");
 			
 			for(int i=0;i<noticeList.size();i++){ %>
 				<li>
@@ -66,7 +66,7 @@ BoardDAO dao = new BoardDAO();
 		</form>
 	</div>
 	
-	<% int pageMax = dao.getSearchBoardListPageMax(keyword, 7);%>
+	<% int pageMax = dao.getSearchBoardListPageMax(keyword, 7, "notice");%>
 	<div class="paging">
 		<nav>
 			<%for(int i=0;i<pageMax;i++){%>

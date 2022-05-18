@@ -312,6 +312,17 @@ input[type="password"] {letter-spacing: .5em;}
 input[type="password"]::placeholder {letter-spacing: normal;}
 input.full {width: 100%;}
 
+::file-selector-button {
+    height: 100%;
+    margin-right: 10px;
+    padding: .4rem .8rem;
+    background: var(--color-default);
+    color: var(--color-bak);
+    border: 0;
+    border-radius: 1rem;
+    font-family: inherit;
+}
+
 .input-item {clear: both; position: relative; padding: 10px 0; margin-bottom: 15px; width: 100%;}
 .input-item input:not([type="checkbox"]) {padding-left: 110px;}
 .input-item input:not([type="checkbox"]) + label {top: 50%; transform: translateY(-50%); position: absolute; left: 0;}

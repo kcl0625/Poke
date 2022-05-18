@@ -7,12 +7,15 @@
 <jsp:include page="/header.jsp" />
 
 <jsp:useBean id="reviewBean" class="bbs.board.BoardDAO" />
+<jsp:useBean id="orderBean" class="order.OrderDAO" />
 
 <%
 request.setCharacterEncoding("utf-8");
 response.setCharacterEncoding("utf-8");
 
 int pageNum = Integer.parseInt(request.getParameter("page"));
+
+String orderNo = orderBean.getOrderNo(sessionId);
 %>
 
 <link rel="stylesheet" href="<%=root%>/css/review.css">
@@ -21,9 +24,8 @@ int pageNum = Integer.parseInt(request.getParameter("page"));
 		<h2><span class="point salmon">R</span>eview</h2>
 		<p class="sub">싱싱한 리뷰</p>	
 	</div>
-	
 	<div class="list">
-		<%if (isMem == 1 && isAdm == 0) {%><a href="writeSkin.jsp"><i class="fas fa-pen"></i></a><%} %>
+		<%if (isMem == 1 && isAdm == 0 && orderNo != null) {%><a href="writeSkin.jsp"><i class="fas fa-pen"></i></a><%} %>
 		<ul>
 			<%
 			ArrayList<BoardDTO> reviewList = reviewBean.getReviewList(pageNum, 9);

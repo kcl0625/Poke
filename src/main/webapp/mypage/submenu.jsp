@@ -8,7 +8,7 @@
 		<li><a href="index.jsp">My POKE</a></li>
 		<li><a href="list.jsp?page=0">My Review</a></li>
 		<li><a href="freq.jsp">자주 묻는 질문</a></li>
-		<li><a href="qna.jsp">Q&A</a></li>
+		<li><a href="qna.jsp?page=0">Q&A</a></li>
 	</ul>
 </div>
 <script>

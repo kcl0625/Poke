@@ -17,7 +17,7 @@
 			</h1>
 			
 			<p class="sub-txt">; one of the Hawaiian dishes,<br>in which diced fish served</p>
-			<h2 class="sub-title">내가 좋아하는 것들만 담아서</h2>
+			<h2 class="sub-title">내가 좋아하는 것들만 담아서 만드는 나만의 포케</h2>
 		</div>
 		<div class="main-bg">
 			<svg viewBox="0 0 150 100">

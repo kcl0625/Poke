@@ -57,7 +57,7 @@ ArrayList<ItemDTO> pokeList = dao.getPokeList(cate, pageNum, 3);%>
 				int price = etcItem.get(i).getPrice();
 				String filename = etcItem.get(i).getFilename();%>
 				<li id="item_<%=no %>">
-					<div class="img" onclick="showDesc(<%=no%>);" style="background-image: url('<%=root %>/data/mealkit/<%=filename %>');"></div>
+					<div class="img" onclick="showDesc(<%=no%>);" style="background-image: url('<%=root %>/data/etc/<%=filename %>');"></div>
 					<div class="content-bottom">
 						<p class="name"><%=name %></p>
 						<span class="price">￦<%=String.format("%,d", price) %></span>

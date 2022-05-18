@@ -16,6 +16,7 @@
 	MemberDTO member = memberBean.getMember(sessionId);
 	%>
 	<div>
+		<a class="quit" href="<%=root%>/bbs/delMem.jsp">회원탈퇴</a>
 		<form name="memForm" action="editRes.jsp" method="post" enctype="multipart/form-data" style="flex-wrap: nowrap;">
 			<input type="hidden" name="id" id="id" value="<%=sessionId%>">
 			<input type="file" name="profpic" style="display: none;" accept="image/jpeg, image/png">

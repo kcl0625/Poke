@@ -23,7 +23,7 @@ String filename = item.getFilename();%>
 	<span></span>
 </a>
 <div class="item-viewer theme-box round">
-	<div class="photo" style="background-image: url('<%=root %>/data/mealkit/<%=filename %>');"></div>
+	<div class="photo" style="background-image: url('<%=root %>/data/etc/<%=filename %>');"></div>
 	
 	<div class="info-area">
 		<div class="info-header">

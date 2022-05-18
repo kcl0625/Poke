@@ -15,7 +15,7 @@ public class MemberDAO {
 	public void join(MemberDTO dto) {
 		try {
 			con = Config.getConnection();
-			sql = "insert into member(id, pw, name, nick, zip, add1, add2, tel, email, admin) values(?,?,?,?,?,?,?,?,?)";
+			sql = "insert into member(id, pw, name, nick, zip, add1, add2, tel, email, admin) values(?,?,?,?,?,?,?,?,?,?)";
 			pstmt = con.prepareStatement(sql);
 			
 			pstmt.setString(1, dto.getId());
@@ -27,6 +27,7 @@ public class MemberDAO {
 			pstmt.setString(7, dto.getAdd2());
 			pstmt.setString(8, dto.getTel());
 			pstmt.setString(9, dto.getEmail());
+			pstmt.setInt(10, 0);
 			
 			pstmt.executeUpdate();
 			pstmt.close();
@@ -61,14 +62,13 @@ public class MemberDAO {
 		}
 	}
 	
-	public void deleteMember(MemberDTO dto) {
+	public void deleteMember(String id) {
 		try {
 			con = Config.getConnection();
 			sql = "delete from member where id = ?";
 			pstmt = con.prepareStatement(sql);
 			
-			pstmt.setString(1, dto.getId());
-			pstmt.setString(2, dto.getPw());
+			pstmt.setString(1, id);
 			
 			pstmt.executeUpdate();
 			pstmt.close();
@@ -82,7 +82,7 @@ public class MemberDAO {
 		MemberDTO member = new MemberDTO();
 		try {
 			con = Config.getConnection();
-			sql = "select pw, name, nick, zip, add1, add2, tel, email, profpic from member where id = ?";
+			sql = "select id, pw, name, nick, zip, add1, add2, tel, email, profpic from member where id = ?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
 			ResultSet rs = null;
@@ -90,6 +90,7 @@ public class MemberDAO {
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
+				member.setId(rs.getString("id"));
 				member.setPw(rs.getString("pw"));
 				member.setName(rs.getString("name"));
 				member.setNick(rs.getString("nick"));
@@ -130,5 +131,70 @@ public class MemberDAO {
 			e.printStackTrace();
 		}
 		return res;
-	} 
+	}
+	
+	public String findId(String name, String tel) {
+		String id = "";
+		try {
+			con = Config.getConnection();
+			sql = "select id from member where name = ? and tel = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, name);
+			pstmt.setString(2, tel);
+			
+			ResultSet rs = null;
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) id = rs.getString("id"); //존재할 때
+			
+			rs.close();
+			pstmt.close();
+			con.close();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return id;
+	}
+	
+	public int findId (String name, String id, String tel) {
+		int res = 0;
+		try {
+			con = Config.getConnection();
+			sql = "select id from member where name = ? and tel = ? and id = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, name);
+			pstmt.setString(2, tel);
+			pstmt.setString(3, id);
+			
+			ResultSet rs = null;
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) res = 1; //존재할 때
+			
+			rs.close();
+			pstmt.close();
+			con.close();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return res;
+	}
+	
+	public void modPw(String id, String pw) {
+		try {
+			con = Config.getConnection();
+			sql = "update member set pw = ? where id = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, pw);
+			pstmt.setString(2, id);
+			
+			pstmt.executeUpdate();
+			
+			pstmt.close();
+			con.close();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
 }
