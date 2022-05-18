@@ -157,11 +157,11 @@ public class MemberDAO {
 		return id;
 	}
 	
-	public int findId (String name, String id, String tel) {
-		int res = 0;
+	public String findPw(String name, String id, String tel) {
+		String res = "";
 		try {
 			con = Config.getConnection();
-			sql = "select id from member where name = ? and tel = ? and id = ?";
+			sql = "select pw from member where name = ? and tel = ? and id = ?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, name);
 			pstmt.setString(2, tel);
@@ -170,7 +170,7 @@ public class MemberDAO {
 			ResultSet rs = null;
 			rs = pstmt.executeQuery();
 			
-			if(rs.next()) res = 1; //존재할 때
+			if(rs.next()) res = rs.getString("pw"); //존재할 때
 			
 			rs.close();
 			pstmt.close();

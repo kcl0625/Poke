@@ -22,12 +22,12 @@ form.form-item legend {font-weight: 200; font-size: 2.2rem;}
 					<span class="indicator"></span>
 				</div>
 				<div class="input-item">
-					<input class="full" type="text" id="tel" name="tel" oninput="chk(this);">
+					<input class="full" type="text" id="tel" name="tel" oninput="chk(this);" minlength="10" maxlength="11">
 					<label for="tel">연락처</label>
 					<span class="indicator"></span>
 				</div>
 			</fieldset>
-			<a class="ui-btn point full">아이디 찾기</a>
+			<a class="ui-btn point full" onclick="formSubmit(findId);">아이디 찾기</a>
 		</form>
 		<hr class="line">
 		<form name="findPw" action="findPw.jsp" method="post" class="form-item" oninput="chk(this);">
@@ -49,7 +49,7 @@ form.form-item legend {font-weight: 200; font-size: 2.2rem;}
 					<span class="indicator"></span>
 				</div>
 			</fieldset>
-			<a class="ui-btn point full">비밀번호 찾기</a>
+			<a class="ui-btn point full" onclick="formSubmit(findPw);">비밀번호 찾기</a>
 		</form>
 	</div>
 </div>
@@ -135,6 +135,28 @@ let chk = (input) => {
 		inputItem.classList.add('false');
 	}
 	if(indicator) printMsg(msg, indicator);
+}
+
+//폼 제출
+let formSubmit = (form) => {
+	let inputItem = form.querySelectorAll('.input-item');
+	let msg = '';
+	
+	inputItem.forEach((item, i) => {
+		let input = inputItem[i].querySelector('input');
+		let indicator = inputItem[i].querySelector('.indicator');
+		if(!inputItem[i].querySelector('input').value) {
+			msg = '값을 입력해주세요';
+			inputItem[i].classList.add('false');
+		} else {
+			msg = '';
+			inputItem[i].classList.remove('false');
+		}
+		printMsg(msg, indicator);
+		chk(inputItem[i].querySelector('input'));
+	})
+	
+	if(!form.querySelector('.false')) form.submit();
 }
 </script>
 <jsp:include page="/footer.jsp" />
