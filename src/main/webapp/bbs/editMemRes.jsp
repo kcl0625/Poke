@@ -11,15 +11,19 @@
 
 <%
 request.setCharacterEncoding("utf-8");
+response.setCharacterEncoding("utf-8");
+String id = request.getParameter("memId");
 
 MultipartRequest multi = null;
 String dir = request.getServletContext().getRealPath("data/member/");
-String dir2 = request.getServletContext().getRealPath("data/member/" + sessionId);
+String dir2 = request.getServletContext().getRealPath("data/member/" + id);
 int max = 1024*1024*15;
 DefaultFileRenamePolicy policy = new DefaultFileRenamePolicy();
 
 File memFolder = new File(dir);
 File memIdFolder = new File(dir2);
+
+//System.out.println(dir2);
 if (!memFolder.exists()) {
 	try{
 		memFolder.mkdir(); //폴더 생성
@@ -36,7 +40,6 @@ if (!memFolder.exists()) {
 	}
 }
 
-String id = "";
 String name = "";
 String nick = "";
 String pw = "";
@@ -50,7 +53,6 @@ String originalfile = "";
 
 try {
 	multi = new MultipartRequest(request, dir2, max, "utf-8", policy); //서버 데이터 폴더에 파일 업로드
-	id = multi.getParameter("id");
 	name = multi.getParameter("name");
 	nick = multi.getParameter("nick");
 	pw = multi.getParameter("pw");
@@ -84,5 +86,6 @@ dto.setProfpic(profpic);
 
 dao.updateMember(dto);
 
-response.sendRedirect(root + "/mypage/edit.jsp");
+if (isMem == 1 && isAdm == 0) response.sendRedirect(root + "/mypage/index.jsp");
+else if (isAdm == 1) response.sendRedirect(root + "/admin/memberList.jsp?page=0");
 %>

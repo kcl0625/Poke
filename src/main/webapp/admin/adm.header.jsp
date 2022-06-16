@@ -30,12 +30,12 @@
 	    	<div class="menu">
 	            <ul>
 	                <li style="--i: 1;"><a href="index.jsp">메인</a></li>
-	                <li style="--i: 2;"><a href="ingreList.jsp">재료 관리</a></li>
+	                <li style="--i: 2;"><a href="ingreList.jsp?page=0">재료 관리</a></li>
 	                <li style="--i: 3;"><a href="menuList.jsp">메뉴 관리</a></li>
 	                <li style="--i: 4;"><a href="etcList.jsp">별매상품 관리</a></li>
-	                <li style="--i: 5;"><a href="memberList.jsp">회원 관리</a></li>
-	                <li style="--i: 6;"><a href="noticeList.jsp">공지 및 이벤트 관리</a></li>
-	                <li style="--i: 7;"><a href="reviewList.jsp">리뷰관리</a></li>
+	                <li style="--i: 5;"><a href="memberList.jsp?page=0">회원 관리</a></li>
+	                <li style="--i: 6;"><a href="noticeList.jsp?page=0&cate=notice">공지 및 이벤트 관리</a></li>
+	                <li style="--i: 7;"><a href="reviewList.jsp?page=0">리뷰관리</a></li>
 	                <li style="--i: 8;"><a href="freqList.jsp">자주 묻는 질문 관리</a></li>
 	                <li style="--i: 9;"><a href="qnaList.jsp">1:1 질문</a></li>
 	            </ul>

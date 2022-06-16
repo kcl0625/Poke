@@ -16,6 +16,20 @@ public class OrderDAO {
 	public void setOrder(String no, ArrayList<OrderDTO> orderArr, MemberDTO memberDto, String id, String date, String payment, String orderStatus, int totPrice, String depositor, int week) {
 		try {
 			con = Config.getConnection();
+			
+			/* 원활한 체험을 위한 주문 삭제 */
+			sql = "delete from poke.order where no = ? and id = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, no);
+			pstmt.setString(2, no);
+			pstmt.executeUpdate();
+			
+			sql = "delete from poke.ordereditem where no = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			pstmt.executeUpdate();
+			
+			/* 주문 정보 삽입 */
 			sql = "insert into poke.order(no, name, id, zip, add1, add2, tel, payment, totprice, orderstatus, date, depositor, email) values(?,?,?,?,?,?,?,?,?,?,?,?,?)";
 			pstmt = con.prepareStatement(sql);
 			
@@ -53,6 +67,7 @@ public class OrderDAO {
 				pstmt.executeUpdate();
 			}
 			
+			/* 주문 완료 후 장바구니 비우기 */
 			sql = "delete from poke.cart where id = ?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
@@ -68,7 +83,8 @@ public class OrderDAO {
 		String no = "";
 		try {
 			con = Config.getConnection();
-			sql = "select no from ordereditem where id = ?";
+			sql = "select oi.no from ordereditem oi join poke.order o on oi.no = o.no where id = ?";
+			
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
 			ResultSet rs = pstmt.executeQuery();
@@ -87,7 +103,7 @@ public class OrderDAO {
 		OrderDTO pokeOrder = new OrderDTO();
 		try {
 			con = Config.getConnection();
-			sql = "select * from ordereditem where type = 'poke' having no = (select no from poke.order where id = ?)";
+			sql = "select * from ordereditem where type = 'poke' having no = (select no from poke.order where id = ? having max(date))";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
 			ResultSet rs = pstmt.executeQuery();
@@ -165,5 +181,71 @@ public class OrderDAO {
 			e.printStackTrace();
 		}
 		return orderStatus;
+	}
+	
+	public ArrayList<OrderDTO> getOrderList (int start, int end) {
+		ArrayList<OrderDTO> order = new ArrayList<OrderDTO>();
+		try {
+			con = Config.getConnection();
+			sql = "select o.no, id, o.name, sum(price) as price, date from ordereditem oi";
+			sql += " join poke.order o on o.no = oi.no group by o.no order by date desc limit ?, ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, start);
+			pstmt.setInt(2, end);
+			
+			ResultSet rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+				OrderDTO dto = new OrderDTO();
+				dto.setNo(rs.getString("no"));
+				dto.setId(rs.getString("id"));
+				dto.setName(rs.getString("name"));
+				dto.setPrice(rs.getInt("price"));
+				dto.setDate(rs.getString("date"));
+				
+				order.add(dto);
+			}
+			rs.close();
+			pstmt.close();
+			con.close();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return order;
+	}
+	
+	public ArrayList<OrderDTO> showOrder(String no, int start, int end) {
+		ArrayList<OrderDTO> order = new ArrayList<OrderDTO>();
+		
+		try {
+			con = Config.getConnection();
+			sql = "select * from ordereditem where no = ? limit ?, ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, no);
+			pstmt.setInt(2, start);
+			pstmt.setInt(3, end);
+			
+			ResultSet rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+				OrderDTO dto = new OrderDTO();
+				dto.setNo(rs.getString("no"));
+				dto.setType(rs.getString("type"));
+				dto.setName(rs.getString("name"));
+				dto.setIngre(rs.getString("ingre"));
+				dto.setDay(rs.getString("day"));
+				dto.setQuantity(rs.getInt("quantity"));
+				dto.setPrice(rs.getInt("price"));
+				dto.setWeek(rs.getInt("week"));
+				order.add(dto);
+			}
+			
+			rs.close();
+			pstmt.close();
+			con.close();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return order;
 	}
 }

@@ -1,10 +1,129 @@
 @charset "UTF-8";
 
+.wrapper {padding-top: 100px;}
+form {overflow-x: auto;}
+
+*::-webkit-scrollbar {display: block; width: 14px; height: 14px;}
+*::-webkit-scrollbar-thumb {
+	border-radius: 1em;
+	background: var(--color-default);
+	border: 5px solid rgba(0, 0, 0, 0);
+	background-clip: padding-box;
+}
+
 @media all and (min-width: 1281px) {
 	#logo {border-right: 1px solid;}
 }
+@media (max-width: 1280px){
+	#gnb {width: 250px; left: -250px;}
+	#gnb ul {margin-top: 9em;}
+}
+input[type="checkbox"],
+input[type="radio"] {display: block;}
 input[type="text"],
-input[type="num"] {border-bottom: 1px solid; padding: 10px 0;}
+input[type="number"] {border-bottom: 1px solid; padding: 10px 0;}
 
-table {position: relative; top: 150px; padding: 1em; margin: 0 auto; border: 1px solid;}
-td {padding: 0 1em;}
+table {position: relative;padding: 1em;margin: 0 auto;border: 1px solid;width: 100%; table-layout: fixed;}
+td {padding: 0 1em; white-space: nowrap; text-overflow: ellipsis; overflow: hidden;}
+
+table .ui-btn {width: max-content; padding: 3px 10px;}
+
+.tbl-section {margin: 3em 0;}
+.tbl-section .tbl-title {float: left; padding-bottom: 1rem; font-weight: 300;}
+.tbl-section > a {float: right; padding-bottom: 1rem;}
+
+/* 재료 리스트 */
+
+/* 메뉴 리스트 */
+
+
+/* 메뉴 수정 및 만들기 */
+.poke-img {width: 10em; height: 10em; margin: 0 auto; display: flex; justify-content: center; align-items: center;}
+.poke-ingre.category {position: fixed; top: 50%; transform: translateY(-50%);}
+.poke-ingre.category ul {display: block;}
+
+form[name="poke"] {width: 60vw;height: 50vh;float: right;}
+
+.ingre-list {
+	position: fixed;
+	top: 15vh;
+	left: 3vw;
+	width: 9em;
+	height: 70vh;
+	overflow-y: scroll;
+	padding: 1em;
+}
+.ingre-list ul {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1.5em;
+}
+.ingre-list ul li {width: 100%; cursor: pointer;}
+.ingre-list ul li .item {
+	position: relative;
+	display: flex;
+	width: 4em;
+	height: 4em;
+	max-width: 80px;
+	max-height: 80px;
+	background: var(--color-bak);
+	border: 1px solid;
+	border-radius: 50%;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+	cursor: pointer;
+	margin: 0 auto;
+}
+.ingre-list ul li .item img {position: relative;width: 70%;height: auto;}
+.ingre-list ul li .name {text-align: center; padding: .2em 0;}
+.ingre-list ul li .theme-box {position: relative; width: 100%;}
+
+.ingre-info {font-size: var(--small-font-size);line-height: 1.2em;padding: 1em;}
+
+/* 리뷰 리스트 */
+.theme-box::after {
+	content: '';
+	position: relative;
+	display: block;
+	width: 100%;
+	clear: both;
+}
+.photo {
+    width: 300px;
+    height: 400px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    border: 1px solid;
+    float: left;
+}
+.review-area {float: right;width: calc(100% - 350px);}
+.review-header .user-info {
+    height: 50px;
+    display: flex;
+    align-items: center;
+}
+.review-header .user-info .pic {
+	width: 50px;
+	height: 50px;
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center;
+	border: 1px solid;
+	border-radius: 50%;
+}
+.review-header .user-info p {padding-left: 1em;}
+.review-header .poke-info {padding: 1em 0;clear: both;position: relative;border-top: 1px solid;border-bottom: 1px solid;margin-top: 1em;}
+
+.review-header .poke-info .star-ratings {position: absolute; bottom: 1em; right: 0; direction: rtl; margin-top: .5em;}
+.review-header .poke-info .star-ratings input {display: none;}
+.review-header .poke-info .star-ratings input + label {color: transparent;-webkit-text-stroke: 1px var(--color-default);font-size: var(--accent-font-size);}
+.review-header .poke-info .star-ratings :checked ~ label {color: var(--color-default);}
+
+.review-content {padding-top: 1em;}
+
+@media all and (max-width: 750px) {
+	.photo {float: none;}
+	.review-area {float: none; width: 100%; margin-top: 2em;}
+}

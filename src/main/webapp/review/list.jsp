@@ -2,12 +2,12 @@
     pageEncoding="UTF-8"%>
 <%@page import="java.util.ArrayList" %>
 <%@page import="bbs.board.*" %>
+<%@page import="order.OrderDAO" %>
 <%@include file="/config.jsp" %>
 
 <jsp:include page="/header.jsp" />
 
 <jsp:useBean id="reviewBean" class="bbs.board.BoardDAO" />
-<jsp:useBean id="orderBean" class="order.OrderDAO" />
 
 <%
 request.setCharacterEncoding("utf-8");
@@ -15,7 +15,13 @@ response.setCharacterEncoding("utf-8");
 
 int pageNum = Integer.parseInt(request.getParameter("page"));
 
-String orderNo = orderBean.getOrderNo(sessionId);
+String orderNo = "";
+OrderDAO orderDAO = new OrderDAO();
+try {
+	orderNo = orderDAO.getOrderNo(sessionId);
+} catch(Exception e) {
+	e.printStackTrace();
+}
 %>
 
 <link rel="stylesheet" href="<%=root%>/css/review.css">
@@ -25,7 +31,7 @@ String orderNo = orderBean.getOrderNo(sessionId);
 		<p class="sub">싱싱한 리뷰</p>	
 	</div>
 	<div class="list">
-		<%if (isMem == 1 && isAdm == 0 && orderNo != null) {%><a href="writeSkin.jsp"><i class="fas fa-pen"></i></a><%} %>
+		<%if (isMem == 1 && isAdm == 0 && !orderNo.equals("")) {%><a href="writeSkin.jsp"><i class="fas fa-pen"></i></a><%} %>
 		<ul>
 			<%
 			ArrayList<BoardDTO> reviewList = reviewBean.getReviewList(pageNum, 9);
@@ -33,7 +39,7 @@ String orderNo = orderBean.getOrderNo(sessionId);
 			%>
 				<li id="review_<%=reviewList.get(i).getNo() %>"
 				onclick="showReview(<%=reviewList.get(i).getNo() %>);"
-				style="background-image:url(<%=root%>/data/review/<%=reviewList.get(i).getFileName()%>);"></li>
+				style="background-image:url('<%=root%>/data/review/<%=reviewList.get(i).getFileName()%>');"></li>
 			<%}
 				if (reviewList.size() == 0) out.println("<p class=\"txt-center no-data\">아직 리뷰가 없어요<br>첫 리뷰를 작성해주세요!</p>");
 			%>

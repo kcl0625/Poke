@@ -164,8 +164,6 @@ let goOrder = () => {
 			contentType: 'application/json',
 			parameters: JSON.stringify({pokeArr: pokeArr, etcArr: etcArr}),
 			onComplete: (response) => {
-				console.log(response);
-				console.log(response.responseText);
 			}
 		})
 	} else {

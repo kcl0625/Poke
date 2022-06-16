@@ -12,6 +12,8 @@ public class MemberDTO {
 	private int point;
 	private String profpic;
 	private int admin;
+	private String date;
+	
 	public String getId() {
 		return id;
 	}
@@ -83,5 +85,11 @@ public class MemberDTO {
 	}
 	public void setAdmin(int admin) {
 		this.admin = admin;
+	}
+	public String getDate() {
+		return date;
+	}
+	public void setDate(String date) {
+		this.date = date;
 	}
 }

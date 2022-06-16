@@ -19,7 +19,7 @@ fieldset.cart .list {position: relative; height: 100%; overflow-y: auto;}
 fieldset.cart .list::-webkit-scrollbar {width: 3px; display: block;}
 fieldset.cart .list::-webkit-scrollbar-thumb {border-radius: 1em;background: var(--color-default);}
 fieldset.cart ul li {display: flex; border-bottom: 1px solid;padding: 1em 0; justify-content: space-between; align-items: center;}
-fieldset.cart ul li p.quantity {position: absolute; left: 60%; transform: translateX(-50%);}
+fieldset.cart ul li p.quantity {position: absolute; left: 50%; transform: translateX(-50%);}
 fieldset.cart ul li:first-child {padding-top: 0;}
 fieldset.cart ul li:last-of-type {border: 0;}
 

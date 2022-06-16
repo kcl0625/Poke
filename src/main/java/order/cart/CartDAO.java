@@ -17,9 +17,10 @@ public class CartDAO {
 		try{
 			con = Config.getConnection();
 			sql = "select c.*, p.filename";
-			sql += " from cart c, poke p";
-			sql += " where c.id = ? and type = 'poke'";
-			sql += " and c.no = p.no";
+			sql += " from poke p";
+			sql += " right outer join cart c";
+			sql += " on p.no = c.no";
+			sql += " where id = ? and type = 'poke'";
 			
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
@@ -37,24 +38,6 @@ public class CartDAO {
 				dto.setFilename(rs.getString("filename"));
 				cart.add(dto);
 			}
-			
-			sql = "select * from cart where id = ? and type = 'poke' and custom = 1";
-			pstmt= con.prepareStatement(sql);
-			pstmt.setString(1, id);
-			rs = pstmt.executeQuery();
-			
-			while(rs.next()) {
-				ItemDTO dto = new ItemDTO();
-				dto.setNo(rs.getString("no"));
-				dto.setType(rs.getString("type"));
-				dto.setName(rs.getString("name"));
-				dto.setIngre(rs.getString("ingre"));
-				dto.setPrice(rs.getInt("price"));
-				dto.setCustom(rs.getInt("custom"));
-				dto.setQuantity(rs.getInt("quantity"));
-				cart.add(dto);
-			}
-			
 			rs.close();
 			pstmt.close();
 			con.close();
@@ -106,9 +89,10 @@ public class CartDAO {
 			con = Config.getConnection();
 			String no = dto.getNo();
 			
-			sql = "select * from cart where no = ?";
+			sql = "select * from cart where no = ? and id = ?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, no);
+			pstmt.setString(2, id);
 			
 			ResultSet rs = null;
 			rs = pstmt.executeQuery();
@@ -145,11 +129,11 @@ public class CartDAO {
 		String res = "";
 		try	{
 			con = Config.getConnection();
-			String no = dto.getNo();
 			
-			sql = "select * from cart where no = ?";
+			sql = "select * from cart where no = ? and id = ?";
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, no);
+			pstmt.setString(1, dto.getNo());
+			pstmt.setString(2, id);
 			
 			ResultSet rs = null;
 			rs = pstmt.executeQuery();
@@ -177,6 +161,55 @@ public class CartDAO {
 			e.printStackTrace();
 		}
 		return res;
+	}
+	
+	public void modMenu(ItemDTO dto, String no, String id, String date) { //etc
+		try	{
+			con = Config.getConnection();
+			
+			sql = "select * from cart where no = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, no);
+			
+			ResultSet rs = null;
+			rs = pstmt.executeQuery();
+			
+			if(!rs.next()) { //중복 메뉴 없음
+				sql = "insert into cart(no, type, name, ingre, price, cal, id, date, custom) values(?,?,?,?,?,?,?,?,?)";
+				pstmt = con.prepareStatement(sql);
+				
+				pstmt.setString(1, no);
+				pstmt.setString(2, dto.getType());
+				pstmt.setString(3, dto.getName());
+				pstmt.setString(4, dto.getIngre());
+				pstmt.setInt(5, dto.getPrice());
+				pstmt.setDouble(6, dto.getCal());
+				pstmt.setString(7, id);
+				pstmt.setString(8, date);
+				pstmt.setInt(9, dto.getCustom());
+			} else {
+				sql = "update cart set ";
+				sql += "name = ?, ";
+				sql += "ingre = ?, ";
+				sql += "cal = ?, ";
+				sql += "price = ? ";
+				
+				sql += "where no = ?";
+				
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, dto.getName());
+				pstmt.setString(2, dto.getIngre());
+				pstmt.setDouble(3, dto.getCal());
+				pstmt.setInt(4, dto.getPrice());
+				pstmt.setString(5, no);
+				
+			}
+			pstmt.executeUpdate();
+			pstmt.close();
+			con.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public void delCart(String no, String id) {

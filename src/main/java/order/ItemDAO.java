@@ -167,9 +167,10 @@ public class ItemDAO {
 		ItemDTO poke = new ItemDTO();
 		try {
 			con = Config.getConnection();
-			sql = "select name, ingre from poke where name = ?";
+			sql = "select name, ingre from poke where name = ? and ingre = ?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, name);
+			pstmt.setString(2, ingre);
 			
 			ResultSet rs = pstmt.executeQuery();
 			if (rs.next()) { //bowls에 있는 메뉴
@@ -224,6 +225,34 @@ public class ItemDAO {
 			e.printStackTrace();
 		}
 		return poke;
+	}
+	
+	public OrderDTO getPoke (String no) { //관리자 페이지 메뉴 수정
+		OrderDTO dto = new OrderDTO();
+		try {
+			con = Config.getConnection();
+			sql = "select filename, name, cate, ingre, cal, price from poke where no = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, no);
+			
+			ResultSet rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+				dto.setFilename(rs.getString("filename"));
+				dto.setName(rs.getString("name"));
+				dto.setCate(rs.getString("cate"));
+				dto.setIngre(rs.getString("ingre"));
+				dto.setCal(rs.getInt("cal"));
+				dto.setPrice(rs.getInt("price"));
+			}
+			
+			rs.close();
+			pstmt.close();
+			con.close();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return dto;
 	}
 	
 	public ItemDTO showView(int no){
@@ -325,5 +354,64 @@ public class ItemDAO {
 			e.printStackTrace();
 		}
 		return poke;
+	}
+	
+	public ArrayList<ItemDTO> selectPoke(String cate) { //관리자 페이지용 메뉴 불러오기
+		ArrayList<ItemDTO> poke = new ArrayList<ItemDTO>();
+		try {
+			con = Config.getConnection();
+			sql = "select * from poke where cate = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, cate);
+			
+			ResultSet rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				ItemDTO dto = new ItemDTO();
+				dto.setNo(rs.getString("no"));
+				dto.setName(rs.getString("name"));
+				dto.setCate(rs.getString("cate"));
+				dto.setCal(rs.getDouble("cal"));
+				dto.setPrice(rs.getInt("price"));
+				dto.setFilename(rs.getString("filename"));
+				poke.add(dto);
+			}
+			
+			rs.close();
+			pstmt.close();
+			con.close();
+		} catch(Exception e){
+			e.printStackTrace();
+		}
+		return poke;
+	}
+	
+	public ArrayList<ItemDTO> selectEtc(String cate) { //관리자 페이지용 etc 불러오기
+		ArrayList<ItemDTO> etc = new ArrayList<ItemDTO>();
+		try {
+			con = Config.getConnection();
+			sql = "select * from etc where category = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, cate);
+			
+			ResultSet rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				ItemDTO dto = new ItemDTO();
+				dto.setNo(rs.getString("no"));
+				dto.setName(rs.getString("name"));
+				dto.setCate(rs.getString("category"));
+				dto.setPrice(rs.getInt("price"));
+				dto.setFilename(rs.getString("filename"));
+				etc.add(dto);
+			}
+			
+			rs.close();
+			pstmt.close();
+			con.close();
+		} catch(Exception e){
+			e.printStackTrace();
+		}
+		return etc;
 	}
 }

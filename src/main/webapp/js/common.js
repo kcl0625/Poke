@@ -2,6 +2,24 @@ let printMsg = (msg, indicator) => {
 	if(indicator) indicator.innerHTML = msg;
 }
 
+let selectCategory = (url, cate, viewer) => {
+	let categoryLi = document.querySelectorAll('.category li');
+	for(let i=0;i<categoryLi.length;i++){
+		categoryLi[i].classList.remove('cur');
+		if(categoryLi[i].dataset.cate == cate)
+			categoryLi[i].classList.add('cur');
+	}
+			
+	new Ajax.Request(url + cate, {
+		method: 'get',
+		parameter: cate,
+		onComplete: (response) => {
+			viewer.innerHTML = response.responseText;
+			slide();
+		}
+	})
+}
+
 let search = (e) => {
 	e.preventDefault();
 	let searchInput = document.querySelector('.search .input-item');
@@ -84,6 +102,27 @@ let openSearch = (e) => {
 
 let addMenu = (no, type, name, ingre, price, custom) => {
 	new Ajax.Request(`../member/addCart.jsp?no=${no}&type=${type}&name=${name}&ingre=${ingre}&price=${price}&custom=${custom}`, {
+		method: 'post',
+		parameter: {
+			no: no,
+			type: type,
+			name: name,
+			ingre: ingre,
+			price: price,
+			custom: custom
+		},
+		onComplete: (response) => {
+			let popup = document.querySelector('#popup');
+			popup.innerHTML = response.responseText;
+			popup.classList.add('cart');
+			popup.classList.add('show');
+			document.body.classList.add('open');
+		}
+	})
+}
+
+let modMenu = (no, type, name, ingre, price, custom) => {
+	new Ajax.Request(`../member/modMenu.jsp?no=${no}&type=${type}&name=${name}&ingre=${ingre}&price=${price}&custom=${custom}`, {
 		method: 'post',
 		parameter: {
 			no: no,

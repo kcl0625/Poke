@@ -27,7 +27,7 @@ MemberDTO member = memberBean.getMember(sessionId);
 		<div class="info">
 			<div class="name">
 				<h2><%=member.getNick() %></h2>
-				<a href="edit.jsp"><i class="fas fa-cog"></i></a>
+				<a href="edit.jsp?memId=<%=sessionId%>"><i class="fas fa-cog"></i></a>
 			</div>
 			<div class="sub-info">
 				<p>작성리뷰<span><%=String.format("%,d", bbsBean.getMyReviewLength(sessionId)) %></span></p>
@@ -77,7 +77,7 @@ MemberDTO member = memberBean.getMember(sessionId);
 			
 		<div class="list">
 			<ul>
-				<%if(pokeOrderArr != null) {
+				<%if(total != 0) {
 					for(int i=0;i<total;i++){%>
 					<li class="theme-box round">
 						<div class="img">
@@ -97,7 +97,7 @@ MemberDTO member = memberBean.getMember(sessionId);
 					</li>
 					<%}	
 				} else {
-					out.println("<p class=\"txt-center\">메뉴 주문 내역이 없습니다</p>");
+					out.println("<p class=\"txt-center\">주문 내역이 없습니다</p>");
 				} %>
 			</ul>
 		</div>
@@ -110,12 +110,16 @@ MemberDTO member = memberBean.getMember(sessionId);
 		<div class="list">
 			<ul>
 				<% ArrayList<ItemDTO> etcArr = orderBean.getEtcOrder(sessionId);
-				for (int i=0;i<etcArr.size();i++){%>
+				if (etcArr.size() != 0) {
+					for (int i=0;i<etcArr.size();i++){%>
 					<li class="theme-box round">
 						<p class="name"><%=etcArr.get(i).getName() %> * <%=etcArr.get(i).getQuantity() %></p>
 						<p class="price"><%=String.format("%,d", etcArr.get(i).getPrice() * etcArr.get(i).getQuantity()) %></p>
 					</li>
-				<%} %>
+				<%}
+				} else {
+					out.println("<p class=\"txt-center\">주문 내역이 없습니다</p>");
+				}%>
 			</ul>
 		</div>
 	</div>

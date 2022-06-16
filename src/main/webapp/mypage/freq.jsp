@@ -28,7 +28,7 @@
 </div>
 
 <script>
-	let selectCategory = (cate) => {
+	selectCategory = (cate) => {
 		let categoryLi = document.querySelectorAll('.category li');
 		for(let i=0;i<categoryLi.length;i++){
 			categoryLi[i].classList.remove('cur');

@@ -148,10 +148,6 @@
 					ArrayList<IngreDTO> ingre = ingreDAO.get5Ingre();
 					
 					for(int i=0;i<ingre.size();i++) {
-						String name = ingre.get(i).getName();
-						int price = ingre.get(i).getPrice();
-						double cal = ingre.get(i).getCal();
-						String origin = ingre.get(i).getOrigin();
 						String fileName = ingre.get(i).getFileName();%>
 						<li class="item" ondragstart="dragStart(this);" draggable="true">
 							<img src="<%=root %>/data/ingre/<%=fileName %>">
@@ -274,7 +270,7 @@
 					fixedElm[0].classList.remove('show');
 					fixedElm[1].classList.remove('show');
 					
-					if(top >= h * 2 - 100 && top < h * 3 + 100) {
+					if(top >= h * 2 - 100 && top < h * 3 - 100) {
 						ingreWrapper.classList.add('show');
 						fixedElm[0].classList.add('show');
 						fixedElm[1].classList.add('show');
@@ -285,19 +281,16 @@
 	</div>
 	
 	<div id="offer" class="wrapper">
-		<div class="txt-area">
-			<p>고민이 될 때에는 레시피 북이나<br>다른 사람의 리뷰를 참고해보는 것은 어떨까요?<br><br>
-			분명 마음에 드는 것을 찾을 수 있을 거예요.</p>
-		</div>
-		
 		<%
 		ItemDAO pokeDAO = new ItemDAO();
 		ArrayList<ItemDTO> poke = pokeDAO.get8Poke();
 		%>
 		<div class="section-content book">
 			<div class="paper theme-box round">
-				<p>또 무엇이 있을까요?</p>
-				<div class="item-wrapper" style="background: var(--color-cheese);">
+				<p>고민이 되시나요?<br>
+				Bowls에서는 저희가 추천하는 조합을 선택하고, 내가 원하는대로 수정할 수 있어요.
+				</p>
+				<div class="item-wrapper">
 					<%for (int i=0;i<Math.floor(poke.size()/2);i++){%>
 						<div class="item">
 							<img src="<%=root%>/data/poke/<%=poke.get(i).getFilename()%>">
@@ -316,19 +309,23 @@
 			</div>
 			
 			<div class="paper theme-box round">
-				<div class="item-wrapper" style="background: var(--color-salmon);">
+				<div class="item-wrapper">
 					<%for (int i=(int)Math.ceil(poke.size()/2);i<poke.size();i++){%>
 						<div class="item">
 							<img src="<%=root%>/data/poke/<%=poke.get(i).getFilename()%>">
 						</div>
 					<%} %>
 				</div>
-				<p>직접 찾아보시는 건 어떠세요?</p>
+				<p>다른 사람의 리뷰를 참고해보는 것은 어떨까요?<br>
+				리뷰를 보고 마음에 드는 조합이 있다면 나도 그렇게 먹어볼 수 있어요.
 			</div>
-		</div>
-		
-		<div class="txt-area">
-			<p>bowls에서는 저희가 추천하는 조합을 선택하고,<br>내가 원하는대로 수정할 수 있어요.</p>
+			
+			<%for (int i=1;i<=3;i++) {%>
+				<div class="paper theme-box round dummy" style="--i: <%=i%>;"></div>
+			<%} %>
+			<%for (int i=1;i<=3;i++) {%>
+				<div class="paper theme-box round dummy" style="--i: <%=i%>;"></div>
+			<%} %>
 		</div>
 	</div>
 

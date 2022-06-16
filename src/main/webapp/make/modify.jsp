@@ -11,7 +11,13 @@
 if (isMem == 0){response.sendRedirect(root + "/bbs/loginForm.jsp");}
 if (isAdm == 1) {
 	out.write("<script>alert('관리자는 주문할 수 없습니다');location.href = '" + root + "/index.jsp';</script>");
-}%>
+}
+String selectedPoke = request.getParameter("name"); 
+String ingreStr = request.getParameter("ingre");
+
+ItemDAO dao = new ItemDAO();
+ItemDTO poke = dao.getPoke(selectedPoke, ingreStr);
+%>
 
 <jsp:useBean id="categoryBean" class="bbs.CategoryDAO" />
 <jsp:useBean id="ingreBean" class="order.IngreDAO" />
@@ -41,7 +47,7 @@ if (isAdm == 1) {
 			
 			<div class="slider-container"><ul></ul></div>
 			<script>
-			let selectCategory = (cate) => {
+			selectCategory = (cate) => {
 				let categoryLi = document.querySelectorAll('.category li');
 				for(let i=0;i<categoryLi.length;i++){
 					categoryLi[i].classList.remove('cur');
@@ -63,26 +69,22 @@ if (isAdm == 1) {
 			</script>
 		</div>
 		<div class="form-wrapper">
-			<form name="menu" method="post" action="<%=root %>/member/addCart.jsp" style="width: 100%;">
+			<form name="menu" method="post" action="<%=root %>/member/modMenu.jsp" style="width: 100%;">
+				<input type="hidden" name="no">
 				<input type="hidden" name="ingre">
 				<input type="hidden" name="price">
 				<input type="hidden" name="cal">
 				<div id="bowl" ondragover="drop();" ondrop="addItem(event);">
 					<div class="write-name">
-						<%String selectedPoke = request.getParameter("name"); 
-						String ingreStr = request.getParameter("ingre");%>
 						<input type="text" name="name" id="name" onsubmit="return false;" value="<%=selectedPoke%>">
 						<hr class="line">
 					</div>
 					<span class="indicator"></span>
 					<svg viewBox="0 0 100 50"><path class="stroke only" d="M99.5,0c0,27.339-22.162,49.5-49.5,49.5C22.662,49.5,0.5,27.339,0.5,0" /></svg>
 					
-					<% ItemDAO dao = new ItemDAO();
-					ItemDTO poke = dao.getPoke(selectedPoke, ingreStr);
-					
-					int totPrice = 0;
+					<%int totPrice = 0;
 					double totCal = 0;
-					
+										
 					for (int i=0;i<poke.getIngreList().size();i++){
 						String nameIngre = poke.getIngreList().get(i).getName();
 						int priceIngre = poke.getIngreList().get(i).getPrice();
@@ -133,8 +135,7 @@ if (isAdm == 1) {
 			let submitBtn = document.querySelector("#submit");
 			
 			submitBtn.addEventListener('click', () => {
-				let no = Math.floor(Math.random() * 90000 + 10000);
-				menuSubmit(no, 'poke', menu.name.value, menu.price.value, 1);
+				menuMod(menu.no.value, 'poke', menu.name.value, menu.price.value, 1);
 			})
 			</script>
 		</div>

@@ -29,8 +29,6 @@
 	display: none;
 }
 .making .category {z-index: 1;position: absolute; top: -2em;}
-.making .category li {cursor: pointer; /* font-size: var(--small-font-size); */}
-.making .category li.cur {font-weight: 600;}
 
 .slider {height: 4em;position: relative;width: 50%;max-height: 80px;}
 .slider .btn.prev {position: absolute;width: 1.5em;max-width: 40px;top: .5em;left: -3em;cursor: pointer;z-index: 10;}

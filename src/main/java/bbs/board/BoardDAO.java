@@ -18,7 +18,7 @@ public class BoardDAO {
 		ArrayList<BoardDTO> reviewList = new ArrayList<BoardDTO>();
 		try{
 			con = Config.getConnection();
-			sql = "select no, filename from review order by no limit ?, ?";
+			sql = "select no, id, pokename, substr(ingre, 1, 10) as ingre, substr(content, 1, 10) as content, filename, star, date from review order by no desc limit ?, ?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, page);
 			pstmt.setInt(2, pageItem);
@@ -29,7 +29,13 @@ public class BoardDAO {
 			while(rs.next()) {
 				BoardDTO dto = new BoardDTO();
 				dto.setNo(rs.getInt("no"));
+				dto.setId(rs.getString("id"));
+				dto.setPoke(rs.getString("pokename"));
+				dto.setIngre(rs.getString("ingre"));
+				dto.setContent(rs.getString("content"));
 				dto.setFileName(rs.getString("filename"));
+				dto.setStar(rs.getInt("star"));
+				dto.setDate(rs.getString("date"));
 				reviewList.add(dto);
 			}
 			rs.close();
@@ -483,5 +489,22 @@ public class BoardDAO {
 			e.printStackTrace();
 		}
 		return freqList;
+	}
+	
+	public void deleteArticle (int no, String board) {
+		try {
+			con = Config.getConnection();
+			sql = "delete from `";
+			sql += board;
+			sql += "` where no = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, no);
+			pstmt.executeUpdate();
+			
+			pstmt.close();
+			con.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }

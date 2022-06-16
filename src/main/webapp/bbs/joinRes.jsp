@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page import="java.util.Date" %>
+<%@page import="java.text.SimpleDateFormat" %>
 <%@ page import="member.*" %>
 <%@include file="/config.jsp" %>
 
@@ -14,9 +16,13 @@ footer {margin-top: 0;}
 </jsp:useBean>
 
 <%
+Date date = new Date();
+SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+String now = format.format(date);
+
 MemberDAO dao = new MemberDAO();
 MemberDTO member = memberBean;
-dao.join(member);
+dao.join(member, now);
 %>
 <div class="wrapper">
 	<div class="page-title"><h2><span class="point cheese">J</span>oin Us</h2></div>
@@ -34,7 +40,7 @@ dao.join(member);
 		</div>
 			
 		<div class="pn" style="flex-wrap: wrap;">
-	    	<a class="ui-btn full" onclick="<%=root%>/bbs/loginForm.jsp">Log in</a>
+	    	<a class="ui-btn full" href="<%=root%>/bbs/loginForm.jsp">Log in</a>
 		    <a class="ui-btn point full" href="<%=root%>/index.jsp">Main</a>
 		</div>
 	</div>

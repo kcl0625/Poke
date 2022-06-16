@@ -65,17 +65,21 @@ public class IngreDAO {
 		}
 		return ingreList;
 	}
-	public ArrayList<IngreDTO> getIngreList() {
+	public ArrayList<IngreDTO> getIngreList(int start, int end) {
 		ArrayList<IngreDTO> ingreList = new ArrayList<IngreDTO>();
 		try {
 			con = Config.getConnection();
-			sql = "select * from ingre";
+			sql = "select * from ingre limit ?, ?";
 			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, start * end);
+			pstmt.setInt(2, end);
+			
 			ResultSet rs = null;
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
 				IngreDTO dto = new IngreDTO();
+				dto.setNo(rs.getInt("no"));
 				dto.setName(rs.getString("name"));
 				dto.setPrice(rs.getInt("price"));
 				dto.setCal(rs.getDouble("cal"));
@@ -91,5 +95,28 @@ public class IngreDAO {
 			e.printStackTrace();
 		}
 		return ingreList;
+	}
+	
+	public int getIngreListPageItemMax(int pageItemMax) {
+		int pageMax = 0;
+		
+		try {
+			con = Config.getConnection();
+			sql = "select ceil(count(*)/?) as pagemax from ingre";
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, pageItemMax);
+			
+			ResultSet rs = pstmt.executeQuery();
+			
+			if(rs.next()) pageMax = rs.getInt("pagemax");
+			
+			rs.close();
+			pstmt.close();
+			con.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return pageMax;
 	}
 }

@@ -17,6 +17,14 @@ if (isAdm == 1) {
 <jsp:include page="/header.jsp" />
 
 <div class="wrapper">
+	<div class="show-tooltip">
+		<p><i class="fas fa-info-circle"></i> 도움말</p>
+											
+		<div class="tooltip theme-box solid round" style="width: 15em;">
+			<p>재료 슬라이더에서 재료를 드래그해서 그릇에 담아보세요</p>
+		</div>
+	</div>
+
 	<div class="making">
 		<h1><span class="point salmon">M</span>ake<br>M<span class="point salary">y</span><br><span class="point cheese">O</span>wn<br>B<span class="point salmon">o</span>wl</h1>
 		<div class="category">
@@ -37,7 +45,7 @@ if (isAdm == 1) {
 			
 			<div class="slider-container"><ul></ul></div>
 			<script>
-			let selectCategory = (cate) => {
+			selectCategory = (cate) => {
 				let categoryLi = document.querySelectorAll('.category li');
 				for(let i=0;i<categoryLi.length;i++){
 					categoryLi[i].classList.remove('cur');

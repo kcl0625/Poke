@@ -12,10 +12,10 @@ public class MemberDAO {
 	String sql = null;
 	PreparedStatement pstmt = null;
 	
-	public void join(MemberDTO dto) {
+	public void join(MemberDTO dto, String date) {
 		try {
 			con = Config.getConnection();
-			sql = "insert into member(id, pw, name, nick, zip, add1, add2, tel, email, admin) values(?,?,?,?,?,?,?,?,?,?)";
+			sql = "insert into member(id, pw, name, nick, zip, add1, add2, tel, email, admin, date) values(?,?,?,?,?,?,?,?,?,?,?)";
 			pstmt = con.prepareStatement(sql);
 			
 			pstmt.setString(1, dto.getId());
@@ -28,6 +28,7 @@ public class MemberDAO {
 			pstmt.setString(8, dto.getTel());
 			pstmt.setString(9, dto.getEmail());
 			pstmt.setInt(10, 0);
+			pstmt.setString(11, date);
 			
 			pstmt.executeUpdate();
 			pstmt.close();
@@ -196,5 +197,30 @@ public class MemberDAO {
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public ArrayList<MemberDTO> getMemberList (int page, int pageItemMax) {
+		ArrayList<MemberDTO> member = new ArrayList<MemberDTO>();
+		try {
+			con = Config.getConnection();
+			sql = "select id, name, nick, date from member where id != 'admin' order by date desc limit ?, ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, page);
+			pstmt.setInt(2, pageItemMax);
+			
+			ResultSet rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				MemberDTO dto = new MemberDTO();
+				dto.setId(rs.getString("id"));
+				dto.setName(rs.getString("name"));
+				dto.setNick(rs.getString("nick"));
+				dto.setDate(rs.getString("date"));
+				member.add(dto);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return member;
 	}
 }

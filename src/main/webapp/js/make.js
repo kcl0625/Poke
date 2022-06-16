@@ -215,6 +215,31 @@ let menuSubmit = (no, type, name, price, custom) => {
 	}
 }
 
+let menuMod = (no, type, name, price, custom) => {
+	check();
+	let ingre;
+	for(let i=0;i<ingreList.length;i++){
+		if(i == 0)
+			ingre = ingreList[i];
+		else
+			ingre += `/${ingreList[i]}`;
+	}
+	
+	if(ingreList.length != 0 && name) {
+		new Promise((resolve, reject) => {
+			window.setTimeout(() => {
+				resolve();
+			}, 1);
+		})
+		.then(() => {
+			modMenu(no, type, name, ingre, price, custom);
+		})
+		.catch((val) => {
+			console.log('beforeend', val);
+		})
+	}
+}
+
 let check = () => { //유효성 검사
 	let indicator = document.querySelector('.indicator');
 	if(!menu.name.value)

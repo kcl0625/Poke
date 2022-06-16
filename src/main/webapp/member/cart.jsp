@@ -31,6 +31,7 @@ String[] dayEng = {"mon", "tue", "wed", "thu", "fri", "sat"};
 					</div>
 					<div class="select">
 						<p>몇 주동안<br>드실 건가요?</p>
+						
 						<input type="hidden" name="week" value="1">
 						<div class="selected select-item">1주</div>
 						<div class="select-wrapper">
@@ -86,7 +87,15 @@ String[] dayEng = {"mon", "tue", "wed", "thu", "fri", "sat"};
 												<label for="poke_<%=no %>_<%=dayEng[j]%>"><%=day[j]%></label>
 											<%} %>
 										</div>
-										<p>요일을 선택해주세요</p>
+										<div class="show-tooltip">
+											<p><i class="fas fa-info-circle"></i> 요일을 선택해주세요</p>
+											
+											<div class="tooltip theme-box solid round">
+												<p>내가 선택한 요일에 따라서 포케를 받아볼 수 있어요<br>
+												선택하신 구독 주차수만큼 매주 해당 요일에 포케가 배송돼요</p>
+											</div>
+										</div>
+										
 									</fieldset>
 									<div class="btns">
 										<button class="mod" type="button" onclick="location.href='<%=root%>/make/modify.jsp?name=<%=name%>&ingre=<%=ingre%>'"><i class="fas fa-pen"></i></button>
@@ -153,7 +162,7 @@ String[] dayEng = {"mon", "tue", "wed", "thu", "fri", "sat"};
 					<div class="plan txt-right">
 						<span class="price-name">포케 금액</span>
 						<p>(
-							<span class="plan-price">￦0</span>*<span class="plan-week">1</span><span class="txt">주동안</span>
+							<span class="plan-price">￦0</span>*<span class="plan-week">1</span><span class="txt">주</span>
 						)</p>
 					</div>
 					<div class="additional txt-right">

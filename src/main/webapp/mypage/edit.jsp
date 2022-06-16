@@ -13,12 +13,12 @@
 	<%
 	request.setCharacterEncoding("utf-8");
 	response.setCharacterEncoding("utf-8");
-	MemberDTO member = memberBean.getMember(sessionId);
+	String id = request.getParameter("memId");
+	MemberDTO member = memberBean.getMember(id);
 	%>
 	<div>
-		<a class="quit" href="<%=root%>/bbs/delMem.jsp">회원탈퇴</a>
-		<form name="memForm" action="editRes.jsp" method="post" enctype="multipart/form-data" style="flex-wrap: nowrap;">
-			<input type="hidden" name="id" id="id" value="<%=sessionId%>">
+		<a class="quit" href="<%=root%>/bbs/delMem.jsp?memId=<%=sessionId%>">회원탈퇴</a>
+		<form name="memForm" action="<%=root %>/bbs/editMemRes.jsp?memId=<%=id %>" method="post" enctype="multipart/form-data" style="flex-wrap: nowrap;">
 			<input type="file" name="profpic" style="display: none;" accept="image/jpeg, image/png">
 			<div class="upload-pic">
 				<a href="javascript:void(0)" onclick="memForm.profpic.click();"><i class="fas fa-camera"></i></a>
@@ -243,9 +243,7 @@
 			})
 		</script>
 		
-		<div class="pn" style="flex-direction: column;align-items: center;">
-			<a class="ui-btn point big" onclick="formSubmit(memForm);">수정하기</a>
-		</div>
+		<a id="submit" class="ui-btn point big" onclick="formSubmit(memForm);">수정하기</a>
 	</div>
 </div>
 <jsp:include page="/footer.jsp" />

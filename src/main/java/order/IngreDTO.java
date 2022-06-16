@@ -1,5 +1,6 @@
 package order;
 public class IngreDTO {
+	private int no;
 	private String name;
 	private int order;
 	private int price;
@@ -8,6 +9,12 @@ public class IngreDTO {
 	private String fileName;
 	private String cate;
 	
+	public int getNo() {
+		return no;
+	}
+	public void setNo(int no) {
+		this.no = no;
+	}
 	public String getName() {
 		return name;
 	}

@@ -20,8 +20,14 @@ for(int i=0;i<ingre.size();i++) {
 	double cal = ingre.get(i).getCal();
 	String origin = ingre.get(i).getOrigin();
 	String fileName = ingre.get(i).getFileName();%>
-	<li data-name="<%=name %>" data-price="<%=price%>" data-cal="<%=cal %>" data-origin="<%=origin %>" ondragstart="dragStart(this);" onmouseenter="showInfo(this, event);" onmouseleave="hideInfo(this, event);">
-		<div class="item" draggable="true"><img src="<%=root %>/data/ingre/<%=fileName %>"></div>
-		<span class="name"><%=name %></span>
+	<li data-name="<%=name %>" data-price="<%=price%>" data-cal="<%=cal %>" onclick="addItem(this);">
+		<div class="item"><img src="<%=root %>/data/ingre/<%=fileName %>"></div>
+		<p class="name"><%=name %></p>
+		
+		<div class="theme-box round solid ingre-info">
+			<%=cal %>kcal<br>
+			￦<%=String.format("%,d", price) %><br>
+			<%=origin %>
+		</div>
 	</li>
 <%}%>

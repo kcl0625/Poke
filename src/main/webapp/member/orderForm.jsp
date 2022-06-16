@@ -155,7 +155,7 @@ int week = Integer.parseInt(request.getParameter("weekPlan"));%>
 									<input type="hidden" name="day" value="<%=day %>">
 									<input type="hidden" name="price" value="<%=itemPrice%>">
 									<p class="name"><%=poke.get("name") %></p>
-									<p class="quantity"><%=day.split("/").length %></p>
+									<p class="quantity"><%=day %></p>
 									<p class="price">￦<%=String.format("%,d", quantity * itemPrice) %></p>
 								</li>
 							<%} %>
@@ -199,9 +199,9 @@ int week = Integer.parseInt(request.getParameter("weekPlan"));%>
 				<div class="theme-box">
 					<div class="price">
 						<div class="plan txt-right">
-							<span class="price-name">플랜 금액</span>
+							<span class="price-name">포케 금액</span>
 							<p>(
-								<span class="plan-price">￦<%=String.format("%,d", planTot) %></span>*<span class="plan-week"><%=week %></span>
+								<span class="plan-price">￦<%=String.format("%,d", planTot) %></span>*<span class="plan-week"><%=week %>주</span>
 							)</p>
 						</div>
 						<div class="additional txt-right">

@@ -4,12 +4,14 @@
 .cart-left .list-container-top {display: flex; justify-content: space-between; align-items: center;}
 .cart-left .list-container-top .tit {position: relative;}
 .cart-left .list-container-top .tit h3 {font-size: var(--big-font-size); font-weight: 200;float: left;}
-.cart-left .list-container-top .tit p {bottom: 0; font-size: var(--small-font-size);white-space: nowrap;height: 1rem;padding-left: 1em;float: left;line-height: 3;}
+.cart-left .list-container-top .tit p {bottom: 0; white-space: nowrap;line-height: 3em;padding-left: 1em;float: left;font-size: var(--small-font-size);}
 .cart-left .list-container-top .select p {
 	text-align: right;
     font-size: var(--small-font-size);
     line-height: 1.2em;
     padding-bottom: 1em;
+    top: -100%;
+    right: 0;
 }
 
 .cart-left .item-list {clear: both; margin-top: 1em;}
@@ -22,7 +24,7 @@
 .cart-left .item-list li .item-info .name {font-size: var(--big-font-size);font-weight: 200;padding: .4rem 0;overflow: hidden;text-overflow: ellipsis;}
 .cart-left .item-list li .item-info .ingre {font-size: var(--small-font-size);overflow: hidden;text-overflow: ellipsis;white-space: nowrap;width: 100%;}
 .cart-left .item-list li .item-info .price {font-size: var(--accent-font-size); font-weight: 300;}
-.cart-left .item-list li fieldset.day {}
+.cart-left .item-list li fieldset.day {position: relative;}
 .cart-left .item-list li fieldset.day .chks {
 	background: var(--color-default);
     color: var(--color-bak);
@@ -35,7 +37,7 @@
 }
 .cart-left .item-list li fieldset.day .chks label {font-size: var(--small-font-size);opacity: .4;cursor: pointer;}
 .cart-left .item-list li fieldset.day .chks :checked + label {opacity: 1;}
-.cart-left .item-list li fieldset.day p {position: absolute; bottom: 1rem; font-size: var(--small-font-size);}
+.cart-left .item-list li fieldset.day .show-tooltip {margin-top: .8em;}
 
 .cart-left .item-list li .qua input {width: 2em; text-align: center;}
 .cart-left .item-list li .btns button {padding-left: .5em; cursor: pointer;}
